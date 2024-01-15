@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nDefault Quarto paragraph:\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "blog",
+    "section": "",
+    "text": "Post Without Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Oreo",
+    "section": "",
+    "text": "Poem of Oreo\nIn a bustling town of Ultimo, where city lights gleam,\nA tale unfolds of Oreo, a kitten’s sweet dream.\nTony brought him home with Lilo by his side,\nA tuxedo cat, in black and white pride.\nOreo, a Maine Coon with a fluffy coat,\nBlack all over, with white around his throat.\nWhite paws that dance, a playful delight,\nA mischievous gleam in his eyes, shining bright.\nLilo, a tiny British Shorthair so fair,\nA dainty companion with a gentle air.\nThey grew up together, a dynamic pair,\nFrom Ultimo to Pyrmont, a journey to share.\nThrough the streets of Townhall, they explored,\nAdventures aplenty, their spirits soared.\nYet, runaway moments were a frequent feat,\nFound and embraced, their connection so sweet.\nOreo, a rogue, with a penchant for bins,\nA greedy delight, where the treasure begins.\nFeasting on scraps, his appetite vast,\nBut his cuteness prevails, a spell he has cast.\nLilo, petite, with a modest cuisine,\nA nibble here, a delicate routine.\nShe watches Oreo with curious eyes,\nAs he plays around, chasing butterflies.\nIn the city’s heartbeat, their story unfolds,\nThrough alleys and parks, where the tale molds.\nOreo, the player, with antics so grand,\nLilo, the watcher, in the city so grand.\nNow, in the world of influencers and fame,\nOreo has found his claim to the game.\nAn influencer cat, with followers galore,\nFrom bins to glamour, a journey to adore.\nThrough Ultimo, Pyrmont, and Townhall’s embrace,\nOreo and Lilo found their special place.\nA tale of friendship, of mischief and grace,\nIn the city’s heartbeat, a memory to trace."
+  },
+  {
+    "objectID": "posts/post-without-code/index.html",
+    "href": "posts/post-without-code/index.html",
+    "title": "Post Without Code",
+    "section": "",
+    "text": "This is a post with just this sentence."
+  }
+]
