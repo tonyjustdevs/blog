@@ -2,9 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/post-with-notebook/index.html",
       "/posts/post-without-code/index.html",
-      "/posts/welcome/index.html",
-      "/posts/post-with-notebook/index.html"
+      "/posts/welcome/index.html"
     ]
   }
 ]
