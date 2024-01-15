@@ -1,0 +1,9 @@
+---
+title: "Post Without Code"
+author: "Tony Phung"
+date: "2024-01-16"
+categories: [news, code, analysis]
+image: "image.jpg"
+---
+
+This is a post with just this sentence.
