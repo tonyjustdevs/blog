@@ -2,7 +2,7 @@
 title: "Welcome To My Blog"
 author: "Tony Phung"
 date: "2024-01-16"
-categories: [news]
+categories: [hello world]
 ---
 
 This is the first post in a Quarto blog. Welcome!

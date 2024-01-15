@@ -2,7 +2,7 @@
 title: "Post Without Code"
 author: "Tony Phung"
 date: "2024-01-16"
-categories: [news, code, analysis]
+categories: [hello world]
 image: "image.jpg"
 ---
 
