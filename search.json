@@ -74,7 +74,7 @@
     "href": "index.html",
     "title": "blog",
     "section": "",
-    "text": "Deploying My First Live App & it’s Neural Network!\n\n\n\n\n\n\ngradio\n\n\nhuggingface\n\n\nAI\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\nfast ai\n\n\njupyter notebook\n\n\ntutorial\n\n\nlabelling\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nimage classfier\n\n\ndeep learning\n\n\nfast ai\n\n\npython\n\n\njupyter\n\n\nfood\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\ngit\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\njupyter notebook\n\n\npython\n\n\nquarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+    "text": "Deploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\ngradio\n\n\nhuggingface\n\n\nAI\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\nfast ai\n\n\njupyter notebook\n\n\ntutorial\n\n\nlabelling\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nimage classfier\n\n\ndeep learning\n\n\nfast ai\n\n\npython\n\n\njupyter\n\n\nfood\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\ngit\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\njupyter notebook\n\n\npython\n\n\nquarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
@@ -93,28 +93,28 @@
   {
     "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
     "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
-    "title": "Deploying My First Live App & it’s Neural Network!",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
     "section": "1. Introduction",
     "text": "1. Introduction\nEmbedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!"
   },
   {
     "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
     "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
-    "title": "Deploying My First Live App & it’s Neural Network!",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
     "section": "2. Background",
     "text": "2. Background\nThis App will guess whether an image is a Cat or Dog with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.\nAll doggos🐕 & cats🐈 image examples has never been viewed by the Model and it makes a prediction in milliseconds! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!\nThe App isn’t perfect:\n- It guesses Incorrectly with great 95% confidence a cat as a dog!\nI’m thrilled to be able to build the app, get it hosted and embed it all in one day for the first time! Alot of firsts today!"
   },
   {
     "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
     "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
-    "title": "Deploying My First Live App & it’s Neural Network!",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
     "section": "3. Future stuff",
     "text": "3. Future stuff\n[1]: Multi-Image Uploader + Predictor.\n[2]: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.\n[4]: Upgrade the rice vs noodle model an App and hosted.\n[4]: Learn some HTML/CSS to make things prettier."
   },
   {
     "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
     "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
-    "title": "Deploying My First Live App & it’s Neural Network!",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
     "section": "4. Heres the App!",
     "text": "4. Heres the App!"
   }
