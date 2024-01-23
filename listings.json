@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html",
       "/posts/2024-01-19-98_embed_gradio_hgface/index.html",
       "/posts/2024-01-19-99_saving_a_fastai_model/index.html",
       "/posts/2024-01-18-99_rice_vs_noodles/index.html",
