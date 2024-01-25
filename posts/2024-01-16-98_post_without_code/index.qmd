@@ -6,4 +6,6 @@ categories: [hello world]
 image: "image.jpg"
 ---
 
+Learning how to quarto blog.
+
 This is a post with just this sentence.
