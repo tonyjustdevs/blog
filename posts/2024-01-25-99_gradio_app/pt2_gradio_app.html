@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-01-24">
+<meta name="dcterms.date" content="2024-01-25">
 
-<title>blog - Deep Learning basics</title>
+<title>blog - How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -107,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -149,9 +115,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Deep Learning basics</h1>
+      <h1 class="title">How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">basics</div>
+                <div class="quarto-category">gradio</div>
+                <div class="quarto-category">tutorial</div>
               </div>
                   </div>
   </div>
@@ -169,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2024-01-24</p>
+        <p class="date">January 25, 2024</p>
       </div>
     </div>
     
@@ -180,7 +147,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -188,74 +157,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><img src="abc.jpg" class="img-fluid"></p>
-<p>Deep Learning basics</p>
-<p><img src="abc.jpg" class="img-fluid"></p>
-<p>Deep Learning basics</p>
-<p>file:///D:/ytvideos/2022_PracDeepLearningCoders/Lesson%203%20Practical%20Deep%20Learning%20for%20Coders%202022_1080p.mp4</p>
-<ol type="1">
-<li>load learner pkl</li>
-<li>call predict (cate and prbailtiy)</li>
-<li>see cateogeries in vcoab</li>
-<li>build dictionary</li>
-<li>build web interface</li>
-</ol>
-<p>model pkl 1. .model - layers - dl - like a tree 2. timm body, sequenctial 3. get_submodule - go through layers 3b. has code and parameters 4a. [kaggle] - how does NN work / its fits function to data 4b. quadratric example 4c. plot in 5a. general formula for quadratric 5b. test it with param values 5c. use partial to test diff quads 5d. plot_fn 6a. test data (data that matches function) 6b. add noise to data 6c. plot scatter of this ‘random’ data 7. [manually move mouse] adjust curve 7a. <span class="citation" data-cites="interact">[@interact]</span> + plot_quad (plot scat+plotfn) 8. how do we when we move it, its better or worse? 8a. measurement? loss function 8b. mse<br>
-8c. do same as 7 8d. move mouse with refernece (more rigor) MSE: value at top 9a. automate it: for each param (abc) when we move up is loss better or worse 9b. method1: [manual 7,8] metho2:[calc derivative] derivative if you increase input, does output inc/dec and how much 9c. create fn (input coeffecients) mk_quad(<em>params) return mse(ie loss)<br>
-9d. tensor: [list/vec 1d], [rectngle 2d], [layers of tbls/nbrs 3d] 9e. calc_gradnt requires_grad_(): rank1 tensor - 1d tenor(pytorch) 9f. [loss.backward()] on the loss fn -&gt; adds .grad attribute 9g. results gradients of each params (ie gradients of the [LOSS_FN]) ie if neg’ve: increasing the param decreases the [LOSS_FN], which we want 10. decrease [abc by a bit] abc-=abc.grad</em>0.01 11. MSE for our quad,</p>
-<section id="turn-into-gradio-application" class="level2">
-<h2 class="anchored" data-anchor-id="turn-into-gradio-application">0. Turn into Gradio Application</h2>
-<div id="cell-4" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.    load learner pkl</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1a.   download learner from google colab.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.    call predict (cate and prbailtiy)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.    see cateogeries in vcoab </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.    build dictionary </span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 5.    build web interface</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-5" class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># model pkl</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.      .model - layers - dl - like a tree</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.      timm body, sequenctial</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.      get_submodule - go through layers</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3b.     has code and parameters</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 4a.     [kaggle] - how does NN work / its fits function to data</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 4b.     quadratric example</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 4c.     plot in</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 5a.     general formula for quadratric</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 5b.     test it with param values</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 5c.     use partial to test diff quads</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 5d.     plot_fn</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 6a.     test data  (data that matches function)</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 6b.     add noise to data </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 6c.     plot scatter of this 'random' data</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 7.      [manually move mouse] adjust curve</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 7a.     [@interact]  + plot_quad (plot scat+plotfn)</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 8.      how do we when we move it, its better or worse?</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 8a.     measurement? loss function</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 8b.     mse  </span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 8c.     do same as 7 </span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 8d.     move mouse with refernece (more rigor) MSE: value at top</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 9a.     automate it: for each param (abc) when we move up is loss better or worse</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 9b.     method1: [manual 7,8] metho2:[calc derivative]</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#         derivative if you increase input, does output inc/dec and how much</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 9c.     create fn (input coeffecients) mk_quad(*params) return mse(ie loss)      </span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 9d.     tensor: [list/vec 1d], [rectngle 2d], [layers of tbls/nbrs 3d]</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 9e.     calc_gradnt requires_grad_(): rank1 tensor - 1d tenor(pytorch)</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 9f.     [loss.backward()] on the loss fn -&gt; adds .grad attribute</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 9g.     results gradients of each params (ie gradients of the [LOSS_FN])</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co">#         ie if neg've: increasing the param decreases the [LOSS_FN], which we want</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 10.     decrease [abc by a bit] abc-=abc.grad*0.01</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 11.     MSE for our quad, </span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p><img src="gradio.jpg" class="img-fluid"></p>
+<p>This is Part 2 creating a <strong>multi-category classifier</strong> Web App</p>
+<p>Part 1: Create <strong>Learner</strong> (.pkl file)<br>
+Part 2: Create <strong>Gradio</strong> application file (app.py)<br>
+Part 3: Upload to <strong>HuggingSpace</strong> account</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
