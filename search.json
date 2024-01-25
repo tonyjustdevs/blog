@@ -63,11 +63,11 @@
     "text": "I’ve just created my first multi-category classifier using Jeremy Howard’s popular fast ai which is an astraction layer library built on top of the most world’s used deep-learning library PyTorch. I’ve documented the process including the issues I faced (i.e. bugs)\nI found it more easier to digest and understand this process by splitting the steps into 3 parts:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
   },
   {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#part-3-host-app-on-huggingface",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#part-3-host-app-on-huggingface",
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
     "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "Part 3: Host app on HuggingFace",
-    "text": "Part 3: Host app on HuggingFace"
+    "section": "Part 1: Create Learner (.pkl file)",
+    "text": "Part 1: Create Learner (.pkl file)"
   },
   {
     "objectID": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
