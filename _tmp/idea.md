@@ -7,6 +7,4 @@ things to do
 - use paperspacegradient 
 - multiple image uploader to gradio app
 
-- testing git pull
-
-[not sure why this isnt being ignored as its in the .gitignore folder hmm] ...
+[not sure why this isnt being ignored as its in the .gitignore folder hmm] - I guess mds are not ignored?
