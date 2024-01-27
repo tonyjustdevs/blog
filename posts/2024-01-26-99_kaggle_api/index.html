@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-01-24">
+<meta name="dcterms.date" content="2024-01-26">
+<meta name="description" content="Compete on the world stage on Kaggle">
 
-<title>blog - How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)</title>
+<title>blog - How To Setup a Kaggle API</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,11 +150,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">cnn</div>
-                <div class="quarto-category">webapp</div>
-                <div class="quarto-category">tutorial</div>
+      <h1 class="title">How To Setup a Kaggle API</h1>
+                  <div>
+        <div class="description">
+          Compete on the world stage on Kaggle
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">kaggle</div>
+                <div class="quarto-category">api</div>
               </div>
                   </div>
   </div>
@@ -171,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 24, 2024</p>
+        <p class="date">January 26, 2024</p>
       </div>
     </div>
     
@@ -187,22 +192,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-3-host-app-on-huggingface" id="toc-part-3-host-app-on-huggingface" class="nav-link active" data-scroll-target="#part-3-host-app-on-huggingface">Part 3: Host app on HuggingFace</a></li>
-  <li><a href="#install-and-import-libraries" id="toc-install-and-import-libraries" class="nav-link" data-scroll-target="#install-and-import-libraries">1.1 Install and import libraries</a></li>
-  <li><a href="#download-pets-breed-data" id="toc-download-pets-breed-data" class="nav-link" data-scroll-target="#download-pets-breed-data">1.2 Download Pets Breed Data</a></li>
-  <li><a href="#create-data-loader" id="toc-create-data-loader" class="nav-link" data-scroll-target="#create-data-loader">1.3 Create Data Loader</a>
+  <li><a href="#install-library" id="toc-install-library" class="nav-link active" data-scroll-target="#install-library">1. Install Library</a></li>
+  <li><a href="#get-api-token" id="toc-get-api-token" class="nav-link" data-scroll-target="#get-api-token">2. Get API token</a></li>
+  <li><a href="#place-the-downloded-json-file-into-your-local-.kaggle-folder-windows" id="toc-place-the-downloded-json-file-into-your-local-.kaggle-folder-windows" class="nav-link" data-scroll-target="#place-the-downloded-json-file-into-your-local-.kaggle-folder-windows">3. Place the downloded JSON file into your local .kaggle folder (Windows)</a>
   <ul class="collapse">
-  <li><a href="#a-different-labelling-function" id="toc-a-different-labelling-function" class="nav-link" data-scroll-target="#a-different-labelling-function">1.3.1 (A different) Labelling Function</a></li>
-  <li><a href="#data-loader-code" id="toc-data-loader-code" class="nav-link" data-scroll-target="#data-loader-code">1.3.2 Data Loader Code</a></li>
+  <li><a href="#pasted-into-the-wrong-folder" id="toc-pasted-into-the-wrong-folder" class="nav-link" data-scroll-target="#pasted-into-the-wrong-folder">3.1 Pasted into the wrong folder?</a></li>
   </ul></li>
-  <li><a href="#batch-examples-create-learner-fine-tune-and-export" id="toc-batch-examples-create-learner-fine-tune-and-export" class="nav-link" data-scroll-target="#batch-examples-create-learner-fine-tune-and-export">1.4 Batch Examples, Create Learner, Fine-Tune and Export</a>
-  <ul class="collapse">
-  <li><a href="#batch-examples" id="toc-batch-examples" class="nav-link" data-scroll-target="#batch-examples">1.4.1 Batch Examples</a></li>
-  <li><a href="#create-learner" id="toc-create-learner" class="nav-link" data-scroll-target="#create-learner">1.4.2 Create Learner</a></li>
-  <li><a href="#fine-tune" id="toc-fine-tune" class="nav-link" data-scroll-target="#fine-tune">1.4.3 Fine-Tune</a></li>
-  <li><a href="#export" id="toc-export" class="nav-link" data-scroll-target="#export">1.4.4 Export</a></li>
-  </ul></li>
-  <li><a href="#to-be-continued" id="toc-to-be-continued" class="nav-link" data-scroll-target="#to-be-continued">To be Continued…</a></li>
+  <li><a href="#start-kaggling" id="toc-start-kaggling" class="nav-link" data-scroll-target="#start-kaggling">4 Start Kaggling</a></li>
   </ul>
 </nav>
     </div>
@@ -213,103 +209,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><img src="dog_cat.jpg" class="img-fluid"></p>
-<p>I’ve just created my first <strong>multi-category classifier</strong> using Jeremy Howard’s popular <strong>fast ai</strong> which is an astraction layer library built on top of the most world’s used deep-learning library <strong>PyTorch</strong>. I’ve documented the process including the issues I faced (i.e.&nbsp;bugs)</p>
-<p>I found it more easier to digest and understand this process by splitting the steps into 3 parts:</p>
-<p>Part 1: Create <strong>Learner</strong> (.pkl file)<br>
-Part 2: Create <strong>Gradio</strong> application file (app.py)<br>
-Part 3: Host on <strong>HuggingFace</strong></p>
-<section id="part-3-host-app-on-huggingface" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-host-app-on-huggingface">Part 3: Host app on HuggingFace</h2>
+<p><img src="kaggle.jpg" class="img-fluid"></p>
+<p>This is how I set up my Kaggle API</p>
+<section id="install-library" class="level2">
+<h2 class="anchored" data-anchor-id="install-library">1. Install Library</h2>
+<p><code>pip install python</code></p>
 </section>
-<section id="install-and-import-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="install-and-import-libraries">1.1 Install and import libraries</h2>
-<div id="cell-4" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install timm</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install fastai </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-5" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.vision.<span class="bu">all</span> <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> timm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="get-api-token" class="level2">
+<h2 class="anchored" data-anchor-id="get-api-token">2. Get API token</h2>
+<ol type="1">
+<li>Go to Kaggle</li>
+<li>Settings<br>
+</li>
+<li>Create New Token</li>
+<li>Save “kaggle.json” file</li>
+</ol>
 </section>
-<section id="download-pets-breed-data" class="level2">
-<h2 class="anchored" data-anchor-id="download-pets-breed-data">1.2 Download Pets Breed Data</h2>
-<div id="cell-7" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> untar_data(URLs.PETS)<span class="op">/</span><span class="st">'images'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="create-data-loader" class="level2">
-<h2 class="anchored" data-anchor-id="create-data-loader">1.3 Create Data Loader</h2>
-<section id="a-different-labelling-function" class="level3">
-<h3 class="anchored" data-anchor-id="a-different-labelling-function">1.3.1 (A different) Labelling Function</h3>
-<p>Here a different method to label our data was used:</p>
-<ul>
-<li><p>In <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-18-99_rice_vs_noodles/">‘noodles vs rice’ model</a>: There were two parent folders separating two categories of data: <code>get_y=parent_label</code></p></li>
-<li><p>In <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-19-99_saving_a_fastai_model/">‘saving a fast ai’ model</a>: There was a custom labelling function that looked for capital letters for cat breeds <code>def is_cat(x): return x[0].isupper()</code></p></li>
-<li><p>In this model, I used <strong>Regex</strong> to find breed names before the last ’_’ in the file name: <code>label_func=RegexLabeller(pat=r'^([^/]+)_\d)</code>. See <code>show_batch()</code> output to see the file names examples.</p></li>
-</ul>
-<p>Did you notice this is the <strong>same dataset</strong> as the is_cat model? So changing our label resulted in a different model!</p>
-</section>
-<section id="data-loader-code" class="level3">
-<h3 class="anchored" data-anchor-id="data-loader-code">1.3.2 Data Loader Code</h3>
-<div id="cell-11" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pets_dataloaders <span class="op">=</span>  ImageDataLoaders.from_name_func(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'.'</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    get_image_files(path),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    valid_pct<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    label_func<span class="op">=</span>RegexLabeller(pat<span class="op">=</span><span class="vs">r'^([^/]+)_\d+'</span>),</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    item_tfms<span class="op">=</span>Resize(<span class="dv">224</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
-  return getattr(torch, 'has_mps', False)</code></pre>
-</div>
-</div>
+<section id="place-the-downloded-json-file-into-your-local-.kaggle-folder-windows" class="level2">
+<h2 class="anchored" data-anchor-id="place-the-downloded-json-file-into-your-local-.kaggle-folder-windows">3. Place the downloded JSON file into your local .kaggle folder (Windows)</h2>
+<p>Location: <code>C:\Users\&lt;Windows-username&gt;\.kaggle\kaggle.json</code><br>
+<a href="https://github.com/Kaggle/kaggle-api">Github Reference</a></p>
+<section id="pasted-into-the-wrong-folder" class="level3">
+<h3 class="anchored" data-anchor-id="pasted-into-the-wrong-folder">3.1 Pasted into the wrong folder?</h3>
+<p>If you forgot to paste it into the folder and ran <code>kaggle</code> in the terminal, you’ll an error to tell you exactly where to put it</p>
+<p><img src="kaggle_error.jpg" class="img-fluid"></p>
 </section>
 </section>
-<section id="batch-examples-create-learner-fine-tune-and-export" class="level2">
-<h2 class="anchored" data-anchor-id="batch-examples-create-learner-fine-tune-and-export">1.4 Batch Examples, Create Learner, Fine-Tune and Export</h2>
-<p>I grouped these steps as the code are exactly the same in previous posts.</p>
-<section id="batch-examples" class="level3">
-<h3 class="anchored" data-anchor-id="batch-examples">1.4.1 Batch Examples</h3>
-<p>This function is also a good way to find out what is the <strong>file name structure</strong> if we were not sure.</p>
-<div id="cell-14" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pets_dataloaders.show_batch(max_n<span class="op">=</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="pt1_create_learner_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<section id="start-kaggling" class="level2">
+<h2 class="anchored" data-anchor-id="start-kaggling">4 Start Kaggling</h2>
+<div id="cell-7" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kaggle</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>??kaggle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Type:        module
+String form: &lt;module 'kaggle' from 'c:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\kaggle\\__init__.py'&gt;
+File:        c:\users\tonyp\miniconda3\envs\fastai\lib\site-packages\kaggle\__init__.py
+Source:     
+#!/usr/bin/python
+#
+# Copyright 2024 Kaggle Inc
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# coding=utf-8
+from __future__ import absolute_import
+from kaggle.api.kaggle_api_extended import KaggleApi
+from kaggle.api_client import ApiClient
+
+api = KaggleApi(ApiClient())
+api.authenticate()</code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="create-learner" class="level3">
-<h3 class="anchored" data-anchor-id="create-learner">1.4.2 Create Learner</h3>
-<p>I am still using resnet model architecture for starters <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#introduction">for reasons mentioned previously by Jeremy Howard</a></p>
-<div id="cell-16" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pets_learner <span class="op">=</span> vision_learner(pets_dataloaders, resnet34, metrics<span class="op">=</span>error_rate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="fine-tune" class="level3">
-<h3 class="anchored" data-anchor-id="fine-tune">1.4.3 Fine-Tune</h3>
-<div id="cell-18" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pets_learner.fine_tune(<span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="export" class="level3">
-<h3 class="anchored" data-anchor-id="export">1.4.4 Export</h3>
-<div id="cell-20" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pets_learner.export(<span class="st">'pets_learner.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="to-be-continued" class="level2">
-<h2 class="anchored" data-anchor-id="to-be-continued">To be Continued…</h2>
-<p><a href="https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/pt1_create_learner.html">Part 1: Create <strong>Learner</strong> (.pkl file)</a><br>
-<a href="https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/">Part 2: Create <strong>Gradio</strong> application file (app.py)</a><br>
-[Part 3: Host on <strong>HuggingFace</strong>]</p>
 
 
 </section>

@@ -1,5 +1,278 @@
 [
   {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html",
+    "title": "How To Setup a Kaggle API",
+    "section": "",
+    "text": "I’m planning to learn and test myself with competitions on Kaggle.\nKaggle is a place with real-world problems where Data Scientists and alike can go against each other to solve problems with Machine Learning.\nFrom my understanding:\n- There is a validation set where your model is tested against and a public leader board to see how you’re going.\n- At the end of the competition, there is an unseen test set where everyones models is tested against and where the final rankings are determined.\n- This is quite reflective of real world where preparing a representative validation set is vital, thus will perform well on the test set.\n- A common mistake for newbs is over-fitting to the validation set. I’m ready to make that mistake 🤣.\nAs for the Kaggle API, you can download the kernel which is the necessary datasets and source files to do the competitions.\nAlternatively, I can use the notebooks on their website. I plan to try doing competitions both ways.\nThis is how I set up my Kaggle API"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
+    "title": "How To Setup a Kaggle API",
+    "section": "1. Install Library",
+    "text": "1. Install Library\npip install python"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
+    "title": "How To Setup a Kaggle API",
+    "section": "2. Create API token (.json file)",
+    "text": "2. Create API token (.json file)\n\nGo to Kaggle\n\nGo to Settings\n\nCreate New Token"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
+    "title": "How To Setup a Kaggle API",
+    "section": "3. Save to your local .kaggle folder (Windows)",
+    "text": "3. Save to your local .kaggle folder (Windows)\nLocation: C:\\Users\\&lt;Windows-username&gt;\\.kaggle\\kaggle.json\nKaggle Github Reference\n\n3.1 Pasted into the wrong folder?\nIf you did something wrong then ran kaggle in the terminal, you’ll an error (telling you where to put it):"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
+    "title": "How To Setup a Kaggle API",
+    "section": "4 Start Kaggling",
+    "text": "4 Start Kaggling\n\nimport kaggle\n??kaggle\n\nType:        module\nString form: &lt;module 'kaggle' from 'c:\\\\Users\\\\tonyp\\\\miniconda3\\\\envs\\\\fastai\\\\Lib\\\\site-packages\\\\kaggle\\\\__init__.py'&gt;\nFile:        c:\\users\\tonyp\\miniconda3\\envs\\fastai\\lib\\site-packages\\kaggle\\__init__.py\nSource:     \n#!/usr/bin/python\n#\n# Copyright 2024 Kaggle Inc\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n# coding=utf-8\nfrom __future__ import absolute_import\nfrom kaggle.api.kaggle_api_extended import KaggleApi\nfrom kaggle.api_client import ApiClient\n\napi = KaggleApi(ApiClient())\napi.authenticate()"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html",
+    "href": "posts/2024-01-25-98_huggingface/index.html",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "",
+    "text": "This post shows how to host your working Local Gradio App on HuggingFace.\nThis post is part of a series:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace account"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
+    "href": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "Part 3: Host on HuggingFace account",
+    "text": "Part 3: Host on HuggingFace account"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
+    "href": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "1 Create HuggingFace Account and Create a ‘Space’",
+    "text": "1 Create HuggingFace Account and Create a ‘Space’\n\nChoose your Space name\nChoose Apache-2.0 to avoid any copyright issues\nChoose Gradio\nChoose the Free option\nChoose Public (show you can show it to the world!)"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
+    "href": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "2 Clone the repo",
+    "text": "2 Clone the repo\nThis will create allow us deploy the Gradio app to the HuggingFace repository:\ngit clone https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
+    "href": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "2. Gather your files",
+    "text": "2. Gather your files\nRecall the various files we needed to run the app locally part 2.\nGather into the cloned huggingface folder:\n- Learner (.pkl)\n- Pet examples (pets.jpg)\n- Gradio app (app.py)\n\nA good way to check for me is seeing the pets_breed_predictor is the git folder and huggingface space."
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
+    "href": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "3. Push to HuggingFace Repo",
+    "text": "3. Push to HuggingFace Repo\nIf you’ve pushed succesfully your app (could take several minutes), then your app is live! Congrats!\nIf you’re like me and forgot to include the requirements.txt then you’ll be greeted with this error.\n\n\n3.1 Add the requirements.txt\nWe imported two libraries fastai and gradio so include them in the requirements.txt file. Commit and push."
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
+    "href": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "4 Web App Complete and is Live",
+    "text": "4 Web App Complete and is Live\nIf all goes well, the HuggingFace space is hosting the Gradio App!\nCheck out my web app here!"
+  },
+  {
+    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html",
+    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html",
+    "title": "How to choose a different Deep-Learning Model Architecture",
+    "section": "",
+    "text": "Today I’ll go through how to find and test different deep-learning architectures from Pytorch Image Models (timm) library made available here by Ross Wightman and use them in our models."
+  },
+  {
+    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#using-timm---pytorch-image-models",
+    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#using-timm---pytorch-image-models",
+    "title": "How to choose a different Deep-Learning Model Architecture",
+    "section": "1. Using timm - PyTorch Image Models",
+    "text": "1. Using timm - PyTorch Image Models\n\n1.1 Introduction\nWhat are timm’s models? They’re mathematical functions (i.e. application of matrix multiplication, non-linearities e.g. ReLu’s)\nReference: “Which image model are best” - Jeremy Howard\nReference: “timm” - Ross Wightman\nWe want to know 3 things:\n1. how fast are they? You’d want models in top left of chart.\n2. how much memory?\n3. how accurate are they? Lower error rate the better.\n[Future iteration I]: A formalised metholodgy to decide what is fast enough, appropriate memory-use, and what is accurate enough for our use-cases.\nThere is a useful high-level chart from Jeremy’s notebook charting accuracy (Y-axis) vs secs per sample (X-axis):\n\nI chose to use a model from the convnext family due to its balance of high accuracy and speed.\n[Future iteration II]: Some more formalised methodology on choosing the architecture. Jeremy does mention architecture should be the one last thing things to worry about and he usually builds from resnet and tests whether it is, accurate enough and fast enough, then iterate from there.\n\n\n1.2 Import timm library\n\nimport timm\n\n\n\n1.3 List available model architectures and choose one\n\ntimm.list_models('convnext*') # * wild card searches \n\n['convnext_atto',\n 'convnext_atto_ols',\n 'convnext_base',\n 'convnext_femto',\n 'convnext_femto_ols',\n 'convnext_large',\n 'convnext_large_mlp',\n 'convnext_nano',\n 'convnext_nano_ols',\n 'convnext_pico',\n 'convnext_pico_ols',\n 'convnext_small',\n 'convnext_tiny',\n 'convnext_tiny_hnf',\n 'convnext_xlarge',\n 'convnext_xxlarge',\n 'convnextv2_atto',\n 'convnextv2_base',\n 'convnextv2_femto',\n 'convnextv2_huge',\n 'convnextv2_large',\n 'convnextv2_nano',\n 'convnextv2_pico',\n 'convnextv2_small',\n 'convnextv2_tiny']"
+  },
+  {
+    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#create-your-learner-with-a-timm-model",
+    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#create-your-learner-with-a-timm-model",
+    "title": "How to choose a different Deep-Learning Model Architecture",
+    "section": "2. Create your Learner with a timm model",
+    "text": "2. Create your Learner with a timm model\n\n2.1 Get your data\n\nfrom fastai.vision.all import *\npath = untar_data(URLs.PETS)/'images'\n\n\n\n2.2 Prepare your Functions\n\ndef is_cat(x): return x[0].isupper()\n\n\n\n2.3 Load your DataLoader\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\n\n\n2.4 Build your Learner\n\nlearn_conv = vision_learner(dls, 'convnext_tiny', metrics=error_rate).to_fp16()\nlearn_resn = vision_learner(dls, 'resnet18', metrics=error_rate).to_fp16()\n\n\n\n2.5 Fine-Tune: ResNet18 vs ConvNextTiny\nA 90% reduction in the error rate! (0.6766% to 0.0667%: 1-(0.000677/0.006766)). It’s noted that the resnet error rate was quite low and changing the model was probably not necessary."
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "1. Introduction",
+    "text": "1. Introduction\nEmbedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!"
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "2. Background",
+    "text": "2. Background\nThis App will guess whether an image is a Cat or Dog with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.\nAll doggos🐕 & cats🐈 image examples has never been viewed by the Model and it makes a prediction in milliseconds! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!\nThe App isn’t perfect:\n- It guesses Incorrectly with great 95% confidence a cat as a dog!\nI’m thrilled to be able to build the app, get it hosted and embed it all in one day for the first time! Alot of firsts today!"
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "3. Future stuff",
+    "text": "3. Future stuff\n[1]: Multi-Image Uploader + Predictor.\n[2]: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.\n[4]: Upgrade the rice vs noodle model an App and hosted.\n[4]: Learn some HTML/CSS to make things prettier."
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "4. Heres the App!",
+    "text": "4. Heres the App!"
+  },
+  {
+    "objectID": "posts/2024-01-16-99_welcome/index.html",
+    "href": "posts/2024-01-16-99_welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nDefault Quarto content:\n“Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.””"
+  },
+  {
+    "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
+    "href": "posts/2024-01-16-97_post_with_notebook/index.html",
+    "title": "Post With Sample Jupyter Notebook",
+    "section": "",
+    "text": "Learning how quarto works with jupyter notebooks. This is a sample editted notebook from fastai.\n\nfrom fastai.vision.all import *\nchosen_sample_seed          = 42\nchosen_sample_n             = 5\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n# useful informative functions\ndef print_useful_info():\n    global path_dir_obj, list_all_img_path_obj\n    print()\n    print(f\"path_obj_home_dir: \\t{path_dir_obj}\")\n    print(f\"image_list_count: \\t{len(list_all_img_path_obj)}\")\n    return None\n\ndef print_sample_imgs():\n    global path_dir_obj, list_all_img_path_obj, chosen_sample_seed, chosen_sample_n\n    import random\n    set_seed(chosen_sample_seed)\n    print(f\"set_seed_number: \\t{chosen_sample_seed}\")\n    rng         = len(list_all_img_path_obj)-1  # Replace 10 with the desired upper limit (exclusive)\n    random_nos  = random.sample(range(rng), chosen_sample_n)\n    print()\n    print(\"sample_images:\")\n    for index, img_path in enumerate(list_all_img_path_obj[random_nos]):\n        print(f\" {random_nos[index]:&gt;7}: \\t\\t{img_path}\")\n    \n    \n    for image_path in list_all_img_path_obj[random_nos]:\n        img = PILImage.create(image_path)\n        show_image(img)\n    return None\n\n\n# 0. get paths of images\npath_dir_obj                = untar_data(URLs.MNIST_TINY)\nlist_all_img_path_obj       = get_image_files(path_dir_obj)\n\n\n# 1. create learner\ndata_loader = ImageDataLoaders.from_folder(path_dir_obj, \n                                    img_cls=PILImageBW,\n                                    set_seed=42)\nx1,y1 = data_loader.one_batch()\ntest_eq(x1.shape, [64, 1, 28, 28])\n\nprint_useful_info()\nprint_sample_imgs()\n# check valid data sets - can check if splits are as expected\nprint(len(data_loader.valid_ds.items)) # 699 as expected\nprint(len(data_loader.train_ds.items)) # 709 as expected\n\n# can show sample pics\ndata_loader.show_batch() #show examples?\n\n\npath_obj_home_dir:  C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\nimage_list_count:   1428\nset_seed_number:    42\n\nsample_images:\n    1309:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\valid\\7\\9036.png\n     228:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\8830.png\n      51:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\731.png\n     563:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\868.png\n     501:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\8186.png\n699\n709\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbr_learner = vision_learner(data_loader, resnet34, metrics=error_rate)\n\n\nnbr_learner.fine_tune(4)\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/1 00:00&lt;?]\n    \n    \n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/11 00:00&lt;?]\n    \n    \n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.303663\n0.174878\n0.054363\n00:21\n\n\n1\n0.228222\n0.127563\n0.040057\n00:20\n\n\n2\n0.172806\n0.091346\n0.027182\n00:21\n\n\n3\n0.139439\n0.056558\n0.015737\n00:21\n\n\n\n\n\n\nfrom IPython.display import Image # import image viewer\n\n\n\nuploader = SimpleNamespace(data = ['3.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [0], representing [3]\")\n\n\n\n\n\n\n\n\n3\ntensor(0)\ntensor([9.9998e-01, 2.1658e-05])\ncorrectly guessed the [0], representing [3]\n\n\n\n\nuploader = SimpleNamespace(data = ['7.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [1], representing [7]\")\n\n\n\n\n\n\n\n\n\n7\ntensor(1)\ntensor([0.0050, 0.9950])\ncorrectly guessed the [1], representing [7]"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "blog",
+    "section": "",
+    "text": "How To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\napi\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\nhuggingface\n\n\ntutorial\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\ngradio\n\n\ntutorial\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\ncnn\n\n\nwebapp\n\n\ntutorial\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntimm\n\n\narchitecture\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\ngradio\n\n\nhuggingface\n\n\nAI\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\nfast ai\n\n\njupyter notebook\n\n\ntutorial\n\n\nlabelling\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nimage classfier\n\n\ndeep learning\n\n\nfast ai\n\n\npython\n\n\njupyter\n\n\nfood\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\ngit\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\njupyter notebook\n\n\npython\n\n\nquarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Oreo",
+    "section": "",
+    "text": "About Tony\nThis is a blog to note down my learning journey. Perhaps it can help others too.\nPoem of Oreo\nIn a bustling town of Ultimo, where city lights gleam,\nA tale unfolds of Oreo, a kitten’s sweet dream.\nTony brought him home with Lilo by his side,\nA tuxedo cat, in black and white pride.\nOreo, a Maine Coon with a fluffy coat,\nBlack all over, with white around his throat.\nWhite paws that dance, a playful delight,\nA mischievous gleam in his eyes, shining bright.\nLilo, a tiny British Shorthair so fair,\nA dainty companion with a gentle air.\nThey grew up together, a dynamic pair,\nFrom Ultimo to Pyrmont, a journey to share.\nThrough the streets of Townhall, they explored,\nAdventures aplenty, their spirits soared.\nYet, runaway moments were a frequent feat,\nFound and embraced, their connection so sweet.\nOreo, a rogue, with a penchant for bins,\nA greedy delight, where the treasure begins.\nFeasting on scraps, his appetite vast,\nBut his cuteness prevails, a spell he has cast.\nLilo, petite, with a modest cuisine,\nA nibble here, a delicate routine.\nShe watches Oreo with curious eyes,\nAs he plays around, chasing butterflies.\nIn the city’s heartbeat, their story unfolds,\nThrough alleys and parks, where the tale molds.\nOreo, the player, with antics so grand,\nLilo, the watcher, in the city so grand.\nNow, in the world of influencers and fame,\nOreo has found his claim to the game.\nAn influencer cat, with followers galore,\nFrom bins to glamour, a journey to adore.\nThrough Ultimo, Pyrmont, and Townhall’s embrace,\nOreo and Lilo found their special place.\nA tale of friendship, of mischief and grace,\nIn the city’s heartbeat, a memory to trace."
+  },
+  {
+    "objectID": "posts/2024-01-16-96_post_with_git_clone/index.html",
+    "href": "posts/2024-01-16-96_post_with_git_clone/index.html",
+    "title": "Post With Git Clone",
+    "section": "",
+    "text": "Learning how git work sand this is a post initiated by cloning existing repo."
+  },
+  {
+    "objectID": "posts/2024-01-16-98_post_without_code/index.html",
+    "href": "posts/2024-01-16-98_post_without_code/index.html",
+    "title": "Post Without Code",
+    "section": "",
+    "text": "Learning how to quarto blog.\nThis is a post with just this sentence."
+  },
+  {
+    "objectID": "posts/2024-01-18-99_rice_vs_noodles/index.html",
+    "href": "posts/2024-01-18-99_rice_vs_noodles/index.html",
+    "title": "Image Classifier 1: Noodles vs Rice",
+    "section": "",
+    "text": "Today I’ll be attempting to build my first deep learning image classifier to distinguish between rice and noodles using knowledge gained from Jeremy Howards Fast AI course\nHigh-level steps:\n1. Search and Prepare Data\n2. Create DataLoader\n3. Create Learner\n4. Prediction\nI will detail any problems, issues, questions and resolutions during the process.\n\n!pip install -Uqq fastai\n\n\nfrom fastbook import * \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n1. Search and Prepare Data\n\n# 1.1 Get 'rice' photos\ndownload_url(search_images_ddg('rice',max_images=1)[0],'rice.jpg',show_progress=False)\nImage.open('rice.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\n\n# 1.2 Get 'noodles' photos\ndownload_url(search_images_ddg('noodles', max_images=1)[0],'noodles.jpg',show_progress=False)\nImage.open('noodles.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\nLets use 60 imagess of ‘rice’ and ‘noodles’ from DuckDuckGo.\nNote: I downloaded for 100 images of each and then taking 60 of them as some images fail so I’m leaving room for failed photos.\nQuestion: Why do we need verify and why do some photos fail?\n\n# 1.3 Prep images in folders\nsearches = ['rice', 'noodles']\npath = Path('rice_or_noodles')\n\nif not path.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=100)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:60])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n# 1.4 Remove Failed images\npath = Path('rice_or_noodles')\nfailed = verify_images(get_image_files(path))\nfailed.map(Path.unlink)\n\n(#0) []\n\n\n\n\n2. Create DataLoader\n\n# 2.1 \ndls = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path) \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n# 2.2 We can see Paths were created for every image and split into our training and data sets\ndls.train_ds.items[:2]\ndls.valid_ds.items[:2]\n\n[Path('rice_or_noodles/rice/4280fe58-691a-4c0b-85a5-5c1c8400ecb7.jpg'),\n Path('rice_or_noodles/rice/f8a77d77-c007-4854-af8b-2af624a8da66.jpg')]\n\n\n[Question]: How does it know whether it is training set or valid set? I guess theres some indexing somewhere that I dont know how to obtain.\n\n# 2.1 Show a training batch which has an 'image' and a 'label'\ndls.show_batch(max_n=6) #batch shows input and label\n\n\n\n\n\n\n\n\n\n\n2. Create Learner using ResNet\nIn the course, we used a pre-trained model ‘ResNet18’ (RN).\nWhy Pre-trained Models?:\n- Pre-trained models is like getting an athlete who is very good basic sport related skills like hand-eye coordination, jumping, running/sprinting, changing directions etc and then - telling them to learn a specific sport (fine-tuning), - say tennis (labelled dataset provided). With a good base of skills, this person should be able to learn tennis to a good level…\nResNet18:\n- ResNet18 is trained on 1.28 million images with 1000 object categories. - 18 layers\n- Trained on ImageNet dataset\n[Future iterations 1]: Perhaps there are alternative pre-trained models specialising in food?\n[Future iterations 2]: - Read up and try understand the various architectures Fast AI’s TIMM model architectures - Try different architectures and different versions\n\nlearner_RN18 = vision_learner(dls, resnet18, metrics=error_rate)\n\n\n2.1 Learner Model Times:\nThey all took under 10 seconds to create the general learner. Now to fine-tune them!\n\nlearner_RN18.fine_tune(8)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.840357\n4.676042\n0.476190\n00:03\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.763106\n3.761843\n0.476190\n00:04\n\n\n1\n1.517361\n2.798523\n0.476190\n00:04\n\n\n2\n1.202234\n2.308116\n0.428571\n00:04\n\n\n3\n0.953227\n1.637496\n0.428571\n00:04\n\n\n4\n0.770979\n1.034023\n0.380952\n00:04\n\n\n5\n0.662257\n0.641428\n0.190476\n00:04\n\n\n6\n0.563239\n0.405057\n0.142857\n00:04\n\n\n7\n0.490904\n0.285846\n0.095238\n00:04\n\n\n\n\n\n\nOur learner is performing at 90% accuracy (9% error rate) by looking at only 60 photos!\nLets try predict some random photos of rice and noodles I’ve found on the internet.\n\nfrom IPython.display import Image # import image viewer\n\n\n# noodle predictor\nuploader = SimpleNamespace(data = ['test_noodle.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\nnoodles: 99.98%\n\n\n\n\nPrediction 1: Noodles\nThe model predicted noodles correctly with 99.98% confidence!\n\n# rice predictor 1\nuploader = SimpleNamespace(data = ['test_rice.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\n\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 66.22%\n\n\n\n\nPrediction and Results 2: Rice 1\nThe model predicted rice incorrectly with 66.22% confidence!\nI was a bit confused so I decided to provide another image of rice to make\n\n# rice predictor 2\nuploader = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path)) # show image\n\n# get\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 98.51%\n\n\n\n\nPrediction and Results 3: Rice 2\nThe model predicted rice incorrectly with 98.51% confidence!\nOkay now there is clearly something wrong going on. I decide to take a gander at the photos in my ‘rice’ folder.\n\nIt looks like we’ve trained a learner specialises in bowled or white rice. I was testing the model with fried rice since that is my favourite rice dish.\nLets test out a couple photos on bowled rice.\n\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice: 88.73%\nnoodles: 92.57%\n\n\n\n\n\n\n\n\n\nNow I’m confused as its predicting incorrectly with 92.57% confidence.\nPerhaps the model isnt seeing enough data?\nLets train a new model with:\n- 300 images instead of 60\n- ‘rice food’ and ‘noodle food’ as keyword insteads of just ‘rice’ and ‘noodles’\n\nsearches = ['rice food', 'noodles food']\npath_200 = Path('rice_or_noodles_300')\n\nif not path_200.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path_200/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=300)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:200])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n\n# 1.4 Remove Failed images\npath_200 = Path('rice_or_noodles_300')\nfailed = verify_images(get_image_files(path_200))\nfailed.map(Path.unlink)\n\n\n(#10) [None,None,None,None,None,None,None,None,None,None]\n\n\n\n\ndls_200 = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path_200) \n\n\nlearner_RN18_200 = vision_learner(dls_200, resnet18, metrics=error_rate)\n\n\nlearner_RN18_200.fine_tune(4)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.155098\n0.872050\n0.338462\n00:11\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.625260\n0.402908\n0.169231\n00:15\n\n\n1\n0.442973\n0.289800\n0.138462\n00:14\n\n\n2\n0.317375\n0.328805\n0.153846\n00:14\n\n\n3\n0.235606\n0.327507\n0.123077\n00:15\n\n\n\n\n\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18_200.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 100.00%\nrice food: 99.95%\n\n\n\n\n\n\n\n\n\nSo it’s now 100 and 99.95% confident they’re rice, which is great!\nLets try some fried rice!\nWe’ll retest now at the fried rice photo which the initial model guessed to be noodles with 98.5% confidence\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path1 = uploader1.data[0]\n\ndisplay(Image(filename=image_path1)) \n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 99.56%\n\n\nGreat! It is correct with 99.56% confidence.\nI think we’ve created a great rice and noodles classifier, lets stop here.\n[Future Iteration 3]: Build web app for everyone to test it out\n[Future Iteration 4]: Make it useable on my blog\n[Question] I wonder if theres a way to quickly see all specific headings I’ve used, I find myself scrolling up and download to find what Iteration I’m up to…\nApologies for the lack of neatness, lets hope this improves over time…"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
+    "title": "Saving a Fast AI Model",
+    "section": "",
+    "text": "This is a short tutorial to save (export) down a fast ai model (pkl file)."
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
+    "title": "Saving a Fast AI Model",
+    "section": "1. Load Fast AI Libaries and Download Dataset",
+    "text": "1. Load Fast AI Libaries and Download Dataset\n\n!pip install -Uqq fastai\nfrom fastai.vision.all import *\n\n\npath = untar_data(URLs.PETS)/'images'\n\n\npath\n\nPath('C:/Users/tonyp/.fastai/data/oxford-iiit-pet/images')\n\n\nIf you ran it in GoogleColab or Kaggle (recommended, its faster) then it’ll be stored in the cloud. \nIf you ran it locally, its stored on your machine and you can take a look at the all the cute images! (Not recommended, its slow)"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
+    "title": "Saving a Fast AI Model",
+    "section": "2. Labelling Function",
+    "text": "2. Labelling Function\n\ndef is_cat(x): return x[0].isupper()\n\nOur data must be consistently labelled and parsed through into the model.\nFor this particular dataset, filenames starting with a Capital letter denotes a Cat, vice versa for a Non-Cat (Dog, in this case).\n\n\n\nPet Filenames\n\n\nLets write a function to handle the files names to get our labels (psuedo-code):\n1. Parse in file name and\n2. Obtain the first character and\n3. Check whether it is an upper case,\n4. If True, then it is a Cat.\nThere are various ways for us to supply the labelling to our model, in a previous blog Rice vs Noodles, the label was supplied via the parent folders name (rice folder and noodle folder).\n\nFast AI provides various helpful functions for common ways data is labelled to parse into our models\nFast AI Docs - Transforms - Label"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
+    "title": "Saving a Fast AI Model",
+    "section": "3. DataLoader",
+    "text": "3. DataLoader\nCreate the Dataloader and supply the labelling function we wrote into label_func.\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
+    "title": "Saving a Fast AI Model",
+    "section": "4. Fine-tune (Non-GPU vs GPU)",
+    "text": "4. Fine-tune (Non-GPU vs GPU)\nI attempted to fine-tune via Kaggle (GPU) and Locally (No GPU) and not suprisingly it is incredibly faster with a GPU setup.\nNvidia (and maybe other) GPUs are designed to be able to take multiple images at once (batches) grouped together (tensors) (I think 64 images at once), whereas a laptop without a GPU like mine will be processing 1 image at a time.\n\nlearn = vision_learner(dls, resnet18, metrics=error_rate)\nlearn.fine_tune(3)\n\nGPU took 35 seconds an epoch \nNon-GPU took 8 minutes an epoch"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
+    "title": "Saving a Fast AI Model",
+    "section": "5. Export the model",
+    "text": "5. Export the model\n\nlearn.export('catdogmodel.pkl')\n\nIn Kaggle, the model will be saved on their cloud and you can access it by using right-hand sidebar under Notebook -&gt; Data -&gt; Output\n\nIt’s only 46 Mb!, not too shabby!\n\nThats it! We’ll go through how to use a saved/exported model in an upcoming post."
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "",
+    "text": "I’ve just created my first multi-category classifier using Jeremy Howard’s popular fast ai which is an astraction layer library built on top of the most world’s used deep-learning library PyTorch. I’ve documented the process including the issues I faced (i.e. bugs)\nI found it more easier to digest and understand this process by splitting the steps into 3 parts:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "Part 1: Create Learner (.pkl file)",
+    "text": "Part 1: Create Learner (.pkl file)"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.1 Install and import libraries",
+    "text": "1.1 Install and import libraries\n\n!pip install timm\n!pip install fastai \n\n\nfrom fastai.vision.all import *\nimport timm"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.2 Download Pets Breed Data",
+    "text": "1.2 Download Pets Breed Data\n\npath = untar_data(URLs.PETS)/'images'"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.3 Create Data Loader",
+    "text": "1.3 Create Data Loader\n\n1.3.1 (A different) Labelling Function\nHere a different method to label our data was used:\n\nIn ‘noodles vs rice’ model: There were two parent folders separating two categories of data: get_y=parent_label\nIn ‘saving a fast ai’ model: There was a custom labelling function that looked for capital letters for cat breeds def is_cat(x): return x[0].isupper()\nIn this model, I used Regex to find breed names before the last ’_’ in the file name: label_func=RegexLabeller(pat=r'^([^/]+)_\\d). See show_batch() output to see the file names examples.\n\nDid you notice this is the same dataset as the is_cat model? So changing our label resulted in a different model!\n\n\n1.3.2 Data Loader Code\n\npets_dataloaders =  ImageDataLoaders.from_name_func(\n    '.',\n    get_image_files(path),\n    valid_pct=0.2,\n    seed=42,\n    label_func=RegexLabeller(pat=r'^([^/]+)_\\d+'),\n    item_tfms=Resize(224))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.4 Batch Examples, Create Learner, Fine-Tune and Export",
+    "text": "1.4 Batch Examples, Create Learner, Fine-Tune and Export\nI grouped these steps as the code are exactly the same in previous posts.\n\n1.4.1 Batch Examples\nThis function is also a good way to find out what is the file name structure if we were not sure.\n\npets_dataloaders.show_batch(max_n=8)\n\n\n\n\n\n\n\n\n\n\n1.4.2 Create Learner\nI am still using resnet model architecture for starters for reasons mentioned previously by Jeremy Howard\n\npets_learner = vision_learner(pets_dataloaders, resnet34, metrics=error_rate)\n\n\n\n1.4.3 Fine-Tune\n\npets_learner.fine_tune(3) \n\n\n\n1.4.4 Export\n\npets_learner.export('pets_learner.pkl')"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "To be Continued…",
+    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\n[Part 3: Host on HuggingFace]"
+  },
+  {
     "objectID": "posts/2024-01-25-99_gradio_app/index.html",
     "href": "posts/2024-01-25-99_gradio_app/index.html",
     "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
@@ -54,243 +327,5 @@
     "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
     "section": "To be Continued…",
     "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\n[Part 3: Upload to HuggingFace account]"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "",
-    "text": "I’ve just created my first multi-category classifier using Jeremy Howard’s popular fast ai which is an astraction layer library built on top of the most world’s used deep-learning library PyTorch. I’ve documented the process including the issues I faced (i.e. bugs)\nI found it more easier to digest and understand this process by splitting the steps into 3 parts:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "Part 1: Create Learner (.pkl file)",
-    "text": "Part 1: Create Learner (.pkl file)"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.1 Install and import libraries",
-    "text": "1.1 Install and import libraries\n\n!pip install timm\n!pip install fastai \n\n\nfrom fastai.vision.all import *\nimport timm"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.2 Download Pets Breed Data",
-    "text": "1.2 Download Pets Breed Data\n\npath = untar_data(URLs.PETS)/'images'"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.3 Create Data Loader",
-    "text": "1.3 Create Data Loader\n\n1.3.1 (A different) Labelling Function\nHere a different method to label our data was used:\n\nIn ‘noodles vs rice’ model: There were two parent folders separating two categories of data: get_y=parent_label\nIn ‘saving a fast ai’ model: There was a custom labelling function that looked for capital letters for cat breeds def is_cat(x): return x[0].isupper()\nIn this model, I used Regex to find breed names before the last ’_’ in the file name: label_func=RegexLabeller(pat=r'^([^/]+)_\\d). See show_batch() output to see the file names examples.\n\nDid you notice this is the same dataset as the is_cat model? So changing our label resulted in a different model!\n\n\n1.3.2 Data Loader Code\n\npets_dataloaders =  ImageDataLoaders.from_name_func(\n    '.',\n    get_image_files(path),\n    valid_pct=0.2,\n    seed=42,\n    label_func=RegexLabeller(pat=r'^([^/]+)_\\d+'),\n    item_tfms=Resize(224))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.4 Batch Examples, Create Learner, Fine-Tune and Export",
-    "text": "1.4 Batch Examples, Create Learner, Fine-Tune and Export\nI grouped these steps as the code are exactly the same in previous posts.\n\n1.4.1 Batch Examples\nThis function is also a good way to find out what is the file name structure if we were not sure.\n\npets_dataloaders.show_batch(max_n=8)\n\n\n\n\n\n\n\n\n\n\n1.4.2 Create Learner\nI am still using resnet model architecture for starters for reasons mentioned previously by Jeremy Howard\n\npets_learner = vision_learner(pets_dataloaders, resnet34, metrics=error_rate)\n\n\n\n1.4.3 Fine-Tune\n\npets_learner.fine_tune(3) \n\n\n\n1.4.4 Export\n\npets_learner.export('pets_learner.pkl')"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "To be Continued…",
-    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\n[Part 3: Host on HuggingFace]"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
-    "title": "Saving a Fast AI Model",
-    "section": "",
-    "text": "This is a short tutorial to save (export) down a fast ai model (pkl file)."
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
-    "title": "Saving a Fast AI Model",
-    "section": "1. Load Fast AI Libaries and Download Dataset",
-    "text": "1. Load Fast AI Libaries and Download Dataset\n\n!pip install -Uqq fastai\nfrom fastai.vision.all import *\n\n\npath = untar_data(URLs.PETS)/'images'\n\n\npath\n\nPath('C:/Users/tonyp/.fastai/data/oxford-iiit-pet/images')\n\n\nIf you ran it in GoogleColab or Kaggle (recommended, its faster) then it’ll be stored in the cloud. \nIf you ran it locally, its stored on your machine and you can take a look at the all the cute images! (Not recommended, its slow)"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
-    "title": "Saving a Fast AI Model",
-    "section": "2. Labelling Function",
-    "text": "2. Labelling Function\n\ndef is_cat(x): return x[0].isupper()\n\nOur data must be consistently labelled and parsed through into the model.\nFor this particular dataset, filenames starting with a Capital letter denotes a Cat, vice versa for a Non-Cat (Dog, in this case).\n\n\n\nPet Filenames\n\n\nLets write a function to handle the files names to get our labels (psuedo-code):\n1. Parse in file name and\n2. Obtain the first character and\n3. Check whether it is an upper case,\n4. If True, then it is a Cat.\nThere are various ways for us to supply the labelling to our model, in a previous blog Rice vs Noodles, the label was supplied via the parent folders name (rice folder and noodle folder).\n\nFast AI provides various helpful functions for common ways data is labelled to parse into our models\nFast AI Docs - Transforms - Label"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
-    "title": "Saving a Fast AI Model",
-    "section": "3. DataLoader",
-    "text": "3. DataLoader\nCreate the Dataloader and supply the labelling function we wrote into label_func.\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
-    "title": "Saving a Fast AI Model",
-    "section": "4. Fine-tune (Non-GPU vs GPU)",
-    "text": "4. Fine-tune (Non-GPU vs GPU)\nI attempted to fine-tune via Kaggle (GPU) and Locally (No GPU) and not suprisingly it is incredibly faster with a GPU setup.\nNvidia (and maybe other) GPUs are designed to be able to take multiple images at once (batches) grouped together (tensors) (I think 64 images at once), whereas a laptop without a GPU like mine will be processing 1 image at a time.\n\nlearn = vision_learner(dls, resnet18, metrics=error_rate)\nlearn.fine_tune(3)\n\nGPU took 35 seconds an epoch \nNon-GPU took 8 minutes an epoch"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
-    "title": "Saving a Fast AI Model",
-    "section": "5. Export the model",
-    "text": "5. Export the model\n\nlearn.export('catdogmodel.pkl')\n\nIn Kaggle, the model will be saved on their cloud and you can access it by using right-hand sidebar under Notebook -&gt; Data -&gt; Output\n\nIt’s only 46 Mb!, not too shabby!\n\nThats it! We’ll go through how to use a saved/exported model in an upcoming post."
-  },
-  {
-    "objectID": "posts/2024-01-18-99_rice_vs_noodles/index.html",
-    "href": "posts/2024-01-18-99_rice_vs_noodles/index.html",
-    "title": "Image Classifier 1: Noodles vs Rice",
-    "section": "",
-    "text": "Today I’ll be attempting to build my first deep learning image classifier to distinguish between rice and noodles using knowledge gained from Jeremy Howards Fast AI course\nHigh-level steps:\n1. Search and Prepare Data\n2. Create DataLoader\n3. Create Learner\n4. Prediction\nI will detail any problems, issues, questions and resolutions during the process.\n\n!pip install -Uqq fastai\n\n\nfrom fastbook import * \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n1. Search and Prepare Data\n\n# 1.1 Get 'rice' photos\ndownload_url(search_images_ddg('rice',max_images=1)[0],'rice.jpg',show_progress=False)\nImage.open('rice.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\n\n# 1.2 Get 'noodles' photos\ndownload_url(search_images_ddg('noodles', max_images=1)[0],'noodles.jpg',show_progress=False)\nImage.open('noodles.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\nLets use 60 imagess of ‘rice’ and ‘noodles’ from DuckDuckGo.\nNote: I downloaded for 100 images of each and then taking 60 of them as some images fail so I’m leaving room for failed photos.\nQuestion: Why do we need verify and why do some photos fail?\n\n# 1.3 Prep images in folders\nsearches = ['rice', 'noodles']\npath = Path('rice_or_noodles')\n\nif not path.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=100)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:60])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n# 1.4 Remove Failed images\npath = Path('rice_or_noodles')\nfailed = verify_images(get_image_files(path))\nfailed.map(Path.unlink)\n\n(#0) []\n\n\n\n\n2. Create DataLoader\n\n# 2.1 \ndls = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path) \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n# 2.2 We can see Paths were created for every image and split into our training and data sets\ndls.train_ds.items[:2]\ndls.valid_ds.items[:2]\n\n[Path('rice_or_noodles/rice/4280fe58-691a-4c0b-85a5-5c1c8400ecb7.jpg'),\n Path('rice_or_noodles/rice/f8a77d77-c007-4854-af8b-2af624a8da66.jpg')]\n\n\n[Question]: How does it know whether it is training set or valid set? I guess theres some indexing somewhere that I dont know how to obtain.\n\n# 2.1 Show a training batch which has an 'image' and a 'label'\ndls.show_batch(max_n=6) #batch shows input and label\n\n\n\n\n\n\n\n\n\n\n2. Create Learner using ResNet\nIn the course, we used a pre-trained model ‘ResNet18’ (RN).\nWhy Pre-trained Models?:\n- Pre-trained models is like getting an athlete who is very good basic sport related skills like hand-eye coordination, jumping, running/sprinting, changing directions etc and then - telling them to learn a specific sport (fine-tuning), - say tennis (labelled dataset provided). With a good base of skills, this person should be able to learn tennis to a good level…\nResNet18:\n- ResNet18 is trained on 1.28 million images with 1000 object categories. - 18 layers\n- Trained on ImageNet dataset\n[Future iterations 1]: Perhaps there are alternative pre-trained models specialising in food?\n[Future iterations 2]: - Read up and try understand the various architectures Fast AI’s TIMM model architectures - Try different architectures and different versions\n\nlearner_RN18 = vision_learner(dls, resnet18, metrics=error_rate)\n\n\n2.1 Learner Model Times:\nThey all took under 10 seconds to create the general learner. Now to fine-tune them!\n\nlearner_RN18.fine_tune(8)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.840357\n4.676042\n0.476190\n00:03\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.763106\n3.761843\n0.476190\n00:04\n\n\n1\n1.517361\n2.798523\n0.476190\n00:04\n\n\n2\n1.202234\n2.308116\n0.428571\n00:04\n\n\n3\n0.953227\n1.637496\n0.428571\n00:04\n\n\n4\n0.770979\n1.034023\n0.380952\n00:04\n\n\n5\n0.662257\n0.641428\n0.190476\n00:04\n\n\n6\n0.563239\n0.405057\n0.142857\n00:04\n\n\n7\n0.490904\n0.285846\n0.095238\n00:04\n\n\n\n\n\n\nOur learner is performing at 90% accuracy (9% error rate) by looking at only 60 photos!\nLets try predict some random photos of rice and noodles I’ve found on the internet.\n\nfrom IPython.display import Image # import image viewer\n\n\n# noodle predictor\nuploader = SimpleNamespace(data = ['test_noodle.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\nnoodles: 99.98%\n\n\n\n\nPrediction 1: Noodles\nThe model predicted noodles correctly with 99.98% confidence!\n\n# rice predictor 1\nuploader = SimpleNamespace(data = ['test_rice.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\n\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 66.22%\n\n\n\n\nPrediction and Results 2: Rice 1\nThe model predicted rice incorrectly with 66.22% confidence!\nI was a bit confused so I decided to provide another image of rice to make\n\n# rice predictor 2\nuploader = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path)) # show image\n\n# get\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 98.51%\n\n\n\n\nPrediction and Results 3: Rice 2\nThe model predicted rice incorrectly with 98.51% confidence!\nOkay now there is clearly something wrong going on. I decide to take a gander at the photos in my ‘rice’ folder.\n\nIt looks like we’ve trained a learner specialises in bowled or white rice. I was testing the model with fried rice since that is my favourite rice dish.\nLets test out a couple photos on bowled rice.\n\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice: 88.73%\nnoodles: 92.57%\n\n\n\n\n\n\n\n\n\nNow I’m confused as its predicting incorrectly with 92.57% confidence.\nPerhaps the model isnt seeing enough data?\nLets train a new model with:\n- 300 images instead of 60\n- ‘rice food’ and ‘noodle food’ as keyword insteads of just ‘rice’ and ‘noodles’\n\nsearches = ['rice food', 'noodles food']\npath_200 = Path('rice_or_noodles_300')\n\nif not path_200.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path_200/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=300)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:200])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n\n# 1.4 Remove Failed images\npath_200 = Path('rice_or_noodles_300')\nfailed = verify_images(get_image_files(path_200))\nfailed.map(Path.unlink)\n\n\n(#10) [None,None,None,None,None,None,None,None,None,None]\n\n\n\n\ndls_200 = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path_200) \n\n\nlearner_RN18_200 = vision_learner(dls_200, resnet18, metrics=error_rate)\n\n\nlearner_RN18_200.fine_tune(4)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.155098\n0.872050\n0.338462\n00:11\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.625260\n0.402908\n0.169231\n00:15\n\n\n1\n0.442973\n0.289800\n0.138462\n00:14\n\n\n2\n0.317375\n0.328805\n0.153846\n00:14\n\n\n3\n0.235606\n0.327507\n0.123077\n00:15\n\n\n\n\n\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18_200.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 100.00%\nrice food: 99.95%\n\n\n\n\n\n\n\n\n\nSo it’s now 100 and 99.95% confident they’re rice, which is great!\nLets try some fried rice!\nWe’ll retest now at the fried rice photo which the initial model guessed to be noodles with 98.5% confidence\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path1 = uploader1.data[0]\n\ndisplay(Image(filename=image_path1)) \n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 99.56%\n\n\nGreat! It is correct with 99.56% confidence.\nI think we’ve created a great rice and noodles classifier, lets stop here.\n[Future Iteration 3]: Build web app for everyone to test it out\n[Future Iteration 4]: Make it useable on my blog\n[Question] I wonder if theres a way to quickly see all specific headings I’ve used, I find myself scrolling up and download to find what Iteration I’m up to…\nApologies for the lack of neatness, lets hope this improves over time…"
-  },
-  {
-    "objectID": "posts/2024-01-16-98_post_without_code/index.html",
-    "href": "posts/2024-01-16-98_post_without_code/index.html",
-    "title": "Post Without Code",
-    "section": "",
-    "text": "Learning how to quarto blog.\nThis is a post with just this sentence."
-  },
-  {
-    "objectID": "posts/2024-01-16-96_post_with_git_clone/index.html",
-    "href": "posts/2024-01-16-96_post_with_git_clone/index.html",
-    "title": "Post With Git Clone",
-    "section": "",
-    "text": "Learning how git work sand this is a post initiated by cloning existing repo."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Oreo",
-    "section": "",
-    "text": "About Tony\nThis is a blog to note down my learning journey. Perhaps it can help others too.\nPoem of Oreo\nIn a bustling town of Ultimo, where city lights gleam,\nA tale unfolds of Oreo, a kitten’s sweet dream.\nTony brought him home with Lilo by his side,\nA tuxedo cat, in black and white pride.\nOreo, a Maine Coon with a fluffy coat,\nBlack all over, with white around his throat.\nWhite paws that dance, a playful delight,\nA mischievous gleam in his eyes, shining bright.\nLilo, a tiny British Shorthair so fair,\nA dainty companion with a gentle air.\nThey grew up together, a dynamic pair,\nFrom Ultimo to Pyrmont, a journey to share.\nThrough the streets of Townhall, they explored,\nAdventures aplenty, their spirits soared.\nYet, runaway moments were a frequent feat,\nFound and embraced, their connection so sweet.\nOreo, a rogue, with a penchant for bins,\nA greedy delight, where the treasure begins.\nFeasting on scraps, his appetite vast,\nBut his cuteness prevails, a spell he has cast.\nLilo, petite, with a modest cuisine,\nA nibble here, a delicate routine.\nShe watches Oreo with curious eyes,\nAs he plays around, chasing butterflies.\nIn the city’s heartbeat, their story unfolds,\nThrough alleys and parks, where the tale molds.\nOreo, the player, with antics so grand,\nLilo, the watcher, in the city so grand.\nNow, in the world of influencers and fame,\nOreo has found his claim to the game.\nAn influencer cat, with followers galore,\nFrom bins to glamour, a journey to adore.\nThrough Ultimo, Pyrmont, and Townhall’s embrace,\nOreo and Lilo found their special place.\nA tale of friendship, of mischief and grace,\nIn the city’s heartbeat, a memory to trace."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "blog",
-    "section": "",
-    "text": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\nhuggingface\n\n\ntutorial\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\ngradio\n\n\ntutorial\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\ncnn\n\n\nwebapp\n\n\ntutorial\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntimm\n\n\narchitecture\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\ngradio\n\n\nhuggingface\n\n\nAI\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\nfast ai\n\n\njupyter notebook\n\n\ntutorial\n\n\nlabelling\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nimage classfier\n\n\ndeep learning\n\n\nfast ai\n\n\npython\n\n\njupyter\n\n\nfood\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\ngit\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\njupyter notebook\n\n\npython\n\n\nquarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
-    "href": "posts/2024-01-16-97_post_with_notebook/index.html",
-    "title": "Post With Sample Jupyter Notebook",
-    "section": "",
-    "text": "Learning how quarto works with jupyter notebooks. This is a sample editted notebook from fastai.\n\nfrom fastai.vision.all import *\nchosen_sample_seed          = 42\nchosen_sample_n             = 5\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n# useful informative functions\ndef print_useful_info():\n    global path_dir_obj, list_all_img_path_obj\n    print()\n    print(f\"path_obj_home_dir: \\t{path_dir_obj}\")\n    print(f\"image_list_count: \\t{len(list_all_img_path_obj)}\")\n    return None\n\ndef print_sample_imgs():\n    global path_dir_obj, list_all_img_path_obj, chosen_sample_seed, chosen_sample_n\n    import random\n    set_seed(chosen_sample_seed)\n    print(f\"set_seed_number: \\t{chosen_sample_seed}\")\n    rng         = len(list_all_img_path_obj)-1  # Replace 10 with the desired upper limit (exclusive)\n    random_nos  = random.sample(range(rng), chosen_sample_n)\n    print()\n    print(\"sample_images:\")\n    for index, img_path in enumerate(list_all_img_path_obj[random_nos]):\n        print(f\" {random_nos[index]:&gt;7}: \\t\\t{img_path}\")\n    \n    \n    for image_path in list_all_img_path_obj[random_nos]:\n        img = PILImage.create(image_path)\n        show_image(img)\n    return None\n\n\n# 0. get paths of images\npath_dir_obj                = untar_data(URLs.MNIST_TINY)\nlist_all_img_path_obj       = get_image_files(path_dir_obj)\n\n\n# 1. create learner\ndata_loader = ImageDataLoaders.from_folder(path_dir_obj, \n                                    img_cls=PILImageBW,\n                                    set_seed=42)\nx1,y1 = data_loader.one_batch()\ntest_eq(x1.shape, [64, 1, 28, 28])\n\nprint_useful_info()\nprint_sample_imgs()\n# check valid data sets - can check if splits are as expected\nprint(len(data_loader.valid_ds.items)) # 699 as expected\nprint(len(data_loader.train_ds.items)) # 709 as expected\n\n# can show sample pics\ndata_loader.show_batch() #show examples?\n\n\npath_obj_home_dir:  C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\nimage_list_count:   1428\nset_seed_number:    42\n\nsample_images:\n    1309:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\valid\\7\\9036.png\n     228:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\8830.png\n      51:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\731.png\n     563:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\868.png\n     501:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\8186.png\n699\n709\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbr_learner = vision_learner(data_loader, resnet34, metrics=error_rate)\n\n\nnbr_learner.fine_tune(4)\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/1 00:00&lt;?]\n    \n    \n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/11 00:00&lt;?]\n    \n    \n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.303663\n0.174878\n0.054363\n00:21\n\n\n1\n0.228222\n0.127563\n0.040057\n00:20\n\n\n2\n0.172806\n0.091346\n0.027182\n00:21\n\n\n3\n0.139439\n0.056558\n0.015737\n00:21\n\n\n\n\n\n\nfrom IPython.display import Image # import image viewer\n\n\n\nuploader = SimpleNamespace(data = ['3.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [0], representing [3]\")\n\n\n\n\n\n\n\n\n3\ntensor(0)\ntensor([9.9998e-01, 2.1658e-05])\ncorrectly guessed the [0], representing [3]\n\n\n\n\nuploader = SimpleNamespace(data = ['7.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [1], representing [7]\")\n\n\n\n\n\n\n\n\n\n7\ntensor(1)\ntensor([0.0050, 0.9950])\ncorrectly guessed the [1], representing [7]"
-  },
-  {
-    "objectID": "posts/2024-01-16-99_welcome/index.html",
-    "href": "posts/2024-01-16-99_welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nDefault Quarto content:\n“Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.””"
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "1. Introduction",
-    "text": "1. Introduction\nEmbedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!"
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "2. Background",
-    "text": "2. Background\nThis App will guess whether an image is a Cat or Dog with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.\nAll doggos🐕 & cats🐈 image examples has never been viewed by the Model and it makes a prediction in milliseconds! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!\nThe App isn’t perfect:\n- It guesses Incorrectly with great 95% confidence a cat as a dog!\nI’m thrilled to be able to build the app, get it hosted and embed it all in one day for the first time! Alot of firsts today!"
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "3. Future stuff",
-    "text": "3. Future stuff\n[1]: Multi-Image Uploader + Predictor.\n[2]: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.\n[4]: Upgrade the rice vs noodle model an App and hosted.\n[4]: Learn some HTML/CSS to make things prettier."
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "4. Heres the App!",
-    "text": "4. Heres the App!"
-  },
-  {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html",
-    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html",
-    "title": "How to choose a different Deep-Learning Model Architecture",
-    "section": "",
-    "text": "Today I’ll go through how to find and test different deep-learning architectures from Pytorch Image Models (timm) library made available here by Ross Wightman and use them in our models."
-  },
-  {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#using-timm---pytorch-image-models",
-    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#using-timm---pytorch-image-models",
-    "title": "How to choose a different Deep-Learning Model Architecture",
-    "section": "1. Using timm - PyTorch Image Models",
-    "text": "1. Using timm - PyTorch Image Models\n\n1.1 Introduction\nWhat are timm’s models? They’re mathematical functions (i.e. application of matrix multiplication, non-linearities e.g. ReLu’s)\nReference: “Which image model are best” - Jeremy Howard\nReference: “timm” - Ross Wightman\nWe want to know 3 things:\n1. how fast are they? You’d want models in top left of chart.\n2. how much memory?\n3. how accurate are they? Lower error rate the better.\n[Future iteration I]: A formalised metholodgy to decide what is fast enough, appropriate memory-use, and what is accurate enough for our use-cases.\nThere is a useful high-level chart from Jeremy’s notebook charting accuracy (Y-axis) vs secs per sample (X-axis):\n\nI chose to use a model from the convnext family due to its balance of high accuracy and speed.\n[Future iteration II]: Some more formalised methodology on choosing the architecture. Jeremy does mention architecture should be the one last thing things to worry about and he usually builds from resnet and tests whether it is, accurate enough and fast enough, then iterate from there.\n\n\n1.2 Import timm library\n\nimport timm\n\n\n\n1.3 List available model architectures and choose one\n\ntimm.list_models('convnext*') # * wild card searches \n\n['convnext_atto',\n 'convnext_atto_ols',\n 'convnext_base',\n 'convnext_femto',\n 'convnext_femto_ols',\n 'convnext_large',\n 'convnext_large_mlp',\n 'convnext_nano',\n 'convnext_nano_ols',\n 'convnext_pico',\n 'convnext_pico_ols',\n 'convnext_small',\n 'convnext_tiny',\n 'convnext_tiny_hnf',\n 'convnext_xlarge',\n 'convnext_xxlarge',\n 'convnextv2_atto',\n 'convnextv2_base',\n 'convnextv2_femto',\n 'convnextv2_huge',\n 'convnextv2_large',\n 'convnextv2_nano',\n 'convnextv2_pico',\n 'convnextv2_small',\n 'convnextv2_tiny']"
-  },
-  {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#create-your-learner-with-a-timm-model",
-    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#create-your-learner-with-a-timm-model",
-    "title": "How to choose a different Deep-Learning Model Architecture",
-    "section": "2. Create your Learner with a timm model",
-    "text": "2. Create your Learner with a timm model\n\n2.1 Get your data\n\nfrom fastai.vision.all import *\npath = untar_data(URLs.PETS)/'images'\n\n\n\n2.2 Prepare your Functions\n\ndef is_cat(x): return x[0].isupper()\n\n\n\n2.3 Load your DataLoader\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\n\n\n2.4 Build your Learner\n\nlearn_conv = vision_learner(dls, 'convnext_tiny', metrics=error_rate).to_fp16()\nlearn_resn = vision_learner(dls, 'resnet18', metrics=error_rate).to_fp16()\n\n\n\n2.5 Fine-Tune: ResNet18 vs ConvNextTiny\nA 90% reduction in the error rate! (0.6766% to 0.0667%: 1-(0.000677/0.006766)). It’s noted that the resnet error rate was quite low and changing the model was probably not necessary."
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html",
-    "href": "posts/2024-01-25-98_huggingface/index.html",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "",
-    "text": "This post shows how to host your working Local Gradio App on HuggingFace.\nThis post is part of a series:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace account"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
-    "href": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "Part 3: Host on HuggingFace account",
-    "text": "Part 3: Host on HuggingFace account"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
-    "href": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "1 Create HuggingFace Account and Create a ‘Space’",
-    "text": "1 Create HuggingFace Account and Create a ‘Space’\n\nChoose your Space name\nChoose Apache-2.0 to avoid any copyright issues\nChoose Gradio\nChoose the Free option\nChoose Public (show you can show it to the world!)"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
-    "href": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "2 Clone the repo",
-    "text": "2 Clone the repo\nThis will create allow us deploy the Gradio app to the HuggingFace repository:\ngit clone https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
-    "href": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "2. Gather your files",
-    "text": "2. Gather your files\nRecall the various files we needed to run the app locally part 2.\nGather into the cloned huggingface folder:\n- Learner (.pkl)\n- Pet examples (pets.jpg)\n- Gradio app (app.py)\n\nA good way to check for me is seeing the pets_breed_predictor is the git folder and huggingface space."
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
-    "href": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "3. Push to HuggingFace Repo",
-    "text": "3. Push to HuggingFace Repo\nIf you’ve pushed succesfully your app (could take several minutes), then your app is live! Congrats!\nIf you’re like me and forgot to include the requirements.txt then you’ll be greeted with this error.\n\n\n3.1 Add the requirements.txt\nWe imported two libraries fastai and gradio so include them in the requirements.txt file. Commit and push."
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
-    "href": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "4 Web App Complete and is Live",
-    "text": "4 Web App Complete and is Live\nIf all goes well, the HuggingFace space is hosting the Gradio App!\nCheck out my web app here!"
   }
 ]
