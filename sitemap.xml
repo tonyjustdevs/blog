@@ -1,63 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-31-99_neural_network_basics/index.html</loc>
-    <lastmod>2024-01-31T08:08:17.084Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-02-02-neural_network_basics/index.html</loc>
+    <lastmod>2024-02-02T12:12:53.365Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/index.html</loc>
-    <lastmod>2024-01-26T08:47:36.920Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/index.html</loc>
-    <lastmod>2024-01-26T08:47:35.930Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-99_saving_a_fastai_model/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.973Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-18-99_rice_vs_noodles/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.512Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-98_post_without_code/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.501Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-96_post_with_git_clone/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.497Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/about.html</loc>
-    <lastmod>2024-01-26T08:47:34.495Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.495Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-97_post_with_notebook/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.498Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-99_welcome/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.501Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-98_embed_gradio_hgface/index.html</loc>
-    <lastmod>2024-01-26T08:47:34.970Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html</loc>
-    <lastmod>2024-01-26T08:47:34.983Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-27-99_kaggle_api/index.html</loc>
+    <lastmod>2024-01-27T03:46:16.663Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-98_huggingface/index.html</loc>
     <lastmod>2024-01-26T08:47:36.911Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-27-99_kaggle_api/index.html</loc>
-    <lastmod>2024-01-27T03:46:16.663Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html</loc>
+    <lastmod>2024-01-26T08:47:34.983Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-98_embed_gradio_hgface/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.970Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-99_welcome/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.501Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-97_post_with_notebook/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.498Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.495Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/about.html</loc>
+    <lastmod>2024-01-26T08:47:34.495Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-96_post_with_git_clone/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-98_post_without_code/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.501Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-18-99_rice_vs_noodles/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.512Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-99_saving_a_fastai_model/index.html</loc>
+    <lastmod>2024-01-26T08:47:34.973Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/index.html</loc>
+    <lastmod>2024-01-26T08:47:35.930Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/index.html</loc>
+    <lastmod>2024-01-26T08:47:36.920Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-31-99_neural_network_basics/index.html</loc>
+    <lastmod>2024-01-31T10:33:31.571Z</lastmod>
   </url>
 </urlset>

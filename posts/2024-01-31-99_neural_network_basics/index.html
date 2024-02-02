@@ -234,7 +234,7 @@ window.Quarto = {
   <li><a href="#creating-1x2-1x-1" id="toc-creating-1x2-1x-1" class="nav-link" data-scroll-target="#creating-1x2-1x-1">3.3 Creating <span class="math inline">\(1x^2 + 1x + 1\)</span></a></li>
   <li><a href="#plotting-1x2-1x-1" id="toc-plotting-1x2-1x-1" class="nav-link" data-scroll-target="#plotting-1x2-1x-1">3.4 Plotting <span class="math inline">\(1x^2 + 1x + 1\)</span></a></li>
   <li><a href="#interactive-quadratic-equation" id="toc-interactive-quadratic-equation" class="nav-link" data-scroll-target="#interactive-quadratic-equation">3.4 Interactive Quadratic Equation</a></li>
-  <li><a href="#mean-squared-errors-mae" id="toc-mean-squared-errors-mae" class="nav-link" data-scroll-target="#mean-squared-errors-mae">3.5 Mean Squared Errors (MAE)</a></li>
+  <li><a href="#mean-absolute-errors-mae" id="toc-mean-absolute-errors-mae" class="nav-link" data-scroll-target="#mean-absolute-errors-mae">3.5 Mean Absolute Errors (MAE)</a></li>
   </ul></li>
   <li><a href="#to-be-continued" id="toc-to-be-continued" class="nav-link" data-scroll-target="#to-be-continued">To be Continued…</a></li>
   </ul>
@@ -254,7 +254,7 @@ window.Quarto = {
 <p>This post will go through basics of how to fit a line to some data.</p>
 <section id="import-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="import-libraries">1. Import Libraries</h2>
-<div id="cell-3" class="cell" data-execution_count="1">
+<div id="cell-3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.basics <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -262,10 +262,10 @@ window.Quarto = {
 </section>
 <section id="upload-and-plot-data" class="level2">
 <h2 class="anchored" data-anchor-id="upload-and-plot-data">2. Upload and Plot Data</h2>
-<div id="cell-5" class="cell" data-execution_count="2">
+<div id="cell-5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"upload_dataset.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -309,7 +309,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="3">
+<div id="cell-6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(df.x, df.y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -324,25 +324,25 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="quadratic-equation">3. Quadratic Equation</h2>
 <section id="general-quadratic-equation" class="level3">
 <h3 class="anchored" data-anchor-id="general-quadratic-equation">3.1 General Quadratic Equation</h3>
-<div id="cell-9" class="cell" data-execution_count="4">
+<div id="cell-9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gen_quad_fn(a,b,c,x): <span class="cf">return</span> a<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">*</span>x <span class="op">+</span> c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="custom-quadratric-equation" class="level3">
 <h3 class="anchored" data-anchor-id="custom-quadratric-equation">3.2 Custom Quadratric Equation</h3>
-<div id="cell-11" class="cell" data-execution_count="5">
+<div id="cell-11" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> custom_quad_fn(a,b,c): <span class="cf">return</span> partial(gen_quad_fn,a,b,c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="creating-1x2-1x-1" class="level3">
 <h3 class="anchored" data-anchor-id="creating-1x2-1x-1">3.3 Creating <span class="math inline">\(1x^2 + 1x + 1\)</span></h3>
-<div id="cell-13" class="cell" data-execution_count="6">
+<div id="cell-13" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>quad_111 <span class="op">=</span> custom_quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="plotting-1x2-1x-1" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-1x2-1x-1">3.4 Plotting <span class="math inline">\(1x^2 + 1x + 1\)</span></h3>
-<div id="cell-15" class="cell" data-execution_count="7">
+<div id="cell-15" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>xs_111 <span class="op">=</span> df.x</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ys_111 <span class="op">=</span> quad_111(xs_111)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.plot(xs_111,ys_111)</span>
@@ -360,7 +360,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="interactive-quadratic-equation">3.4 Interactive Quadratic Equation</h3>
 <p>The coefficients <code>a</code>, <code>b</code> and <code>c</code> of the Quadratic Function can be adjusted which in turn changes the shape of the line.</p>
 <p><strong>[Future Iteration]</strong>: Figure out how to embed this adjustable plot into quarto blog</p>
-<div id="cell-17" class="cell" data-execution_count="8">
+<div id="cell-17" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">'figure'</span>, dpi<span class="op">=</span><span class="dv">90</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(a<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.1</span>),b<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.1</span>),c<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.1</span>))</span>
@@ -374,20 +374,20 @@ window.Quarto = {
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs_interact, custom_quad_fn(a,b,c)(xs_interact))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"a1d0edc149724f9899840021b64c68eb","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"1441cbe048d249d9bb4e8fa46a044740","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 </div>
 <p><img src="int_plot_wout_mae.jpg" class="img-fluid"></p>
 </section>
-<section id="mean-squared-errors-mae" class="level3">
-<h3 class="anchored" data-anchor-id="mean-squared-errors-mae">3.5 Mean Squared Errors (MAE)</h3>
-<p>By calculating a Loss Function such as Mean Squared Errors, we can numerically determine what is the ‘best’ fit of our line to the data.</p>
+<section id="mean-absolute-errors-mae" class="level3">
+<h3 class="anchored" data-anchor-id="mean-absolute-errors-mae">3.5 Mean Absolute Errors (MAE)</h3>
+<p>By calculating a Loss Function such as Mean Absolute Errors, we can numerically determine what is the ‘best’ fit of our line to the data.</p>
 <p>Sure it isn’t entirely scientific to adjust it manually but its a good starting point.</p>
-<div id="cell-20" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mae(prediction, actual): <span class="cf">return</span> np.mean((prediction<span class="op">-</span>actual)<span class="op">**</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-20" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mae(prediction, actual): <span class="cf">return</span> np.mean(<span class="bu">abs</span>(prediction<span class="op">-</span>actual))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-execution_count="10">
+<div id="cell-21" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">'figure'</span>, dpi<span class="op">=</span><span class="dv">90</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(a<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.1</span>),b<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.1</span>),c<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="fl">0.1</span>))</span>
@@ -413,7 +413,7 @@ window.Quarto = {
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"MAE: </span><span class="sc">{</span>interact_mae<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"ee98176f864d4edfb5a0d8477e4b9ac5","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"5e409d53ecb244768ff00fa146d431d6","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 </div>
