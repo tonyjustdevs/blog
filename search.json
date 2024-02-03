@@ -312,7 +312,7 @@
     "href": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
     "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
     "section": "To be Continued…",
-    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\n[Part 3: Host on HuggingFace]"
+    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
   },
   {
     "objectID": "posts/2024-01-25-99_gradio_app/index.html",
@@ -368,7 +368,7 @@
     "href": "posts/2024-01-25-99_gradio_app/index.html#to-be-continued",
     "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
     "section": "To be Continued…",
-    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\n[Part 3: Upload to HuggingFace account]"
+    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Upload to HuggingFace account"
   },
   {
     "objectID": "posts/2024-01-31-99_neural_network_basics/index.html",
