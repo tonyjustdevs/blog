@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-01-25">
-<meta name="description" content="Host a neural network app live on HuggingFace">
+<meta name="dcterms.date" content="2024-01-23">
 
-<title>blog - How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)</title>
+<title>blog - How to choose a different Deep-Learning Model Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -116,14 +149,9 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)</h1>
-                  <div>
-        <div class="description">
-          Host a neural network app live on <strong>HuggingFace</strong>
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">huggingface</div>
+      <h1 class="title">How to choose a different Deep-Learning Model Architecture</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">timm</div>
               </div>
                   </div>
   </div>
@@ -141,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 25, 2024</p>
+        <p class="date">January 23, 2024</p>
       </div>
     </div>
     
@@ -157,15 +185,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-3-host-on-huggingface-account" id="toc-part-3-host-on-huggingface-account" class="nav-link active" data-scroll-target="#part-3-host-on-huggingface-account">Part 3: Host on <strong>HuggingFace</strong> account</a></li>
-  <li><a href="#create-huggingface-account-and-create-a-space" id="toc-create-huggingface-account-and-create-a-space" class="nav-link" data-scroll-target="#create-huggingface-account-and-create-a-space">1 Create HuggingFace Account and Create a ‘Space’</a></li>
-  <li><a href="#clone-the-repo" id="toc-clone-the-repo" class="nav-link" data-scroll-target="#clone-the-repo">2 Clone the repo</a></li>
-  <li><a href="#gather-your-files" id="toc-gather-your-files" class="nav-link" data-scroll-target="#gather-your-files">2. Gather your files</a></li>
-  <li><a href="#push-to-huggingface-repo" id="toc-push-to-huggingface-repo" class="nav-link" data-scroll-target="#push-to-huggingface-repo">3. Push to HuggingFace Repo</a>
+  <li><a href="#using-timm---pytorch-image-models" id="toc-using-timm---pytorch-image-models" class="nav-link active" data-scroll-target="#using-timm---pytorch-image-models">1. Using timm - PyTorch Image Models</a>
   <ul class="collapse">
-  <li><a href="#add-the-requirements.txt" id="toc-add-the-requirements.txt" class="nav-link" data-scroll-target="#add-the-requirements.txt">3.1 Add the requirements.txt</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1.1 Introduction</a></li>
+  <li><a href="#import-timm-library" id="toc-import-timm-library" class="nav-link" data-scroll-target="#import-timm-library">1.2 Import timm library</a></li>
+  <li><a href="#list-available-model-architectures-and-choose-one" id="toc-list-available-model-architectures-and-choose-one" class="nav-link" data-scroll-target="#list-available-model-architectures-and-choose-one">1.3 List available model architectures and choose one</a></li>
   </ul></li>
-  <li><a href="#web-app-complete-and-is-live" id="toc-web-app-complete-and-is-live" class="nav-link" data-scroll-target="#web-app-complete-and-is-live">4 Web App Complete and is Live</a></li>
+  <li><a href="#create-your-learner-with-a-timm-model" id="toc-create-your-learner-with-a-timm-model" class="nav-link" data-scroll-target="#create-your-learner-with-a-timm-model">2. Create your Learner with a timm model</a>
+  <ul class="collapse">
+  <li><a href="#get-your-data" id="toc-get-your-data" class="nav-link" data-scroll-target="#get-your-data">2.1 Get your data</a></li>
+  <li><a href="#prepare-your-functions" id="toc-prepare-your-functions" class="nav-link" data-scroll-target="#prepare-your-functions">2.2 Prepare your Functions</a></li>
+  <li><a href="#load-your-dataloader" id="toc-load-your-dataloader" class="nav-link" data-scroll-target="#load-your-dataloader">2.3 Load your DataLoader</a></li>
+  <li><a href="#build-your-learner" id="toc-build-your-learner" class="nav-link" data-scroll-target="#build-your-learner">2.4 Build your Learner</a></li>
+  <li><a href="#fine-tune-resnet18-vs-convnexttiny" id="toc-fine-tune-resnet18-vs-convnexttiny" class="nav-link" data-scroll-target="#fine-tune-resnet18-vs-convnexttiny">2.5 Fine-Tune: ResNet18 vs ConvNextTiny</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -176,60 +209,103 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><img src="dog_cat.jpg" class="img-fluid"></p>
-<p>This post shows how to host your working Local Gradio App on <strong>HuggingFace</strong>.</p>
-<p>This post is part of a series:<br>
-Part 1: Create <strong>Learner</strong> (.pkl file)<br>
-Part 2: Create <strong>Gradio</strong> application file (app.py)<br>
-Part 3: Host on <strong>HuggingFace</strong> account</p>
-<section id="part-3-host-on-huggingface-account" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-host-on-huggingface-account">Part 3: Host on <strong>HuggingFace</strong> account</h2>
+<p><img src="timms.jpg" class="img-fluid"></p>
+<p>Today I’ll go through how to find and test different deep-learning architectures from <strong>Pytorch Image Models</strong> (timm) library <a href="https://timm.fast.ai/">made available here</a> by Ross Wightman and use them in our models.</p>
+<section id="using-timm---pytorch-image-models" class="level2">
+<h2 class="anchored" data-anchor-id="using-timm---pytorch-image-models">1. Using timm - PyTorch Image Models</h2>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">1.1 Introduction</h3>
+<p>What are timm’s models? They’re mathematical functions (i.e.&nbsp;application of matrix multiplication, non-linearities e.g.&nbsp;ReLu’s)</p>
+<p>Reference: <a href="https://www.kaggle.com/code/jhoward/which-image-models-are-best">“Which image model are best”</a> - Jeremy Howard<br>
+Reference: <a href="https://timm.fast.ai/">“timm”</a> - Ross Wightman</p>
+<p>We want to know 3 things:<br>
+1. how <strong>fast</strong> are they? You’d want models in top left of chart.<br>
+2. how much <strong>memory</strong>?<br>
+3. how <strong>accurate</strong> are they? Lower error rate the better.</p>
+<p><strong>[Future iteration I]</strong>: A formalised metholodgy to decide what is fast enough, appropriate memory-use, and what is accurate enough for our use-cases.</p>
+<p>There is a useful high-level chart from Jeremy’s notebook charting <strong>accuracy</strong> (Y-axis) vs <strong>secs per sample</strong> (X-axis):</p>
+<p><img src="convnext.jpg" class="img-fluid"></p>
+<p>I chose to use a model from the <strong>convnext</strong> family due to its balance of <strong>high accuracy</strong> and <strong>speed</strong>.</p>
+<p><strong>[Future iteration II]</strong>: Some more formalised methodology on choosing the architecture. Jeremy does mention architecture should be the one <strong>last thing</strong> things to worry about and he usually builds from resnet and tests whether it is, accurate enough and fast enough, then iterate from there.</p>
 </section>
-<section id="create-huggingface-account-and-create-a-space" class="level2">
-<h2 class="anchored" data-anchor-id="create-huggingface-account-and-create-a-space">1 Create HuggingFace Account and Create a ‘Space’</h2>
-<ol type="1">
-<li>Choose your <strong>Space</strong> name</li>
-<li>Choose <strong>Apache-2.0</strong> to avoid any copyright issues</li>
-<li>Choose <strong>Gradio</strong></li>
-<li>Choose the <strong>Free</strong> option</li>
-<li>Choose <strong>Public</strong> (show you can show it to the world!)</li>
-</ol>
-<p><img src="hf_space.jpg" class="img-fluid"></p>
+<section id="import-timm-library" class="level3">
+<h3 class="anchored" data-anchor-id="import-timm-library">1.2 Import timm library</h3>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> timm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="clone-the-repo" class="level2">
-<h2 class="anchored" data-anchor-id="clone-the-repo">2 Clone the repo</h2>
-<p>This will create allow us deploy the Gradio app to the HuggingFace repository:</p>
-<p><code>git clone https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor</code></p>
-<p><img src="hf_git.jpg" class="img-fluid"></p>
+<section id="list-available-model-architectures-and-choose-one" class="level3">
+<h3 class="anchored" data-anchor-id="list-available-model-architectures-and-choose-one">1.3 List available model architectures and choose one</h3>
+<div id="cell-9" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>timm.list_models(<span class="st">'convnext*'</span>) <span class="co"># * wild card searches </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>['convnext_atto',
+ 'convnext_atto_ols',
+ 'convnext_base',
+ 'convnext_femto',
+ 'convnext_femto_ols',
+ 'convnext_large',
+ 'convnext_large_mlp',
+ 'convnext_nano',
+ 'convnext_nano_ols',
+ 'convnext_pico',
+ 'convnext_pico_ols',
+ 'convnext_small',
+ 'convnext_tiny',
+ 'convnext_tiny_hnf',
+ 'convnext_xlarge',
+ 'convnext_xxlarge',
+ 'convnextv2_atto',
+ 'convnextv2_base',
+ 'convnextv2_femto',
+ 'convnextv2_huge',
+ 'convnextv2_large',
+ 'convnextv2_nano',
+ 'convnextv2_pico',
+ 'convnextv2_small',
+ 'convnextv2_tiny']</code></pre>
+</div>
+</div>
 </section>
-<section id="gather-your-files" class="level2">
-<h2 class="anchored" data-anchor-id="gather-your-files">2. Gather your files</h2>
-<p>Recall the various files we needed to <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/">run the app locally part 2</a>.</p>
-<p>Gather into the cloned huggingface folder:<br>
-- Learner (.pkl)<br>
-- Pet examples (pets.jpg)<br>
-- Gradio app (app.py)</p>
-<p><img src="hf_folder.jpg" class="img-fluid"></p>
-<p>A good way to check for me is seeing the <strong>pets_breed_predictor</strong> is the git folder and huggingface space.</p>
 </section>
-<section id="push-to-huggingface-repo" class="level2">
-<h2 class="anchored" data-anchor-id="push-to-huggingface-repo">3. Push to HuggingFace Repo</h2>
-<p>If you’ve pushed succesfully your app (could take several minutes), then your app is live! Congrats!</p>
-<p>If you’re like me and forgot to include the <code>requirements.txt</code> then you’ll be greeted with this error.</p>
-<p><img src="hf_requirements.jpg" class="img-fluid"></p>
-<section id="add-the-requirements.txt" class="level3">
-<h3 class="anchored" data-anchor-id="add-the-requirements.txt">3.1 Add the requirements.txt</h3>
-<p>We imported two libraries <code>fastai</code> and <code>gradio</code> so include them in the <code>requirements.txt</code> file. Commit and push.</p>
-<p><img src="hf_rq_fix.jpg" class="img-fluid"></p>
+<section id="create-your-learner-with-a-timm-model" class="level2">
+<h2 class="anchored" data-anchor-id="create-your-learner-with-a-timm-model">2. Create your Learner with a timm model</h2>
+<section id="get-your-data" class="level3">
+<h3 class="anchored" data-anchor-id="get-your-data">2.1 Get your data</h3>
+<div id="cell-12" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.vision.<span class="bu">all</span> <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> untar_data(URLs.PETS)<span class="op">/</span><span class="st">'images'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
+<section id="prepare-your-functions" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-your-functions">2.2 Prepare your Functions</h3>
+<div id="cell-14" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_cat(x): <span class="cf">return</span> x[<span class="dv">0</span>].isupper()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="web-app-complete-and-is-live" class="level2">
-<h2 class="anchored" data-anchor-id="web-app-complete-and-is-live">4 Web App Complete and is Live</h2>
-<p>If all goes well, the HuggingFace space is hosting the Gradio App!</p>
-<p>Check out <a href="https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor">my web app here</a>!</p>
-<p><img src="hf_live.jpg" class="img-fluid"></p>
+<section id="load-your-dataloader" class="level3">
+<h3 class="anchored" data-anchor-id="load-your-dataloader">2.3 Load your DataLoader</h3>
+<div id="cell-16" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dls <span class="op">=</span> ImageDataLoaders.from_name_func(<span class="st">'.'</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    get_image_files(path), valid_pct<span class="op">=</span><span class="fl">0.2</span>, seed<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    label_func<span class="op">=</span>is_cat,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    item_tfms<span class="op">=</span>Resize(<span class="dv">192</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="build-your-learner" class="level3">
+<h3 class="anchored" data-anchor-id="build-your-learner">2.4 Build your Learner</h3>
+<div id="cell-18" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>learn_conv <span class="op">=</span> vision_learner(dls, <span class="st">'convnext_tiny'</span>, metrics<span class="op">=</span>error_rate).to_fp16()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>learn_resn <span class="op">=</span> vision_learner(dls, <span class="st">'resnet18'</span>, metrics<span class="op">=</span>error_rate).to_fp16()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fine-tune-resnet18-vs-convnexttiny" class="level3">
+<h3 class="anchored" data-anchor-id="fine-tune-resnet18-vs-convnexttiny">2.5 Fine-Tune: ResNet18 vs ConvNextTiny</h3>
+<p>A <strong>90% reduction</strong> in the error rate! (0.6766% to 0.0667%: 1-(0.000677/0.006766)). It’s noted that the resnet error rate was quite low and changing the model was probably not necessary.</p>
+<p><img src="resn_conv.jpg" class="img-fluid"></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

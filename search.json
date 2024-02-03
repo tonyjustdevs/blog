@@ -60,7 +60,7 @@
     "href": "posts/2024-01-31-99_neural_network_basics/index.html#to-be-continued",
     "title": "Neural Network Basics (Part 1)",
     "section": "To be Continued…",
-    "text": "To be Continued…\nThe next section go through a more automated method to find the smallest MAE.\n[TBA] Part 1\n[TBA] Part 2"
+    "text": "To be Continued…\nThe next section go through a more automated method to find the smallest MAE.\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
   },
   {
     "objectID": "posts/2024-01-25-99_gradio_app/index.html",
@@ -228,7 +228,7 @@
     "href": "posts/2024-01-16-96_post_with_git_clone/index.html",
     "title": "Post With Git Clone",
     "section": "",
-    "text": "Learning how git work sand this is a post initiated by cloning existing repo."
+    "text": "Learning how git work and\nthis is a post initiated by cloning existing repo."
   },
   {
     "objectID": "about.html",
@@ -242,7 +242,7 @@
     "href": "index.html",
     "title": "blog",
     "section": "",
-    "text": "Neural Network Basics (Part 3)\n\n\n\n\n\n\nGradient Descent\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nGradient Descent\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nkaggle\n\n\napi\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\napi\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\nhuggingface\n\n\ntutorial\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\ngradio\n\n\ntutorial\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\ncnn\n\n\nwebapp\n\n\ntutorial\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntimm\n\n\narchitecture\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\ngradio\n\n\nhuggingface\n\n\nAI\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\nfast ai\n\n\njupyter notebook\n\n\ntutorial\n\n\nlabelling\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nimage classfier\n\n\ndeep learning\n\n\nfast ai\n\n\npython\n\n\njupyter\n\n\nfood\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\ngit\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\njupyter notebook\n\n\npython\n\n\nquarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+    "text": "Neural Network Basics (Part 3)\n\n\n\n\n\n\nbasics\n\n\nrelu\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nbasics\n\n\ngradient descent\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nbasics\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\nhuggingface\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\ngradio\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\nimage classifier\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntimm\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\ngradio\n\n\nhuggingface\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\nfast ai\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nimage classifier\n\n\nfast ai\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\ntesting quarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\ntesting quarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\ntesting quarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\ntesting quarto\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
@@ -287,22 +287,22 @@
     "text": "4. Heres the App!"
   },
   {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html",
-    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html",
+    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html",
+    "href": "posts/2024-01-23-99-testing-different_archs/index.html",
     "title": "How to choose a different Deep-Learning Model Architecture",
     "section": "",
     "text": "Today I’ll go through how to find and test different deep-learning architectures from Pytorch Image Models (timm) library made available here by Ross Wightman and use them in our models."
   },
   {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#using-timm---pytorch-image-models",
-    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#using-timm---pytorch-image-models",
+    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html#using-timm---pytorch-image-models",
+    "href": "posts/2024-01-23-99-testing-different_archs/index.html#using-timm---pytorch-image-models",
     "title": "How to choose a different Deep-Learning Model Architecture",
     "section": "1. Using timm - PyTorch Image Models",
     "text": "1. Using timm - PyTorch Image Models\n\n1.1 Introduction\nWhat are timm’s models? They’re mathematical functions (i.e. application of matrix multiplication, non-linearities e.g. ReLu’s)\nReference: “Which image model are best” - Jeremy Howard\nReference: “timm” - Ross Wightman\nWe want to know 3 things:\n1. how fast are they? You’d want models in top left of chart.\n2. how much memory?\n3. how accurate are they? Lower error rate the better.\n[Future iteration I]: A formalised metholodgy to decide what is fast enough, appropriate memory-use, and what is accurate enough for our use-cases.\nThere is a useful high-level chart from Jeremy’s notebook charting accuracy (Y-axis) vs secs per sample (X-axis):\n\nI chose to use a model from the convnext family due to its balance of high accuracy and speed.\n[Future iteration II]: Some more formalised methodology on choosing the architecture. Jeremy does mention architecture should be the one last thing things to worry about and he usually builds from resnet and tests whether it is, accurate enough and fast enough, then iterate from there.\n\n\n1.2 Import timm library\n\nimport timm\n\n\n\n1.3 List available model architectures and choose one\n\ntimm.list_models('convnext*') # * wild card searches \n\n['convnext_atto',\n 'convnext_atto_ols',\n 'convnext_base',\n 'convnext_femto',\n 'convnext_femto_ols',\n 'convnext_large',\n 'convnext_large_mlp',\n 'convnext_nano',\n 'convnext_nano_ols',\n 'convnext_pico',\n 'convnext_pico_ols',\n 'convnext_small',\n 'convnext_tiny',\n 'convnext_tiny_hnf',\n 'convnext_xlarge',\n 'convnext_xxlarge',\n 'convnextv2_atto',\n 'convnextv2_base',\n 'convnextv2_femto',\n 'convnextv2_huge',\n 'convnextv2_large',\n 'convnextv2_nano',\n 'convnextv2_pico',\n 'convnextv2_small',\n 'convnextv2_tiny']"
   },
   {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#create-your-learner-with-a-timm-model",
-    "href": "posts/2024-01-23-99-testing-different_archs/20240123_testing_different_archs.html#create-your-learner-with-a-timm-model",
+    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html#create-your-learner-with-a-timm-model",
+    "href": "posts/2024-01-23-99-testing-different_archs/index.html#create-your-learner-with-a-timm-model",
     "title": "How to choose a different Deep-Learning Model Architecture",
     "section": "2. Create your Learner with a timm model",
     "text": "2. Create your Learner with a timm model\n\n2.1 Get your data\n\nfrom fastai.vision.all import *\npath = untar_data(URLs.PETS)/'images'\n\n\n\n2.2 Prepare your Functions\n\ndef is_cat(x): return x[0].isupper()\n\n\n\n2.3 Load your DataLoader\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\n\n\n2.4 Build your Learner\n\nlearn_conv = vision_learner(dls, 'convnext_tiny', metrics=error_rate).to_fp16()\nlearn_resn = vision_learner(dls, 'resnet18', metrics=error_rate).to_fp16()\n\n\n\n2.5 Fine-Tune: ResNet18 vs ConvNextTiny\nA 90% reduction in the error rate! (0.6766% to 0.0667%: 1-(0.000677/0.006766)). It’s noted that the resnet error rate was quite low and changing the model was probably not necessary."
@@ -431,6 +431,6 @@
     "href": "posts/2024-02-02-neural_network_basics/index.html#to-be-continued",
     "title": "Neural Network Basics (Part 2)",
     "section": "To be Continued…",
-    "text": "To be Continued…\nNext A universal function called the ReLu Function (rather than a quadratric function) is used for our modelling.\nNeural Network Basics: Part 1\n[TBA] Part 3"
+    "text": "To be Continued…\nNext A universal function called the ReLU Function (rather than a quadratric function) is used for our modelling.\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
   }
 ]
