@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2024-02-04">
+<meta name="description" content="An attempt to apply neural network concepts in a spreadsheet">
 
-<title>blog</title>
+<title>blog - Neural Network in a Spread-Sheet (Attempt 1)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -105,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -144,42 +113,192 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Neural Network in a Spread-Sheet (Attempt 1)</h1>
+                  <div>
+        <div class="description">
+          An attempt to apply neural network concepts in a spreadsheet
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">spreadsheet</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 4, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#download-kaggle-data" id="toc-download-kaggle-data" class="nav-link active" data-scroll-target="#download-kaggle-data">1. Download Kaggle Data</a></li>
+  <li><a href="#clean-dataset" id="toc-clean-dataset" class="nav-link" data-scroll-target="#clean-dataset">2. Clean Dataset</a></li>
+  <li><a href="#binary-categorical-variables" id="toc-binary-categorical-variables" class="nav-link" data-scroll-target="#binary-categorical-variables">3. Binary Categorical Variables</a></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression">4. Regression</a>
+  <ul class="collapse">
+  <li><a href="#dealing-with-continuous-variables-age-and-fare" id="toc-dealing-with-continuous-variables-age-and-fare" class="nav-link" data-scroll-target="#dealing-with-continuous-variables-age-and-fare">4.1 Dealing with Continuous Variables <code>Age</code> and <code>Fare</code></a></li>
+  <li><a href="#prediction-and-loss-and-average-loss" id="toc-prediction-and-loss-and-average-loss" class="nav-link" data-scroll-target="#prediction-and-loss-and-average-loss">4.2 Prediction and Loss and Average Loss</a></li>
+  <li><a href="#gradient-descent-or-solver" id="toc-gradient-descent-or-solver" class="nav-link" data-scroll-target="#gradient-descent-or-solver">4.3 Gradient Descent (or Solver)</a></li>
+  </ul></li>
+  <li><a href="#neural-network" id="toc-neural-network" class="nav-link" data-scroll-target="#neural-network">5. Neural Network</a>
+  <ul class="collapse">
+  <li><a href="#error-in-optimisation---all-relus-going-to-zero" id="toc-error-in-optimisation---all-relus-going-to-zero" class="nav-link" data-scroll-target="#error-in-optimisation---all-relus-going-to-zero">5.1 Error In Optimisation - All ReLUs going to Zero</a></li>
+  <li><a href="#setting-constraints-coefficients-0" id="toc-setting-constraints-coefficients-0" class="nav-link" data-scroll-target="#setting-constraints-coefficients-0">5.2 Setting Constraints (Coefficients &gt; 0)</a></li>
+  <li><a href="#added-ones-columns" id="toc-added-ones-columns" class="nav-link" data-scroll-target="#added-ones-columns">5.3 Added Ones Columns</a></li>
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">5.4 Matrix Multiplication</a></li>
+  </ul></li>
+  <li><a href="#mission-failed." id="toc-mission-failed." class="nav-link" data-scroll-target="#mission-failed.">6. Mission Failed.</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<div id="cell-0" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming df, custom_quad_fn, mae, and other necessary functions are defined</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">'figure'</span>, dpi<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> interactive_plot(a, b, c):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Your existing plotting code here</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    plt.scatter(df.x, df.y)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    xs_interact <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="fl">2.1</span>, <span class="fl">2.1</span>, <span class="dv">100</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    plt.ylim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">15</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    ys_interact <span class="op">=</span> custom_quad_fn(a, b, c)(xs_interact)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    y_actual <span class="op">=</span> df.y</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    y_predicted <span class="op">=</span> custom_quad_fn(a, b, c)(df.x)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    interact_mae <span class="op">=</span> <span class="bu">round</span>(mae(y_actual, y_predicted), <span class="dv">3</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs_interact, ys_interact)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"MAE: </span><span class="sc">{</span>interact_mae<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Use nbi.show to define the interactive plot</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>nbi.show(interactive_plot, a<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="fl">0.1</span>), b<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="fl">0.1</span>), c<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="fl">0.1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+
+<p>FYI I’m unable to do it in this post.</p>
+<p><img src="cup.jpg" class="img-fluid"></p>
+<p><img src="activation.jpg" class="img-fluid"></p>
+<section id="download-kaggle-data" class="level2">
+<h2 class="anchored" data-anchor-id="download-kaggle-data">1. Download Kaggle Data</h2>
+<p>Log into Kaggle:<br>
+1. Competitions<br>
+2. Titanic<br>
+3. Data<br>
+4. Train.csv and Download</p>
+<p><img src="data.jpg" class="img-fluid"> <img src="data2.jpg" class="img-fluid"></p>
+</section>
+<section id="clean-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="clean-dataset">2. Clean Dataset</h2>
+<p>Each single passenger is represented by a single row with demographics and information across the columns.</p>
+<p>For this first attempt, I’ll keep the model simple and used 8 columns and discarded the rest.</p>
+<p><strong>[Future Iteration]</strong>: Would using more columns increase my accuracy?</p>
+<p><em>The <strong>training set</strong> should be used to build your machine learning models. For the training set, we provide the outcome (also known as the “<strong>ground truth</strong>”) for each passenger</em> - <a href="https://www.kaggle.com/competitions/titanic/data">Kaggle Data Description</a></p>
+<p>Note: There are originally 891 Passengers (rows) in the <code>training</code> dataset.</p>
+<p>There were a few steps taken to clean the data:<br>
+1. Keep Certain Columns Only:<br>
+- Survived<br>
+- Pclass - Sex - Age - SibSp - Parch - Fare - Embarked 2. Remove blanks from: - <code>Sex</code> (177 rows removed) - <code>Embarked</code> (2 rows removed) Columns: Remaining Passengers (712 = 891-177-2)</p>
+<ol start="3" type="1">
+<li>Create a <strong>New Sheet</strong> and Copy over the editted Dataset</li>
+</ol>
+<p><img src="clean.jpg" class="img-fluid"></p>
+</section>
+<section id="binary-categorical-variables" class="level2">
+<h2 class="anchored" data-anchor-id="binary-categorical-variables">3. Binary Categorical Variables</h2>
+<p>Recall a Function has <code>inputs</code> and <code>parameters</code>. The output is calculated by adding the all the inputs which are weighted (multiplied) by the parameters.</p>
+<p>In <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-31-99_neural_network_basics/">neural network basics</a>: - the inputs were a single variable <code>x</code> and the output was a single <code>y</code> (or <code>f(x)</code>).<br>
+- the <strong>parameters</strong> (coefficients of <code>x</code>) could be optimised against a <strong>Loss Function</strong> (Mean Squared Error) to achieve a high accuracy (good predictability) for that function, called <strong>Gradient Descent</strong> - an arbitrary number of <strong>Rectified Linear Unit (ReLU)</strong> could be added together to form any function to fit a given set of data and parameter (weights) can be optimised to minimise the loss function as above with gradient descent.</p>
+<p>Similarly, the inputs in the Titanic model will be the information describing the passengers, i.e.&nbsp;columns in our spreadsheet, are multiplied by the parameters (weights or coefficients) to represents its importance.</p>
+<ul>
+<li><strong>Question</strong>: <strong><em>But</em></strong> how can a parameter (<strong><em>number</em></strong>) be multiplied to word (<strong><em>text</em></strong>) such as <code>male</code> or <code>female</code> from the <code>Sex</code> Column or Letter <code>S</code> or <code>C</code> or <code>Q</code> from the <code>Embarked</code> Column?</li>
+<li><strong>Answer</strong>: You Can’t.</li>
+</ul>
+<p>However, <strong>Categorical Variables</strong> (unordered) can be converted into <strong>Binary Categorical Variables</strong>:<br>
+- <code>IsMale</code> will indicate a <code>1</code> for True (Male) and <code>0</code> for False (Female)<br>
+- <code>Embarked</code> has 3 categories “<code>S</code>, <code>C</code> and <code>Q</code>: Having two columns (<code>S</code> and <code>C</code>) to represent the 3 categories will suffice. If both <code>S</code> and <code>C</code> columns have <code>0</code>’s, this implies it is a <code>Q</code>, so we do not need the extra column to have all the information.<br>
+- <code>PClass</code> (<code>1</code>, <code>2</code> and <code>3</code>) also has 3 categories and is treated the same as above.<br>
+- <code>Age</code> and <code>Fare</code> are continuous values and left them as is for now</p>
+<p><img src="model.jpg" class="img-fluid"></p>
+</section>
+<section id="regression" class="level2">
+<h2 class="anchored" data-anchor-id="regression">4. Regression</h2>
+<p>I created random variables (coefficients or weights for our parameters) with rand() and multiplied them to each parameter. I did this for several rows to and looked at the output.</p>
+<p>Looks like <code>Age</code> and <code>Fare</code> columns are dominating our function.</p>
+<p><img src="model1.jpg" class="img-fluid"></p>
+<section id="dealing-with-continuous-variables-age-and-fare" class="level3">
+<h3 class="anchored" data-anchor-id="dealing-with-continuous-variables-age-and-fare">4.1 Dealing with Continuous Variables <code>Age</code> and <code>Fare</code></h3>
+<p>Its probably fair (see what I did there) that a Passenger’s age (or fare) shouldn’t be the only two defining factors to determine their survivability as the above model suggests.</p>
+<p>These values need to be <code>normalised</code>: - For <code>Age</code>, I divided each passengers age by the maximum age. - For <code>Fare</code>, I took the <code>Logarithm</code> of each passengers fare. Taking the Log of a variable where there are very small values and a few large ones distributes the values more evenly.</p>
+<p><img src="normalise.jpg" class="img-fluid"></p>
+</section>
+<section id="prediction-and-loss-and-average-loss" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-and-loss-and-average-loss">4.2 Prediction and Loss and Average Loss</h3>
+<p><strong>Prediction</strong>: Multiply each parameter by the random coefficient created and sum it up to have our prediction.<br>
+- I used the <strong>SumProduct()</strong> function. - I also created a <strong>manual linear version</strong> from scratch to see test my understanding was correct and sumproduct was working as expected. It was.</p>
+<p><strong>Loss</strong>: It’s the survival (0 No, 1 Yes) minus the Prediction, then squared. - This is the <strong>squared error</strong>. If the errors are not squared, the errors end up cancelling each other off. Alternatively, the absolute errors could be taken done previously.</p>
+<p><strong>Average Loss</strong>: Self-explanatory.</p>
+<p><img src="loss.jpg" class="img-fluid"></p>
+<p>Note: Current <strong><code>Average Loss</code></strong> is <strong><code>0.886</code></strong> with random parameters.</p>
+</section>
+<section id="gradient-descent-or-solver" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-descent-or-solver">4.3 Gradient Descent (or Solver)</h3>
+<p>Setting the Solver to Minimise our Average Loss, our parameters have been adjusted and <strong><code>Average Loss</code></strong> has come down to: <strong><code>0.535</code></strong>!</p>
+<p>Not but but this isn’t a neural net yet, its just a regression.</p>
+<p><img src="loss2.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="neural-network" class="level2">
+<h2 class="anchored" data-anchor-id="neural-network">5. Neural Network</h2>
+<p><strong><code>Params_2</code></strong>: Add another set of random coefficients.<br>
+<strong><code>Linear_2</code></strong>: Calculate the linear model on this set of coefficients.<br>
+<strong><code>ReLU</code></strong>: ReLUs are calculated with an <code>IF()</code> statement, if it is below zero, then set to zero, otherwise keep the value.<br>
+<strong><code>Prediction</code></strong>: Add the ReLUs.<br>
+<strong><code>Loss</code></strong> Prediction minus Survived.<br>
+<strong><code>Average Loss</code></strong>: Run Solver, but this time allow the change of both sets of coefficients <strong><code>Params_1</code></strong> and <strong><code>Params_2</code></strong></p>
+<p>Note: Current Neural Network <strong><code>Average Loss</code></strong> is <strong><code>0.527</code></strong> with random parameters.</p>
+<p><img src="nn1.jpg" class="img-fluid"></p>
+<p><strong>[Future Iteration]</strong>: <strong><em>To be honest, I haven’t quite understood fully whats going on here. The concept of adding a second set of parameters and then having two Linear Models and adding together their reLUs will give a prediction that can be optimised, just dont get it yet. be fair, I just learnt Gradient Descent a day or two ago.</em></strong></p>
+<section id="error-in-optimisation---all-relus-going-to-zero" class="level3">
+<h3 class="anchored" data-anchor-id="error-in-optimisation---all-relus-going-to-zero">5.1 Error In Optimisation - All ReLUs going to Zero</h3>
+<p>Having <strong>no constraints on whether coefficients can be negative or positive</strong>, the Solver found the most convenient result of making all parameters less than zero, hence making outputs a negative linear output, which <strong>makes all the ReLUs Zero</strong>, hence simply making the prediction that everyone died! A quick and dirty prediction thats not too bad but very scientific…</p>
+<p>Note: I’m currently using <strong>WPS Solver rather than Excel Solver</strong> (Don’t own paid version of Excel). Not sure if I did a mistake in my model or its a Solver thing.</p>
+<p><img src="zeros.jpg" class="img-fluid"></p>
+</section>
+<section id="setting-constraints-coefficients-0" class="level3">
+<h3 class="anchored" data-anchor-id="setting-constraints-coefficients-0">5.2 Setting Constraints (Coefficients &gt; 0)</h3>
+<p>By placing the constraint the Solver seems to finally do what is expected.<br>
+The <strong><code>Average Loss</code></strong> has come down from the Regresssion <strong><code>0.535</code></strong> to <strong><code>0.235</code></strong>!</p>
+<p><img src="soln1.jpg" class="img-fluid"></p>
+</section>
+<section id="added-ones-columns" class="level3">
+<h3 class="anchored" data-anchor-id="added-ones-columns">5.3 Added Ones Columns</h3>
+<p>But this didn’t fix the Solver Issuer.</p>
+<p><img src="ones.jpg" class="img-fluid"></p>
+</section>
+<section id="matrix-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-multiplication">5.4 Matrix Multiplication</h3>
+<p>I made a Matrix Multiplication version and optimised with the same silly negative parameters solution</p>
+<p><img src="mm404.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="mission-failed." class="level2">
+<h2 class="anchored" data-anchor-id="mission-failed.">6. Mission Failed.</h2>
+<p>Having downloaded the spreadsheet from Jeremy and ran the Solver, the Zero ReLUs error persists. This is a WPS Sheets issue.</p>
+<p>I also tried getting Solver on Google Sheets with no Luck however my emails permissions didn’t allow the install. Will give it a go to fix it next time.</p>
+<p>For now, today I’ll admit defeat. Onwards to tomorrow…</p>
+<p>I’ll upload this notebook anyway because I want to record my failures as well as my triumphs.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
