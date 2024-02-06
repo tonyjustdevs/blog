@@ -6,11 +6,14 @@ website:
   navbar:
     right:
       - about.qmd
-      - leetcode.qmd
+      - leetcode.qmd      
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/tonyjustdevs
+      - icon: linkedin
+        href: https://au.linkedin.com/in/tony-phung-6190b0b8
+      - icon: leetcode
+        href: https://leetcode.com
+
 format:
   html:
     theme: cosmo
