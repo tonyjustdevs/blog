@@ -1,7 +1,16 @@
 [
   {
+    "listing": "/leetcode.html",
+    "items": [
+      "/posts/lc_posts/2024-02-06-leetcode155_1/155-1.html",
+      "/posts/lc_posts/welcome_to_lc/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
+      "/posts/lc_posts/2024-02-06-leetcode155_1/155-1.html",
+      "/posts/lc_posts/welcome_to_lc/index.html",
       "/posts/2024-02-04-neural_network_spreadsheet/index.html",
       "/posts/2024-02-03-neural_network_basics/index.html",
       "/posts/2024-02-02-neural_network_basics/index.html",

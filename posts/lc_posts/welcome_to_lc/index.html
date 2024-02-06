@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-01-27">
-<meta name="description" content="Continuing my Data Science journey with Kaggle">
+<meta name="dcterms.date" content="2024-02-06">
+<meta name="description" content="A page to archive my (naively hopeful daily) leetcode attempts.">
 
-<title>blog - How To Setup a Kaggle API</title>
+<title>blog - ❄️LeetCode Posts❄️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,59 +23,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,17 +71,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">blog</span>
     </a>
   </div>
@@ -126,11 +92,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">about</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../leetcode.html"> 
+    <a class="nav-link" href="../../../leetcode.html"> 
 <span class="menu-text">leetcode</span></a>
   </li>  
   <li class="nav-item compact">
@@ -159,14 +125,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">How To Setup a Kaggle API</h1>
+      <h1 class="title">❄️LeetCode Posts❄️</h1>
                   <div>
         <div class="description">
-          Continuing my Data Science journey with Kaggle
+          A page to archive my (naively hopeful daily) leetcode attempts.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">kaggle</div>
+                <div class="quarto-category">hello world</div>
               </div>
                   </div>
   </div>
@@ -184,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 27, 2024</p>
+        <p class="date">February 6, 2024</p>
       </div>
     </div>
     
@@ -195,21 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#install-library" id="toc-install-library" class="nav-link active" data-scroll-target="#install-library">1. Install Library</a></li>
-  <li><a href="#create-api-token-.json-file" id="toc-create-api-token-.json-file" class="nav-link" data-scroll-target="#create-api-token-.json-file">2. Create API token (.json file)</a></li>
-  <li><a href="#save-to-your-local-.kaggle-folder-windows" id="toc-save-to-your-local-.kaggle-folder-windows" class="nav-link" data-scroll-target="#save-to-your-local-.kaggle-folder-windows">3. Save to your local .kaggle folder (Windows)</a>
-  <ul class="collapse">
-  <li><a href="#pasted-into-the-wrong-folder" id="toc-pasted-into-the-wrong-folder" class="nav-link" data-scroll-target="#pasted-into-the-wrong-folder">3.1 Pasted into the wrong folder?</a></li>
-  </ul></li>
-  <li><a href="#start-kaggling" id="toc-start-kaggling" class="nav-link" data-scroll-target="#start-kaggling">4 Start Kaggling</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -217,80 +169,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>I’m planning to learn and test myself with competitions on <strong>Kaggle</strong>.</p>
-<p>Kaggle is a place with real-world problems where Data Scientists and alike can go against each other to solve problems with Machine Learning.</p>
-<p>From my understanding:<br>
-- There is a <strong>validation set</strong> where your model is tested against and a public leader board to see how you’re going.<br>
-- At the end of the competition, there is an unseen <strong>test set</strong> where everyones models is tested against and where the final rankings are determined.<br>
-- This is quite reflective of real world where preparing a representative validation set is vital, thus will perform well on the test set.<br>
-- A common mistake for newbs is over-fitting to the validation set. I’m ready to make that mistake 🤣.</p>
-<p>As for the Kaggle API, you can download the <strong>kernel</strong> which is the necessary datasets and source files to do the competitions.</p>
-<p>Alternatively, I can use the notebooks on their website. I plan to try doing competitions both ways.</p>
-<p><img src="kaggle.jpg" class="img-fluid"></p>
-<p>This is how I set up my Kaggle API</p>
-<section id="install-library" class="level2">
-<h2 class="anchored" data-anchor-id="install-library">1. Install Library</h2>
-<p><code>pip install python</code></p>
-</section>
-<section id="create-api-token-.json-file" class="level2">
-<h2 class="anchored" data-anchor-id="create-api-token-.json-file">2. Create API token (.json file)</h2>
+<p><img src="leetcode_coming.jpg" class="img-fluid"></p>
+<p><a href="https://leetcode.com/tonyjustdevs/">link to leetcode profile here</a></p>
 <ol type="1">
-<li>Go to <strong>Kaggle</strong><br>
+<li>Created new <code>leetcode.qmd</code> based on front page <code>index.qmd</code> and<br>
 </li>
-<li>Go to <strong>Settings</strong><br>
-</li>
-<li>Create <strong>New Token</strong></li>
+<li>Directed contents to point here: <code>contents: posts/lc_posts</code>.</li>
 </ol>
-<p><img src="kaggle_settings.jpg" class="img-fluid"></p>
-</section>
-<section id="save-to-your-local-.kaggle-folder-windows" class="level2">
-<h2 class="anchored" data-anchor-id="save-to-your-local-.kaggle-folder-windows">3. Save to your local .kaggle folder (Windows)</h2>
-<p>Location: <code>C:\Users\&lt;Windows-username&gt;\.kaggle\kaggle.json</code><br>
-<a href="https://github.com/Kaggle/kaggle-api">Kaggle Github Reference</a></p>
-<section id="pasted-into-the-wrong-folder" class="level3">
-<h3 class="anchored" data-anchor-id="pasted-into-the-wrong-folder">3.1 Pasted into the wrong folder?</h3>
-<p>If you did something wrong then ran <code>kaggle</code> in the terminal, you’ll an error (telling you where to put it):</p>
-<p><img src="kaggle_error.jpg" class="img-fluid"></p>
-</section>
-</section>
-<section id="start-kaggling" class="level2">
-<h2 class="anchored" data-anchor-id="start-kaggling">4 Start Kaggling</h2>
-<div id="cell-7" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kaggle</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>??kaggle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Type:        module
-String form: &lt;module 'kaggle' from 'c:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\kaggle\\__init__.py'&gt;
-File:        c:\users\tonyp\miniconda3\envs\fastai\lib\site-packages\kaggle\__init__.py
-Source:     
-#!/usr/bin/python
-#
-# Copyright 2024 Kaggle Inc
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# coding=utf-8
-from __future__ import absolute_import
-from kaggle.api.kaggle_api_extended import KaggleApi
-from kaggle.api_client import ApiClient
-
-api = KaggleApi(ApiClient())
-api.authenticate()</code></pre>
-</div>
-</div>
+<p>Probably not the ideal blog + folder structure but it’ll do the job👌.<br>
+I don’t claim to be a web-designer in any sense 😂.</p>
+<p>I began 3 months ago with no algorithm or data structures academic background at all. The Easys were definitey not Easy to me as you can see from the number of submissions.</p>
+<p>The majority of submissions were 2-3 months ago and I made no attempts in January 2024 👏.</p>
+<p>This page should keep me accountable and these fingers minty as a mojito on a hot day 🍹.</p>
+<p><img src="leet_summary.jpg" class="img-fluid"></p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
