@@ -10,7 +10,7 @@ listing:
 page-layout: full
 title-block-banner: true
 about:
-  template: jolla
+  template: marquee
   links:
     - icon: github
       text: Github
