@@ -1,5 +1,5 @@
 ---
-title: "About Oreo"
+title: "about"
 image: profile.jpg
 about:
   template: jolla
@@ -16,12 +16,9 @@ about:
 
 ---
 
-About Tony
+This is a blog attempting to archive my learning journey from my applied finance background to a more data-sciency/ml one.
 
-This is a blog to note down my learning journey. Perhaps it can help others too.
-
-
-Poem of Oreo  
+**A Poem of Oreo**  
 
 In a bustling town of Ultimo, where city lights gleam,  
 A tale unfolds of Oreo, a kitten’s sweet dream.  

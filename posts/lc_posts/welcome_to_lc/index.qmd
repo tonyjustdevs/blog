@@ -1,0 +1,25 @@
+---
+title: "LeetCode posts to come..."
+author: "Tony Phung"
+date: "2024-02-06"
+categories: [leetcode]
+description: A page to archive my (naively hopeful daily) leetcode attempts.
+---
+
+![](thumbnail.jpg)
+
+[link to leetcode profile here](https://leetcode.com/tonyjustdevs/)
+
+1. Created new `leetcode.qmd` based on front page `index.qmd` and  
+2. Directed contents to point here: `contents: posts/lc_posts`.
+
+Probably not the ideal blog + folder structure but it'll do the job👌.  
+I don't claim to be a web-designer in any sense 😂. 
+
+I began 3 months ago with no algorithm or data structures academic background at all. The Easys were definitey not Easy to me as you can see from the number of submissions.
+
+The majority of submissions were 2-3 months ago and I made no attempts in January 2024 👏
+
+This page should keep me accountable and keep my fingers fresh 🤌.
+
+![](leet_summary.jpg)
