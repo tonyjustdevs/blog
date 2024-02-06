@@ -1,5 +1,5 @@
 ---
-title: "❄️LeetCode❄️"
+title: "❄️LeetCode Posts❄️"
 author: "Tony Phung"
 date: "2024-02-06"
 categories: [hello world]
