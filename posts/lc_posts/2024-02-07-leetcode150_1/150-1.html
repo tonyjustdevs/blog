@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.539">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2024-02-07">
+<meta name="description" content="Implement a Stack using Postfix Notation">
+
+<title>blog - LC 150. Evaluate Reverse Polish Notation (attempt 1)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../leetcode.html"> 
+<span class="menu-text">leetcode</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tonyjustdevs"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://au.linkedin.com/in/tony-phung-6190b0b8"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://leetcode.com"> <i class="bi bi-leetcode" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">LC 150. Evaluate Reverse Polish Notation (attempt 1)</h1>
+                  <div>
+        <div class="description">
+          Implement a Stack using Postfix Notation
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">leetcode solved</div>
+                <div class="quarto-category">medium difficulty</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 7, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem-description" id="toc-problem-description" class="nav-link active" data-scroll-target="#problem-description">1. Problem Description</a></li>
+  <li><a href="#leetcode-examples" id="toc-leetcode-examples" class="nav-link" data-scroll-target="#leetcode-examples">2. LeetCode Examples</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">2.1 Example 1</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">2.2 Example 2</a></li>
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">2.3 Example 3</a></li>
+  </ul></li>
+  <li><a href="#background-and-analysis" id="toc-background-and-analysis" class="nav-link" data-scroll-target="#background-and-analysis">3. Background and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#wiki-example" id="toc-wiki-example" class="nav-link" data-scroll-target="#wiki-example">3.1 Wiki Example</a></li>
+  <li><a href="#stack-explanation" id="toc-stack-explanation" class="nav-link" data-scroll-target="#stack-explanation">3.2 Stack Explanation</a></li>
+  <li><a href="#stack-explanation-table" id="toc-stack-explanation-table" class="nav-link" data-scroll-target="#stack-explanation-table">3.3 Stack Explanation Table</a></li>
+  <li><a href="#why" id="toc-why" class="nav-link" data-scroll-target="#why">3.3 Why?</a></li>
+  </ul></li>
+  <li><a href="#coding" id="toc-coding" class="nav-link" data-scroll-target="#coding">4. Coding</a>
+  <ul class="collapse">
+  <li><a href="#write-pseudo-python-code" id="toc-write-pseudo-python-code" class="nav-link" data-scroll-target="#write-pseudo-python-code">4.1 Write pseudo-python-code</a></li>
+  <li><a href="#write-required-functions" id="toc-write-required-functions" class="nav-link" data-scroll-target="#write-required-functions">4.2 Write Required Functions</a></li>
+  </ul></li>
+  <li><a href="#test-functionality" id="toc-test-functionality" class="nav-link" data-scroll-target="#test-functionality">5. Test Functionality</a>
+  <ul class="collapse">
+  <li><a href="#case-1-expected-9" id="toc-case-1-expected-9" class="nav-link" data-scroll-target="#case-1-expected-9">5.1 Case 1 Expected 9</a></li>
+  <li><a href="#case-2-expected-6" id="toc-case-2-expected-6" class="nav-link" data-scroll-target="#case-2-expected-6">5.2 Case 2 Expected 6</a></li>
+  <li><a href="#case-2-expected-22" id="toc-case-2-expected-22" class="nav-link" data-scroll-target="#case-2-expected-22">5.3 Case 2 Expected 22</a></li>
+  </ul></li>
+  <li><a href="#clean-version" id="toc-clean-version" class="nav-link" data-scroll-target="#clean-version">6. Clean Version</a>
+  <ul class="collapse">
+  <li><a href="#clean-check" id="toc-clean-check" class="nav-link" data-scroll-target="#clean-check">6.1 Clean Check</a></li>
+  </ul></li>
+  <li><a href="#submit" id="toc-submit" class="nav-link" data-scroll-target="#submit">7. Submit</a></li>
+  <li><a href="#notes-to-self." id="toc-notes-to-self." class="nav-link" data-scroll-target="#notes-to-self.">6. Notes to self.</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p><img src="rpn.jpg" class="img-fluid"></p>
+<p><a href="https://leetcode.com/problems/evaluate-reverse-polish-notation/submissions/1168794169">link to question + submission</a><br>
+<a href="https://leetcode.com/tonyjustdevs/">link to my leetcode profile</a></p>
+<section id="problem-description" class="level2">
+<h2 class="anchored" data-anchor-id="problem-description">1. Problem Description</h2>
+<p>You are given an array of strings tokens that represents an arithmetic expression in a <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish Notation</a> (RPN).</p>
+<p>Input: Evaluate the input <strong>RPN arithmetic expression</strong>.</p>
+<p>Output: Return an <strong><em>integer that represents the value of the expression.</em></strong></p>
+<p>Rules:<br>
+1. The valid operators are ‘<code>+</code>’, ‘<code>-</code>’, ‘<code>*</code>’, and ‘<code>/</code>’.<br>
+2. Each <code>operand</code> may be an integer or another expression.<br>
+3. The <code>division</code> between two integers always <strong>truncates toward zero</strong><br>
+4. There will not be any division by zero.<br>
+5. The input represents a <em>valid arithmetic expression in a reverse polish notation</em>.<br>
+6. The answer and all the intermediate calculations can be represented in a <strong>32-bit</strong> integer.</p>
+</section>
+<section id="leetcode-examples" class="level2">
+<h2 class="anchored" data-anchor-id="leetcode-examples">2. LeetCode Examples</h2>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">2.1 Example 1</h3>
+<p>Input: tokens = <code>["2","1","+","3","*"]</code><br>
+Output: <code>9</code><br>
+Explanation: <code>((2 + 1) * 3) = 9</code></p>
+</section>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">2.2 Example 2</h3>
+<p>Input: tokens = <code>["4","13","5","/","+"]</code><br>
+Output: <code>6</code><br>
+Explanation: <code>(4 + (13 / 5)) = 6</code></p>
+</section>
+<section id="example-3" class="level3">
+<h3 class="anchored" data-anchor-id="example-3">2.3 Example 3</h3>
+<p>Input: tokens = <code>["10","6","9","3","+","-11","*","/","*","17","+","5","+"]</code><br>
+Output: <code>22</code><br>
+Explanation:<br>
+<code>((10 * (6 / ((9 + 3) * -11))) + 17) + 5</code><br>
+<code>= ((10 * (6 / (12 * -11))) + 17) + 5</code><br>
+<code>= ((10 * (6 / -132)) + 17) + 5</code><br>
+<code>= ((10 * 0) + 17) + 5</code><br>
+<code>= (0 + 17) + 5</code><br>
+<code>= 17 + 5</code><br>
+<code>= 22</code></p>
+</section>
+</section>
+<section id="background-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="background-and-analysis">3. Background and Analysis</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation">wiki</a> explains this is also known as <em>postfix notation</em>, the <strong>operators</strong> follow their <strong>operands</strong>, in contrast to <strong>prefix (Polish) notation</strong> (operators precede their operands).</p>
+<section id="wiki-example" class="level3">
+<h3 class="anchored" data-anchor-id="wiki-example">3.1 Wiki Example</h3>
+<p>To add 3 and 4 together, the expression is <code>[3 4 +]</code> rather than <code>[3 + 4]</code>.<br>
+- The conventional notation expression <code>[3 − 4 + 5]</code> becomes <code>[3 4 − 5 +]</code> in reverse Polish notation:<br>
+- 4 is first subtracted from 3, then - 5 is added to it.</p>
+</section>
+<section id="stack-explanation" class="level3">
+<h3 class="anchored" data-anchor-id="stack-explanation">3.2 Stack Explanation</h3>
+<p>The concept of a stack, a <code>last-in/first-out</code> construct. In the example <code>[3 4 −]</code>:<br>
+1. <strong>push</strong> <code>3</code> to stack: <code>[3]</code> 2. <strong>push</strong> <code>4</code> to stack; ie <code>4</code> is now on top, <code>3</code> below it: <code>[3 4]</code> 3. apply <strong>subtraction</strong> operator: - <strong>Remove</strong> <code>top two</code> items from the stack: - performs <code>3 − 4</code>, and 4. <strong>push</strong> the <code>result</code> of <code>−1</code> to top of stack.</p>
+</section>
+<section id="stack-explanation-table" class="level3">
+<h3 class="anchored" data-anchor-id="stack-explanation-table">3.3 Stack Explanation Table</h3>
+<section id="example-1-3-4-with-all-steps" class="level4">
+<h4 class="anchored" data-anchor-id="example-1-3-4-with-all-steps">3.3.1 Example 1: <code>[3 4 −]</code> with all steps</h4>
+<table class="table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 46%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Python Pseudocode</th>
+<th>Stack_Expected</th>
+<th>Output_Expected</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rpn_obj = rpn_cls()</td>
+<td><code>[  ]</code></td>
+<td>null</td>
+<td>initialise stack</td>
+</tr>
+<tr class="even">
+<td>rpn_obj.push(<code>3</code>)</td>
+<td><code>[3]</code></td>
+<td>null</td>
+<td>push <code>3</code> to stack_top</td>
+</tr>
+<tr class="odd">
+<td>rpn_obj.push(<code>4</code>)</td>
+<td><code>[3,4]</code></td>
+<td>null</td>
+<td>push <code>4</code> to stack_top</td>
+</tr>
+<tr class="even">
+<td>rpn_obj.op()[pt_1]: .pop(top 2)</td>
+<td><code>[  ]</code></td>
+<td><code>[3,4]</code></td>
+<td>pop [<code>3</code>] [<code>4</code>] stack_top_2</td>
+</tr>
+<tr class="odd">
+<td>rpn_obj.op()[pt_2]: .op(top 2)</td>
+<td><code>[-1]</code></td>
+<td><code>[3,4]</code></td>
+<td>operate(<code>3</code>,<code>4</code>,<code>-</code>) on stack_top_2</td>
+</tr>
+<tr class="even">
+<td>rpn_obj.op()[pt_3]: .truncate(res)</td>
+<td><code>[-1]</code></td>
+<td><code>-1</code></td>
+<td>int(<code>result</code>), truncate to zero as per Rule_3</td>
+</tr>
+<tr class="odd">
+<td>rpn_obj.op()[pt_4]: .return()</td>
+<td><code>[-1]</code></td>
+<td><code>-1</code></td>
+<td>return operated <code>result</code></td>
+</tr>
+<tr class="even">
+<td>rpn_obj.op()[pt_5]: .push(result)</td>
+<td><code>[-1]</code></td>
+<td>null</td>
+<td>push <code>results</code> stack_top</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-2-3-4-5-6-with-concise-steps" class="level4">
+<h4 class="anchored" data-anchor-id="example-2-3-4-5-6-with-concise-steps">3.3.2 Example 2: <code>[3 4 × 5 6 × +]</code> with concise steps</h4>
+<table class="table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 20%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Python Pseudocode</th>
+<th>Stack_Expected</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rpn_obj = rpn_cls()</td>
+<td><code>[  ]</code></td>
+<td>initialise stack</td>
+</tr>
+<tr class="even">
+<td>rpn_obj.push(<code>3</code>)</td>
+<td><code>[3]</code></td>
+<td>push <code>3</code> to stack_top</td>
+</tr>
+<tr class="odd">
+<td>rpn_obj.push(<code>4</code>)</td>
+<td><code>[3,4]</code></td>
+<td>push <code>4</code> to stack_top</td>
+</tr>
+<tr class="even">
+<td>rpn_obj.op(<code>x</code>)</td>
+<td><code>[12]</code></td>
+<td>rem top_2 <code>3,4</code>, op <code>3*4</code>, push top <code>12</code></td>
+</tr>
+<tr class="odd">
+<td>rpn_obj.push(<code>5</code>)</td>
+<td><code>[12,5]</code></td>
+<td>push <code>5</code> to stack_top</td>
+</tr>
+<tr class="even">
+<td>rpn_obj.push(<code>6</code>)</td>
+<td><code>[12,5,6]</code></td>
+<td>push <code>6</code> to stack_top</td>
+</tr>
+<tr class="odd">
+<td>rpn_obj.op(<code>x</code>)</td>
+<td><code>[12,30]</code></td>
+<td>rem top_2 <code>5,6</code>, op <code>5*6</code>, push top <code>30</code></td>
+</tr>
+<tr class="even">
+<td>rpn_obj.op(<code>+</code>)</td>
+<td><code>[meaning of life]</code></td>
+<td>rem top_2 <code>12,30</code>, op <code>12+30</code>, push top <code>42</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="why" class="level3">
+<h3 class="anchored" data-anchor-id="why">3.3 Why?</h3>
+<p>The <strong>advantage</strong> of <strong>RPN</strong> is it:<br>
+- removes the need for order of operations and parentheses that are required by infix notation and<br>
+- can be evaluated linearly, left-to-right.</p>
+<p>For example, the infix expression <code>(3 × 4) + (5 × 6)</code> becomes <code>[3 4 × 5 6 × +]</code> in reverse Polish notation.*</p>
+</section>
+</section>
+<section id="coding" class="level2">
+<h2 class="anchored" data-anchor-id="coding">4. Coding</h2>
+<section id="write-pseudo-python-code" class="level3">
+<h3 class="anchored" data-anchor-id="write-pseudo-python-code">4.1 Write pseudo-python-code</h3>
+<div id="cell-10" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evalRPN(<span class="va">self</span>, tokens: [<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rule 5: Input expression is valid, no check required, </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ie doesn't start with operateor</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(tokens) <span class="op">==</span><span class="dv">0</span>: <span class="co"># check if no token </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span> <span class="co"># Probably not needed due for R5 but wrote save time in case </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        stack <span class="op">=</span> [] <span class="co">#initialise stack</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        stack.append(tokens[<span class="dv">0</span>])  <span class="co"># first item is valid due to R5 so set it to stk</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">### [1]     operator functions/mapping (*,-,+,/)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">### [2]     .pop_top_2(stack):    </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">### [3]     .operate(top_2_items, operator #[2.1]): </span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(tokens)):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="co"># stack = [2]</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            curr_chr <span class="op">=</span> tokens[i]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> curr_chr <span class="kw">in</span> operators:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                top_2_items <span class="op">=</span> [top_2, top_1] <span class="op">=</span> pop_top_2(stack) <span class="co"># [1]</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                <span class="co"># [validation]: do spot check stacked removed top 2</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                res   <span class="op">=</span> operate(top_2_items,curr_chr) <span class="co">#[2]</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                stack.append(res)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>: <span class="co"># is a valid integer so just append to top</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                stack.append(curr_chr)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="write-required-functions" class="level3">
+<h3 class="anchored" data-anchor-id="write-required-functions">4.2 Write Required Functions</h3>
+<div id="cell-12" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evalRPN(<span class="va">self</span>, tokens: [<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(tokens) <span class="op">==</span> <span class="dv">0</span>: </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        stack <span class="op">=</span> []</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        stack.append(<span class="bu">int</span>(tokens[<span class="dv">0</span>])) </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        operators <span class="op">=</span> [<span class="st">'*'</span>, <span class="st">'+'</span>, <span class="st">'-'</span>, <span class="st">'/'</span>] </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> operate(operator,x2,x1):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"operator: </span><span class="sc">{</span>operator<span class="sc">}</span><span class="ss">, top2:</span><span class="sc">{</span>x2<span class="sc">}</span><span class="ss">, top1:</span><span class="sc">{</span>x1<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> operator <span class="op">==</span> <span class="st">'+'</span>:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> x2<span class="op">+</span>x1</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">'-'</span>:</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> x2<span class="op">-</span>x1</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">'*'</span>:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> x2<span class="op">*</span>x1</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">'/'</span>:</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="bu">int</span>(x2<span class="op">/</span>x1)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">"unknown operator!"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> pop_top_2(stack):</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="bu">len</span>(stack))</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(stack) <span class="op">&lt;</span><span class="dv">2</span>:</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">"Stack too short!"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                top_1 <span class="op">=</span> stack.pop()</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                top_2 <span class="op">=</span> stack.pop()</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                top_2_items <span class="op">=</span> [top_2,top_1]</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(top_2_items)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> top_2_items</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(tokens)):</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>            curr_chr <span class="op">=</span> tokens[i]</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> curr_chr <span class="kw">in</span> operators:</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                operator <span class="op">=</span> curr_chr</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                top_2_items <span class="op">=</span> pop_top_2(stack) </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                res   <span class="op">=</span> operate(operator, top_2_items[<span class="dv">0</span>],top_2_items[<span class="dv">1</span>])</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                stack.append(res)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>: </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                stack.append(<span class="bu">int</span>(curr_chr))</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(stack)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stack</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>soln <span class="op">=</span> Solution()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="test-functionality" class="level2">
+<h2 class="anchored" data-anchor-id="test-functionality">5. Test Functionality</h2>
+<section id="case-1-expected-9" class="level3">
+<h3 class="anchored" data-anchor-id="case-1-expected-9">5.1 Case 1 Expected 9</h3>
+<div id="cell-15" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>soln.evalRPN([<span class="st">"2"</span>,<span class="st">"1"</span>,<span class="st">"+"</span>,<span class="st">"3"</span>,<span class="st">"*"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2
+[2, 1]
+operator: +, top2:2, top1:1
+2
+[3, 3]
+operator: *, top2:3, top1:3
+[9]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>[9]</code></pre>
+</div>
+</div>
+</section>
+<section id="case-2-expected-6" class="level3">
+<h3 class="anchored" data-anchor-id="case-2-expected-6">5.2 Case 2 Expected 6</h3>
+<div id="cell-17" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>soln.evalRPN([<span class="st">"4"</span>,<span class="st">"13"</span>,<span class="st">"5"</span>,<span class="st">"/"</span>,<span class="st">"+"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3
+[13, 5]
+operator: /, top2:13, top1:5
+2
+[4, 2]
+operator: +, top2:4, top1:2
+[6]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>[6]</code></pre>
+</div>
+</div>
+</section>
+<section id="case-2-expected-22" class="level3">
+<h3 class="anchored" data-anchor-id="case-2-expected-22">5.3 Case 2 Expected 22</h3>
+<div id="cell-19" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>soln.evalRPN([<span class="st">"10"</span>,<span class="st">"6"</span>,<span class="st">"9"</span>,<span class="st">"3"</span>,<span class="st">"+"</span>,<span class="st">"-11"</span>,<span class="st">"*"</span>,<span class="st">"/"</span>,<span class="st">"*"</span>,<span class="st">"17"</span>,<span class="st">"+"</span>,<span class="st">"5"</span>,<span class="st">"+"</span>])  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4
+[9, 3]
+operator: +, top2:9, top1:3
+4
+[12, -11]
+operator: *, top2:12, top1:-11
+3
+[6, -132]
+operator: /, top2:6, top1:-132
+2
+[10, 0]
+operator: *, top2:10, top1:0
+2
+[0, 17]
+operator: +, top2:0, top1:17
+2
+[17, 5]
+operator: +, top2:17, top1:5
+[22]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>[22]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="clean-version" class="level2">
+<h2 class="anchored" data-anchor-id="clean-version">6. Clean Version</h2>
+<div id="cell-21" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evalRPN_clean(<span class="va">self</span>, tokens: [<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        stack <span class="op">=</span> []</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        stack.append(<span class="bu">int</span>(tokens[<span class="dv">0</span>])) </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        operators <span class="op">=</span> [<span class="st">'*'</span>, <span class="st">'+'</span>, <span class="st">'-'</span>, <span class="st">'/'</span>] </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> operate(operator,x2,x1):</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> operator <span class="op">==</span> <span class="st">'+'</span>:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> x2<span class="op">+</span>x1</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">'-'</span>:</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> x2<span class="op">-</span>x1</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">'*'</span>:</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> x2<span class="op">*</span>x1</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="bu">int</span>(x2<span class="op">/</span>x1)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> pop_top_2(stack):</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            top_1 <span class="op">=</span> stack.pop()</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            top_2 <span class="op">=</span> stack.pop()</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [top_2,top_1]</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(tokens)):</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>            curr_chr <span class="op">=</span> tokens[i]</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> curr_chr <span class="kw">in</span> operators:</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>                top_2_items <span class="op">=</span> pop_top_2(stack) </span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>                res   <span class="op">=</span> operate(curr_chr, top_2_items[<span class="dv">0</span>],top_2_items[<span class="dv">1</span>])</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>                stack.append(res)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>: </span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>                stack.append(<span class="bu">int</span>(curr_chr))</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stack[<span class="dv">0</span>] <span class="co">############### fixed after submission 2  ###############</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>soln <span class="op">=</span> Solution()</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>soln.evalRPN_clean([<span class="st">"10"</span>,<span class="st">"6"</span>,<span class="st">"9"</span>,<span class="st">"3"</span>,<span class="st">"+"</span>,<span class="st">"-11"</span>,<span class="st">"*"</span>,<span class="st">"/"</span>,<span class="st">"*"</span>,<span class="st">"17"</span>,<span class="st">"+"</span>,<span class="st">"5"</span>,<span class="st">"+"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>22</code></pre>
+</div>
+</div>
+<section id="clean-check" class="level3">
+<h3 class="anchored" data-anchor-id="clean-check">6.1 Clean Check</h3>
+<div id="cell-23" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>soln.evalRPN_clean([<span class="st">"2"</span>,<span class="st">"1"</span>,<span class="st">"+"</span>,<span class="st">"3"</span>,<span class="st">"*"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>9</code></pre>
+</div>
+</div>
+<div id="cell-24" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>soln.evalRPN_clean([<span class="st">"4"</span>,<span class="st">"13"</span>,<span class="st">"5"</span>,<span class="st">"/"</span>,<span class="st">"+"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>6</code></pre>
+</div>
+</div>
+<div id="cell-25" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>soln.evalRPN_clean([<span class="st">"10"</span>,<span class="st">"6"</span>,<span class="st">"9"</span>,<span class="st">"3"</span>,<span class="st">"+"</span>,<span class="st">"-11"</span>,<span class="st">"*"</span>,<span class="st">"/"</span>,<span class="st">"*"</span>,<span class="st">"17"</span>,<span class="st">"+"</span>,<span class="st">"5"</span>,<span class="st">"+"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>22</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="submit" class="level2">
+<h2 class="anchored" data-anchor-id="submit">7. Submit</h2>
+<ul>
+<li>First attempt <strong>Failed</strong>, because I returned the stack as a list with result as the first item.</li>
+<li>Second attempt <strong>Accepted</strong>! Quick fix after indexing out the value form the list. Not a bad result.
+<ul>
+<li>Top 40% in Speed and</li>
+<li>Top 20% in Memory.</li>
+</ul></li>
+</ul>
+<p><img src="150-1.jpg" class="img-fluid"></p>
+</section>
+<section id="notes-to-self." class="level2">
+<h2 class="anchored" data-anchor-id="notes-to-self.">6. Notes to self.</h2>
+<p>This took alot of time setting up the problem, the solving part was quite fast.</p>
+<p>I need to be more seemless in set up!</p>
+<p><strong>[Future Iterations 1]</strong>: Incorporate best solutions from LC<br>
+<strong>[Future Iterations 2]</strong>: Attempt iterations for speed and memory</p>
+<p><a href="https://tonyjustdevs.github.io/blog/">Go to Main Blog</a><br>
+<a href="https://tonyjustdevs.github.io/blog/leetcode.html">Go to LeetCode Blog</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
