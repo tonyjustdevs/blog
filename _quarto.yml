@@ -13,10 +13,11 @@ website:
       - icon: linkedin
         href: https://au.linkedin.com/in/tony-phung-6190b0b8
       - icon: leetcode
-        href: https://leetcode.com
+        href: https://leetcode.com/tonyjustdevs/
 
 format:
   html:
     theme:
-      light: cosmo
       dark: solar
+      light: cosmo
+    highlight-style: github
