@@ -18,5 +18,5 @@ website:
 format:
   html:
     theme:
-      light: solar
+      light: cosmo
       dark: solar
