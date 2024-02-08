@@ -1,7 +1,14 @@
 [
   {
+    "listing": "/notes.html",
+    "items": [
+      "/posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
+      "/posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html",
       "/posts/lc_posts/2024-02-07-leetcode150_1/150-1.html",
       "/posts/lc_posts/2024-02-06-leetcode155_1/155-1.html",
       "/posts/lc_posts/welcome_to_lc/index.html",

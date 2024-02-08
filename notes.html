@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-01-19">
 
-<title>blog - Deploying My First Live App &amp; it’s a Neural Network!</title>
+<title>blog - notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,24 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,7 +69,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -81,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">blog</span>
     </a>
   </div>
@@ -92,15 +149,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">about</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../leetcode.html"> 
+    <a class="nav-link" href="./leetcode.html"> 
 <span class="menu-text">leetcode</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../notes.html"> 
+    <a class="nav-link active" href="./notes.html" aria-current="page"> 
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item compact">
@@ -129,88 +186,80 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Deploying My First Live App &amp; it’s a Neural Network!</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">gradio</div>
-                <div class="quarto-category">huggingface</div>
-              </div>
-                  </div>
+    <div class="quarto-title column-page-left">
+      <h1 class="title">notes</h1>
+                      </div>
   </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Tony Phung </p>
-            </div>
+  <div class="quarto-title-meta column-page-left">
     </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">January 19, 2024</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">2. Background</a></li>
-  <li><a href="#future-stuff" id="toc-future-stuff" class="nav-link" data-scroll-target="#future-stuff">3. Future stuff</a></li>
-  <li><a href="#heres-the-app" id="toc-heres-the-app" class="nav-link" data-scroll-target="#heres-the-app">4. Heres the App!</a></li>
-  </ul>
-</nav>
-    </div>
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="linear algebra">linear algebra <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<div class="quarto-about-marquee content column-page-left">
+  <div class="about-image-container">
+  </div>
+  <div class="about-contents">
+     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
-
-
-
-<p><img src="huggrad.jpg" class="img-fluid"></p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
-<p>Embedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!</p>
-</section>
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">2. Background</h2>
-<p>This App will guess whether an image is a <strong>Cat</strong> or <strong>Dog</strong> with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.</p>
-<p>All doggos🐕 &amp; cats🐈 image examples has <strong>never been viewed</strong> by the Model and it makes a prediction in <strong>milliseconds</strong>! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!</p>
-<p>The App isn’t perfect:<br>
-- It guesses <strong>Incorrectly with great 95% confidence</strong> a cat as a dog!</p>
-<p>I’m thrilled to be able to build the app, get it hosted and embed it all <strong>in one day</strong> for the first time! Alot of firsts today!</p>
-</section>
-<section id="future-stuff" class="level2">
-<h2 class="anchored" data-anchor-id="future-stuff">3. Future stuff</h2>
-<p><strong>[1]</strong>: Multi-Image Uploader + Predictor.<br>
-<strong>[2]</strong>: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.<br>
-<strong>[4]</strong>: Upgrade the rice vs noodle model an App and hosted.<br>
-<strong>[4]</strong>: Learn some <strong>HTML/CSS</strong> to make things prettier.</p>
-</section>
-<section id="heres-the-app" class="level2">
-<h2 class="anchored" data-anchor-id="heres-the-app">4. Heres the App!</h2>
-<iframe src="https://tonyjustdevs-ai.hf.space" width="100%" height="800">
-</iframe>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-</section>
-
-</main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="linear algebra" data-listing-date-sort="1707411600000" data-listing-file-modified-sort="1707418410552" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html" class="no-external"></a></p><a href="./posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html" class="no-external">
+<p><img src="./posts/notes/1-la_chg_of_bse/Change.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html" class="no-external">Change of Basis</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('linear algebra'); return false;">
+linear algebra
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html" class="no-external">Some scribbles</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html" class="no-external">
+<div class="listing-date">
+Feb 9, 2024
+</div>
+<div class="listing-author">
+Tony Phung
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> 
+    <div class="about-footer"><div class="about-links">
+  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+</div>
+</div>
+  </div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -375,13 +424,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
