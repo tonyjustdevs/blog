@@ -12,8 +12,9 @@ website:
         href: https://github.com/tonyjustdevs
       - icon: linkedin
         href: https://au.linkedin.com/in/tony-phung-6190b0b8
-      - icon: leetcode
-        href: https://leetcode.com/tonyjustdevs/
+      # - icon: huggingface        
+      #   href: https://huggingface.co/tonyjustdevs
+        # href: https://leetcode.com/tonyjustdevs/
 
 format:
   html:

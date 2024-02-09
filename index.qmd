@@ -18,6 +18,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://au.linkedin.com/in/tony-phung-6190b0b8
+    # - icon: HuggingFace
+    #   text: HuggingFace
+    #   href: https://huggingface.co/tonyjustdevs
 ---
 
 
