@@ -1,17 +1,21 @@
 [
   {
-    "listing": "/notes.html",
+    "listing": "/leetcode.html",
     "items": [
-      "/posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html"
+      "/posts/leetcode/3-binary_search/LC704.html",
+      "/posts/leetcode/2-reverse_polish_notation/LC150.html",
+      "/posts/leetcode/1-min_stack/LC155.html",
+      "/posts/leetcode/0-welcome_to_lc/index.html"
     ]
   },
   {
     "listing": "/index.html",
     "items": [
-      "/posts/notes/1-la_chg_of_bse/1-la_chg_of_bse.html",
-      "/posts/lc_posts/2024-02-07-leetcode150_1/150-1.html",
-      "/posts/lc_posts/2024-02-06-leetcode155_1/155-1.html",
-      "/posts/lc_posts/welcome_to_lc/index.html",
+      "/posts/leetcode/3-binary_search/LC704.html",
+      "/posts/notes/linear_algebra/1-chg_of_bse.html",
+      "/posts/leetcode/2-reverse_polish_notation/LC150.html",
+      "/posts/leetcode/1-min_stack/LC155.html",
+      "/posts/leetcode/0-welcome_to_lc/index.html",
       "/posts/2024-02-04-neural_network_spreadsheet/index.html",
       "/posts/2024-02-03-neural_network_basics/index.html",
       "/posts/2024-02-02-neural_network_basics/index.html",
@@ -31,11 +35,9 @@
     ]
   },
   {
-    "listing": "/leetcode.html",
+    "listing": "/notes.html",
     "items": [
-      "/posts/lc_posts/2024-02-07-leetcode150_1/150-1.html",
-      "/posts/lc_posts/2024-02-06-leetcode155_1/155-1.html",
-      "/posts/lc_posts/welcome_to_lc/index.html"
+      "/posts/notes/linear_algebra/1-chg_of_bse.html"
     ]
   }
 ]
