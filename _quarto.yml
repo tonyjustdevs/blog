@@ -20,4 +20,3 @@ format:
     theme:
       dark: solar
       light: cosmo
-    highlight-style: github
