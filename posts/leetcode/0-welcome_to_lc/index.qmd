@@ -1,7 +1,7 @@
 ---
 title: "❄️LeetCode Posts❄️"
 author: "Tony Phung"
-date: "2024-02-06"
+date: "2024-02-05"
 categories: [leetcode, hello world]
 description: A page to archive my (naively hopeful daily) leetcode attempts.
 ---
