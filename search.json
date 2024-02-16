@@ -105,67 +105,382 @@
     "text": "link to leetcode profile here\n\nCreated new leetcode.qmd based on front page index.qmd and\n\nDirected contents to point here: contents: posts/lc_posts.\n\nProbably not the ideal blog + folder structure but it’ll do the job👌.\nI don’t claim to be a web-designer in any sense 😂.\nI began 3 months ago with no algorithm or data structures academic background at all. The Easys were definitey not Easy to me as you can see from the number of submissions.\nThe majority of submissions were 2-3 months ago and I made no attempts in January 2024 👏.\nThis page should keep me accountable and these fingers minty as a mojito on a hot day 🍹."
   },
   {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html",
-    "href": "posts/2024-02-03-neural_network_basics/index.html",
-    "title": "Neural Network Basics (Part 3)",
+    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#download-kaggle-data",
+    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#download-kaggle-data",
+    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
+    "section": "1. Download Kaggle Data",
+    "text": "1. Download Kaggle Data\nLog into Kaggle:\n1. Competitions\n2. Titanic\n3. Data\n4. Train.csv and Download"
+  },
+  {
+    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#clean-dataset",
+    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#clean-dataset",
+    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
+    "section": "2. Clean Dataset",
+    "text": "2. Clean Dataset\nEach single passenger is represented by a single row with demographics and information across the columns.\nFor this first attempt, I’ll keep the model simple and used 8 columns and discarded the rest.\n[Future Iteration]: Would using more columns increase my accuracy?\nThe training set should be used to build your machine learning models. For the training set, we provide the outcome (also known as the “ground truth”) for each passenger - Kaggle Data Description\nNote: There are originally 891 Passengers (rows) in the training dataset.\nThere were a few steps taken to clean the data:\n1. Keep Certain Columns Only:\n- Survived\n- Pclass - Sex - Age - SibSp - Parch - Fare - Embarked 2. Remove blanks from: - Sex (177 rows removed) - Embarked (2 rows removed) Columns: Remaining Passengers (712 = 891-177-2)\n\nCreate a New Sheet and Copy over the editted Dataset"
+  },
+  {
+    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#binary-categorical-variables",
+    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#binary-categorical-variables",
+    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
+    "section": "3. Binary Categorical Variables",
+    "text": "3. Binary Categorical Variables\nRecall a Function has inputs and parameters. The output is calculated by adding the all the inputs which are weighted (multiplied) by the parameters.\nIn neural network basics: - the inputs were a single variable x and the output was a single y (or f(x)).\n- the parameters (coefficients of x) could be optimised against a Loss Function (Mean Squared Error) to achieve a high accuracy (good predictability) for that function, called Gradient Descent - an arbitrary number of Rectified Linear Unit (ReLU) could be added together to form any function to fit a given set of data and parameter (weights) can be optimised to minimise the loss function as above with gradient descent.\nSimilarly, the inputs in the Titanic model will be the information describing the passengers, i.e. columns in our spreadsheet, are multiplied by the parameters (weights or coefficients) to represents its importance.\n\nQuestion: But how can a parameter (number) be multiplied to word (text) such as male or female from the Sex Column or Letter S or C or Q from the Embarked Column?\nAnswer: You Can’t.\n\nHowever, Categorical Variables (unordered) can be converted into Binary Categorical Variables:\n- IsMale will indicate a 1 for True (Male) and 0 for False (Female)\n- Embarked has 3 categories “S, C and Q: Having two columns (S and C) to represent the 3 categories will suffice. If both S and C columns have 0’s, this implies it is a Q, so we do not need the extra column to have all the information.\n- PClass (1, 2 and 3) also has 3 categories and is treated the same as above.\n- Age and Fare are continuous values and left them as is for now"
+  },
+  {
+    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#regression",
+    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#regression",
+    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
+    "section": "4. Regression",
+    "text": "4. Regression\nI created random variables (coefficients or weights for our parameters) with rand() and multiplied them to each parameter. I did this for several rows to and looked at the output.\nLooks like Age and Fare columns are dominating our function.\n\n\n4.1 Dealing with Continuous Variables Age and Fare\nIts probably fair (see what I did there) that a Passenger’s age (or fare) shouldn’t be the only two defining factors to determine their survivability as the above model suggests.\nThese values need to be normalised: - For Age, I divided each passengers age by the maximum age. - For Fare, I took the Logarithm of each passengers fare. Taking the Log of a variable where there are very small values and a few large ones distributes the values more evenly.\n\n\n\n4.2 Prediction and Loss and Average Loss\nPrediction: Multiply each parameter by the random coefficient created and sum it up to have our prediction.\n- I used the SumProduct() function. - I also created a manual linear version from scratch to see test my understanding was correct and sumproduct was working as expected. It was.\nLoss: It’s the survival (0 No, 1 Yes) minus the Prediction, then squared. - This is the squared error. If the errors are not squared, the errors end up cancelling each other off. Alternatively, the absolute errors could be taken done previously.\nAverage Loss: Self-explanatory.\n\nNote: Current Average Loss is 0.886 with random parameters.\n\n\n4.3 Gradient Descent (or Solver)\nSetting the Solver to Minimise our Average Loss, our parameters have been adjusted and Average Loss has come down to: 0.535!\nNot but but this isn’t a neural net yet, its just a regression."
+  },
+  {
+    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#neural-network",
+    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#neural-network",
+    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
+    "section": "5. Neural Network",
+    "text": "5. Neural Network\nParams_2: Add another set of random coefficients.\nLinear_2: Calculate the linear model on this set of coefficients.\nReLU: ReLUs are calculated with an IF() statement, if it is below zero, then set to zero, otherwise keep the value.\nPrediction: Add the ReLUs.\nLoss Prediction minus Survived.\nAverage Loss: Run Solver, but this time allow the change of both sets of coefficients Params_1 and Params_2\nNote: Current Neural Network Average Loss is 0.527 with random parameters.\n\n[Future Iteration]: To be honest, I haven’t quite understood fully whats going on here. The concept of adding a second set of parameters and then having two Linear Models and adding together their reLUs will give a prediction that can be optimised, just dont get it yet. be fair, I just learnt Gradient Descent a day or two ago.\n\n5.1 Error In Optimisation - All ReLUs going to Zero\nHaving no constraints on whether coefficients can be negative or positive, the Solver found the most convenient result of making all parameters less than zero, hence making outputs a negative linear output, which makes all the ReLUs Zero, hence simply making the prediction that everyone died! A quick and dirty prediction thats not too bad but very scientific…\nNote: I’m currently using WPS Solver rather than Excel Solver (Don’t own paid version of Excel). Not sure if I did a mistake in my model or its a Solver thing.\n\n\n\n5.2 Setting Constraints (Coefficients &gt; 0)\nBy placing the constraint the Solver seems to finally do what is expected.\nThe Average Loss has come down from the Regresssion 0.535 to 0.235!\n\n\n\n5.3 Added Ones Columns\nBut this didn’t fix the Solver Issuer.\n\n\n\n5.4 Matrix Multiplication\nI made a Matrix Multiplication version and optimised with the same silly negative parameters solution"
+  },
+  {
+    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#mission-failed.",
+    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#mission-failed.",
+    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
+    "section": "6. Mission Failed.",
+    "text": "6. Mission Failed.\nHaving downloaded the spreadsheet from Jeremy and ran the Solver, the Zero ReLUs error persists. This is a WPS Sheets issue.\nI also tried getting Solver on Google Sheets with no Luck however my emails permissions didn’t allow the install. Will give it a go to fix it next time.\nFor now, today I’ll admit defeat. Onwards to tomorrow…\nI’ll upload this notebook anyway because I want to record my failures as well as my triumphs."
+  },
+  {
+    "objectID": "posts/2024-02-02-neural_network_basics/index.html",
+    "href": "posts/2024-02-02-neural_network_basics/index.html",
+    "title": "Neural Network Basics (Part 2)",
     "section": "",
-    "text": "In Neural Network Basics: Part 2, the parameters of a function were found (optimised) to Minimise the Loss Function. The Loss Function chosen was the Mean Absolute Error, it could have been chosen to be the Mean Squared Error.\nBut What is the mathematical function if the wish to model something more complex like predicting the breed of Cat?\nUnfortunately, its unlikely the relationship between the parameters and whether a pixel is part of a Maine Coon 🐈 is a Quadratic, its going to be something more complicated.\nThankfully, there exists the infinitely flexible function known as Rectified Linear Unit (ReLU)"
+    "text": "Automation of finding the best parameters (lowest loss) based on Mean Average Error (MAE) using Gradient Descent for our Quadratic Function"
   },
   {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
-    "href": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
-    "title": "Neural Network Basics (Part 3)",
-    "section": "1. Rectified Linear Unit (ReLU)",
-    "text": "1. Rectified Linear Unit (ReLU)\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nfrom functools import partial\n\n\n1.1 Function\nThe function does two things:\n1. Calculate the output of a line\n2. If the output is smaller than zero, return zero\n\ndef rectified_linear(m,b,x):\n    y = m*x+b\n    return torch.clip(y,0.)\n\n\n\n1.2 Create A Custom ReLU Method\n\ndef custom_relu_fn(m,b): return partial(rectified_linear,m,b)\n\n\n\n1.3 Create y = 1x + 1 with Custom ReLU Method\n\nfn_11 = custom_relu_fn(1,1)\nfn_11\n\nfunctools.partial(&lt;function rectified_linear at 0x00000220331C9D00&gt;, 1, 1)\n\n\n\n\n1.4 ReLU y = 1x+ 1 Plot\n\nx = torch.linspace(-2.1,2.1,20)\nplt.plot(x,fn_11(x))\n\n\n\n\n\n\n\n\n\n1.4.1 Interactive ReLU\n\nplt.rc('figure', dpi=90)\n\n@interact(m=1.2, b=1.2)\ndef plot_relu(m, b):\n    min, max = -4.1, 4.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(rectified_linear, m,b)\n    ylim=(-1,4)\n    plt.ylim(ylim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n\n1.5 Double ReLU Function\n\ndef double_relu(m1,b1,m2,b2,x):\n    return rectified_linear(m1,b1) + rectified_linear(m2,b2) \n\n\n1.5.1 Interactive Double ReLU\n\nplt.rc('figure', dpi=90)\n\ndef dbl_rectified_linear(m1, b1,m2,b2,x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2)\ndef plot_dbl_relu(m1,b1,m2,b2):\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(dbl_rectified_linear, m1,b1,m2,b2)\n    ylim=(-1,4)\n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n1.5.1 Triple ReLU for Good Measure!\n\ndef trple_rectified_linear(m1, b1, m2, b2, m3, b3, x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x) + rectified_linear(m3,b3,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2, m3=0.5, b3=0.5)\ndef plot_trple_relu(m1,b1,m2,b2,m3,b3):\n# static variables\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    \n# update partial to include extra parameters m3, b3\n    triple_relu_fn_y = partial(trple_rectified_linear, m1,b1,m2,b2,m3,b3)\n\n# static variables\n    ylim=(-1,4) \n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, triple_relu_fn_y(x))"
-  },
-  {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
-    "href": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
-    "title": "Neural Network Basics (Part 3)",
-    "section": "2. ReLU is An Infinitely Flexible Function",
-    "text": "2. ReLU is An Infinitely Flexible Function\nThere could be arbitrarily many ReLus added together to form any function!\nThe previous functions are of a single input x i.e. 2-Dimensions.\nReLU’s could be added together over as many dimensions as desired, i.e. ReLU’s over surfaces or ReLU’s over 3D, 4D 5D etc.\nBut adding these ReLU’s, this means there are arbitrary amount of parameters related to each ReLU, how can these parameters be calculated?\nIn Part 2, a optimisation method called Gradient Descent was used to determine Parameters.\nThat’s Deep Learning in a nutshell. Beyond this, Tweaks are to:\n- make it faster\n- require less data"
-  },
-  {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
-    "href": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
-    "title": "Neural Network Basics (Part 3)",
-    "section": "Neural Network Basics Completed.",
-    "text": "Neural Network Basics Completed.\nGo back to a previous post:\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
-  },
-  {
-    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html",
-    "href": "posts/2024-01-31-99_neural_network_basics/index.html",
-    "title": "Neural Network Basics (Part 1)",
-    "section": "",
-    "text": "A neural network is a mathematical function. So what’s that?\nA function is a mapping or transformation where each unique set of inputs is equal to exactly one output.\nIn highschool, the Vertical Line Test was used to determine whether a line was a function.\nThis post will go through basics of how to fit a line to some data."
-  },
-  {
-    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#import-libraries",
-    "href": "posts/2024-01-31-99_neural_network_basics/index.html#import-libraries",
-    "title": "Neural Network Basics (Part 1)",
+    "objectID": "posts/2024-02-02-neural_network_basics/index.html#import-libraries",
+    "href": "posts/2024-02-02-neural_network_basics/index.html#import-libraries",
+    "title": "Neural Network Basics (Part 2)",
     "section": "1. Import Libraries",
-    "text": "1. Import Libraries\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nimport pandas as pd"
+    "text": "1. Import Libraries\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nimport pandas as pd\nfrom functools import partial"
   },
   {
-    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#upload-and-plot-data",
-    "href": "posts/2024-01-31-99_neural_network_basics/index.html#upload-and-plot-data",
-    "title": "Neural Network Basics (Part 1)",
-    "section": "2. Upload and Plot Data",
-    "text": "2. Upload and Plot Data\n\ndf = pd.read_csv(\"upload_dataset.csv\")\ndf.head()\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n-2.000000\n11.869037\n\n\n1\n-1.789474\n6.543284\n\n\n2\n-1.578947\n5.939607\n\n\n3\n-1.368421\n2.630370\n\n\n4\n-1.157895\n1.794741\n\n\n\n\n\n\n\n\nplt.scatter(df.x, df.y)"
+    "objectID": "posts/2024-02-02-neural_network_basics/index.html#upload-data-and-convert-data-to-pytorch-tensors",
+    "href": "posts/2024-02-02-neural_network_basics/index.html#upload-data-and-convert-data-to-pytorch-tensors",
+    "title": "Neural Network Basics (Part 2)",
+    "section": "2. Upload Data and Convert Data to Pytorch Tensors",
+    "text": "2. Upload Data and Convert Data to Pytorch Tensors\n\ndf = pd.read_csv(\"upload_dataset.csv\")\nx_trch = torch.tensor(df.x) \ny_trch = torch.tensor(df.y)"
   },
   {
-    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#quadratic-equation",
-    "href": "posts/2024-01-31-99_neural_network_basics/index.html#quadratic-equation",
-    "title": "Neural Network Basics (Part 1)",
-    "section": "3. Quadratic Equation",
-    "text": "3. Quadratic Equation\n\n3.1 General Quadratic Equation\n\ndef gen_quad_fn(a,b,c,x): return a*x**2 + b*x + c\n\n\n\n3.2 Custom Quadratric Equation\n\ndef custom_quad_fn(a,b,c): return partial(gen_quad_fn,a,b,c)\n\n\n\n3.3 Creating \\(1x^2 + 1x + 1\\)\n\nquad_111 = custom_quad_fn(1,1,1)\n\n\n\n3.4 Plotting \\(1x^2 + 1x + 1\\)\n\nxs_111 = df.x\nys_111 = quad_111(xs_111)\nplt.plot(xs_111,ys_111)\nplt.scatter(df.x, df.y)\n\n\n\n\n\n\n\n\n\n\n3.4 Interactive Quadratic Equation\nThe coefficients a, b and c of the Quadratic Function can be adjusted which in turn changes the shape of the line.\n[Future Iteration]: Figure out how to embed this adjustable plot into quarto blog\n\nplt.rc('figure', dpi=90)\n\n@interact(a=(0,5,0.1),b=(0,5,0.1),c=(0,5,0.1))\ndef interactive_plot(a,b,c):\n# 1. plot scatter\n    plt.scatter(df.x, df.y)    \n# 2. create xs_interact    \n    xs_interact = torch.linspace(-2.1,2.1,100)\n# 3. plot custom_quad_interactive\n    plt.ylim(-1,15)\n    plt.plot(xs_interact, custom_quad_fn(a,b,c)(xs_interact))\n\n\n\n\n\n\n\n3.5 Mean Absolute Errors (MAE)\nBy calculating a Loss Function such as Mean Absolute Errors, we can numerically determine what is the ‘best’ fit of our line to the data.\nSure it isn’t entirely scientific to adjust it manually but its a good starting point.\n\ndef mae(prediction, actual): return np.mean(abs(prediction-actual))\n\n\nplt.rc('figure', dpi=90)\n\n@interact(a=(0,5,0.1),b=(0,5,0.1),c=(0,5,0.1))\ndef interactive_plot2(a,b,c):\n# 1.    plot scatter\n    plt.scatter(df.x, df.y)\n\n# 2     create custom_quad_interactive_fn\n# 2.1   create xs_interact    \n    xs_interact = torch.linspace(-2.1,2.1,100)\n\n# 3.    create ys_interact\n    plt.ylim(-1,15)\n    ys_interact = custom_quad_fn(a,b,c)(xs_interact)\n\n# 4.    calc mae\n    y_actual     = df.y\n    y_predicted  = custom_quad_fn(a,b,c)(df.x)\n    interact_mae = round(mae(y_actual, y_predicted),3)\n\n# 5. plot   \n    plt.plot(xs_interact, ys_interact)\n    plt.title(f\"MAE: {interact_mae}\")"
+    "objectID": "posts/2024-02-02-neural_network_basics/index.html#create-customisable-quadratic-functions-and-interactively-plot-with-mae",
+    "href": "posts/2024-02-02-neural_network_basics/index.html#create-customisable-quadratic-functions-and-interactively-plot-with-mae",
+    "title": "Neural Network Basics (Part 2)",
+    "section": "3. Create Customisable Quadratic functions and Interactively Plot with MAE",
+    "text": "3. Create Customisable Quadratic functions and Interactively Plot with MAE\n\ndef gen_quad_fn(a,b,c,x): return a*x**2 + b*x + c\ndef custom_quad_fn(a,b,c): return partial(gen_quad_fn,a,b,c)\ndef torch_mae(prediction, actual): return (torch.abs(prediction-actual).mean())\ndef torch_mse(prediction, actual): return ((prediction-actual)**2).mean()\n\n\n# def mae(prediction, actual): return np.mean(abs(prediction-actual))\n# def torch_mae(prediction, actual): return np.mean(torch.abs(prediction-actual))\n# def mae(prediction, actual): return (torch.abs(prediction-actual).mean())\n# def mae2(prediction, actual): return abs(prediction-actual).mean()\n# def mae_jh(prediction, actual): return (abs(prediction-actual)).mean()\n# def mse_jh(prediction, actual): return ((prediction-actual)**2).mean()\n# def mae(preds, acts): return (torch.abs(preds-acts)).mean()\n\n\nplt.rc('figure', dpi=90)\n\n@interact(a=(0,2.1,0.1),b=(0,2.1,0.1),c=(0,2.1,0.1))\ndef interactive_plot(a,b,c):\n# 1.    plot scatter\n    plt.scatter(x_trch, y_trch)\n# 2     create custom_quad_interactive_fn\n# 2.1   create xs_interact    \n    xs_interact = x_trch\n# 3.    create ys_interact\n    plt.ylim(-1,15)\n    ys_interact = custom_quad_fn(a,b,c)(xs_interact)\n# 4.    calc mae\n    y_actual     = y_trch\n    y_predicted  = custom_quad_fn(a,b,c)(x_trch)\n    interact_mae = torch_mae(y_predicted,y_actual)\n# 5. plot   \n    plt.plot(xs_interact, ys_interact)\n    plt.title(f\"MAE: {interact_mae:.2f}\")"
   },
   {
-    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#to-be-continued",
-    "href": "posts/2024-01-31-99_neural_network_basics/index.html#to-be-continued",
-    "title": "Neural Network Basics (Part 1)",
+    "objectID": "posts/2024-02-02-neural_network_basics/index.html#determining-the-effect-of-the-parameters-a-b-c-in-ax-bx2-c",
+    "href": "posts/2024-02-02-neural_network_basics/index.html#determining-the-effect-of-the-parameters-a-b-c-in-ax-bx2-c",
+    "title": "Neural Network Basics (Part 2)",
+    "section": "4. Determining the effect of the parameters (\\(a\\), \\(b\\), \\(c\\)) in: \\(ax + bx^2 + c\\)",
+    "text": "4. Determining the effect of the parameters (\\(a\\), \\(b\\), \\(c\\)) in: \\(ax + bx^2 + c\\)\nThe key thing to understand if whether the loss function gets better or worse when you increase the parameters a little.\nThere are two ways we can try: 1. Manually adjust the parameter: Move each parameter each way and observe the impact to MAE.\n2. Calculate the Derivative of the parameter: A Derivative iS a function that tells you if you increase the input the: - direction in which output changes (increases or decreases) and the;\n- magnitude of the change to the output\n\n4.1 Create Mean-Absolute-Error (mae) Quadratic Function\nThis function will take in the parameters or coefficients of a quadratic function and output the MSE. - Input: coeffiicents of quadratic - Output: MAE (between the prediction of the quadratic with the coffecients of the quadratic and the actual predictsions)\n\ndef mae_quad_fn(x_trch, y_trch, abc_params):\n    quad_fn = custom_quad_fn(*abc_params)\n    y_predicted_trch = quad_fn(x_trch)\n    y_actual_trch    = y_trch\n    # so quad_params(2,3,4) -&gt;  creates a custom quad fn -&gt; 2x^2 + 3x + 4\n    return torch_mae(y_predicted_trch,y_actual_trch)\n\ndef mse_quad_fn(x_trch, y_trch, abc_params):\n    quad_fn = custom_quad_fn(*abc_params)\n    y_predicted_trch = quad_fn(x_trch)\n    y_actual_trch    = y_trch\n    # so quad_params(2,3,4) -&gt;  creates a custom quad fn -&gt; 2x^2 + 3x + 4\n    return torch_mse(y_predicted_trch,y_actual_trch)\n\nThe chart shows MAE(2,2,2) = 1.4501 loss Our mae_function also calculates 1.491 loss.\n\nmae_quad_fn(x_trch=x_trch,y_trch=y_trch,abc_params=[1.0,1.0,1.0])\n\ntensor(2.6103, dtype=torch.float64)\n\n\nA tensor is a pytorch type that works with: - lists (1D tensors) - tables (2D tensors) - layers of tables of numbers (3D tensors) and etc\n\n\n4.2 Telling PyTorch to calculate gradients\nBy calling method .requires_grad_(), our abc_rg tensor is not will calculate gradients whenever we use the tensor.\n\n# rank 1 tensor\nabc_rg = torch.tensor([1.0,1.0,1.0])\nabc_rg.requires_grad_()\n\ntensor([1., 1., 1.], requires_grad=True)\n\n\n\nabc_rg\n\ntensor([1., 1., 1.], requires_grad=True)\n\n\n\n4.2.1 Method .requires_grad_()\ngrad_fn=&lt;MeanBackward0&gt; shows the gradients are calculated to for each parameter (our inputs)\n\nloss = mae_quad_fn(x_trch, y_trch, abc_rg)\nloss\n\ntensor(2.6103, dtype=torch.float64, grad_fn=&lt;MeanBackward0&gt;)\n\n\n\n\n4.2.2 Method .backward()\nThis adds an attribute .grad to our abc_rg tensor.\n\nloss.backward()\n\n\n\n4.2.3 Attribute .grad\nThis attributes tells us if we increase the input slightly in the same position of this tensor, the loss will increase (if its positive) or decrease (if negative)\n\nabc_rg.grad\n\ntensor([-1.3529, -0.0316, -0.5000])\n\n\n\n\n4.2.4 Increase our abc parameters and recalculate loss\n\nwith torch.no_grad():\n    print(f\"loss before: {loss}\")\n    abc_rg -= abc_rg.grad * 0.01\n    loss = mae_quad_fn(x_trch, y_trch, abc_rg)\n    print(f\"loss after: {loss}\")\n\nloss before: 2.61030324932801\nloss after: 2.5894896953092177\n\n\n\n\n4.2.5 Automate it\nCreate a loop that decreases the loss by iteratively increasing the parameters (since the gradients are negative, or vice versa)\n\nfor i in range(10):\n    loss = mae_quad_fn(x_trch, y_trch, abc_rg)\n    loss.backward()\n    with torch.no_grad(): abc_rg -= abc_rg.grad * 0.01\n    print(f\"step {i}: {loss} - {abc_rg.grad}\") \n\nstep 0: 2.5894896953092177 - tensor([-2.7058, -0.0632, -1.0000])\nstep 1: 2.547862587271633 - tensor([-4.0587, -0.0947, -1.5000])\nstep 2: 2.4854217639359875 - tensor([-5.4116, -0.1263, -2.0000])\nstep 3: 2.4021673865815485 - tensor([-6.7645, -0.1579, -2.5000])\nstep 4: 2.2980994552083187 - tensor([-8.1175, -0.1895, -3.0000])\nstep 5: 2.173217969816296 - tensor([-9.4704, -0.2211, -3.5000])\nstep 6: 2.0300959430578267 - tensor([-10.6892,  -0.3684,  -3.9000])\nstep 7: 1.883669135864714 - tensor([-11.9080,  -0.5158,  -4.3000])\nstep 8: 1.740979068220988 - tensor([-12.9396,  -0.8000,  -4.6000])\nstep 9: 1.5914231086209807 - tensor([-13.9712,  -1.0842,  -4.9000])\n\n\n\n\n\n5 Parameters are getting closer\nThe parameters started as 1,1,1 and now are 1.9, 1.0, 1.3, the underlying function was modelled with 3, 2, 1 so its getting there!\n[Future Iteration] How to just fix a parameter and just move the others?\n\nabc_rg\n\ntensor([1.8739, 1.0365, 1.3170], requires_grad=True)"
+  },
+  {
+    "objectID": "posts/2024-02-02-neural_network_basics/index.html#to-be-continued",
+    "href": "posts/2024-02-02-neural_network_basics/index.html#to-be-continued",
+    "title": "Neural Network Basics (Part 2)",
     "section": "To be Continued…",
-    "text": "To be Continued…\nThe next section go through a more automated method to find the smallest MAE.\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
+    "text": "To be Continued…\nNext A universal function called the ReLU Function (rather than a quadratric function) is used for our modelling.\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html",
+    "title": "How To Setup a Kaggle API",
+    "section": "",
+    "text": "I’m planning to learn and test myself with competitions on Kaggle.\nKaggle is a place with real-world problems where Data Scientists and alike can go against each other to solve problems with Machine Learning.\nFrom my understanding:\n- There is a validation set where your model is tested against and a public leader board to see how you’re going.\n- At the end of the competition, there is an unseen test set where everyones models is tested against and where the final rankings are determined.\n- This is quite reflective of real world where preparing a representative validation set is vital, thus will perform well on the test set.\n- A common mistake for newbs is over-fitting to the validation set. I’m ready to make that mistake 🤣.\nAs for the Kaggle API, you can download the kernel which is the necessary datasets and source files to do the competitions.\nAlternatively, I can use the notebooks on their website. I plan to try doing competitions both ways.\nThis is how I set up my Kaggle API"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
+    "title": "How To Setup a Kaggle API",
+    "section": "1. Install Library",
+    "text": "1. Install Library\npip install python"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
+    "title": "How To Setup a Kaggle API",
+    "section": "2. Create API token (.json file)",
+    "text": "2. Create API token (.json file)\n\nGo to Kaggle\n\nGo to Settings\n\nCreate New Token"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
+    "title": "How To Setup a Kaggle API",
+    "section": "3. Save to your local .kaggle folder (Windows)",
+    "text": "3. Save to your local .kaggle folder (Windows)\nLocation: C:\\Users\\&lt;Windows-username&gt;\\.kaggle\\kaggle.json\nKaggle Github Reference\n\n3.1 Pasted into the wrong folder?\nIf you did something wrong then ran kaggle in the terminal, you’ll an error (telling you where to put it):"
+  },
+  {
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
+    "title": "How To Setup a Kaggle API",
+    "section": "4 Start Kaggling",
+    "text": "4 Start Kaggling\n\nimport kaggle\n??kaggle\n\nType:        module\nString form: &lt;module 'kaggle' from 'c:\\\\Users\\\\tonyp\\\\miniconda3\\\\envs\\\\fastai\\\\Lib\\\\site-packages\\\\kaggle\\\\__init__.py'&gt;\nFile:        c:\\users\\tonyp\\miniconda3\\envs\\fastai\\lib\\site-packages\\kaggle\\__init__.py\nSource:     \n#!/usr/bin/python\n#\n# Copyright 2024 Kaggle Inc\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n# coding=utf-8\nfrom __future__ import absolute_import\nfrom kaggle.api.kaggle_api_extended import KaggleApi\nfrom kaggle.api_client import ApiClient\n\napi = KaggleApi(ApiClient())\napi.authenticate()"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html",
+    "href": "posts/2024-01-25-98_huggingface/index.html",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "",
+    "text": "This post shows how to host your working Local Gradio App on HuggingFace.\nThis post is part of a series:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace account"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
+    "href": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "Part 3: Host on HuggingFace account",
+    "text": "Part 3: Host on HuggingFace account"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
+    "href": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "1 Create HuggingFace Account and Create a ‘Space’",
+    "text": "1 Create HuggingFace Account and Create a ‘Space’\n\nChoose your Space name\nChoose Apache-2.0 to avoid any copyright issues\nChoose Gradio\nChoose the Free option\nChoose Public (show you can show it to the world!)"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
+    "href": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "2 Clone the repo",
+    "text": "2 Clone the repo\nThis will create allow us deploy the Gradio app to the HuggingFace repository:\ngit clone https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor"
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
+    "href": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "2. Gather your files",
+    "text": "2. Gather your files\nRecall the various files we needed to run the app locally part 2.\nGather into the cloned huggingface folder:\n- Learner (.pkl)\n- Pet examples (pets.jpg)\n- Gradio app (app.py)\n\nA good way to check for me is seeing the pets_breed_predictor is the git folder and huggingface space."
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
+    "href": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "3. Push to HuggingFace Repo",
+    "text": "3. Push to HuggingFace Repo\nIf you’ve pushed succesfully your app (could take several minutes), then your app is live! Congrats!\nIf you’re like me and forgot to include the requirements.txt then you’ll be greeted with this error.\n\n\n3.1 Add the requirements.txt\nWe imported two libraries fastai and gradio so include them in the requirements.txt file. Commit and push."
+  },
+  {
+    "objectID": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
+    "href": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
+    "section": "4 Web App Complete and is Live",
+    "text": "4 Web App Complete and is Live\nIf all goes well, the HuggingFace space is hosting the Gradio App!\nCheck out my web app here!"
+  },
+  {
+    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html",
+    "href": "posts/2024-01-23-99-testing-different_archs/index.html",
+    "title": "How to choose a different Deep-Learning Model Architecture",
+    "section": "",
+    "text": "Today I’ll go through how to find and test different deep-learning architectures from Pytorch Image Models (timm) library made available here by Ross Wightman and use them in our models."
+  },
+  {
+    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html#using-timm---pytorch-image-models",
+    "href": "posts/2024-01-23-99-testing-different_archs/index.html#using-timm---pytorch-image-models",
+    "title": "How to choose a different Deep-Learning Model Architecture",
+    "section": "1. Using timm - PyTorch Image Models",
+    "text": "1. Using timm - PyTorch Image Models\n\n1.1 Introduction\nWhat are timm’s models? They’re mathematical functions (i.e. application of matrix multiplication, non-linearities e.g. ReLu’s)\nReference: “Which image model are best” - Jeremy Howard\nReference: “timm” - Ross Wightman\nWe want to know 3 things:\n1. how fast are they? You’d want models in top left of chart.\n2. how much memory?\n3. how accurate are they? Lower error rate the better.\n[Future iteration I]: A formalised metholodgy to decide what is fast enough, appropriate memory-use, and what is accurate enough for our use-cases.\nThere is a useful high-level chart from Jeremy’s notebook charting accuracy (Y-axis) vs secs per sample (X-axis):\n\nI chose to use a model from the convnext family due to its balance of high accuracy and speed.\n[Future iteration II]: Some more formalised methodology on choosing the architecture. Jeremy does mention architecture should be the one last thing things to worry about and he usually builds from resnet and tests whether it is, accurate enough and fast enough, then iterate from there.\n\n\n1.2 Import timm library\n\nimport timm\n\n\n\n1.3 List available model architectures and choose one\n\ntimm.list_models('convnext*') # * wild card searches \n\n['convnext_atto',\n 'convnext_atto_ols',\n 'convnext_base',\n 'convnext_femto',\n 'convnext_femto_ols',\n 'convnext_large',\n 'convnext_large_mlp',\n 'convnext_nano',\n 'convnext_nano_ols',\n 'convnext_pico',\n 'convnext_pico_ols',\n 'convnext_small',\n 'convnext_tiny',\n 'convnext_tiny_hnf',\n 'convnext_xlarge',\n 'convnext_xxlarge',\n 'convnextv2_atto',\n 'convnextv2_base',\n 'convnextv2_femto',\n 'convnextv2_huge',\n 'convnextv2_large',\n 'convnextv2_nano',\n 'convnextv2_pico',\n 'convnextv2_small',\n 'convnextv2_tiny']"
+  },
+  {
+    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html#create-your-learner-with-a-timm-model",
+    "href": "posts/2024-01-23-99-testing-different_archs/index.html#create-your-learner-with-a-timm-model",
+    "title": "How to choose a different Deep-Learning Model Architecture",
+    "section": "2. Create your Learner with a timm model",
+    "text": "2. Create your Learner with a timm model\n\n2.1 Get your data\n\nfrom fastai.vision.all import *\npath = untar_data(URLs.PETS)/'images'\n\n\n\n2.2 Prepare your Functions\n\ndef is_cat(x): return x[0].isupper()\n\n\n\n2.3 Load your DataLoader\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\n\n\n2.4 Build your Learner\n\nlearn_conv = vision_learner(dls, 'convnext_tiny', metrics=error_rate).to_fp16()\nlearn_resn = vision_learner(dls, 'resnet18', metrics=error_rate).to_fp16()\n\n\n\n2.5 Fine-Tune: ResNet18 vs ConvNextTiny\nA 90% reduction in the error rate! (0.6766% to 0.0667%: 1-(0.000677/0.006766)). It’s noted that the resnet error rate was quite low and changing the model was probably not necessary."
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "1. Introduction",
+    "text": "1. Introduction\nEmbedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!"
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "2. Background",
+    "text": "2. Background\nThis App will guess whether an image is a Cat or Dog with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.\nAll doggos🐕 & cats🐈 image examples has never been viewed by the Model and it makes a prediction in milliseconds! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!\nThe App isn’t perfect:\n- It guesses Incorrectly with great 95% confidence a cat as a dog!\nI’m thrilled to be able to build the app, get it hosted and embed it all in one day for the first time! Alot of firsts today!"
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "3. Future stuff",
+    "text": "3. Future stuff\n[1]: Multi-Image Uploader + Predictor.\n[2]: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.\n[4]: Upgrade the rice vs noodle model an App and hosted.\n[4]: Learn some HTML/CSS to make things prettier."
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "4. Heres the App!",
+    "text": "4. Heres the App!"
+  },
+  {
+    "objectID": "posts/2024-01-16-99_welcome/index.html",
+    "href": "posts/2024-01-16-99_welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nDefault Quarto content:\n“Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.””"
+  },
+  {
+    "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
+    "href": "posts/2024-01-16-97_post_with_notebook/index.html",
+    "title": "Post With Sample Jupyter Notebook",
+    "section": "",
+    "text": "Learning how quarto works with jupyter notebooks. This is a sample editted notebook from fastai.\n\nfrom fastai.vision.all import *\nchosen_sample_seed          = 42\nchosen_sample_n             = 5\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n# useful informative functions\ndef print_useful_info():\n    global path_dir_obj, list_all_img_path_obj\n    print()\n    print(f\"path_obj_home_dir: \\t{path_dir_obj}\")\n    print(f\"image_list_count: \\t{len(list_all_img_path_obj)}\")\n    return None\n\ndef print_sample_imgs():\n    global path_dir_obj, list_all_img_path_obj, chosen_sample_seed, chosen_sample_n\n    import random\n    set_seed(chosen_sample_seed)\n    print(f\"set_seed_number: \\t{chosen_sample_seed}\")\n    rng         = len(list_all_img_path_obj)-1  # Replace 10 with the desired upper limit (exclusive)\n    random_nos  = random.sample(range(rng), chosen_sample_n)\n    print()\n    print(\"sample_images:\")\n    for index, img_path in enumerate(list_all_img_path_obj[random_nos]):\n        print(f\" {random_nos[index]:&gt;7}: \\t\\t{img_path}\")\n    \n    \n    for image_path in list_all_img_path_obj[random_nos]:\n        img = PILImage.create(image_path)\n        show_image(img)\n    return None\n\n\n# 0. get paths of images\npath_dir_obj                = untar_data(URLs.MNIST_TINY)\nlist_all_img_path_obj       = get_image_files(path_dir_obj)\n\n\n# 1. create learner\ndata_loader = ImageDataLoaders.from_folder(path_dir_obj, \n                                    img_cls=PILImageBW,\n                                    set_seed=42)\nx1,y1 = data_loader.one_batch()\ntest_eq(x1.shape, [64, 1, 28, 28])\n\nprint_useful_info()\nprint_sample_imgs()\n# check valid data sets - can check if splits are as expected\nprint(len(data_loader.valid_ds.items)) # 699 as expected\nprint(len(data_loader.train_ds.items)) # 709 as expected\n\n# can show sample pics\ndata_loader.show_batch() #show examples?\n\n\npath_obj_home_dir:  C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\nimage_list_count:   1428\nset_seed_number:    42\n\nsample_images:\n    1309:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\valid\\7\\9036.png\n     228:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\8830.png\n      51:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\731.png\n     563:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\868.png\n     501:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\8186.png\n699\n709\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbr_learner = vision_learner(data_loader, resnet34, metrics=error_rate)\n\n\nnbr_learner.fine_tune(4)\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/1 00:00&lt;?]\n    \n    \n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/11 00:00&lt;?]\n    \n    \n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.303663\n0.174878\n0.054363\n00:21\n\n\n1\n0.228222\n0.127563\n0.040057\n00:20\n\n\n2\n0.172806\n0.091346\n0.027182\n00:21\n\n\n3\n0.139439\n0.056558\n0.015737\n00:21\n\n\n\n\n\n\nfrom IPython.display import Image # import image viewer\n\n\n\nuploader = SimpleNamespace(data = ['3.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [0], representing [3]\")\n\n\n\n\n\n\n\n\n3\ntensor(0)\ntensor([9.9998e-01, 2.1658e-05])\ncorrectly guessed the [0], representing [3]\n\n\n\n\nuploader = SimpleNamespace(data = ['7.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [1], representing [7]\")\n\n\n\n\n\n\n\n\n\n7\ntensor(1)\ntensor([0.0050, 0.9950])\ncorrectly guessed the [1], representing [7]"
+  },
+  {
+    "objectID": "notes.html",
+    "href": "notes.html",
+    "title": "notes",
+    "section": "",
+    "text": "Eigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "kaggle.html",
+    "href": "kaggle.html",
+    "title": "kaggle",
+    "section": "",
+    "text": "A Basic NLP model\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "about",
+    "section": "",
+    "text": "This is a blog will archive my journey into the more data-science/ml/ai space.\nA Poem of Oreo\nIn a bustling town of Ultimo, where city lights gleam,\nA tale unfolds of Oreo, a kitten’s sweet dream.\nTony brought him home with Lilo by his side,\nA tuxedo cat, in black and white pride.\nOreo, a Maine Coon with a fluffy coat,\nBlack all over, with white around his throat.\nWhite paws that dance, a playful delight,\nA mischievous gleam in his eyes, shining bright.\nLilo, a tiny British Shorthair so fair,\nA dainty companion with a gentle air.\nThey grew up together, a dynamic pair,\nFrom Ultimo to Pyrmont, a journey to share.\nThrough the streets of Townhall, they explored,\nAdventures aplenty, their spirits soared.\nYet, runaway moments were a frequent feat,\nFound and embraced, their connection so sweet.\nOreo, a rogue, with a penchant for bins,\nA greedy delight, where the treasure begins.\nFeasting on scraps, his appetite vast,\nBut his cuteness prevails, a spell he has cast.\nLilo, petite, with a modest cuisine,\nA nibble here, a delicate routine.\nShe watches Oreo with curious eyes,\nAs he plays around, chasing butterflies.\nIn the city’s heartbeat, their story unfolds,\nThrough alleys and parks, where the tale molds.\nOreo, the player, with antics so grand,\nLilo, the watcher, in the city so grand.\nNow, in the world of influencers and fame,\nOreo has found his claim to the game.\nAn influencer cat, with followers galore,\nFrom bins to glamour, a journey to adore.\nThrough Ultimo, Pyrmont, and Townhall’s embrace,\nOreo and Lilo found their special place.\nA tale of friendship, of mischief and grace,\nIn the city’s heartbeat, a memory to trace."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "blog",
+    "section": "",
+    "text": "A Basic NLP model\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks in a Spreadsheet (Attempt 1)\n\n\n\n\n\n\nspreadsheet\n\n\n\nA failed attempt to apply neural network concepts in a spreadsheet\n\n\n\n\n\nFeb 4, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 3)\n\n\n\n\n\n\nbasics\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nbasics\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nbasics\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\napp\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\napp\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\nclassifier\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\napp\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nclassifier\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nquarto test\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "leetcode.html",
+    "href": "leetcode.html",
+    "title": "leetcode",
+    "section": "",
+    "text": "LC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/2024-01-16-96_post_with_git_clone/index.html",
+    "href": "posts/2024-01-16-96_post_with_git_clone/index.html",
+    "title": "Post With Git Clone",
+    "section": "",
+    "text": "Learning how git work and\nthis is a post initiated by cloning existing repo."
+  },
+  {
+    "objectID": "posts/2024-01-16-98_post_without_code/index.html",
+    "href": "posts/2024-01-16-98_post_without_code/index.html",
+    "title": "Post Without Code",
+    "section": "",
+    "text": "Learning how to quarto blog.\nThis is a post with just this sentence."
+  },
+  {
+    "objectID": "posts/2024-01-18-99_rice_vs_noodles/index.html",
+    "href": "posts/2024-01-18-99_rice_vs_noodles/index.html",
+    "title": "Image Classifier 1: Noodles vs Rice",
+    "section": "",
+    "text": "Today I’ll be attempting to build my first deep learning image classifier to distinguish between rice and noodles using knowledge gained from Jeremy Howards Fast AI course\nHigh-level steps:\n1. Search and Prepare Data\n2. Create DataLoader\n3. Create Learner\n4. Prediction\nI will detail any problems, issues, questions and resolutions during the process.\n\n!pip install -Uqq fastai\n\n\nfrom fastbook import * \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n1. Search and Prepare Data\n\n# 1.1 Get 'rice' photos\ndownload_url(search_images_ddg('rice',max_images=1)[0],'rice.jpg',show_progress=False)\nImage.open('rice.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\n\n# 1.2 Get 'noodles' photos\ndownload_url(search_images_ddg('noodles', max_images=1)[0],'noodles.jpg',show_progress=False)\nImage.open('noodles.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\nLets use 60 imagess of ‘rice’ and ‘noodles’ from DuckDuckGo.\nNote: I downloaded for 100 images of each and then taking 60 of them as some images fail so I’m leaving room for failed photos.\nQuestion: Why do we need verify and why do some photos fail?\n\n# 1.3 Prep images in folders\nsearches = ['rice', 'noodles']\npath = Path('rice_or_noodles')\n\nif not path.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=100)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:60])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n# 1.4 Remove Failed images\npath = Path('rice_or_noodles')\nfailed = verify_images(get_image_files(path))\nfailed.map(Path.unlink)\n\n(#0) []\n\n\n\n\n2. Create DataLoader\n\n# 2.1 \ndls = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path) \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n# 2.2 We can see Paths were created for every image and split into our training and data sets\ndls.train_ds.items[:2]\ndls.valid_ds.items[:2]\n\n[Path('rice_or_noodles/rice/4280fe58-691a-4c0b-85a5-5c1c8400ecb7.jpg'),\n Path('rice_or_noodles/rice/f8a77d77-c007-4854-af8b-2af624a8da66.jpg')]\n\n\n[Question]: How does it know whether it is training set or valid set? I guess theres some indexing somewhere that I dont know how to obtain.\n\n# 2.1 Show a training batch which has an 'image' and a 'label'\ndls.show_batch(max_n=6) #batch shows input and label\n\n\n\n\n\n\n\n\n\n\n2. Create Learner using ResNet\nIn the course, we used a pre-trained model ‘ResNet18’ (RN).\nWhy Pre-trained Models?:\n- Pre-trained models is like getting an athlete who is very good basic sport related skills like hand-eye coordination, jumping, running/sprinting, changing directions etc and then - telling them to learn a specific sport (fine-tuning), - say tennis (labelled dataset provided). With a good base of skills, this person should be able to learn tennis to a good level…\nResNet18:\n- ResNet18 is trained on 1.28 million images with 1000 object categories. - 18 layers\n- Trained on ImageNet dataset\n[Future iterations 1]: Perhaps there are alternative pre-trained models specialising in food?\n[Future iterations 2]: - Read up and try understand the various architectures Fast AI’s TIMM model architectures - Try different architectures and different versions\n\nlearner_RN18 = vision_learner(dls, resnet18, metrics=error_rate)\n\n\n2.1 Learner Model Times:\nThey all took under 10 seconds to create the general learner. Now to fine-tune them!\n\nlearner_RN18.fine_tune(8)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.840357\n4.676042\n0.476190\n00:03\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.763106\n3.761843\n0.476190\n00:04\n\n\n1\n1.517361\n2.798523\n0.476190\n00:04\n\n\n2\n1.202234\n2.308116\n0.428571\n00:04\n\n\n3\n0.953227\n1.637496\n0.428571\n00:04\n\n\n4\n0.770979\n1.034023\n0.380952\n00:04\n\n\n5\n0.662257\n0.641428\n0.190476\n00:04\n\n\n6\n0.563239\n0.405057\n0.142857\n00:04\n\n\n7\n0.490904\n0.285846\n0.095238\n00:04\n\n\n\n\n\n\nOur learner is performing at 90% accuracy (9% error rate) by looking at only 60 photos!\nLets try predict some random photos of rice and noodles I’ve found on the internet.\n\nfrom IPython.display import Image # import image viewer\n\n\n# noodle predictor\nuploader = SimpleNamespace(data = ['test_noodle.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\nnoodles: 99.98%\n\n\n\n\nPrediction 1: Noodles\nThe model predicted noodles correctly with 99.98% confidence!\n\n# rice predictor 1\nuploader = SimpleNamespace(data = ['test_rice.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\n\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 66.22%\n\n\n\n\nPrediction and Results 2: Rice 1\nThe model predicted rice incorrectly with 66.22% confidence!\nI was a bit confused so I decided to provide another image of rice to make\n\n# rice predictor 2\nuploader = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path)) # show image\n\n# get\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 98.51%\n\n\n\n\nPrediction and Results 3: Rice 2\nThe model predicted rice incorrectly with 98.51% confidence!\nOkay now there is clearly something wrong going on. I decide to take a gander at the photos in my ‘rice’ folder.\n\nIt looks like we’ve trained a learner specialises in bowled or white rice. I was testing the model with fried rice since that is my favourite rice dish.\nLets test out a couple photos on bowled rice.\n\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice: 88.73%\nnoodles: 92.57%\n\n\n\n\n\n\n\n\n\nNow I’m confused as its predicting incorrectly with 92.57% confidence.\nPerhaps the model isnt seeing enough data?\nLets train a new model with:\n- 300 images instead of 60\n- ‘rice food’ and ‘noodle food’ as keyword insteads of just ‘rice’ and ‘noodles’\n\nsearches = ['rice food', 'noodles food']\npath_200 = Path('rice_or_noodles_300')\n\nif not path_200.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path_200/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=300)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:200])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n\n# 1.4 Remove Failed images\npath_200 = Path('rice_or_noodles_300')\nfailed = verify_images(get_image_files(path_200))\nfailed.map(Path.unlink)\n\n\n(#10) [None,None,None,None,None,None,None,None,None,None]\n\n\n\n\ndls_200 = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path_200) \n\n\nlearner_RN18_200 = vision_learner(dls_200, resnet18, metrics=error_rate)\n\n\nlearner_RN18_200.fine_tune(4)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.155098\n0.872050\n0.338462\n00:11\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.625260\n0.402908\n0.169231\n00:15\n\n\n1\n0.442973\n0.289800\n0.138462\n00:14\n\n\n2\n0.317375\n0.328805\n0.153846\n00:14\n\n\n3\n0.235606\n0.327507\n0.123077\n00:15\n\n\n\n\n\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18_200.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 100.00%\nrice food: 99.95%\n\n\n\n\n\n\n\n\n\nSo it’s now 100 and 99.95% confident they’re rice, which is great!\nLets try some fried rice!\nWe’ll retest now at the fried rice photo which the initial model guessed to be noodles with 98.5% confidence\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path1 = uploader1.data[0]\n\ndisplay(Image(filename=image_path1)) \n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 99.56%\n\n\nGreat! It is correct with 99.56% confidence.\nI think we’ve created a great rice and noodles classifier, lets stop here.\n[Future Iteration 3]: Build web app for everyone to test it out\n[Future Iteration 4]: Make it useable on my blog\n[Question] I wonder if theres a way to quickly see all specific headings I’ve used, I find myself scrolling up and download to find what Iteration I’m up to…\nApologies for the lack of neatness, lets hope this improves over time…"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
+    "title": "Saving a Fast AI Model",
+    "section": "",
+    "text": "This is a short tutorial to save (export) down a fast ai model (pkl file)."
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
+    "title": "Saving a Fast AI Model",
+    "section": "1. Load Fast AI Libaries and Download Dataset",
+    "text": "1. Load Fast AI Libaries and Download Dataset\n\n!pip install -Uqq fastai\nfrom fastai.vision.all import *\n\n\npath = untar_data(URLs.PETS)/'images'\n\n\npath\n\nPath('C:/Users/tonyp/.fastai/data/oxford-iiit-pet/images')\n\n\nIf you ran it in GoogleColab or Kaggle (recommended, its faster) then it’ll be stored in the cloud. \nIf you ran it locally, its stored on your machine and you can take a look at the all the cute images! (Not recommended, its slow)"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
+    "title": "Saving a Fast AI Model",
+    "section": "2. Labelling Function",
+    "text": "2. Labelling Function\n\ndef is_cat(x): return x[0].isupper()\n\nOur data must be consistently labelled and parsed through into the model.\nFor this particular dataset, filenames starting with a Capital letter denotes a Cat, vice versa for a Non-Cat (Dog, in this case).\n\n\n\nPet Filenames\n\n\nLets write a function to handle the files names to get our labels (psuedo-code):\n1. Parse in file name and\n2. Obtain the first character and\n3. Check whether it is an upper case,\n4. If True, then it is a Cat.\nThere are various ways for us to supply the labelling to our model, in a previous blog Rice vs Noodles, the label was supplied via the parent folders name (rice folder and noodle folder).\n\nFast AI provides various helpful functions for common ways data is labelled to parse into our models\nFast AI Docs - Transforms - Label"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
+    "title": "Saving a Fast AI Model",
+    "section": "3. DataLoader",
+    "text": "3. DataLoader\nCreate the Dataloader and supply the labelling function we wrote into label_func.\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
+    "title": "Saving a Fast AI Model",
+    "section": "4. Fine-tune (Non-GPU vs GPU)",
+    "text": "4. Fine-tune (Non-GPU vs GPU)\nI attempted to fine-tune via Kaggle (GPU) and Locally (No GPU) and not suprisingly it is incredibly faster with a GPU setup.\nNvidia (and maybe other) GPUs are designed to be able to take multiple images at once (batches) grouped together (tensors) (I think 64 images at once), whereas a laptop without a GPU like mine will be processing 1 image at a time.\n\nlearn = vision_learner(dls, resnet18, metrics=error_rate)\nlearn.fine_tune(3)\n\nGPU took 35 seconds an epoch \nNon-GPU took 8 minutes an epoch"
+  },
+  {
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
+    "title": "Saving a Fast AI Model",
+    "section": "5. Export the model",
+    "text": "5. Export the model\n\nlearn.export('catdogmodel.pkl')\n\nIn Kaggle, the model will be saved on their cloud and you can access it by using right-hand sidebar under Notebook -&gt; Data -&gt; Output\n\nIt’s only 46 Mb!, not too shabby!\n\nThats it! We’ll go through how to use a saved/exported model in an upcoming post."
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "",
+    "text": "I’ve just created my first multi-category classifier using Jeremy Howard’s popular fast ai which is an astraction layer library built on top of the most world’s used deep-learning library PyTorch. I’ve documented the process including the issues I faced (i.e. bugs)\nI found it more easier to digest and understand this process by splitting the steps into 3 parts:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "Part 1: Create Learner (.pkl file)",
+    "text": "Part 1: Create Learner (.pkl file)"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.1 Install and import libraries",
+    "text": "1.1 Install and import libraries\n\n!pip install timm\n!pip install fastai \n\n\nfrom fastai.vision.all import *\nimport timm"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.2 Download Pets Breed Data",
+    "text": "1.2 Download Pets Breed Data\n\npath = untar_data(URLs.PETS)/'images'"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.3 Create Data Loader",
+    "text": "1.3 Create Data Loader\n\n1.3.1 (A different) Labelling Function\nHere a different method to label our data was used:\n\nIn ‘noodles vs rice’ model: There were two parent folders separating two categories of data: get_y=parent_label\nIn ‘saving a fast ai’ model: There was a custom labelling function that looked for capital letters for cat breeds def is_cat(x): return x[0].isupper()\nIn this model, I used Regex to find breed names before the last ’_’ in the file name: label_func=RegexLabeller(pat=r'^([^/]+)_\\d). See show_batch() output to see the file names examples.\n\nDid you notice this is the same dataset as the is_cat model? So changing our label resulted in a different model!\n\n\n1.3.2 Data Loader Code\n\npets_dataloaders =  ImageDataLoaders.from_name_func(\n    '.',\n    get_image_files(path),\n    valid_pct=0.2,\n    seed=42,\n    label_func=RegexLabeller(pat=r'^([^/]+)_\\d+'),\n    item_tfms=Resize(224))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "1.4 Batch Examples, Create Learner, Fine-Tune and Export",
+    "text": "1.4 Batch Examples, Create Learner, Fine-Tune and Export\nI grouped these steps as the code are exactly the same in previous posts.\n\n1.4.1 Batch Examples\nThis function is also a good way to find out what is the file name structure if we were not sure.\n\npets_dataloaders.show_batch(max_n=8)\n\n\n\n\n\n\n\n\n\n\n1.4.2 Create Learner\nI am still using resnet model architecture for starters for reasons mentioned previously by Jeremy Howard\n\npets_learner = vision_learner(pets_dataloaders, resnet34, metrics=error_rate)\n\n\n\n1.4.3 Fine-Tune\n\npets_learner.fine_tune(3) \n\n\n\n1.4.4 Export\n\npets_learner.export('pets_learner.pkl')"
+  },
+  {
+    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
+    "href": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "section": "To be Continued…",
+    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
   },
   {
     "objectID": "posts/2024-01-25-99_gradio_app/index.html",
@@ -224,375 +539,123 @@
     "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Upload to HuggingFace account"
   },
   {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
+    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html",
+    "href": "posts/2024-01-31-99_neural_network_basics/index.html",
+    "title": "Neural Network Basics (Part 1)",
     "section": "",
-    "text": "I’ve just created my first multi-category classifier using Jeremy Howard’s popular fast ai which is an astraction layer library built on top of the most world’s used deep-learning library PyTorch. I’ve documented the process including the issues I faced (i.e. bugs)\nI found it more easier to digest and understand this process by splitting the steps into 3 parts:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
+    "text": "A neural network is a mathematical function. So what’s that?\nA function is a mapping or transformation where each unique set of inputs is equal to exactly one output.\nIn highschool, the Vertical Line Test was used to determine whether a line was a function.\nThis post will go through basics of how to fit a line to some data."
   },
   {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#part-1-create-learner-.pkl-file",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "Part 1: Create Learner (.pkl file)",
-    "text": "Part 1: Create Learner (.pkl file)"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#install-and-import-libraries",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.1 Install and import libraries",
-    "text": "1.1 Install and import libraries\n\n!pip install timm\n!pip install fastai \n\n\nfrom fastai.vision.all import *\nimport timm"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#download-pets-breed-data",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.2 Download Pets Breed Data",
-    "text": "1.2 Download Pets Breed Data\n\npath = untar_data(URLs.PETS)/'images'"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#create-data-loader",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.3 Create Data Loader",
-    "text": "1.3 Create Data Loader\n\n1.3.1 (A different) Labelling Function\nHere a different method to label our data was used:\n\nIn ‘noodles vs rice’ model: There were two parent folders separating two categories of data: get_y=parent_label\nIn ‘saving a fast ai’ model: There was a custom labelling function that looked for capital letters for cat breeds def is_cat(x): return x[0].isupper()\nIn this model, I used Regex to find breed names before the last ’_’ in the file name: label_func=RegexLabeller(pat=r'^([^/]+)_\\d). See show_batch() output to see the file names examples.\n\nDid you notice this is the same dataset as the is_cat model? So changing our label resulted in a different model!\n\n\n1.3.2 Data Loader Code\n\npets_dataloaders =  ImageDataLoaders.from_name_func(\n    '.',\n    get_image_files(path),\n    valid_pct=0.2,\n    seed=42,\n    label_func=RegexLabeller(pat=r'^([^/]+)_\\d+'),\n    item_tfms=Resize(224))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#batch-examples-create-learner-fine-tune-and-export",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "1.4 Batch Examples, Create Learner, Fine-Tune and Export",
-    "text": "1.4 Batch Examples, Create Learner, Fine-Tune and Export\nI grouped these steps as the code are exactly the same in previous posts.\n\n1.4.1 Batch Examples\nThis function is also a good way to find out what is the file name structure if we were not sure.\n\npets_dataloaders.show_batch(max_n=8)\n\n\n\n\n\n\n\n\n\n\n1.4.2 Create Learner\nI am still using resnet model architecture for starters for reasons mentioned previously by Jeremy Howard\n\npets_learner = vision_learner(pets_dataloaders, resnet34, metrics=error_rate)\n\n\n\n1.4.3 Fine-Tune\n\npets_learner.fine_tune(3) \n\n\n\n1.4.4 Export\n\npets_learner.export('pets_learner.pkl')"
-  },
-  {
-    "objectID": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
-    "href": "posts/2024-01-24-99_multi_classifier/index.html#to-be-continued",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)",
-    "section": "To be Continued…",
-    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
-    "title": "Saving a Fast AI Model",
-    "section": "",
-    "text": "This is a short tutorial to save (export) down a fast ai model (pkl file)."
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
-    "title": "Saving a Fast AI Model",
-    "section": "1. Load Fast AI Libaries and Download Dataset",
-    "text": "1. Load Fast AI Libaries and Download Dataset\n\n!pip install -Uqq fastai\nfrom fastai.vision.all import *\n\n\npath = untar_data(URLs.PETS)/'images'\n\n\npath\n\nPath('C:/Users/tonyp/.fastai/data/oxford-iiit-pet/images')\n\n\nIf you ran it in GoogleColab or Kaggle (recommended, its faster) then it’ll be stored in the cloud. \nIf you ran it locally, its stored on your machine and you can take a look at the all the cute images! (Not recommended, its slow)"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
-    "title": "Saving a Fast AI Model",
-    "section": "2. Labelling Function",
-    "text": "2. Labelling Function\n\ndef is_cat(x): return x[0].isupper()\n\nOur data must be consistently labelled and parsed through into the model.\nFor this particular dataset, filenames starting with a Capital letter denotes a Cat, vice versa for a Non-Cat (Dog, in this case).\n\n\n\nPet Filenames\n\n\nLets write a function to handle the files names to get our labels (psuedo-code):\n1. Parse in file name and\n2. Obtain the first character and\n3. Check whether it is an upper case,\n4. If True, then it is a Cat.\nThere are various ways for us to supply the labelling to our model, in a previous blog Rice vs Noodles, the label was supplied via the parent folders name (rice folder and noodle folder).\n\nFast AI provides various helpful functions for common ways data is labelled to parse into our models\nFast AI Docs - Transforms - Label"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
-    "title": "Saving a Fast AI Model",
-    "section": "3. DataLoader",
-    "text": "3. DataLoader\nCreate the Dataloader and supply the labelling function we wrote into label_func.\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
-    "title": "Saving a Fast AI Model",
-    "section": "4. Fine-tune (Non-GPU vs GPU)",
-    "text": "4. Fine-tune (Non-GPU vs GPU)\nI attempted to fine-tune via Kaggle (GPU) and Locally (No GPU) and not suprisingly it is incredibly faster with a GPU setup.\nNvidia (and maybe other) GPUs are designed to be able to take multiple images at once (batches) grouped together (tensors) (I think 64 images at once), whereas a laptop without a GPU like mine will be processing 1 image at a time.\n\nlearn = vision_learner(dls, resnet18, metrics=error_rate)\nlearn.fine_tune(3)\n\nGPU took 35 seconds an epoch \nNon-GPU took 8 minutes an epoch"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
-    "title": "Saving a Fast AI Model",
-    "section": "5. Export the model",
-    "text": "5. Export the model\n\nlearn.export('catdogmodel.pkl')\n\nIn Kaggle, the model will be saved on their cloud and you can access it by using right-hand sidebar under Notebook -&gt; Data -&gt; Output\n\nIt’s only 46 Mb!, not too shabby!\n\nThats it! We’ll go through how to use a saved/exported model in an upcoming post."
-  },
-  {
-    "objectID": "posts/2024-01-18-99_rice_vs_noodles/index.html",
-    "href": "posts/2024-01-18-99_rice_vs_noodles/index.html",
-    "title": "Image Classifier 1: Noodles vs Rice",
-    "section": "",
-    "text": "Today I’ll be attempting to build my first deep learning image classifier to distinguish between rice and noodles using knowledge gained from Jeremy Howards Fast AI course\nHigh-level steps:\n1. Search and Prepare Data\n2. Create DataLoader\n3. Create Learner\n4. Prediction\nI will detail any problems, issues, questions and resolutions during the process.\n\n!pip install -Uqq fastai\n\n\nfrom fastbook import * \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n1. Search and Prepare Data\n\n# 1.1 Get 'rice' photos\ndownload_url(search_images_ddg('rice',max_images=1)[0],'rice.jpg',show_progress=False)\nImage.open('rice.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\n\n# 1.2 Get 'noodles' photos\ndownload_url(search_images_ddg('noodles', max_images=1)[0],'noodles.jpg',show_progress=False)\nImage.open('noodles.jpg').to_thumb(256,256)\n\n\n\n\n\n\n\n\nLets use 60 imagess of ‘rice’ and ‘noodles’ from DuckDuckGo.\nNote: I downloaded for 100 images of each and then taking 60 of them as some images fail so I’m leaving room for failed photos.\nQuestion: Why do we need verify and why do some photos fail?\n\n# 1.3 Prep images in folders\nsearches = ['rice', 'noodles']\npath = Path('rice_or_noodles')\n\nif not path.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=100)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:60])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n# 1.4 Remove Failed images\npath = Path('rice_or_noodles')\nfailed = verify_images(get_image_files(path))\nfailed.map(Path.unlink)\n\n(#0) []\n\n\n\n\n2. Create DataLoader\n\n# 2.1 \ndls = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path) \n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n# 2.2 We can see Paths were created for every image and split into our training and data sets\ndls.train_ds.items[:2]\ndls.valid_ds.items[:2]\n\n[Path('rice_or_noodles/rice/4280fe58-691a-4c0b-85a5-5c1c8400ecb7.jpg'),\n Path('rice_or_noodles/rice/f8a77d77-c007-4854-af8b-2af624a8da66.jpg')]\n\n\n[Question]: How does it know whether it is training set or valid set? I guess theres some indexing somewhere that I dont know how to obtain.\n\n# 2.1 Show a training batch which has an 'image' and a 'label'\ndls.show_batch(max_n=6) #batch shows input and label\n\n\n\n\n\n\n\n\n\n\n2. Create Learner using ResNet\nIn the course, we used a pre-trained model ‘ResNet18’ (RN).\nWhy Pre-trained Models?:\n- Pre-trained models is like getting an athlete who is very good basic sport related skills like hand-eye coordination, jumping, running/sprinting, changing directions etc and then - telling them to learn a specific sport (fine-tuning), - say tennis (labelled dataset provided). With a good base of skills, this person should be able to learn tennis to a good level…\nResNet18:\n- ResNet18 is trained on 1.28 million images with 1000 object categories. - 18 layers\n- Trained on ImageNet dataset\n[Future iterations 1]: Perhaps there are alternative pre-trained models specialising in food?\n[Future iterations 2]: - Read up and try understand the various architectures Fast AI’s TIMM model architectures - Try different architectures and different versions\n\nlearner_RN18 = vision_learner(dls, resnet18, metrics=error_rate)\n\n\n2.1 Learner Model Times:\nThey all took under 10 seconds to create the general learner. Now to fine-tune them!\n\nlearner_RN18.fine_tune(8)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.840357\n4.676042\n0.476190\n00:03\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.763106\n3.761843\n0.476190\n00:04\n\n\n1\n1.517361\n2.798523\n0.476190\n00:04\n\n\n2\n1.202234\n2.308116\n0.428571\n00:04\n\n\n3\n0.953227\n1.637496\n0.428571\n00:04\n\n\n4\n0.770979\n1.034023\n0.380952\n00:04\n\n\n5\n0.662257\n0.641428\n0.190476\n00:04\n\n\n6\n0.563239\n0.405057\n0.142857\n00:04\n\n\n7\n0.490904\n0.285846\n0.095238\n00:04\n\n\n\n\n\n\nOur learner is performing at 90% accuracy (9% error rate) by looking at only 60 photos!\nLets try predict some random photos of rice and noodles I’ve found on the internet.\n\nfrom IPython.display import Image # import image viewer\n\n\n# noodle predictor\nuploader = SimpleNamespace(data = ['test_noodle.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\nnoodles: 99.98%\n\n\n\n\nPrediction 1: Noodles\nThe model predicted noodles correctly with 99.98% confidence!\n\n# rice predictor 1\nuploader = SimpleNamespace(data = ['test_rice.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path))\n\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 66.22%\n\n\n\n\nPrediction and Results 2: Rice 1\nThe model predicted rice incorrectly with 66.22% confidence!\nI was a bit confused so I decided to provide another image of rice to make\n\n# rice predictor 2\nuploader = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path = uploader.data[0]\ndisplay(Image(filename=image_path)) # show image\n\n# get\nres1, res2, res3 = learner_RN18.predict(image_path)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnoodles: 98.51%\n\n\n\n\nPrediction and Results 3: Rice 2\nThe model predicted rice incorrectly with 98.51% confidence!\nOkay now there is clearly something wrong going on. I decide to take a gander at the photos in my ‘rice’ folder.\n\nIt looks like we’ve trained a learner specialises in bowled or white rice. I was testing the model with fried rice since that is my favourite rice dish.\nLets test out a couple photos on bowled rice.\n\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice: 88.73%\nnoodles: 92.57%\n\n\n\n\n\n\n\n\n\nNow I’m confused as its predicting incorrectly with 92.57% confidence.\nPerhaps the model isnt seeing enough data?\nLets train a new model with:\n- 300 images instead of 60\n- ‘rice food’ and ‘noodle food’ as keyword insteads of just ‘rice’ and ‘noodles’\n\nsearches = ['rice food', 'noodles food']\npath_200 = Path('rice_or_noodles_300')\n\nif not path_200.exists(): # Ensure the path exists\n    for o in searches:\n        dest = (path_200/o)\n        dest.mkdir(parents=True, exist_ok=True)\n        print(f'Searching for {o} images...')\n        results = search_images_ddg(f'{o} photo',max_images=300)\n        print(f'{len(results)} images found for {o}. Downloading...')\n        download_images(dest, urls=results[:200])\n        print(f'Resizing images in {dest}')\n        resize_images(dest, max_size=400, dest=dest)\n\n\n\n# 1.4 Remove Failed images\npath_200 = Path('rice_or_noodles_300')\nfailed = verify_images(get_image_files(path_200))\nfailed.map(Path.unlink)\n\n\n(#10) [None,None,None,None,None,None,None,None,None,None]\n\n\n\n\ndls_200 = DataBlock(\n    blocks = (ImageBlock, CategoryBlock), # i.e.input image / ouput is category (coin or notes)\n    get_items = get_image_files, # returns list of images files\n    splitter = RandomSplitter(valid_pct=0.2, seed=42), # critical to test accuracy with validation set\n    get_y=parent_label, # use parents folder of a path\n    item_tfms=[Resize(192, method=\"squish\")] # most computer vision architecutres need all your inputs to be same size \n).dataloaders(path_200) \n\n\nlearner_RN18_200 = vision_learner(dls_200, resnet18, metrics=error_rate)\n\n\nlearner_RN18_200.fine_tune(4)\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n1.155098\n0.872050\n0.338462\n00:11\n\n\n\n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.625260\n0.402908\n0.169231\n00:15\n\n\n1\n0.442973\n0.289800\n0.138462\n00:14\n\n\n2\n0.317375\n0.328805\n0.153846\n00:14\n\n\n3\n0.235606\n0.327507\n0.123077\n00:15\n\n\n\n\n\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_boiledrice1.jpg'])\nuploader2 = SimpleNamespace(data = ['test_boiledrice2.jpg'])\nimage_path1 = uploader1.data[0]\nimage_path2 = uploader2.data[0]\n\ndisplay(Image(filename=image_path1)) # show image\ndisplay(Image(filename=image_path2)) # show image\n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\nres1, res2, res3 = learner_RN18_200.predict(image_path2)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 100.00%\nrice food: 99.95%\n\n\n\n\n\n\n\n\n\nSo it’s now 100 and 99.95% confident they’re rice, which is great!\nLets try some fried rice!\nWe’ll retest now at the fried rice photo which the initial model guessed to be noodles with 98.5% confidence\n\n# Prediction with new learner (300 images and specific keywords)\n# rice predictor 2\nuploader1 = SimpleNamespace(data = ['test_rice2.jpg'])\nimage_path1 = uploader1.data[0]\n\ndisplay(Image(filename=image_path1)) \n\nres1, res2, res3 = learner_RN18_200.predict(image_path1)\nprint(f\"{res1}: {res3[res2]*100:.2f}%\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nrice food: 99.56%\n\n\nGreat! It is correct with 99.56% confidence.\nI think we’ve created a great rice and noodles classifier, lets stop here.\n[Future Iteration 3]: Build web app for everyone to test it out\n[Future Iteration 4]: Make it useable on my blog\n[Question] I wonder if theres a way to quickly see all specific headings I’ve used, I find myself scrolling up and download to find what Iteration I’m up to…\nApologies for the lack of neatness, lets hope this improves over time…"
-  },
-  {
-    "objectID": "posts/2024-01-16-98_post_without_code/index.html",
-    "href": "posts/2024-01-16-98_post_without_code/index.html",
-    "title": "Post Without Code",
-    "section": "",
-    "text": "Learning how to quarto blog.\nThis is a post with just this sentence."
-  },
-  {
-    "objectID": "posts/2024-01-16-96_post_with_git_clone/index.html",
-    "href": "posts/2024-01-16-96_post_with_git_clone/index.html",
-    "title": "Post With Git Clone",
-    "section": "",
-    "text": "Learning how git work and\nthis is a post initiated by cloning existing repo."
-  },
-  {
-    "objectID": "leetcode.html",
-    "href": "leetcode.html",
-    "title": "leetcode",
-    "section": "",
-    "text": "LC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "about",
-    "section": "",
-    "text": "This is a blog attempting to archive my learning journey from my applied finance background to a more data-sciency/ml one.\nA Poem of Oreo\nIn a bustling town of Ultimo, where city lights gleam,\nA tale unfolds of Oreo, a kitten’s sweet dream.\nTony brought him home with Lilo by his side,\nA tuxedo cat, in black and white pride.\nOreo, a Maine Coon with a fluffy coat,\nBlack all over, with white around his throat.\nWhite paws that dance, a playful delight,\nA mischievous gleam in his eyes, shining bright.\nLilo, a tiny British Shorthair so fair,\nA dainty companion with a gentle air.\nThey grew up together, a dynamic pair,\nFrom Ultimo to Pyrmont, a journey to share.\nThrough the streets of Townhall, they explored,\nAdventures aplenty, their spirits soared.\nYet, runaway moments were a frequent feat,\nFound and embraced, their connection so sweet.\nOreo, a rogue, with a penchant for bins,\nA greedy delight, where the treasure begins.\nFeasting on scraps, his appetite vast,\nBut his cuteness prevails, a spell he has cast.\nLilo, petite, with a modest cuisine,\nA nibble here, a delicate routine.\nShe watches Oreo with curious eyes,\nAs he plays around, chasing butterflies.\nIn the city’s heartbeat, their story unfolds,\nThrough alleys and parks, where the tale molds.\nOreo, the player, with antics so grand,\nLilo, the watcher, in the city so grand.\nNow, in the world of influencers and fame,\nOreo has found his claim to the game.\nAn influencer cat, with followers galore,\nFrom bins to glamour, a journey to adore.\nThrough Ultimo, Pyrmont, and Townhall’s embrace,\nOreo and Lilo found their special place.\nA tale of friendship, of mischief and grace,\nIn the city’s heartbeat, a memory to trace."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "blog",
-    "section": "",
-    "text": "Eigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks in a Spreadsheet (Attempt 1)\n\n\n\n\n\n\nspreadsheet\n\n\n\nA failed attempt to apply neural network concepts in a spreadsheet\n\n\n\n\n\nFeb 4, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 3)\n\n\n\n\n\n\nbasics\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nbasics\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nbasics\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\napp\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\napp\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\nclassifier\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\napp\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nclassifier\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nquarto test\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "notes.html",
-    "href": "notes.html",
-    "title": "notes",
-    "section": "",
-    "text": "Eigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
-    "href": "posts/2024-01-16-97_post_with_notebook/index.html",
-    "title": "Post With Sample Jupyter Notebook",
-    "section": "",
-    "text": "Learning how quarto works with jupyter notebooks. This is a sample editted notebook from fastai.\n\nfrom fastai.vision.all import *\nchosen_sample_seed          = 42\nchosen_sample_n             = 5\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn(\n\n\n\n# useful informative functions\ndef print_useful_info():\n    global path_dir_obj, list_all_img_path_obj\n    print()\n    print(f\"path_obj_home_dir: \\t{path_dir_obj}\")\n    print(f\"image_list_count: \\t{len(list_all_img_path_obj)}\")\n    return None\n\ndef print_sample_imgs():\n    global path_dir_obj, list_all_img_path_obj, chosen_sample_seed, chosen_sample_n\n    import random\n    set_seed(chosen_sample_seed)\n    print(f\"set_seed_number: \\t{chosen_sample_seed}\")\n    rng         = len(list_all_img_path_obj)-1  # Replace 10 with the desired upper limit (exclusive)\n    random_nos  = random.sample(range(rng), chosen_sample_n)\n    print()\n    print(\"sample_images:\")\n    for index, img_path in enumerate(list_all_img_path_obj[random_nos]):\n        print(f\" {random_nos[index]:&gt;7}: \\t\\t{img_path}\")\n    \n    \n    for image_path in list_all_img_path_obj[random_nos]:\n        img = PILImage.create(image_path)\n        show_image(img)\n    return None\n\n\n# 0. get paths of images\npath_dir_obj                = untar_data(URLs.MNIST_TINY)\nlist_all_img_path_obj       = get_image_files(path_dir_obj)\n\n\n# 1. create learner\ndata_loader = ImageDataLoaders.from_folder(path_dir_obj, \n                                    img_cls=PILImageBW,\n                                    set_seed=42)\nx1,y1 = data_loader.one_batch()\ntest_eq(x1.shape, [64, 1, 28, 28])\n\nprint_useful_info()\nprint_sample_imgs()\n# check valid data sets - can check if splits are as expected\nprint(len(data_loader.valid_ds.items)) # 699 as expected\nprint(len(data_loader.train_ds.items)) # 709 as expected\n\n# can show sample pics\ndata_loader.show_batch() #show examples?\n\n\npath_obj_home_dir:  C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\nimage_list_count:   1428\nset_seed_number:    42\n\nsample_images:\n    1309:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\valid\\7\\9036.png\n     228:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\8830.png\n      51:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\3\\731.png\n     563:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\868.png\n     501:       C:\\Users\\tonyp\\.fastai\\data\\mnist_tiny\\train\\7\\8186.png\n699\n709\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnbr_learner = vision_learner(data_loader, resnet34, metrics=error_rate)\n\n\nnbr_learner.fine_tune(4)\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/1 00:00&lt;?]\n    \n    \n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/11 00:00&lt;?]\n    \n    \n\n\n\n\n\n\n\n\n\nepoch\ntrain_loss\nvalid_loss\nerror_rate\ntime\n\n\n\n\n0\n0.303663\n0.174878\n0.054363\n00:21\n\n\n1\n0.228222\n0.127563\n0.040057\n00:20\n\n\n2\n0.172806\n0.091346\n0.027182\n00:21\n\n\n3\n0.139439\n0.056558\n0.015737\n00:21\n\n\n\n\n\n\nfrom IPython.display import Image # import image viewer\n\n\n\nuploader = SimpleNamespace(data = ['3.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [0], representing [3]\")\n\n\n\n\n\n\n\n\n3\ntensor(0)\ntensor([9.9998e-01, 2.1658e-05])\ncorrectly guessed the [0], representing [3]\n\n\n\n\nuploader = SimpleNamespace(data = ['7.png'])\nimage_path = uploader.data[0]\nImage(filename=image_path)\nres1, res2, res3 = nbr_learner.predict(image_path) # predict unseen input using LEARNER\nprint(res1,res2,res3, sep=\"\\n\") #fix output formatting later\nprint(\"correctly guessed the [1], representing [7]\")\n\n\n\n\n\n\n\n\n\n7\ntensor(1)\ntensor([0.0050, 0.9950])\ncorrectly guessed the [1], representing [7]"
-  },
-  {
-    "objectID": "posts/2024-01-16-99_welcome/index.html",
-    "href": "posts/2024-01-16-99_welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nDefault Quarto content:\n“Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.””"
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "1. Introduction",
-    "text": "1. Introduction\nEmbedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!"
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "2. Background",
-    "text": "2. Background\nThis App will guess whether an image is a Cat or Dog with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.\nAll doggos🐕 & cats🐈 image examples has never been viewed by the Model and it makes a prediction in milliseconds! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!\nThe App isn’t perfect:\n- It guesses Incorrectly with great 95% confidence a cat as a dog!\nI’m thrilled to be able to build the app, get it hosted and embed it all in one day for the first time! Alot of firsts today!"
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "3. Future stuff",
-    "text": "3. Future stuff\n[1]: Multi-Image Uploader + Predictor.\n[2]: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.\n[4]: Upgrade the rice vs noodle model an App and hosted.\n[4]: Learn some HTML/CSS to make things prettier."
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "4. Heres the App!",
-    "text": "4. Heres the App!"
-  },
-  {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html",
-    "href": "posts/2024-01-23-99-testing-different_archs/index.html",
-    "title": "How to choose a different Deep-Learning Model Architecture",
-    "section": "",
-    "text": "Today I’ll go through how to find and test different deep-learning architectures from Pytorch Image Models (timm) library made available here by Ross Wightman and use them in our models."
-  },
-  {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html#using-timm---pytorch-image-models",
-    "href": "posts/2024-01-23-99-testing-different_archs/index.html#using-timm---pytorch-image-models",
-    "title": "How to choose a different Deep-Learning Model Architecture",
-    "section": "1. Using timm - PyTorch Image Models",
-    "text": "1. Using timm - PyTorch Image Models\n\n1.1 Introduction\nWhat are timm’s models? They’re mathematical functions (i.e. application of matrix multiplication, non-linearities e.g. ReLu’s)\nReference: “Which image model are best” - Jeremy Howard\nReference: “timm” - Ross Wightman\nWe want to know 3 things:\n1. how fast are they? You’d want models in top left of chart.\n2. how much memory?\n3. how accurate are they? Lower error rate the better.\n[Future iteration I]: A formalised metholodgy to decide what is fast enough, appropriate memory-use, and what is accurate enough for our use-cases.\nThere is a useful high-level chart from Jeremy’s notebook charting accuracy (Y-axis) vs secs per sample (X-axis):\n\nI chose to use a model from the convnext family due to its balance of high accuracy and speed.\n[Future iteration II]: Some more formalised methodology on choosing the architecture. Jeremy does mention architecture should be the one last thing things to worry about and he usually builds from resnet and tests whether it is, accurate enough and fast enough, then iterate from there.\n\n\n1.2 Import timm library\n\nimport timm\n\n\n\n1.3 List available model architectures and choose one\n\ntimm.list_models('convnext*') # * wild card searches \n\n['convnext_atto',\n 'convnext_atto_ols',\n 'convnext_base',\n 'convnext_femto',\n 'convnext_femto_ols',\n 'convnext_large',\n 'convnext_large_mlp',\n 'convnext_nano',\n 'convnext_nano_ols',\n 'convnext_pico',\n 'convnext_pico_ols',\n 'convnext_small',\n 'convnext_tiny',\n 'convnext_tiny_hnf',\n 'convnext_xlarge',\n 'convnext_xxlarge',\n 'convnextv2_atto',\n 'convnextv2_base',\n 'convnextv2_femto',\n 'convnextv2_huge',\n 'convnextv2_large',\n 'convnextv2_nano',\n 'convnextv2_pico',\n 'convnextv2_small',\n 'convnextv2_tiny']"
-  },
-  {
-    "objectID": "posts/2024-01-23-99-testing-different_archs/index.html#create-your-learner-with-a-timm-model",
-    "href": "posts/2024-01-23-99-testing-different_archs/index.html#create-your-learner-with-a-timm-model",
-    "title": "How to choose a different Deep-Learning Model Architecture",
-    "section": "2. Create your Learner with a timm model",
-    "text": "2. Create your Learner with a timm model\n\n2.1 Get your data\n\nfrom fastai.vision.all import *\npath = untar_data(URLs.PETS)/'images'\n\n\n\n2.2 Prepare your Functions\n\ndef is_cat(x): return x[0].isupper()\n\n\n\n2.3 Load your DataLoader\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\n\n\n2.4 Build your Learner\n\nlearn_conv = vision_learner(dls, 'convnext_tiny', metrics=error_rate).to_fp16()\nlearn_resn = vision_learner(dls, 'resnet18', metrics=error_rate).to_fp16()\n\n\n\n2.5 Fine-Tune: ResNet18 vs ConvNextTiny\nA 90% reduction in the error rate! (0.6766% to 0.0667%: 1-(0.000677/0.006766)). It’s noted that the resnet error rate was quite low and changing the model was probably not necessary."
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html",
-    "href": "posts/2024-01-25-98_huggingface/index.html",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "",
-    "text": "This post shows how to host your working Local Gradio App on HuggingFace.\nThis post is part of a series:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace account"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
-    "href": "posts/2024-01-25-98_huggingface/index.html#part-3-host-on-huggingface-account",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "Part 3: Host on HuggingFace account",
-    "text": "Part 3: Host on HuggingFace account"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
-    "href": "posts/2024-01-25-98_huggingface/index.html#create-huggingface-account-and-create-a-space",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "1 Create HuggingFace Account and Create a ‘Space’",
-    "text": "1 Create HuggingFace Account and Create a ‘Space’\n\nChoose your Space name\nChoose Apache-2.0 to avoid any copyright issues\nChoose Gradio\nChoose the Free option\nChoose Public (show you can show it to the world!)"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
-    "href": "posts/2024-01-25-98_huggingface/index.html#clone-the-repo",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "2 Clone the repo",
-    "text": "2 Clone the repo\nThis will create allow us deploy the Gradio app to the HuggingFace repository:\ngit clone https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor"
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
-    "href": "posts/2024-01-25-98_huggingface/index.html#gather-your-files",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "2. Gather your files",
-    "text": "2. Gather your files\nRecall the various files we needed to run the app locally part 2.\nGather into the cloned huggingface folder:\n- Learner (.pkl)\n- Pet examples (pets.jpg)\n- Gradio app (app.py)\n\nA good way to check for me is seeing the pets_breed_predictor is the git folder and huggingface space."
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
-    "href": "posts/2024-01-25-98_huggingface/index.html#push-to-huggingface-repo",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "3. Push to HuggingFace Repo",
-    "text": "3. Push to HuggingFace Repo\nIf you’ve pushed succesfully your app (could take several minutes), then your app is live! Congrats!\nIf you’re like me and forgot to include the requirements.txt then you’ll be greeted with this error.\n\n\n3.1 Add the requirements.txt\nWe imported two libraries fastai and gradio so include them in the requirements.txt file. Commit and push."
-  },
-  {
-    "objectID": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
-    "href": "posts/2024-01-25-98_huggingface/index.html#web-app-complete-and-is-live",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)",
-    "section": "4 Web App Complete and is Live",
-    "text": "4 Web App Complete and is Live\nIf all goes well, the HuggingFace space is hosting the Gradio App!\nCheck out my web app here!"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html",
-    "title": "How To Setup a Kaggle API",
-    "section": "",
-    "text": "I’m planning to learn and test myself with competitions on Kaggle.\nKaggle is a place with real-world problems where Data Scientists and alike can go against each other to solve problems with Machine Learning.\nFrom my understanding:\n- There is a validation set where your model is tested against and a public leader board to see how you’re going.\n- At the end of the competition, there is an unseen test set where everyones models is tested against and where the final rankings are determined.\n- This is quite reflective of real world where preparing a representative validation set is vital, thus will perform well on the test set.\n- A common mistake for newbs is over-fitting to the validation set. I’m ready to make that mistake 🤣.\nAs for the Kaggle API, you can download the kernel which is the necessary datasets and source files to do the competitions.\nAlternatively, I can use the notebooks on their website. I plan to try doing competitions both ways.\nThis is how I set up my Kaggle API"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
-    "title": "How To Setup a Kaggle API",
-    "section": "1. Install Library",
-    "text": "1. Install Library\npip install python"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
-    "title": "How To Setup a Kaggle API",
-    "section": "2. Create API token (.json file)",
-    "text": "2. Create API token (.json file)\n\nGo to Kaggle\n\nGo to Settings\n\nCreate New Token"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
-    "title": "How To Setup a Kaggle API",
-    "section": "3. Save to your local .kaggle folder (Windows)",
-    "text": "3. Save to your local .kaggle folder (Windows)\nLocation: C:\\Users\\&lt;Windows-username&gt;\\.kaggle\\kaggle.json\nKaggle Github Reference\n\n3.1 Pasted into the wrong folder?\nIf you did something wrong then ran kaggle in the terminal, you’ll an error (telling you where to put it):"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
-    "title": "How To Setup a Kaggle API",
-    "section": "4 Start Kaggling",
-    "text": "4 Start Kaggling\n\nimport kaggle\n??kaggle\n\nType:        module\nString form: &lt;module 'kaggle' from 'c:\\\\Users\\\\tonyp\\\\miniconda3\\\\envs\\\\fastai\\\\Lib\\\\site-packages\\\\kaggle\\\\__init__.py'&gt;\nFile:        c:\\users\\tonyp\\miniconda3\\envs\\fastai\\lib\\site-packages\\kaggle\\__init__.py\nSource:     \n#!/usr/bin/python\n#\n# Copyright 2024 Kaggle Inc\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n# coding=utf-8\nfrom __future__ import absolute_import\nfrom kaggle.api.kaggle_api_extended import KaggleApi\nfrom kaggle.api_client import ApiClient\n\napi = KaggleApi(ApiClient())\napi.authenticate()"
-  },
-  {
-    "objectID": "posts/2024-02-02-neural_network_basics/index.html",
-    "href": "posts/2024-02-02-neural_network_basics/index.html",
-    "title": "Neural Network Basics (Part 2)",
-    "section": "",
-    "text": "Automation of finding the best parameters (lowest loss) based on Mean Average Error (MAE) using Gradient Descent for our Quadratic Function"
-  },
-  {
-    "objectID": "posts/2024-02-02-neural_network_basics/index.html#import-libraries",
-    "href": "posts/2024-02-02-neural_network_basics/index.html#import-libraries",
-    "title": "Neural Network Basics (Part 2)",
+    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#import-libraries",
+    "href": "posts/2024-01-31-99_neural_network_basics/index.html#import-libraries",
+    "title": "Neural Network Basics (Part 1)",
     "section": "1. Import Libraries",
-    "text": "1. Import Libraries\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nimport pandas as pd\nfrom functools import partial"
+    "text": "1. Import Libraries\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nimport pandas as pd"
   },
   {
-    "objectID": "posts/2024-02-02-neural_network_basics/index.html#upload-data-and-convert-data-to-pytorch-tensors",
-    "href": "posts/2024-02-02-neural_network_basics/index.html#upload-data-and-convert-data-to-pytorch-tensors",
-    "title": "Neural Network Basics (Part 2)",
-    "section": "2. Upload Data and Convert Data to Pytorch Tensors",
-    "text": "2. Upload Data and Convert Data to Pytorch Tensors\n\ndf = pd.read_csv(\"upload_dataset.csv\")\nx_trch = torch.tensor(df.x) \ny_trch = torch.tensor(df.y)"
+    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#upload-and-plot-data",
+    "href": "posts/2024-01-31-99_neural_network_basics/index.html#upload-and-plot-data",
+    "title": "Neural Network Basics (Part 1)",
+    "section": "2. Upload and Plot Data",
+    "text": "2. Upload and Plot Data\n\ndf = pd.read_csv(\"upload_dataset.csv\")\ndf.head()\n\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n0\n-2.000000\n11.869037\n\n\n1\n-1.789474\n6.543284\n\n\n2\n-1.578947\n5.939607\n\n\n3\n-1.368421\n2.630370\n\n\n4\n-1.157895\n1.794741\n\n\n\n\n\n\n\n\nplt.scatter(df.x, df.y)"
   },
   {
-    "objectID": "posts/2024-02-02-neural_network_basics/index.html#create-customisable-quadratic-functions-and-interactively-plot-with-mae",
-    "href": "posts/2024-02-02-neural_network_basics/index.html#create-customisable-quadratic-functions-and-interactively-plot-with-mae",
-    "title": "Neural Network Basics (Part 2)",
-    "section": "3. Create Customisable Quadratic functions and Interactively Plot with MAE",
-    "text": "3. Create Customisable Quadratic functions and Interactively Plot with MAE\n\ndef gen_quad_fn(a,b,c,x): return a*x**2 + b*x + c\ndef custom_quad_fn(a,b,c): return partial(gen_quad_fn,a,b,c)\ndef torch_mae(prediction, actual): return (torch.abs(prediction-actual).mean())\ndef torch_mse(prediction, actual): return ((prediction-actual)**2).mean()\n\n\n# def mae(prediction, actual): return np.mean(abs(prediction-actual))\n# def torch_mae(prediction, actual): return np.mean(torch.abs(prediction-actual))\n# def mae(prediction, actual): return (torch.abs(prediction-actual).mean())\n# def mae2(prediction, actual): return abs(prediction-actual).mean()\n# def mae_jh(prediction, actual): return (abs(prediction-actual)).mean()\n# def mse_jh(prediction, actual): return ((prediction-actual)**2).mean()\n# def mae(preds, acts): return (torch.abs(preds-acts)).mean()\n\n\nplt.rc('figure', dpi=90)\n\n@interact(a=(0,2.1,0.1),b=(0,2.1,0.1),c=(0,2.1,0.1))\ndef interactive_plot(a,b,c):\n# 1.    plot scatter\n    plt.scatter(x_trch, y_trch)\n# 2     create custom_quad_interactive_fn\n# 2.1   create xs_interact    \n    xs_interact = x_trch\n# 3.    create ys_interact\n    plt.ylim(-1,15)\n    ys_interact = custom_quad_fn(a,b,c)(xs_interact)\n# 4.    calc mae\n    y_actual     = y_trch\n    y_predicted  = custom_quad_fn(a,b,c)(x_trch)\n    interact_mae = torch_mae(y_predicted,y_actual)\n# 5. plot   \n    plt.plot(xs_interact, ys_interact)\n    plt.title(f\"MAE: {interact_mae:.2f}\")"
+    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#quadratic-equation",
+    "href": "posts/2024-01-31-99_neural_network_basics/index.html#quadratic-equation",
+    "title": "Neural Network Basics (Part 1)",
+    "section": "3. Quadratic Equation",
+    "text": "3. Quadratic Equation\n\n3.1 General Quadratic Equation\n\ndef gen_quad_fn(a,b,c,x): return a*x**2 + b*x + c\n\n\n\n3.2 Custom Quadratric Equation\n\ndef custom_quad_fn(a,b,c): return partial(gen_quad_fn,a,b,c)\n\n\n\n3.3 Creating \\(1x^2 + 1x + 1\\)\n\nquad_111 = custom_quad_fn(1,1,1)\n\n\n\n3.4 Plotting \\(1x^2 + 1x + 1\\)\n\nxs_111 = df.x\nys_111 = quad_111(xs_111)\nplt.plot(xs_111,ys_111)\nplt.scatter(df.x, df.y)\n\n\n\n\n\n\n\n\n\n\n3.4 Interactive Quadratic Equation\nThe coefficients a, b and c of the Quadratic Function can be adjusted which in turn changes the shape of the line.\n[Future Iteration]: Figure out how to embed this adjustable plot into quarto blog\n\nplt.rc('figure', dpi=90)\n\n@interact(a=(0,5,0.1),b=(0,5,0.1),c=(0,5,0.1))\ndef interactive_plot(a,b,c):\n# 1. plot scatter\n    plt.scatter(df.x, df.y)    \n# 2. create xs_interact    \n    xs_interact = torch.linspace(-2.1,2.1,100)\n# 3. plot custom_quad_interactive\n    plt.ylim(-1,15)\n    plt.plot(xs_interact, custom_quad_fn(a,b,c)(xs_interact))\n\n\n\n\n\n\n\n3.5 Mean Absolute Errors (MAE)\nBy calculating a Loss Function such as Mean Absolute Errors, we can numerically determine what is the ‘best’ fit of our line to the data.\nSure it isn’t entirely scientific to adjust it manually but its a good starting point.\n\ndef mae(prediction, actual): return np.mean(abs(prediction-actual))\n\n\nplt.rc('figure', dpi=90)\n\n@interact(a=(0,5,0.1),b=(0,5,0.1),c=(0,5,0.1))\ndef interactive_plot2(a,b,c):\n# 1.    plot scatter\n    plt.scatter(df.x, df.y)\n\n# 2     create custom_quad_interactive_fn\n# 2.1   create xs_interact    \n    xs_interact = torch.linspace(-2.1,2.1,100)\n\n# 3.    create ys_interact\n    plt.ylim(-1,15)\n    ys_interact = custom_quad_fn(a,b,c)(xs_interact)\n\n# 4.    calc mae\n    y_actual     = df.y\n    y_predicted  = custom_quad_fn(a,b,c)(df.x)\n    interact_mae = round(mae(y_actual, y_predicted),3)\n\n# 5. plot   \n    plt.plot(xs_interact, ys_interact)\n    plt.title(f\"MAE: {interact_mae}\")"
   },
   {
-    "objectID": "posts/2024-02-02-neural_network_basics/index.html#determining-the-effect-of-the-parameters-a-b-c-in-ax-bx2-c",
-    "href": "posts/2024-02-02-neural_network_basics/index.html#determining-the-effect-of-the-parameters-a-b-c-in-ax-bx2-c",
-    "title": "Neural Network Basics (Part 2)",
-    "section": "4. Determining the effect of the parameters (\\(a\\), \\(b\\), \\(c\\)) in: \\(ax + bx^2 + c\\)",
-    "text": "4. Determining the effect of the parameters (\\(a\\), \\(b\\), \\(c\\)) in: \\(ax + bx^2 + c\\)\nThe key thing to understand if whether the loss function gets better or worse when you increase the parameters a little.\nThere are two ways we can try: 1. Manually adjust the parameter: Move each parameter each way and observe the impact to MAE.\n2. Calculate the Derivative of the parameter: A Derivative iS a function that tells you if you increase the input the: - direction in which output changes (increases or decreases) and the;\n- magnitude of the change to the output\n\n4.1 Create Mean-Absolute-Error (mae) Quadratic Function\nThis function will take in the parameters or coefficients of a quadratic function and output the MSE. - Input: coeffiicents of quadratic - Output: MAE (between the prediction of the quadratic with the coffecients of the quadratic and the actual predictsions)\n\ndef mae_quad_fn(x_trch, y_trch, abc_params):\n    quad_fn = custom_quad_fn(*abc_params)\n    y_predicted_trch = quad_fn(x_trch)\n    y_actual_trch    = y_trch\n    # so quad_params(2,3,4) -&gt;  creates a custom quad fn -&gt; 2x^2 + 3x + 4\n    return torch_mae(y_predicted_trch,y_actual_trch)\n\ndef mse_quad_fn(x_trch, y_trch, abc_params):\n    quad_fn = custom_quad_fn(*abc_params)\n    y_predicted_trch = quad_fn(x_trch)\n    y_actual_trch    = y_trch\n    # so quad_params(2,3,4) -&gt;  creates a custom quad fn -&gt; 2x^2 + 3x + 4\n    return torch_mse(y_predicted_trch,y_actual_trch)\n\nThe chart shows MAE(2,2,2) = 1.4501 loss Our mae_function also calculates 1.491 loss.\n\nmae_quad_fn(x_trch=x_trch,y_trch=y_trch,abc_params=[1.0,1.0,1.0])\n\ntensor(2.6103, dtype=torch.float64)\n\n\nA tensor is a pytorch type that works with: - lists (1D tensors) - tables (2D tensors) - layers of tables of numbers (3D tensors) and etc\n\n\n4.2 Telling PyTorch to calculate gradients\nBy calling method .requires_grad_(), our abc_rg tensor is not will calculate gradients whenever we use the tensor.\n\n# rank 1 tensor\nabc_rg = torch.tensor([1.0,1.0,1.0])\nabc_rg.requires_grad_()\n\ntensor([1., 1., 1.], requires_grad=True)\n\n\n\nabc_rg\n\ntensor([1., 1., 1.], requires_grad=True)\n\n\n\n4.2.1 Method .requires_grad_()\ngrad_fn=&lt;MeanBackward0&gt; shows the gradients are calculated to for each parameter (our inputs)\n\nloss = mae_quad_fn(x_trch, y_trch, abc_rg)\nloss\n\ntensor(2.6103, dtype=torch.float64, grad_fn=&lt;MeanBackward0&gt;)\n\n\n\n\n4.2.2 Method .backward()\nThis adds an attribute .grad to our abc_rg tensor.\n\nloss.backward()\n\n\n\n4.2.3 Attribute .grad\nThis attributes tells us if we increase the input slightly in the same position of this tensor, the loss will increase (if its positive) or decrease (if negative)\n\nabc_rg.grad\n\ntensor([-1.3529, -0.0316, -0.5000])\n\n\n\n\n4.2.4 Increase our abc parameters and recalculate loss\n\nwith torch.no_grad():\n    print(f\"loss before: {loss}\")\n    abc_rg -= abc_rg.grad * 0.01\n    loss = mae_quad_fn(x_trch, y_trch, abc_rg)\n    print(f\"loss after: {loss}\")\n\nloss before: 2.61030324932801\nloss after: 2.5894896953092177\n\n\n\n\n4.2.5 Automate it\nCreate a loop that decreases the loss by iteratively increasing the parameters (since the gradients are negative, or vice versa)\n\nfor i in range(10):\n    loss = mae_quad_fn(x_trch, y_trch, abc_rg)\n    loss.backward()\n    with torch.no_grad(): abc_rg -= abc_rg.grad * 0.01\n    print(f\"step {i}: {loss} - {abc_rg.grad}\") \n\nstep 0: 2.5894896953092177 - tensor([-2.7058, -0.0632, -1.0000])\nstep 1: 2.547862587271633 - tensor([-4.0587, -0.0947, -1.5000])\nstep 2: 2.4854217639359875 - tensor([-5.4116, -0.1263, -2.0000])\nstep 3: 2.4021673865815485 - tensor([-6.7645, -0.1579, -2.5000])\nstep 4: 2.2980994552083187 - tensor([-8.1175, -0.1895, -3.0000])\nstep 5: 2.173217969816296 - tensor([-9.4704, -0.2211, -3.5000])\nstep 6: 2.0300959430578267 - tensor([-10.6892,  -0.3684,  -3.9000])\nstep 7: 1.883669135864714 - tensor([-11.9080,  -0.5158,  -4.3000])\nstep 8: 1.740979068220988 - tensor([-12.9396,  -0.8000,  -4.6000])\nstep 9: 1.5914231086209807 - tensor([-13.9712,  -1.0842,  -4.9000])\n\n\n\n\n\n5 Parameters are getting closer\nThe parameters started as 1,1,1 and now are 1.9, 1.0, 1.3, the underlying function was modelled with 3, 2, 1 so its getting there!\n[Future Iteration] How to just fix a parameter and just move the others?\n\nabc_rg\n\ntensor([1.8739, 1.0365, 1.3170], requires_grad=True)"
-  },
-  {
-    "objectID": "posts/2024-02-02-neural_network_basics/index.html#to-be-continued",
-    "href": "posts/2024-02-02-neural_network_basics/index.html#to-be-continued",
-    "title": "Neural Network Basics (Part 2)",
+    "objectID": "posts/2024-01-31-99_neural_network_basics/index.html#to-be-continued",
+    "href": "posts/2024-01-31-99_neural_network_basics/index.html#to-be-continued",
+    "title": "Neural Network Basics (Part 1)",
     "section": "To be Continued…",
-    "text": "To be Continued…\nNext A universal function called the ReLU Function (rather than a quadratric function) is used for our modelling.\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
+    "text": "To be Continued…\nThe next section go through a more automated method to find the smallest MAE.\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
   },
   {
-    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#download-kaggle-data",
-    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#download-kaggle-data",
-    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
-    "section": "1. Download Kaggle Data",
-    "text": "1. Download Kaggle Data\nLog into Kaggle:\n1. Competitions\n2. Titanic\n3. Data\n4. Train.csv and Download"
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html",
+    "href": "posts/2024-02-03-neural_network_basics/index.html",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "",
+    "text": "In Neural Network Basics: Part 2, the parameters of a function were found (optimised) to Minimise the Loss Function. The Loss Function chosen was the Mean Absolute Error, it could have been chosen to be the Mean Squared Error.\nBut What is the mathematical function if the wish to model something more complex like predicting the breed of Cat?\nUnfortunately, its unlikely the relationship between the parameters and whether a pixel is part of a Maine Coon 🐈 is a Quadratic, its going to be something more complicated.\nThankfully, there exists the infinitely flexible function known as Rectified Linear Unit (ReLU)"
   },
   {
-    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#clean-dataset",
-    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#clean-dataset",
-    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
-    "section": "2. Clean Dataset",
-    "text": "2. Clean Dataset\nEach single passenger is represented by a single row with demographics and information across the columns.\nFor this first attempt, I’ll keep the model simple and used 8 columns and discarded the rest.\n[Future Iteration]: Would using more columns increase my accuracy?\nThe training set should be used to build your machine learning models. For the training set, we provide the outcome (also known as the “ground truth”) for each passenger - Kaggle Data Description\nNote: There are originally 891 Passengers (rows) in the training dataset.\nThere were a few steps taken to clean the data:\n1. Keep Certain Columns Only:\n- Survived\n- Pclass - Sex - Age - SibSp - Parch - Fare - Embarked 2. Remove blanks from: - Sex (177 rows removed) - Embarked (2 rows removed) Columns: Remaining Passengers (712 = 891-177-2)\n\nCreate a New Sheet and Copy over the editted Dataset"
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
+    "href": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "1. Rectified Linear Unit (ReLU)",
+    "text": "1. Rectified Linear Unit (ReLU)\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nfrom functools import partial\n\n\n1.1 Function\nThe function does two things:\n1. Calculate the output of a line\n2. If the output is smaller than zero, return zero\n\ndef rectified_linear(m,b,x):\n    y = m*x+b\n    return torch.clip(y,0.)\n\n\n\n1.2 Create A Custom ReLU Method\n\ndef custom_relu_fn(m,b): return partial(rectified_linear,m,b)\n\n\n\n1.3 Create y = 1x + 1 with Custom ReLU Method\n\nfn_11 = custom_relu_fn(1,1)\nfn_11\n\nfunctools.partial(&lt;function rectified_linear at 0x00000220331C9D00&gt;, 1, 1)\n\n\n\n\n1.4 ReLU y = 1x+ 1 Plot\n\nx = torch.linspace(-2.1,2.1,20)\nplt.plot(x,fn_11(x))\n\n\n\n\n\n\n\n\n\n1.4.1 Interactive ReLU\n\nplt.rc('figure', dpi=90)\n\n@interact(m=1.2, b=1.2)\ndef plot_relu(m, b):\n    min, max = -4.1, 4.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(rectified_linear, m,b)\n    ylim=(-1,4)\n    plt.ylim(ylim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n\n1.5 Double ReLU Function\n\ndef double_relu(m1,b1,m2,b2,x):\n    return rectified_linear(m1,b1) + rectified_linear(m2,b2) \n\n\n1.5.1 Interactive Double ReLU\n\nplt.rc('figure', dpi=90)\n\ndef dbl_rectified_linear(m1, b1,m2,b2,x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2)\ndef plot_dbl_relu(m1,b1,m2,b2):\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(dbl_rectified_linear, m1,b1,m2,b2)\n    ylim=(-1,4)\n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n1.5.1 Triple ReLU for Good Measure!\n\ndef trple_rectified_linear(m1, b1, m2, b2, m3, b3, x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x) + rectified_linear(m3,b3,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2, m3=0.5, b3=0.5)\ndef plot_trple_relu(m1,b1,m2,b2,m3,b3):\n# static variables\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    \n# update partial to include extra parameters m3, b3\n    triple_relu_fn_y = partial(trple_rectified_linear, m1,b1,m2,b2,m3,b3)\n\n# static variables\n    ylim=(-1,4) \n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, triple_relu_fn_y(x))"
   },
   {
-    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#binary-categorical-variables",
-    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#binary-categorical-variables",
-    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
-    "section": "3. Binary Categorical Variables",
-    "text": "3. Binary Categorical Variables\nRecall a Function has inputs and parameters. The output is calculated by adding the all the inputs which are weighted (multiplied) by the parameters.\nIn neural network basics: - the inputs were a single variable x and the output was a single y (or f(x)).\n- the parameters (coefficients of x) could be optimised against a Loss Function (Mean Squared Error) to achieve a high accuracy (good predictability) for that function, called Gradient Descent - an arbitrary number of Rectified Linear Unit (ReLU) could be added together to form any function to fit a given set of data and parameter (weights) can be optimised to minimise the loss function as above with gradient descent.\nSimilarly, the inputs in the Titanic model will be the information describing the passengers, i.e. columns in our spreadsheet, are multiplied by the parameters (weights or coefficients) to represents its importance.\n\nQuestion: But how can a parameter (number) be multiplied to word (text) such as male or female from the Sex Column or Letter S or C or Q from the Embarked Column?\nAnswer: You Can’t.\n\nHowever, Categorical Variables (unordered) can be converted into Binary Categorical Variables:\n- IsMale will indicate a 1 for True (Male) and 0 for False (Female)\n- Embarked has 3 categories “S, C and Q: Having two columns (S and C) to represent the 3 categories will suffice. If both S and C columns have 0’s, this implies it is a Q, so we do not need the extra column to have all the information.\n- PClass (1, 2 and 3) also has 3 categories and is treated the same as above.\n- Age and Fare are continuous values and left them as is for now"
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
+    "href": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "2. ReLU is An Infinitely Flexible Function",
+    "text": "2. ReLU is An Infinitely Flexible Function\nThere could be arbitrarily many ReLus added together to form any function!\nThe previous functions are of a single input x i.e. 2-Dimensions.\nReLU’s could be added together over as many dimensions as desired, i.e. ReLU’s over surfaces or ReLU’s over 3D, 4D 5D etc.\nBut adding these ReLU’s, this means there are arbitrary amount of parameters related to each ReLU, how can these parameters be calculated?\nIn Part 2, a optimisation method called Gradient Descent was used to determine Parameters.\nThat’s Deep Learning in a nutshell. Beyond this, Tweaks are to:\n- make it faster\n- require less data"
   },
   {
-    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#regression",
-    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#regression",
-    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
-    "section": "4. Regression",
-    "text": "4. Regression\nI created random variables (coefficients or weights for our parameters) with rand() and multiplied them to each parameter. I did this for several rows to and looked at the output.\nLooks like Age and Fare columns are dominating our function.\n\n\n4.1 Dealing with Continuous Variables Age and Fare\nIts probably fair (see what I did there) that a Passenger’s age (or fare) shouldn’t be the only two defining factors to determine their survivability as the above model suggests.\nThese values need to be normalised: - For Age, I divided each passengers age by the maximum age. - For Fare, I took the Logarithm of each passengers fare. Taking the Log of a variable where there are very small values and a few large ones distributes the values more evenly.\n\n\n\n4.2 Prediction and Loss and Average Loss\nPrediction: Multiply each parameter by the random coefficient created and sum it up to have our prediction.\n- I used the SumProduct() function. - I also created a manual linear version from scratch to see test my understanding was correct and sumproduct was working as expected. It was.\nLoss: It’s the survival (0 No, 1 Yes) minus the Prediction, then squared. - This is the squared error. If the errors are not squared, the errors end up cancelling each other off. Alternatively, the absolute errors could be taken done previously.\nAverage Loss: Self-explanatory.\n\nNote: Current Average Loss is 0.886 with random parameters.\n\n\n4.3 Gradient Descent (or Solver)\nSetting the Solver to Minimise our Average Loss, our parameters have been adjusted and Average Loss has come down to: 0.535!\nNot but but this isn’t a neural net yet, its just a regression."
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
+    "href": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "Neural Network Basics Completed.",
+    "text": "Neural Network Basics Completed.\nGo back to a previous post:\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
   },
   {
-    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#neural-network",
-    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#neural-network",
-    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
-    "section": "5. Neural Network",
-    "text": "5. Neural Network\nParams_2: Add another set of random coefficients.\nLinear_2: Calculate the linear model on this set of coefficients.\nReLU: ReLUs are calculated with an IF() statement, if it is below zero, then set to zero, otherwise keep the value.\nPrediction: Add the ReLUs.\nLoss Prediction minus Survived.\nAverage Loss: Run Solver, but this time allow the change of both sets of coefficients Params_1 and Params_2\nNote: Current Neural Network Average Loss is 0.527 with random parameters.\n\n[Future Iteration]: To be honest, I haven’t quite understood fully whats going on here. The concept of adding a second set of parameters and then having two Linear Models and adding together their reLUs will give a prediction that can be optimised, just dont get it yet. be fair, I just learnt Gradient Descent a day or two ago.\n\n5.1 Error In Optimisation - All ReLUs going to Zero\nHaving no constraints on whether coefficients can be negative or positive, the Solver found the most convenient result of making all parameters less than zero, hence making outputs a negative linear output, which makes all the ReLUs Zero, hence simply making the prediction that everyone died! A quick and dirty prediction thats not too bad but very scientific…\nNote: I’m currently using WPS Solver rather than Excel Solver (Don’t own paid version of Excel). Not sure if I did a mistake in my model or its a Solver thing.\n\n\n\n5.2 Setting Constraints (Coefficients &gt; 0)\nBy placing the constraint the Solver seems to finally do what is expected.\nThe Average Loss has come down from the Regresssion 0.535 to 0.235!\n\n\n\n5.3 Added Ones Columns\nBut this didn’t fix the Solver Issuer.\n\n\n\n5.4 Matrix Multiplication\nI made a Matrix Multiplication version and optimised with the same silly negative parameters solution"
+    "objectID": "posts/kaggle/1-us-patents/index.html#import-a-pretrained-language-model",
+    "href": "posts/kaggle/1-us-patents/index.html#import-a-pretrained-language-model",
+    "title": "A Basic NLP model",
+    "section": "1. Import a Pretrained Language Model",
+    "text": "1. Import a Pretrained Language Model\n\nchosen_pretrained_model = \"microsoft/deberta-v3-small\"\n\nfrom transformers import AutoModelForSequenceClassification,AutoTokenizer\ndebv3_tokenizer = AutoTokenizer.from_pretrained(chosen_pretrained_model)\n\n\n\n1.1 Look Inside the Language Model\n\nprint(debv3_tokenizer)"
   },
   {
-    "objectID": "posts/2024-02-04-neural_network_spreadsheet/index.html#mission-failed.",
-    "href": "posts/2024-02-04-neural_network_spreadsheet/index.html#mission-failed.",
-    "title": "Neural Networks in a Spreadsheet (Attempt 1)",
-    "section": "6. Mission Failed.",
-    "text": "6. Mission Failed.\nHaving downloaded the spreadsheet from Jeremy and ran the Solver, the Zero ReLUs error persists. This is a WPS Sheets issue.\nI also tried getting Solver on Google Sheets with no Luck however my emails permissions didn’t allow the install. Will give it a go to fix it next time.\nFor now, today I’ll admit defeat. Onwards to tomorrow…\nI’ll upload this notebook anyway because I want to record my failures as well as my triumphs."
+    "objectID": "posts/kaggle/1-us-patents/index.html#test-out-tokenizer",
+    "href": "posts/kaggle/1-us-patents/index.html#test-out-tokenizer",
+    "title": "A Basic NLP model",
+    "section": "2. Test out Tokenizer",
+    "text": "2. Test out Tokenizer\n\ntest_string = (\"Hey all! What's going on? It's Tony from Sydney!\")\ndebv3_tokenizer.tokenize(test_string)"
+  },
+  {
+    "objectID": "posts/kaggle/1-us-patents/index.html#import-competition-data",
+    "href": "posts/kaggle/1-us-patents/index.html#import-competition-data",
+    "title": "A Basic NLP model",
+    "section": "3. Import Competition Data",
+    "text": "3. Import Competition Data\nTo add relevant competition data to your kaggle “Input” folder.\nThis “Input” folder is persistent when you submit to the competition. All other folders created during prior to submitting are disregarded.\n\n3.1 Via GUI:\n\nOn Kaggle, Go to [Add Data]\n\nFilter for “Competition Datasets”\n\nSearch “US Patents”\nClick [Add Competition]\n\n \n\n\n3.2 Via Programatically:\nNote: You’ll need your own GPU’s, I don’t so the rest of the notebook is ran on the Kaggle website 1. Have kaggle login + keys ready locally, explained in this post 2. Run code to download data locally.\n\nfrom pathlib import Path\npath = Path('us-patent-phrase-to-phrase-matching')\nif not path.exists():\n    import zipfile,kaggle\n    kaggle.api.competition_download_cli(str(path))\n    zipfile.ZipFile(f'{path}.zip').extractall(path)\n\n\n\n3.3 Look Inside the Competition Data\n\npath = Path('/kaggle/input/us-patent-phrase-to-phrase-matching') # Using GUI places comp-data into 'kaggle/input' folder\nimport pandas as pd\ndf = pd.read_csv(path/'train.csv')\ndf.describe(include='object')"
+  },
+  {
+    "objectID": "posts/kaggle/1-us-patents/index.html#data-preparation",
+    "href": "posts/kaggle/1-us-patents/index.html#data-preparation",
+    "title": "A Basic NLP model",
+    "section": "4. Data Preparation",
+    "text": "4. Data Preparation\n\n4.1 Create Input Column\nCreate a contentated column of imporatant columns context, target and anchor.\n\ndf['input'] = 'TEXT1: ' + df.context + '; TEXT2: ' + df.target + '; ANC1: ' + df.anchor\ndf['input']\n\n\n\n\n4.2 Convert Pandas Dataframe to HuggingFace Dataset\n\nfrom datasets import Dataset,DatasetDict\nhf_datasets = Dataset.from_pandas(df)\nhf_datasets.keys\n\n\n\n\n4.3 Tokenize our HuggingFace Dataset\nUsing the tokenizer, we can apply pre-trained model to our new concatenated column.\nA hugging face dataset is in the form of a dictionary so we can index to get a column with dict['column']\nWe can apply the tokenization with batching, resulting in an additional few columns input_ids, token_type_ids, attention_marks, which only took 2 seconds!\n\ndef tok_func(x): return debv3_tokenizer(x[\"input\"])\ntok_ds = hf_datasets.map(tok_func, batched=True)\ntok_ds\n\n\n\n\n4.4 Rename the Columns as to what HF expects\n\ntok_ds = tok_ds.rename_columns({'score':'labels'})\n\n\n\n4.5 Training and Validation Sets\nSplit the above tokenized hugging face datasets into validation and training sets, into DatasetDicts.\nNote: The validation set here is called test and not validate\n\ntok_ds_dicts = tok_ds.train_test_split(0.25, seed=42)\ntok_ds_dicts"
+  },
+  {
+    "objectID": "posts/kaggle/1-us-patents/index.html#data-modelling",
+    "href": "posts/kaggle/1-us-patents/index.html#data-modelling",
+    "title": "A Basic NLP model",
+    "section": "5. Data Modelling",
+    "text": "5. Data Modelling\n\n5.1 Import libraries and set parameters\nImport modules: - TrainingArgument: to take in all the hyperparameters - Trainer class: combines the TrainingArguments and Pre-trained model Set the main hyper-parameters: - Batch Sizes: to fit on the GPU, - Number of Epochs: for each ‘experiment’ and the - Learning Rate, so it doesnt fail.\n[“Future Iteration”]: More descriptions on these and other parameters in future posts.\n\nfrom transformers import TrainingArguments,Trainer\nbs = 128\nepochs = 4\nlr = 8e-5\n\n\n\n5.2 Setup Training Arguments\n\nargs = TrainingArguments('outputs', learning_rate=lr, warmup_ratio=0.1, lr_scheduler_type='cosine', fp16=True,\n    evaluation_strategy=\"epoch\", per_device_train_batch_size=bs, per_device_eval_batch_size=bs*2,\n    num_train_epochs=epochs, weight_decay=0.01, report_to='none')\n\n\n\n5.3 Create Model\n\nmodel = AutoModelForSequenceClassification.from_pretrained(chosen_pretrained_model, \n                                                           num_labels=1,\n                                                           ignore_mismatched_sizes=True)\n\n\n\n5.4 Create Metrics Functions\nThe Pearson coefficient using numpy.\n\nimport numpy as np\ndef corr(x,y): return np.corrcoef(x,y)[0][1]\ndef corr_d(eval_pred): return {'pearson': corr(*eval_pred)}\n\n\n\n5.5 Create Trainer\n\ntrainer = Trainer(model, \n                  args, \n                  train_dataset=tok_ds_dicts['train'], \n                  eval_dataset=tok_ds_dicts['test'],\n                  tokenizer=debv3_tokenizer, \n                  compute_metrics=corr_d)\n\n\n\n5.6 Do the Training\n\ntrainer.train()"
+  },
+  {
+    "objectID": "posts/kaggle/1-us-patents/index.html#predictions",
+    "href": "posts/kaggle/1-us-patents/index.html#predictions",
+    "title": "A Basic NLP model",
+    "section": "6. Predictions",
+    "text": "6. Predictions\nNow that we have a Trainer (same as Learner in FastAI), we could use it on a an unseen set of data such as a Test Set and make predictions.\n\n6.1 Import Test Dataset\n\neval_df['input'] = 'TEXT1: ' + eval_df.context + '; TEXT2: ' + eval_df.target + '; ANC1: ' + eval_df.anchor\neval_ds = Dataset.from_pandas(eval_df).map(tok_func, batched=True)\n\n\n\n6.2 Make Predictions\nPredictions are going beyond 0 and 1\n\npreds = trainer.predict(eval_ds).predictions.astype(float)\n\n\n\n\n6.3 Clip Predictions\nPredictions are going beyond 0 and 1\n\npreds = np.clip(preds, 0, 1)"
+  },
+  {
+    "objectID": "posts/kaggle/1-us-patents/index.html#submission",
+    "href": "posts/kaggle/1-us-patents/index.html#submission",
+    "title": "A Basic NLP model",
+    "section": "7. Submission",
+    "text": "7. Submission\n\nimport datasets\n\nsubmission = datasets.Dataset.from_dict({\n    'id': eval_ds['id'],\n    'score': preds\n})\n\nsubmission.to_csv('submission.csv', index=False)"
+  },
+  {
+    "objectID": "posts/kaggle/1-us-patents/index.html#part-2",
+    "href": "posts/kaggle/1-us-patents/index.html#part-2",
+    "title": "A Basic NLP model",
+    "section": "8. Part 2",
+    "text": "8. Part 2\nActually the submissiong won’t work because it is a Notebook competition is the Internet is Turned Off.\nWhat needs to be done is convert this version to one that works without installing anything from the internet.\nThat would be in Part 2."
   },
   {
     "objectID": "posts/leetcode/1-min_stack/LC155.html",
