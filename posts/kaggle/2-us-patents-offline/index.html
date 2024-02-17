@@ -232,10 +232,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
 <p>From <a href="https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/">Part 1</a>, the <a href="https://www.kaggle.com/competitions/us-patent-phrase-to-phrase-matching">Kaggle Competition</a> was a <strong>notebook competition</strong>, that is, not a competition where simply a csv of results are required to be submitted.</p>
-<p>In order to successfully submit to this competition a <strong>notebook</strong> needs to be submitted on their website. This notebook has <strong>no access to the internet</strong> and but has access to any uploads and the competitions dataset.</p>
-<p>Thus, the pre-trained models and tokenizers need to be uploaded.</p>
-<p>In order to upload them, they need to be exported first.</p>
-<p>I’ll show how to export models, then upload them to Kaggle, then import them back from the datasets folder.</p>
+<p>In order to enter succesfully enter to this competition, a <strong>notebook</strong> with code needs to be submitted. This notebook will need to access the kaggles cloud folders to get the raw data, process the data and model it. The only catch is the notebook has <strong>no access to the internet</strong>. This means <code>pip install package</code> wont work.</p>
+<p>Thus, the pre-trained models and tokenizers need to be uploaded to the inputs folder and installed.<br>
+However in order to upload files, they first need to be exported.<br>
+But in order for them to be exported, they need to be downloaded first!</p>
+<p>So, the idea is:<br>
+1. create new workbooked with internet on 2. install libraries 3. run our models 4. export our models 5. download our libraries 6. create new workbook with internet off 7. upload downloaded libraries and exported models 8. install libraries via uploaded files 9. import pre-trained models vias uploaded files 10. do our training 11. export to csv 12. submit!</p>
 </section>
 <section id="export-model-and-tokenizer" class="level2">
 <h2 class="anchored" data-anchor-id="export-model-and-tokenizer">2. Export Model and Tokenizer</h2>
