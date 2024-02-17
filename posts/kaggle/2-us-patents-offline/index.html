@@ -231,13 +231,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="patent.jpg" class="img-fluid"></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
-<p>From <a href="https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/">Part 1</a>, the <a href="https://www.kaggle.com/competitions/us-patent-phrase-to-phrase-matching">Kaggle Competition</a> was a <strong>notebook competition</strong>, that is, not a competition where simply a csv of results are required to be submitted.</p>
-<p>In order to enter succesfully enter to this competition, a <strong>notebook</strong> with code needs to be submitted. This notebook will need to access the kaggles cloud folders to get the raw data, process the data and model it. The only catch is the notebook has <strong>no access to the internet</strong>. This means <code>pip install package</code> wont work.</p>
-<p>Thus, the pre-trained models and tokenizers need to be uploaded to the inputs folder and installed.<br>
-However in order to upload files, they first need to be exported.<br>
-But in order for them to be exported, they need to be downloaded first!</p>
+<p>From <a href="https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/">Part 1</a>, the Kaggle Competition: <strong><a href="https://www.kaggle.com/competitions/us-patent-phrase-to-phrase-matching">U.S. Patent Phrase to Phrase Matching</a></strong> was a <strong>notebook competition</strong>, that is, a simple csv upload of predictions would not suffice.</p>
+<p>A <strong>notebook</strong> with code needs to be submitted in order to succesfully enter and be graded.</p>
+<p>This notebook will have access the kaggles cloud folders to gather the raw data, process and model it. The only catch is the notebook has <strong>no access to the internet</strong>. This means <code>pip install package</code> will not work.</p>
+<p>Thus, the pre-trained models and tokenizers need to be uploaded to the inputs folder, before being installed.</p>
+<p>Why? Even though <code>transformers</code> library is available on Kaggle via <code>import</code>, each time a function like <code>AutoTokenizer</code> is called, this accesses the internet to reach the <a href="https://huggingface.co/docs/hub/en/models-the-hub">HuggingFace Model Hub</a> and looks for the latest available models.</p>
+<p>In order to upload files though, they need to be exported first, but in order for them to be exported, they need to be downloaded first!. Well that is what I figured out, there’s probably a vastly more seemless way but I didn’t go out of my way to find out a way to do it, this way just made the most sense. In the future, I’ll find out a better way.</p>
 <p>So, the idea is:<br>
-1. create new workbooked with internet on 2. install libraries 3. run our models 4. export our models 5. download our libraries 6. create new workbook with internet off 7. upload downloaded libraries and exported models 8. install libraries via uploaded files 9. import pre-trained models vias uploaded files 10. do our training 11. export to csv 12. submit!</p>
+1. create new kaggle noteook with internet access<br>
+2. install libraries<br>
+3. run our models<br>
+4. export our models<br>
+5. download our libraries<br>
+6. create new kaggle noteook with no internet access 7. upload downloaded libraries and exported models<br>
+8. install libraries via uploaded files<br>
+9. import pre-trained models vias uploaded files<br>
+10. conduct training<br>
+11. make predictions 11. export to csv<br>
+12. submit notebook</p>
 </section>
 <section id="export-model-and-tokenizer" class="level2">
 <h2 class="anchored" data-anchor-id="export-model-and-tokenizer">2. Export Model and Tokenizer</h2>
