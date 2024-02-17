@@ -429,8 +429,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="import-test-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="import-test-dataset">6.1 Import Test Dataset</h3>
 <div id="cell-45" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>eval_df[<span class="st">'input'</span>] <span class="op">=</span> <span class="st">'TEXT1: '</span> <span class="op">+</span> eval_df.context <span class="op">+</span> <span class="st">'; TEXT2: '</span> <span class="op">+</span> eval_df.target <span class="op">+</span> <span class="st">'; ANC1: '</span> <span class="op">+</span> eval_df.anchor</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>eval_ds <span class="op">=</span> Dataset.from_pandas(eval_df).<span class="bu">map</span>(tok_func, batched<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>eval_df <span class="op">=</span> pd.read_csv(path<span class="op">/</span><span class="st">'test.csv'</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>eval_df[<span class="st">'input'</span>] <span class="op">=</span> <span class="st">'TEXT1: '</span> <span class="op">+</span> eval_df.context <span class="op">+</span> <span class="st">'; TEXT2: '</span> <span class="op">+</span> eval_df.target <span class="op">+</span> <span class="st">'; ANC1: '</span> <span class="op">+</span> eval_df.anchor</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>eval_ds <span class="op">=</span> Dataset.from_pandas(eval_df).<span class="bu">map</span>(tok_func, batched<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="make-predictions" class="level3">

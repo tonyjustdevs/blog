@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2024-02-17">
+<meta name="description" content="Training my first NLP Model">
 
-<title>Tony’s blog - kaggle</title>
+<title>Tony’s blog - A Basic NLP model - [Competition Version]</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,65 +105,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -138,7 +116,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Tony’s blog</span>
     </a>
   </div>
@@ -149,19 +127,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">about</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./kaggle.html" aria-current="page"> 
+    <a class="nav-link" href="../../../kaggle.html"> 
 <span class="menu-text">kaggle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./leetcode.html"> 
+    <a class="nav-link" href="../../../leetcode.html"> 
 <span class="menu-text">leetcode</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./notes.html"> 
+    <a class="nav-link" href="../../../notes.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item compact">
@@ -185,119 +163,188 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">kaggle</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">A Basic NLP model - [Competition Version]</h1>
+                  <div>
+        <div class="description">
+          Training my first NLP Model
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">NLP</div>
+                <div class="quarto-category">kaggle</div>
+              </div>
+                  </div>
   </div>
-  <div class="quarto-title-meta column-page-left">
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
     </div>
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 17, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="NLP">NLP <span class="quarto-category-count">(2)</span></div><div class="category" data-category="kaggle">kaggle <span class="quarto-category-count">(2)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#export-model-and-tokenizer" id="toc-export-model-and-tokenizer" class="nav-link" data-scroll-target="#export-model-and-tokenizer">2. Export Model and Tokenizer</a></li>
+  <li><a href="#download-libraries" id="toc-download-libraries" class="nav-link" data-scroll-target="#download-libraries">3. Download Libraries</a></li>
+  <li><a href="#upload-file-to-kaggle" id="toc-upload-file-to-kaggle" class="nav-link" data-scroll-target="#upload-file-to-kaggle">4. Upload File to Kaggle</a>
+  <ul class="collapse">
+  <li><a href="#gather-files" id="toc-gather-files" class="nav-link" data-scroll-target="#gather-files">4.1 Gather files</a></li>
+  <li><a href="#kaggle-upload" id="toc-kaggle-upload" class="nav-link" data-scroll-target="#kaggle-upload">4.2 Kaggle Upload</a></li>
+  <li><a href="#load-succesful" id="toc-load-succesful" class="nav-link" data-scroll-target="#load-succesful">4.3 Load Succesful</a></li>
+  <li><a href="#add-data" id="toc-add-data" class="nav-link" data-scroll-target="#add-data">4.4 Add Data</a></li>
+  </ul></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">5. Code</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">6. Results</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-marquee content column-page-left">
-  <div class="about-image-container">
-  </div>
-  <div class="about-contents">
-     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="NLP,kaggle" data-listing-date-sort="1708102800000" data-listing-file-modified-sort="1708143392670" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178">
-<div class="thumbnail">
-<p><a href="./posts/kaggle/2-us-patents-offline/index.html" class="no-external"></a></p><a href="./posts/kaggle/2-us-patents-offline/index.html" class="no-external">
-<p><img src="./posts/kaggle/2-us-patents-offline/patent.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/kaggle/2-us-patents-offline/index.html" class="no-external"></a></p>
+
+
+
+<p><img src="patent.jpg" class="img-fluid"></p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<p>From <a href="https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/">Part 1</a>, The <a href="https://www.kaggle.com/competitions/us-patent-phrase-to-phrase-matching">Kaggle Competition</a> was a <strong>notebook competition</strong> where the <strong>internet is switch off</strong>.</p>
+<p>In order to successfully submit to this competition a notebook needs to be submitted on their website. This notebook has no access to the internet and but has access to any uploads provided and the competitions dataset.</p>
+<p>Thus, the pre-trained models and tokenizers need to be uploaded.</p>
+<p>In order to upload them, they need to be exported first.</p>
+</section>
+<section id="export-model-and-tokenizer" class="level2">
+<h2 class="anchored" data-anchor-id="export-model-and-tokenizer">2. Export Model and Tokenizer</h2>
+<div id="cell-4" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>debv3_tokenizer.save_pretrained(<span class="st">"./tokenizer"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model.save_pretrained(<span class="st">"./model"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kaggle/2-us-patents-offline/index.html" class="no-external">A Basic NLP model - [Competition Version]</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kaggle/2-us-patents-offline/index.html" class="no-external"></a>
+<p><img src="model_tokenizer.jpg" class="img-fluid"></p>
+</section>
+<section id="download-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="download-libraries">3. Download Libraries</h2>
+<p>Two libraries are required for this notebook to run <code>datasets</code> and <code>transformers</code></p>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip download datasets</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip download transformers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('NLP'); return false;">
-NLP
+</section>
+<section id="upload-file-to-kaggle" class="level2">
+<h2 class="anchored" data-anchor-id="upload-file-to-kaggle">4. Upload File to Kaggle</h2>
+<section id="gather-files" class="level3">
+<h3 class="anchored" data-anchor-id="gather-files">4.1 Gather files</h3>
+<p>Place all json files (tokenizer and model) and whl files (libraries) in the same folder.</p>
+<p><img src="json_whl.jpg" class="img-fluid"></p>
+</section>
+<section id="kaggle-upload" class="level3">
+<h3 class="anchored" data-anchor-id="kaggle-upload">4.2 Kaggle Upload</h3>
+<ol type="1">
+<li>Go to <strong>[Datasets]</strong></li>
+<li>Then <strong>[New Dataset]</strong></li>
+<li>Name a <strong>[Dataset Title]</strong></li>
+<li>Choose all <strong>files</strong> from your local folder</li>
+<li>Click <strong>[Create]</strong></li>
+</ol>
+<p><img src="kgl_upload.jpg" class="img-fluid"></p>
+</section>
+<section id="load-succesful" class="level3">
+<h3 class="anchored" data-anchor-id="load-succesful">4.3 Load Succesful</h3>
+<p>Upon completion, a greeting of success should appear.</p>
+<p><img src="success.jpg" class="img-fluid"></p>
+</section>
+<section id="add-data" class="level3">
+<h3 class="anchored" data-anchor-id="add-data">4.4 Add Data</h3>
+<ul>
+<li>Click <strong>[Add Data]</strong></li>
+<li>Filter for <strong>[Your Datasets]</strong></li>
+<li>Find the uploaded <strong>Dataset</strong></li>
+</ul>
+<p><img src="add_data.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">5. Code</h2>
+<p>It’s almost the same code as the previous post so I’ve combined it altogether.</p>
+<div id="cell-15" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>no<span class="op">-</span>index <span class="op">--</span>find<span class="op">-</span>links<span class="op">=</span>. transformers</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>no<span class="op">-</span>index <span class="op">--</span>find<span class="op">-</span>links<span class="op">=</span>. datasets</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModelForSequenceClassification,TrainingArguments,Trainer</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datasets <span class="im">import</span> Dataset,DatasetDict</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datasets</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>model_nm <span class="op">=</span> <span class="st">"microsoft/deberta-v3-small"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> Path(<span class="st">'/kaggle/input/us-patent-phrase-to-phrase-matching'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>mypath <span class="op">=</span> Path(<span class="st">'/kaggle/input/us-patents-libraries-model-tokenizer'</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>tokenizer_uploaded  <span class="op">=</span> AutoTokenizer.from_pretrained(mypath)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>model_uploaded <span class="op">=</span> AutoModelForSequenceClassification.from_pretrained(mypath)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(path<span class="op">/</span><span class="st">'train.csv'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>df.describe(include<span class="op">=</span><span class="st">'object'</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'input'</span>] <span class="op">=</span> <span class="st">'TEXT1: '</span> <span class="op">+</span> df.context <span class="op">+</span> <span class="st">'; TEXT2: '</span> <span class="op">+</span> df.target <span class="op">+</span> <span class="st">'; ANC1: '</span> <span class="op">+</span> df.anchor</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> Dataset.from_pandas(df)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tok_func(x): <span class="cf">return</span> tokenizer_uploaded(x[<span class="st">"input"</span>])</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>tok_ds <span class="op">=</span> ds.<span class="bu">map</span>(tok_func, batched<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>tok_ds <span class="op">=</span> tok_ds.rename_columns({<span class="st">'score'</span>:<span class="st">'labels'</span>})</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>dds <span class="op">=</span> tok_ds.train_test_split(<span class="fl">0.25</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>eval_df <span class="op">=</span> pd.read_csv(path<span class="op">/</span><span class="st">'test.csv'</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>eval_df[<span class="st">'input'</span>] <span class="op">=</span> <span class="st">'TEXT1: '</span> <span class="op">+</span> eval_df.context <span class="op">+</span> <span class="st">'; TEXT2: '</span> <span class="op">+</span> eval_df.target <span class="op">+</span> <span class="st">'; ANC1: '</span> <span class="op">+</span> eval_df.anchor</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>eval_ds <span class="op">=</span> Dataset.from_pandas(eval_df).<span class="bu">map</span>(tok_func, batched<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> corr(x,y): <span class="cf">return</span> np.corrcoef(x,y)[<span class="dv">0</span>][<span class="dv">1</span>]</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> corr_d(eval_pred): <span class="cf">return</span> {<span class="st">'pearson'</span>: corr(<span class="op">*</span>eval_pred)}</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>bs <span class="op">=</span> <span class="dv">128</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">8e-5</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> TrainingArguments(<span class="st">'outputs'</span>, learning_rate<span class="op">=</span>lr, warmup_ratio<span class="op">=</span><span class="fl">0.1</span>, lr_scheduler_type<span class="op">=</span><span class="st">'cosine'</span>, fp16<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    evaluation_strategy<span class="op">=</span><span class="st">"epoch"</span>, per_device_train_batch_size<span class="op">=</span>bs, per_device_eval_batch_size<span class="op">=</span>bs<span class="op">*</span><span class="dv">2</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    num_train_epochs<span class="op">=</span>epochs, weight_decay<span class="op">=</span><span class="fl">0.01</span>, report_to<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AutoModelForSequenceClassification.from_pretrained(mypath, num_labels<span class="op">=</span><span class="dv">1</span>,ignore_mismatched_sizes<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> Trainer(model, args, train_dataset<span class="op">=</span>dds[<span class="st">'train'</span>], eval_dataset<span class="op">=</span>dds[<span class="st">'test'</span>],</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>                  tokenizer<span class="op">=</span>tokenizer_uploaded, compute_metrics<span class="op">=</span>corr_d)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>trainer.train()</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> trainer.predict(eval_ds).predictions.astype(<span class="bu">float</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> np.clip(preds, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>submission <span class="op">=</span> datasets.Dataset.from_dict({</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">'id'</span>: eval_ds[<span class="st">'id'</span>],</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">'score'</span>: preds.squeeze()</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>submission.to_csv(<span class="st">'submission.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('kaggle'); return false;">
-kaggle
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/kaggle/2-us-patents-offline/index.html" class="no-external">Training my first NLP Model</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/kaggle/2-us-patents-offline/index.html" class="no-external">
-<div class="listing-date">
-Feb 17, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="NLP,kaggle" data-listing-date-sort="1708016400000" data-listing-file-modified-sort="1708134235395" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="420">
-<div class="thumbnail">
-<p><a href="./posts/kaggle/1-us-patents/index.html" class="no-external"></a></p><a href="./posts/kaggle/1-us-patents/index.html" class="no-external">
-<p><img src="./posts/kaggle/1-us-patents/nlp.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/kaggle/1-us-patents/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kaggle/1-us-patents/index.html" class="no-external">A Basic NLP model</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/kaggle/1-us-patents/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('NLP'); return false;">
-NLP
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('kaggle'); return false;">
-kaggle
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/kaggle/1-us-patents/index.html" class="no-external">Training my first NLP Model</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/kaggle/1-us-patents/index.html" class="no-external">
-<div class="listing-date">
-Feb 16, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> 
-    <div class="about-footer"><div class="about-links">
-  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-</div>
-</div>
-  </div>
-</div>
- <!-- /main -->
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">6. Results</h2>
+<p>It worked!</p>
+<p><img src="results.jpg" class="img-fluid"></p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -462,6 +509,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
