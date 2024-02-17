@@ -662,7 +662,7 @@
     "href": "posts/kaggle/2-us-patents-offline/index.html#introduction",
     "title": "A Basic NLP model - [Competition Version]",
     "section": "1. Introduction",
-    "text": "1. Introduction\nFrom Part 1, The Kaggle Competition was a notebook competition where the internet is switch off.\nIn order to successfully submit to this competition a notebook needs to be submitted on their website. This notebook has no access to the internet and but has access to any uploads provided and the competitions dataset.\nThus, the pre-trained models and tokenizers need to be uploaded.\nIn order to upload them, they need to be exported first."
+    "text": "1. Introduction\nFrom Part 1, the Kaggle Competition was a notebook competition, that is, not a competition where simply a csv of results are required to be submitted.\nIn order to successfully submit to this competition a notebook needs to be submitted on their website. This notebook has no access to the internet and but has access to any uploads and the competitions dataset.\nThus, the pre-trained models and tokenizers need to be uploaded.\nIn order to upload them, they need to be exported first.\nI’ll show how to export models, then upload them to Kaggle, then import them back from the datasets folder."
   },
   {
     "objectID": "posts/kaggle/2-us-patents-offline/index.html#export-model-and-tokenizer",
