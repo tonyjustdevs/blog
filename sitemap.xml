@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html</loc>
-    <lastmod>2024-02-13T21:14:21.838Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/3-eigenvalues_eigenvectors.html</loc>
+    <lastmod>2024-02-20T11:21:23.901Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/1-chg_of_bse.html</loc>
+    <lastmod>2024-02-09T13:25:45.225Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/4-search_a_2d_matrix/LC74.html</loc>
@@ -26,7 +30,7 @@
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-31-99_neural_network_basics/index.html</loc>
-    <lastmod>2024-02-04T08:53:18.447Z</lastmod>
+    <lastmod>2024-02-18T02:10:48.227Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/index.html</loc>
@@ -106,7 +110,7 @@
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/2-us-patents-offline/index.html</loc>
-    <lastmod>2024-02-17T05:19:34.613Z</lastmod>
+    <lastmod>2024-02-20T10:40:30.777Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/1-min_stack/LC155.html</loc>
@@ -117,7 +121,11 @@
     <lastmod>2024-02-09T13:16:17.281Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/1-chg_of_bse.html</loc>
-    <lastmod>2024-02-09T13:25:45.225Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/1-github_resolve.html</loc>
+    <lastmod>2024-02-20T11:38:29.403Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html</loc>
+    <lastmod>2024-02-13T21:14:21.838Z</lastmod>
   </url>
 </urlset>

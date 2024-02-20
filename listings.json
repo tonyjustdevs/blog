@@ -12,6 +12,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/notes/coding/1-github_resolve.html",
+      "/posts/notes/linear_algebra/3-eigenvalues_eigenvectors.html",
       "/posts/kaggle/2-us-patents-offline/index.html",
       "/posts/kaggle/1-us-patents/index.html",
       "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
@@ -49,6 +51,8 @@
   {
     "listing": "/notes.html",
     "items": [
+      "/posts/notes/coding/1-github_resolve.html",
+      "/posts/notes/linear_algebra/3-eigenvalues_eigenvectors.html",
       "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
       "/posts/notes/linear_algebra/1-chg_of_bse.html"
     ]

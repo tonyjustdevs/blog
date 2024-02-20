@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
-    "href": "posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
-    "title": "Eigen is my valentines in 2024",
+    "objectID": "posts/notes/linear_algebra/3-eigenvalues_eigenvectors.html",
+    "href": "posts/notes/linear_algebra/3-eigenvalues_eigenvectors.html",
+    "title": "Eigenvales and Eigenvectors Example",
     "section": "",
-    "text": "Note on Colours:\n- I’m colourblind (red-green). Read more here.\n- I’m using Nebo App on a Lenovo Tablet in Dark Mode. The app doesn’t actually export the way I see it, it exports in non-dark mode so it looks completely different to how I chose the colours. If the colours are an eyesore, I apologise 🤭 (It’s probably sub-optimal without the export issues already).\n- I used a website to reverse colours but it isn’t right either.\nI’ll figure it out… for now I’ve put up both unwanted versions because I havent posted in 4 days (awful).\n\n1. Dark-mode\n\n\n\n2. Normal-mode"
+    "text": "1. Introduction"
   },
   {
     "objectID": "posts/leetcode/4-search_a_2d_matrix/LC74.html",
@@ -403,7 +403,7 @@
     "href": "index.html",
     "title": "blog",
     "section": "",
-    "text": "A Basic NLP model - [Competition Version]\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 17, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nA Basic NLP model\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks in a Spreadsheet (Attempt 1)\n\n\n\n\n\n\nspreadsheet\n\n\n\nA failed attempt to apply neural network concepts in a spreadsheet\n\n\n\n\n\nFeb 4, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 3)\n\n\n\n\n\n\nbasics\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nbasics\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nbasics\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\napp\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\napp\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\nclassifier\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\napp\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nclassifier\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nquarto test\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+    "text": "Automate the closing of Issues in Github Projects\n\n\n\n\n\n\ncoding\n\n\n\nHow to automate the closing of an issue in Github Projects via a Commit Message\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigenvales and Eigenvectors Example\n\n\n\n\n\n\nlinear algebra\n\n\n\nAlgebraic examples\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nA Basic NLP model - [Competition Version]\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 17, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nA Basic NLP model\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks in a Spreadsheet (Attempt 1)\n\n\n\n\n\n\nspreadsheet\n\n\n\nA failed attempt to apply neural network concepts in a spreadsheet\n\n\n\n\n\nFeb 4, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 3)\n\n\n\n\n\n\nbasics\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nbasics\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nbasics\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\napp\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\napp\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\nclassifier\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\napp\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nclassifier\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nquarto test\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -424,7 +424,7 @@
     "href": "notes.html",
     "title": "notes",
     "section": "",
-    "text": "Eigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+    "text": "Automate the closing of Issues in Github Projects\n\n\n\n\n\n\ncoding\n\n\n\nHow to automate the closing of an issue in Github Projects via a Commit Message\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigenvales and Eigenvectors Example\n\n\n\n\n\n\nlinear algebra\n\n\n\nAlgebraic examples\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
@@ -775,5 +775,40 @@
     "title": "LC: 704. Binary Search",
     "section": "6. Submit",
     "text": "6. Submit\nMiddle of the pack \nGo to Main Blog\nGo to LeetCode Blog"
+  },
+  {
+    "objectID": "posts/notes/coding/1-github_resolve.html#the-setup",
+    "href": "posts/notes/coding/1-github_resolve.html#the-setup",
+    "title": "Automate the closing of Issues in Github Projects",
+    "section": "1. The Setup",
+    "text": "1. The Setup\nTesting the automation of closing a GitHub Issue via a VSCode Commit Message shown in youtube tutorial: How to Use GitHub for Automated Kanban Project Management\n\nHigh level steps:\n\nCreate Issue\n\nAttach associated Repo\n\nAttach associated Project\n\nAttach any relevant Tags\n\nDo required changes to your repo files\n\nCommit with “resolve #” associated to Issue\n\n[Important]: to include “resolve #58” in Commit Message in order to tell Github to automatically resolve it."
+  },
+  {
+    "objectID": "posts/notes/coding/1-github_resolve.html#issue-is-open",
+    "href": "posts/notes/coding/1-github_resolve.html#issue-is-open",
+    "title": "Automate the closing of Issues in Github Projects",
+    "section": "2. Issue is Open",
+    "text": "2. Issue is Open"
+  },
+  {
+    "objectID": "posts/notes/coding/1-github_resolve.html#issue-is-closed-successfully",
+    "href": "posts/notes/coding/1-github_resolve.html#issue-is-closed-successfully",
+    "title": "Automate the closing of Issues in Github Projects",
+    "section": "3. Issue is Closed successfully",
+    "text": "3. Issue is Closed successfully\nActions: Commmited, Staged and Pushed.\n[SUCCESS]: Issue #58 has indeed been automatically closed without a manual intervention on the kanban board!"
+  },
+  {
+    "objectID": "posts/notes/coding/1-github_resolve.html#a-tick-as-a-little-reward-for-work-done",
+    "href": "posts/notes/coding/1-github_resolve.html#a-tick-as-a-little-reward-for-work-done",
+    "title": "Automate the closing of Issues in Github Projects",
+    "section": "4. A Tick ☑️ as a little reward for work done",
+    "text": "4. A Tick ☑️ as a little reward for work done"
+  },
+  {
+    "objectID": "posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
+    "href": "posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
+    "title": "Eigen is my valentines in 2024",
+    "section": "",
+    "text": "Note on Colours:\n- I’m colourblind (red-green). Read more here.\n- I’m using Nebo App on a Lenovo Tablet in Dark Mode. The app doesn’t actually export the way I see it, it exports in non-dark mode so it looks completely different to how I chose the colours. If the colours are an eyesore, I apologise 🤭 (It’s probably sub-optimal without the export issues already).\n- I used a website to reverse colours but it isn’t right either.\nI’ll figure it out… for now I’ve put up both unwanted versions because I havent posted in 4 days (awful).\n\n1. Dark-mode\n\n\n\n2. Normal-mode"
   }
 ]
