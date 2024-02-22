@@ -805,18 +805,11 @@
     "text": "3. Submit\n\nGo to Main Blog\nGo to LeetCode Blog"
   },
   {
-    "objectID": "posts/notes/coding/2-linux_setup.html",
-    "href": "posts/notes/coding/2-linux_setup.html",
-    "title": "Setting up a Data Science Machine",
-    "section": "",
-    "text": "This post shows how to set up Linux-based Python Notebooks on a Windows PC for Data Science and Deep Learning Projects.\nOne of the drawbacks of Python-based Projects are compatability issues with packages which were developed with Linux.\nLinux is often preferred for Python development due to its:\n- powerful terminal for scripting and automation\n- has a open-source philosophy fostering community-driven ecosystem\n- containerization (e.g. Docker) and orchestration (e.g. Kubernetes)\n- Has a robust package management (APT and YUM)\n- Resource efficiency suitable for running Python applications (in resource-constrained environments)\n- compatibility with production environments & real-world deployments"
-  },
-  {
     "objectID": "posts/notes/coding/2-linux_setup.html#introduction",
     "href": "posts/notes/coding/2-linux_setup.html#introduction",
     "title": "Setting up a Data Science Machine",
-    "section": "",
-    "text": "This post shows how to set up Linux-based Python Notebooks on a Windows PC for Data Science and Deep Learning Projects.\nOne of the drawbacks of Python-based Projects are compatability issues with packages which were developed with Linux.\nLinux is often preferred for Python development due to its:\n- powerful terminal for scripting and automation\n- has a open-source philosophy fostering community-driven ecosystem\n- containerization (e.g. Docker) and orchestration (e.g. Kubernetes)\n- Has a robust package management (APT and YUM)\n- Resource efficiency suitable for running Python applications (in resource-constrained environments)\n- compatibility with production environments & real-world deployments"
+    "section": "1. Introduction",
+    "text": "1. Introduction\nThis post shows how to set up Linux-based Python Notebooks on a Windows PC for Data Science and Deep Learning Projects.\nOne of the drawbacks of Python-based Projects are compatability issues with packages which were developed with Linux.\nLinux is often preferred for Python development due to its:\n- powerful terminal for scripting and automation\n- has a open-source philosophy fostering community-driven ecosystem\n- containerization (e.g. Docker) and orchestration (e.g. Kubernetes)\n- Has a robust package management (APT and YUM)\n- Resource efficiency suitable for running Python applications (in resource-constrained environments)\n- compatibility with production environments & real-world deployments"
   },
   {
     "objectID": "posts/notes/coding/2-linux_setup.html#linux",
