@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-02-24">
+<meta name="dcterms.date" content="2024-02-26">
 <meta name="description" content="Tabular Deep-Learning">
 
 <title>Tony’s blog - Kaggle 101: Titanic</title>
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -155,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 24, 2024</p>
+        <p class="date">February 26, 2024</p>
       </div>
     </div>
     
@@ -171,7 +205,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#get-data" id="toc-get-data" class="nav-link active" data-scroll-target="#get-data">1. Get Data</a></li>
+  <li><a href="#clean-data" id="toc-clean-data" class="nav-link" data-scroll-target="#clean-data">2. Clean Data</a>
+  <ul class="collapse">
+  <li><a href="#dealing-with-nans" id="toc-dealing-with-nans" class="nav-link" data-scroll-target="#dealing-with-nans">2.1 Dealing with NaNs</a></li>
+  <li><a href="#normalise" id="toc-normalise" class="nav-link" data-scroll-target="#normalise">3. Normalise</a></li>
+  <li><a href="#numeric-values" id="toc-numeric-values" class="nav-link" data-scroll-target="#numeric-values">3.1 Numeric Values</a></li>
+  <li><a href="#categorical-ordinal-values" id="toc-categorical-ordinal-values" class="nav-link" data-scroll-target="#categorical-ordinal-values">3.2 Categorical / Ordinal Values</a></li>
+  </ul></li>
+  <li><a href="#tensors" id="toc-tensors" class="nav-link" data-scroll-target="#tensors">4. Tensors</a>
+  <ul class="collapse">
+  <li><a href="#dependent-variable" id="toc-dependent-variable" class="nav-link" data-scroll-target="#dependent-variable">4.1 Dependent Variable</a></li>
+  <li><a href="#independent-variable" id="toc-independent-variable" class="nav-link" data-scroll-target="#independent-variable">4.2 Independent Variable</a></li>
+  </ul></li>
+  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model">5. Linear Model</a></li>
+  <li><a href="#coefficients" id="toc-coefficients" class="nav-link" data-scroll-target="#coefficients">5.1 Coefficients</a></li>
+  <li><a href="#bias" id="toc-bias" class="nav-link" data-scroll-target="#bias">5.2 Bias</a></li>
   </ul>
 </nav>
     </div>
@@ -182,9 +231,264 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><img src="patent.jpg" class="img-fluid"></p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<section id="get-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-data">1. Get Data</h2>
+<div id="cell-2" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>iskaggle <span class="op">=</span> os.environ.get(<span class="st">'KAGGLE_KERNEL_RUN_TYPE'</span>, <span class="st">''</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> iskaggle: path <span class="op">=</span> Path(<span class="st">'../input/titanic'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>: <span class="co"># else set path for pc</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> Path(<span class="st">'titanic'</span>) <span class="co"># windows path</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> path.exists():</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="im">import</span> zipfile,kaggle</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        kaggle.api.competition_download_cli(<span class="bu">str</span>(path)) <span class="co"># download the zip</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        zipfile.ZipFile(<span class="ss">f'</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">.zip'</span>).extractall(path) <span class="co"># open the zip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-3" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>PlotYes <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>PrintInfo <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch, numpy <span class="im">as</span> np, pandas <span class="im">as</span> pd, matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(linewidth<span class="op">=</span><span class="dv">140</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>torch.set_printoptions(linewidth<span class="op">=</span><span class="dv">140</span>, sci_mode<span class="op">=</span><span class="va">False</span>, edgeitems<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.width'</span>, <span class="dv">140</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="clean-data" class="level2">
+<h2 class="anchored" data-anchor-id="clean-data">2. Clean Data</h2>
+<section id="dealing-with-nans" class="level3">
+<h3 class="anchored" data-anchor-id="dealing-with-nans">2.1 Dealing with NaNs</h3>
+<p>To provide a prediction, each column is multiplied by a coefficient, <code>NaN</code>s can’t be multiplied by coefficients.</p>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(path<span class="op">/</span><span class="st">'train.csv'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_og_keys <span class="op">=</span> df.keys()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> PrintInfo: <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">   BEFORE: </span><span class="ch">\n</span><span class="sc">{</span>df<span class="sc">.</span>isna()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>) <span class="co"># True or False if NA</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># Each Nan's is equivalent to 1, sum all per col</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>top_modes <span class="op">=</span> df.mode().iloc[<span class="dv">0</span>] <span class="co"># get first row of modes table per col (ties are random)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df.fillna(top_modes, inplace<span class="op">=</span><span class="va">True</span>) <span class="co"># using the first row (a panda series with labels replace nas)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># df.isna().sum() # no more nas</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> PrintInfo: <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">   AFTER: </span><span class="ch">\n</span><span class="sc">{</span>df<span class="sc">.</span>isna()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>) <span class="co"># True or False if NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="normalise" class="level3">
+<h3 class="anchored" data-anchor-id="normalise">3. Normalise</h3>
+<p>Look at the all the range of all numerical (<code>x-axis</code>) data and their relative frequencies (<code>y-axis</code>) too see any outliers</p>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_numeric_histograms(df):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    numeric_columns <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'number'</span>]).columns</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If there are no numeric columns, print a message</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> numeric_columns.<span class="bu">any</span>():</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No numeric columns found in the DataFrame."</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create subplots with shared y-axis</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="bu">len</span>(numeric_columns), figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate through numeric columns</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(numeric_columns):</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        df[col].hist(ax<span class="op">=</span>axes[i], bins<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Customize bins as needed</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(col)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        axes[i].set_xlabel(<span class="st">'Values'</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        axes[i].set_ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> PrintInfo: plot_numeric_histograms(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="numeric-values" class="level3">
+<h3 class="anchored" data-anchor-id="numeric-values">3.1 Numeric Values</h3>
+<ul>
+<li>Values too large (e.g.&nbsp;Fare $500) relatively to will others (e.g.&nbsp;)</li>
+</ul>
+<p><code>Fare</code> and <code>Age</code> have quite larger ranges compared to the other columns. Multiplying them by a coefficient will result is them dominating the function. Must <code>scale</code> or <code>normalise</code> these columns so their range is like the others.</p>
+</section>
+<section id="categorical-ordinal-values" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-ordinal-values">3.2 Categorical / Ordinal Values</h3>
+<ul>
+<li>Good to ensure/validate all values are catered for</li>
+<li>Create <code>dummy</code> variables (for columns with a few unique values)</li>
+</ul>
+<div id="cell-9" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cols_to_dummy <span class="op">=</span> [<span class="st">"Sex"</span>, <span class="st">"Pclass"</span>, <span class="st">"Embarked"</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># replaces og columns with dummy cols + dtype=int otherwise its T/F not 1/0s</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.get_dummies(df, columns<span class="op">=</span>cols_to_dummy, dtype<span class="op">=</span><span class="bu">int</span>) </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>dummy_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> df_og_keys]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'LogFare'</span>] <span class="op">=</span> np.log(df[<span class="st">'Fare'</span>]<span class="op">+</span><span class="dv">1</span>) <span class="co"># log-fare for more even-spread</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="other-categories-columns" class="level4">
+<h4 class="anchored" data-anchor-id="other-categories-columns">3.2.1 Other Categories columns</h4>
+<p>Unused columns should have farely large number of uniques to make <code>normalising</code> impractical (too many columns)</p>
+<div id="cell-11" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.describe(include<span class="op">=</span>[<span class="bu">object</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-12" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_non_numeric_histograms(df, exclude_columns<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    non_numeric_columns <span class="op">=</span> df.select_dtypes(exclude<span class="op">=</span>[<span class="st">'number'</span>]).columns</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Exclude specified columns</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> exclude_columns:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        non_numeric_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> non_numeric_columns <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> exclude_columns]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If there are no non-numeric columns, print a message</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> non_numeric_columns:</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No non-numeric columns found in the DataFrame."</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create subplots</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="bu">len</span>(non_numeric_columns), figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set a common y-axis limit for better comparison</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    common_y_limit <span class="op">=</span> <span class="bu">max</span>(df[col].value_counts().<span class="bu">max</span>() <span class="cf">for</span> col <span class="kw">in</span> non_numeric_columns)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate through non-numeric columns</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(non_numeric_columns):</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        df[col].value_counts().plot(kind<span class="op">=</span><span class="st">'bar'</span>, ax<span class="op">=</span>axes[i])</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(col)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        axes[i].set_xlabel(<span class="st">'Values'</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        axes[i].set_ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        axes[i].set_ylim(<span class="dv">0</span>, common_y_limit)  <span class="co"># Set common y-axis limit</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-13" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_numeric_histograms(df, exclude_columns<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    numeric_columns <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'number'</span>]).columns</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Exclude specified columns</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> exclude_columns:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        numeric_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> numeric_columns <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> exclude_columns]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If there are no numeric columns, print a message</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> numeric_columns:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No numeric columns found in the DataFrame."</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create subplots</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="bu">len</span>(numeric_columns), figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set a common y-axis limit for better comparison</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    common_y_limit <span class="op">=</span> <span class="bu">max</span>(df[col].count() <span class="cf">for</span> col <span class="kw">in</span> numeric_columns)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate through numeric columns</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(numeric_columns):</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        df[col].hist(ax<span class="op">=</span>axes[i], bins<span class="op">=</span><span class="dv">10</span>)  <span class="co"># Customize bins as needed</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        axes[i].set_title(col)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        axes[i].set_xlabel(<span class="st">'Values'</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        axes[i].set_ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        axes[i].set_ylim(<span class="dv">0</span>, common_y_limit)  <span class="co"># Set common y-axis limit</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-14" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> PlotYes:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Numeric Columns: </span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    plot_non_numeric_histograms(df,  exclude_columns <span class="op">=</span> [<span class="st">'Name'</span>, <span class="st">'Ticket'</span>, <span class="st">'Cabin'</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"  Categorical Columns: </span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    plot_numeric_histograms(df, exclude_columns <span class="op">=</span> [<span class="st">'Fare'</span>, <span class="st">'PassengerId'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="tensors" class="level2">
+<h2 class="anchored" data-anchor-id="tensors">4. Tensors</h2>
+<ul>
+<li>Create <strong>Independent</strong> variables: <code>predictors</code> (all continuous variables)<br>
+</li>
+<li>Create <strong>Dependent</strong> variables: <code>target</code>, i.e.&nbsp;<code>Survived</code> (variable to be predicted).</li>
+</ul>
+<p>All model variables must be continuous variables.</p>
+<p>They must be converted Pytorch <strong>Tensors</strong> (in order to use the special tensor methods):</p>
+<p><strong>1D Tensor</strong>: is like an Array<br>
+<strong>2D Tensor</strong>: is like a Table/Matrix<br>
+<strong>3D Tensor</strong>: is 3-Dimensional and so forth.</p>
+<section id="dependent-variable" class="level3">
+<h3 class="anchored" data-anchor-id="dependent-variable">4.1 Dependent Variable</h3>
+<p>In this dataset, it is a single column/tensor, predicting whether a passenger is <code>1</code> (Survived) or <code>0</code> (Died).</p>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> tensor</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dep_var_tensor_1D <span class="op">=</span> tensor(df.Survived)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dep_var_tensor_1D[:<span class="dv">3</span>] <span class="co"># Like a numpy array, can get index to get items, first 3 here.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="independent-variable" class="level3">
+<h3 class="anchored" data-anchor-id="independent-variable">4.2 Independent Variable</h3>
+<p>Stacking multiple tensors (columns) together creates our 2D-Tensor.</p>
+<ol type="1">
+<li>Convert all independent columns to tensors</li>
+<li>Stack to a 2-D Tenssor</li>
+</ol>
+<div id="cell-19" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>indep_cols <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'SibSp'</span>, <span class="st">'Parch'</span>, <span class="st">'LogFare'</span>] <span class="op">+</span> dummy_columns</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_array_values <span class="op">=</span> df[indep_cols].values <span class="co"># shape (891,18)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>indep_var_tensor_2D <span class="op">=</span> tensor(df_array_values, dtype<span class="op">=</span>torch.<span class="bu">float</span>) </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># error: error will occur here if your independent  columns are bools rather than 0s/1s</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> PrintInfo: </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"original all df shape:       (rows,cols) </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"# indep variables cols:      </span><span class="sc">{</span><span class="bu">len</span>(indep_cols)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"new df 2d-tensor indep:      </span><span class="sc">{</span>indep_var_tensor_2D<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="linear-model" class="level2">
+<h2 class="anchored" data-anchor-id="linear-model">5. Linear Model</h2>
+<p>Important values for each paseenger can be calculated now as all independent and dependent variables are ready: - <strong>Predictions</strong> - <strong>Loss</strong></p>
+</section>
+<section id="coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="coefficients">5.1 Coefficients</h2>
+<p>Each columns will be mulitiplied by its corresponding coefficient. 1. Set each coefficient randomly (between -0.5 and 0.5) 2. Set manual seed (for reproducibility only)</p>
+</section>
+<section id="bias" class="level2">
+<h2 class="anchored" data-anchor-id="bias">5.2 Bias</h2>
+<p>No bias because all the dummy variables have been added. More on that later in future posts.</p>
+<div id="cell-21" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">442</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>nbr_of_coeffs <span class="op">=</span> indep_var_tensor_2D.shape[<span class="dv">1</span>] <span class="co"># number of independent variables</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>coeffs_indep_var_tensor_1D <span class="op">=</span> torch.rand(nbr_of_coeffs)<span class="op">-</span><span class="fl">0.5</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>coeffs_indep_var_tensor_1D <span class="co"># random numbers (-0.5 to 0.5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>vals,indices <span class="op">=</span> indep_var_tensor_2D.<span class="bu">max</span>(dim<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>vals</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># indices</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-23" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># testing stuff</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>nbrs <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>nparray <span class="op">=</span> np.array(nbrs)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>tsnr_np_1d <span class="op">=</span> tensor(nparray,dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>tsnr_nbrs_1d <span class="op">=</span> tensor(nbrs,dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tsnr_nbrs_1d)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tsnr_np_1d)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"inputting array or list doesnt change tensor given dtype"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>df[indep_cols][<span class="st">'Age'</span>] <span class="co">#age col</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>df[indep_cols][<span class="st">'Age'</span>][<span class="dv">0</span>] <span class="co">#age first value  [22]</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>df[indep_cols][<span class="st">'Age'</span>][<span class="dv">1</span>] <span class="co">#age 2nd value  [38]</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>df[indep_cols].values[<span class="dv">1</span>][<span class="dv">0</span>] <span class="co"># 38  </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>df[indep_cols].values[<span class="dv">1</span>, <span class="dv">0</span>] <span class="co"># 38 (2nd row, 1st col)</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># df[indep_cols][1][0]</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># df.loc[0, ]</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">0</span>:<span class="dv">1</span>, <span class="st">'Age'</span>] <span class="co">#22,38 pd series</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">0</span>:<span class="dv">1</span>, <span class="st">'Age'</span>][<span class="dv">1</span>] <span class="co">#38 numpy float</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>df.iloc[<span class="dv">0</span>, df.columns.get_indexer(indep_cols)] <span class="co"># works with indicies</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># df.iloc[0, indep_cols] # doesnt work</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">0</span>, indep_cols] <span class="co"># works with names first row pd sereis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
