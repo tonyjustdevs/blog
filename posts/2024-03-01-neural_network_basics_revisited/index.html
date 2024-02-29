@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2024-03-01">
 <meta name="description" content="Deeper dive into Neural Network basics">
 
-<title>Tony’s blog - Neural Networks Basics (revisited) - [DRAFT]</title>
+<title>Tony’s blog - Neural Networks Basics (Revisited) - [DRAFT TBC 02/3/24]</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -197,15 +197,15 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Neural Networks Basics (revisited) - [DRAFT]</h1>
+      <h1 class="title">Neural Networks Basics (Revisited) - [DRAFT TBC 02/3/24]</h1>
                   <div>
         <div class="description">
           Deeper dive into Neural Network basics
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">deep learning</div>
-                <div class="quarto-category">neural networks</div>
+                <div class="quarto-category">deep dive</div>
+                <div class="quarto-category">laymens</div>
               </div>
                   </div>
   </div>
@@ -245,7 +245,15 @@ window.Quarto = {
   <li><a href="#the-mathematical-model" id="toc-the-mathematical-model" class="nav-link" data-scroll-target="#the-mathematical-model">1.2 The Mathematical Model</a></li>
   <li><a href="#laymens-mathematical-model" id="toc-laymens-mathematical-model" class="nav-link" data-scroll-target="#laymens-mathematical-model">1.2.1 Laymens (mathematical model):</a></li>
   <li><a href="#simple-examples-of-mathematical-models" id="toc-simple-examples-of-mathematical-models" class="nav-link" data-scroll-target="#simple-examples-of-mathematical-models">1.3 Simple Examples (of mathematical models)</a></li>
-  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">1.4 Steps</a></li>
+  </ul></li>
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">2 Steps</a>
+  <ul class="collapse">
+  <li><a href="#step-1-choose-create-the-general-quadratic-equationmodel" id="toc-step-1-choose-create-the-general-quadratic-equationmodel" class="nav-link" data-scroll-target="#step-1-choose-create-the-general-quadratic-equationmodel">2.1 [Step 1]: Choose (Create) the General Quadratic Equation/Model</a></li>
+  <li><a href="#step-2-make-predictions" id="toc-step-2-make-predictions" class="nav-link" data-scroll-target="#step-2-make-predictions">2.2 [Step 2]: Make Predictions!</a></li>
+  <li><a href="#the-real-step-2-2a-set-the-parameters-a-b-and-c" id="toc-the-real-step-2-2a-set-the-parameters-a-b-and-c" class="nav-link" data-scroll-target="#the-real-step-2-2a-set-the-parameters-a-b-and-c">2.3 The Real Step 2: 2a Set the Parameters <code>a, b, and c</code></a></li>
+  <li><a href="#step-2b-input-x" id="toc-step-2b-input-x" class="nav-link" data-scroll-target="#step-2b-input-x">2.3 Step 2b: Input <code>x</code></a></li>
+  <li><a href="#tba-step-accuracy" id="toc-tba-step-accuracy" class="nav-link" data-scroll-target="#tba-step-accuracy">2.4 TBA STEP Accuracy</a></li>
+  <li><a href="#tba-step-update-parameters" id="toc-tba-step-update-parameters" class="nav-link" data-scroll-target="#tba-step-update-parameters">2.4 TBA STEP UPDATE PARAMETERS</a></li>
   </ul></li>
   <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">2. Simulate Data</a></li>
   </ul>
@@ -258,24 +266,35 @@ window.Quarto = {
 
 
 
+<p><strong><em>POSTING ON LIVE BLOG TO FORCE MYSELF TO FINISH THIS POST ASAP</em></strong></p>
 <p><img src="deep.jpg" class="img-fluid"></p>
-<p>It’s time for me to important topics deeper (pun unintended ✊).</p>
-<p>Its a way for me to actually try to understand what I’m doing.</p>
-<p>These posts and blog in general are a way to trigger some memory on what I thought at the time of learning each topic. It might <strong>not be easily disgestable for other people</strong>, like the rest of the world 🗺️.</p>
-<p>Up to this point I’ve sped-run through each topics whilst not understanding details of significnat sections of it, just trying to get the code running and producing some results, at least I know it does work so I can go back and look at the details.</p>
+<p>It’s time to dive into previously explored topics a bit more <strong>deeply</strong>. Time to try to understand what’s actually going on.</p>
+<p>These posts help me trigger what kind of thought process I had at the time of learning the topic. It’s <strong>not be easily disgestable for other people 🗺️</strong> but feel free to read on.</p>
+<p>Up til now, I’ve sped-run topics whilst not understanding much of the details.</p>
+<p>I like to get the code running at least and produce results to expectation before getting in the weeds. At least I know the code works so I don’t end up heading towards doom 🌚.</p>
 <p>In these deeper dives:</p>
 <ul>
-<li><p>I hope to do these concepts justice (Will try to get feedback from professionals at some point). Feel free to correct my understanding if anything seems off (I’m sure some parts aren’t on the ball 👎🍙).</p></li>
-<li><p>The concepts and math are brand new to me (or done a decade ago), so these posts are a way for me to express them back to myself in a way I can understand. It is a pretty pure recollection of my thoughts at each step of the concept ideas. Con-steps? Step-deas? (Sorry ❄️).</p></li>
-<li><p>Also, I know full well that without writing how I conceived these concepts, it will be like these thoughts had never happened (loss and irretrievable from the black-hole that is my mind ⚫).</p></li>
+<li><p>Lets hope to do these concepts justice (I’ll try to get feedback from professionals at some point). Feel free to correct my understanding! (I’m sure some parts aren’t on the ball 👎🍙).</p></li>
+<li><p>The concepts and math are brand new to me (or done a decade ago), these posts help me express things in my way, which is usually the very lay way. It is a pretty raw thoughts at each step of the concepts and ideas I’m trying to understand; Con-steps? Step-deas? (Sorry ❄️).</p></li>
+<li><p>Also, without writing them down, I’ll end up forgetting most of how and what I thought to conceive these concepts (I need to improve my vocabulary), i.e.&nbsp;it will be like these thoughts had never had happened (loss and irretrievable from the black-hole that is my mind ⚫).</p></li>
 </ul>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
 <section id="the-mission" class="level3">
 <h3 class="anchored" data-anchor-id="the-mission">1.1 The Mission</h3>
 <p><img src="mission.jpg" class="img-fluid"></p>
-<p><strong>[Mission]</strong>: - Create a <code>model</code> that takes in some <code>inputs</code> and provides a reasonble <code>predictions</code>.</p>
-<p><strong>[Method]</strong>: - A <code>mathematical function</code> is a form of a model: - takes in inputs <code>x1, x2, ...</code> and - <code>transforms</code> it into a single output <code>y = F(x1, x2, ...)</code>.</p>
+<p><strong>[Mission]</strong>:</p>
+<ul>
+<li>Create a <code>model</code> that takes in some <code>inputs</code> and provides a reasonble <code>output</code> (prediction).</li>
+</ul>
+<p><strong>[Method]</strong>:</p>
+<ul>
+<li>A <code>mathematical function</code> is a form of a model:
+<ul>
+<li>takes in inputs <code>x1, x2, ...</code> and</li>
+<li><code>transforms</code> it into a single output <code>y = F(x1, x2, ...)</code>.</li>
+</ul></li>
+</ul>
 <p>This seems like a good appraoch to tackle the mission.</p>
 </section>
 <section id="the-mathematical-model" class="level3">
@@ -293,66 +312,187 @@ window.Quarto = {
 <section id="laymens-mathematical-model" class="level3">
 <h3 class="anchored" data-anchor-id="laymens-mathematical-model">1.2.1 Laymens (mathematical model):</h3>
 <ul>
-<li>If a coefficient of a parameter is <strong>almost zero</strong>, it’s like saying it does not impact the prediction value (remember we are adding up scaled versions of inputs to calculate the output / prediction). Then thats like saying perhaps this particualr parameter unimportant feature! Perhaps we can get rid of it altogether? Less variables, less calculations, less overhead, more simple more without losing significant accuracy.</li>
+<li>If a coefficient <span class="math inline">\(a_1, a_2 ...\)</span> is <strong>almost zero</strong>, it’s like saying it does not impact the prediction value (remember we are adding up scaled versions of inputs to calculate the output / prediction). Then thats like saying perhaps this particualr parameter is an unimportant variable (or feature)!
+<ul>
+<li>Perhaps we can get rid of it altogether?</li>
+<li>Less variables, less calculations, less overhead (and less work!) and a more simple model without losing significant predictive power.</li>
+</ul></li>
 <li>If it has a large coefficient, then it would impact the overall sum, hence prediction. Probably shouldnt disregard this parameter.</li>
 </ul>
 </section>
 <section id="simple-examples-of-mathematical-models" class="level3">
 <h3 class="anchored" data-anchor-id="simple-examples-of-mathematical-models">1.3 Simple Examples (of mathematical models)</h3>
-<p>Two simple examples (single input <code>x</code> and a single output <code>y</code>) can be visualised on the <code>2D-plane</code>: - A <code>straight line</code> where input <code>x</code> is the horizontal-axis and output: <code>F(x)</code> and <code>y</code> is on the vertical-axis is with the formula we all know and love: <span class="math display">\[ F(x) = mx + b \]</span></p>
-<p>And similarly,<br>
-- A <code>quadratic line</code> is: <span class="math display">\[F(x) = ax^2 + bx + c\]</span></p>
-<p><strong>Note</strong>: <strong><em>The model should <code>generalise a mathematical function</code> to be on the given data to make predictions on unseen data.</em></strong></p>
+<p>Two simple examples (single input <code>x</code> and a single output <code>y</code>) can be visualised on the <code>2D-plane</code>:</p>
+<ul>
+<li>A <code>straight line</code> where input <code>x</code> is the horizontal-axis and output: <code>F(x)</code> and <code>y</code> is on the vertical-axis is with the formula we all know and love: <span class="math display">\[ F(x) = mx + b \]</span></li>
+</ul>
+<p>And similarly,</p>
+<ul>
+<li>A <code>quadratic line</code> is: <span class="math display">\[F(x) = ax^2 + bx + c\]</span></li>
+</ul>
+<p><strong>Note</strong>: <strong><em>Our model should <code>generalise a mathematical function</code> (or find out the core characteristics and relationships ) given our set of data, so once we know that, we can predict unseen data with similar traits.</em></strong></p>
+<p>For a quadratic, what combination of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> will help us predict closely the value we want given some random <span class="math inline">\(x\)</span> and then another <span class="math inline">\(x\)</span>, in fact, how about all future values of <span class="math inline">\(x\)</span> as we want and have good predictions all of them on average <span class="math inline">\(x\)</span>? That’s what we are trying to do!</p>
 </section>
-<section id="steps" class="level3">
-<h3 class="anchored" data-anchor-id="steps">1.4 Steps</h3>
-<section id="step-1-create-general-quadratic-equationmodel" class="level4">
-<h4 class="anchored" data-anchor-id="step-1-create-general-quadratic-equationmodel">1.4.1 Step 1: Create General Quadratic Equation/Model</h4>
+</section>
+<section id="steps" class="level2">
+<h2 class="anchored" data-anchor-id="steps">2 Steps</h2>
+<section id="step-1-choose-create-the-general-quadratic-equationmodel" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-choose-create-the-general-quadratic-equationmodel">2.1 [Step 1]: Choose (Create) the General Quadratic Equation/Model</h3>
 <p>Assume a quadratic equation: <code>F(x) = ax^2 + bx + c</code> can help us model some real world phenomena (e.g.&nbsp;throwing a ball or driving then stopping).</p>
 <p><img src="quad_real_world.jpg" class="img-fluid"></p>
 </section>
-<section id="step-2-set-inputs" class="level4">
-<h4 class="anchored" data-anchor-id="step-2-set-inputs">1.4.2 Step 2: Set Inputs</h4>
-<p><span class="math inline">\(F(x)\)</span>: <code>make prediction</code> with <code>random coefficients</code>.</p>
-<p><strong><em>But what does making predictions mean</em></strong> in this context?</p>
-<p>It’s simply plugging in the input values (<code>a,b,c,x</code>) to our equation to get the output value (<code>y</code>).</p>
-<p>That is, calcualte the <code>F(x)</code> (predictions) by using different combinations of our inputs <code>x</code> and parameters (coefficients) <code>a,b,c</code> with the equation <code>F(x) = ax^2 + bx + c</code>.</p>
-<p>So in order to make predictions, we need to systematic way to decide what <code>coefficients</code> and <code>variables</code> to select.</p>
-<section id="component-1-parameters-a-b-and-c" class="level5">
-<h5 class="anchored" data-anchor-id="component-1-parameters-a-b-and-c">1.4.2.1 Component 1: Parameters <code>a, b, and c</code></h5>
+<section id="step-2-make-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-make-predictions">2.2 [Step 2]: Make Predictions!</h3>
+<p>Okay I wish it was that easy, but <strong><em>But what does making predictions mean and how do you do it</em></strong>?</p>
+<p>Actually, in this context, it’s as simple as plugging in the different input values and their coefficients (<code>a,b,c,x</code>) to our quadaratic equation to see what output value (<code>y</code>) we get.</p>
+<p>In other words, calculate the <code>F(x)</code> (predictions) by using different combinations of our inputs <code>x</code> and parameters <code>a,b,c</code> with the equation <code>F(x) = ax^2 + bx + c</code>. Simple!</p>
+<p>Wait no, but how do we know what <code>input variables x</code> and combinations <code>coefficients a,b,c</code> to use? Surely not just anything random? Kinda yes but also no.</p>
+<p>So in order to make useful predictions, we should have <strong>systematic way</strong> to decide what <strong><em><code>starting</code></em></strong> coefficients and variables to use.</p>
+<section id="long-laymens-on-using-good-starting-coefficients-and-variables" class="level4">
+<h4 class="anchored" data-anchor-id="long-laymens-on-using-good-starting-coefficients-and-variables">2.2.1 <strong>LONG Laymens</strong> on using good <strong><em>starting</em></strong> coefficients and variables</h4>
+<p>A <code>Good</code> set of inputs:</p>
+<ul>
+<li>Say we want to produce a model that guesses whether a passenger on the Titanic <strong>Survived</strong> and <strong>Didnt Survive</strong>.
+<ul>
+<li>A pretty good set of input variables would be data on actual passengers of the titanic and on whether they survived or not.<br>
+</li>
+<li>A model could learn what characteristics of these passengers and then adjust the parameters, say <code>gender</code> or <code>age</code> to see if the prediction is better or worse, knowing already the survivability of the passenger in the first place.</li>
+</ul></li>
+</ul>
+<p>A <code>Bad</code> set of inputs:</p>
+<ul>
+<li>would be perhaps characteristics about passengers wouldnt probably not impact their survivability like:
+<ul>
+<li><code>their favourite colour</code> or<br>
+</li>
+<li><code>their dominant hand</code> or<br>
+</li>
+<li><code>ear, finger, arm, or toe lengths</code> (within each group of adults and kids)</li>
+</ul></li>
+</ul>
+<p>An <code>even worse</code> set of inputs (moving towards the bad <code>validation set</code> territory, more on this later).</p>
+<ul>
+<li>would be getting data from unrelated sources (and sorry to state the obvious), such as:
+<ul>
+<li>the cohort of 2015 Applied Finance Graduates from Macquarie University, Sydney,<br>
+</li>
+<li>a group people picked at random off streets of Binh Thanh Saigon, Vietnam,<br>
+</li>
+<li>a group of online matches from a popular dating app obtained by a user.<br>
+These groups technically surivived the Titanic so the model will say all their characteristics of everyone are useful, which isnt a great predictor (it’ll predict being born after the Titanic sunk gives you a 100% chance of surviving the Titanic 🤭)</li>
+</ul></li>
+</ul>
+<p>For coefficients, I heard its <strong><em>more of an art than a science</em></strong> on what are good starting parameter values (although I assume later there are some cool algorithms that give us a hand in the future).</p>
+<ul>
+<li>Logically it would make sense that initially <strong>input dominate parameters</strong> (input values are large relative to their coefficients) and then they’re scaled by a <strong>parameter</strong> according to importance through the neural network.<br>
+</li>
+<li>This means, start with <strong>relatively low value parameters</strong> (to it’s input variables) and let these coefficients adjust (<code>learn</code> through <code>gradient descent</code>) to larger values, whether positive or negative.<br>
+</li>
+<li>In other words start with coefficients <strong>about zero</strong>.<br>
+</li>
+<li>Okay that kinda makes sense but lets talk through an example:
+<ul>
+<li>Lets assume we have a parameters should be relatively large and positive (for e.g.&nbsp;being a female or child in first class on the Titanic is probably two good parameters for survivability).<br>
+</li>
+<li>If the parameter starts off large and negative then this causes the model to take alot of iterations to learn and adjust the parameter to be positive. And vice versa.<br>
+</li>
+<li>So if we set all near zero, it will simply take <code>less time on average</code> for most models for each parameter to get to whether they need to go (<code>optimisation?</code>) considering we don’t know what parameters matter or not, so its random for us, ie, it can be positive or negative, we just don’t know (<strong><em>assuming there is no super obvious characteristic that would dominate a model, in which case, maybe its better to put a larger value? perhaps that isnt a data science way to do things though, I’m not sure yet</em></strong>).
+<ul>
+<li>From my understanding, by initially <code>setting the some coefficients initially</code> and then adjust the model to our data, this is actually called <code>learning with a pre-trained model</code> (not set by us). The pre-trained model has already been run and complete by someone else and we are teaching the model learn about our data on top of its knowledge.<br>
+</li>
+<li>Most of what I’ll be initially doing is <code>Building a Learner from a Pre-trained Model</code>. In the future, I hope to learn to build the Pre-Trained models from scratch, if its a useful endeavour?<br>
+</li>
+<li>Popular examples of pre-trained models are <code>ResNet50</code>, which are trained on (millions of) pictures with 50 layers deep neural network.<br>
+</li>
+</ul></li>
+</ul></li>
+<li>Another example to drive it home to start between <code>-0.5 to 0.5</code>:
+<ul>
+<li>Say we play a game where I tell you to choose a starting value and take count by 1 towards my guess and you want to choose a starting value to minimise the count on average.<br>
+</li>
+<li>And I tell you my guess is always random and between <code>-50 and 50</code>.<br>
+</li>
+<li>You’d probably pick zero because its common sense! (I hope it is)<br>
+</li>
+<li>It’s kind of same in our model, except we dont pick zero itself because it ruins the math (explain later).</li>
+</ul></li>
+</ul>
+<p><strong><em>That sounds well and good but:</em></strong></p>
+<ol type="1">
+<li>Doesnt a coefficients <strong>relativeness</strong> depend on the actual value of its <strong>corresponding input parameter</strong>. So shouldnt the starting coefficient be set <strong>relative to its corresponding starting input parameter</strong>, and not just an <code>arbitrary range of -0.5 to 0.5</code>? and also</li>
+<li>Input parameters can <strong>range drastically</strong> <strong>within itself</strong> and <strong>relative to other variables</strong>! For example:</li>
+</ol>
+<ul>
+<li><code>age</code> could be range <code>from 1 to 130</code> years old<br>
+</li>
+<li><code>Amount of money fundraised or donated</code> by people could range <code>0 to billions</code><br>
+</li>
+<li><code>Lenght of the petals of a plum flower</code> could range <code>0.1 mm to 40 mm</code>.<br>
+</li>
+<li><code>x-values</code> of any line function could be negative <span class="math inline">\(\infty\)</span> to positive <span class="math inline">\(\infty\)</span> (ngl I wanted to use the <span class="math inline">\(\infty\)</span> sign for once in my life ♾️)</li>
+</ul>
+<p><strong><em>How does it make sense to just arbitrarily choose -0.5 to 0.5 then?</em></strong></p>
+<p><code>insert explanation of normalisation of data</code><br>
+<code>insert explanation of dummy variables</code></p>
+<p>Thus, I’ll use randomly generated values between -0.5 and +0.5 (-1.0 and +1.0 could also work)</p>
+</section>
+</section>
+<section id="the-real-step-2-2a-set-the-parameters-a-b-and-c" class="level3">
+<h3 class="anchored" data-anchor-id="the-real-step-2-2a-set-the-parameters-a-b-and-c">2.3 The Real Step 2: 2a Set the Parameters <code>a, b, and c</code></h3>
 <ul>
 <li><strong>[Action]</strong>: Set our parameters to be random numbers.</li>
 </ul>
 </section>
-<section id="component-2-input-x" class="level5">
-<h5 class="anchored" data-anchor-id="component-2-input-x">1.4.2.2 Component 2: Input <code>x</code></h5>
-<p>Set a range values input values. - <strong>Note</strong>: In real world and here there is always a set of real world data. - Unfortunately computers can really interpret photos or audio or text in its aesthestic form like humans. Fortunately, these different modes can be represented with numbers which computers are very good at handling. - A <strong>picture</strong> are made up on pixels. Each pixel is a combination of a 3 parameters input (R,G,B) to create the colour. - A piece of <strong>Text</strong> can be decomposed into words and letters and be labelled with integers too. For our model, given that we have some <code>real y-values</code> mapped to some <code>input x-values</code>, we should at least have predictions on those x-values to see how our predicted y-values are doing (known as <code>accuracy</code>, more later) iii. calculate each <code>F(x1), F(x2), etc</code>, by going through each combination <code>a,b,c and x</code>: -<code>F(x1) = a1x2^2 + b1x1 + c1</code> (prediction 1 <code>y1 or F(x1) or F(x1,a1,b1,c1)</code> given this specific set of input variable <code>x1</code> and parameters <code>a1, b1, c1</code>) -<code>F(x2) = a2x2^2 + b2x2 + c2</code>, (prediction 2)… etc</p>
-<p><strong>Note</strong>: - These coefficients are started as <code>random</code> because we have to start somewhere. - Starting off random parameters is generally a good practice, the art is then to incrementally updating our coefficients (known as <code>gradient descent</code>) to make our model (<code>neural network</code>) do better (<code>improving accuracy</code> or <code>decreasing our loss function</code>) at each iteration (known as <code>epoch</code>).</p>
+<section id="step-2b-input-x" class="level3">
+<h3 class="anchored" data-anchor-id="step-2b-input-x">2.3 Step 2b: Input <code>x</code></h3>
+<p>Set a range values input values.</p>
+<ul>
+<li><strong>Note</strong>: In real world and here there is always a set of real world data.</li>
+<li>Unfortunately computers can really interpret photos or audio or text in its aesthestic form like humans. Fortunately, these different modes can be represented with numbers which computers are very good at handling.
+<ul>
+<li>A <strong>picture</strong> are made up on pixels. Each pixel is a combination of a 3 parameters input (R,G,B) to create the colour.</li>
+<li>A piece of <strong>Text</strong> can be decomposed into words and letters and be labelled with integers too.</li>
+</ul></li>
+</ul>
+<p>For our model, given that we have some <code>real y-values</code> mapped to some <code>input x-values</code>, we should at least have predictions on those x-values to see how our predicted y-values are doing (known as <code>accuracy</code>, more later), calculate each <code>F(x1), F(x2), etc</code>, by going through each combination <code>a,b,c and x</code>:</p>
+<ul>
+<li><code>F(x1) = a1x2^2 + b1x1 + c1</code> (prediction 1 <code>y1 or F(x1) or F(x1,a1,b1,c1)</code> given this specific set of input variable <code>x1</code> and parameters <code>a1, b1, c1</code>)</li>
+<li><code>F(x2) = a2x2^2 + b2x2 + c2</code>, (prediction 2)… etc</li>
+</ul>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>These coefficients are started as <code>random</code> because we have to start somewhere.</li>
+<li>Starting off random parameters is generally a good practice, the art is then to incrementally updating our coefficients (known as <code>gradient descent</code>) to make our model (<code>neural network</code>) do better (<code>improving accuracy</code> or <code>decreasing our loss function</code>) at each iteration (known as <code>epoch</code>).</li>
+</ul>
 </section>
-</section>
-<section id="step-3-create-general-quadratic-equationmodel" class="level4">
-<h4 class="anchored" data-anchor-id="step-3-create-general-quadratic-equationmodel">1.4.3 Step 3: Create General Quadratic Equation/Model</h4>
-<ol start="3" type="1">
+<section id="tba-step-accuracy" class="level3">
+<h3 class="anchored" data-anchor-id="tba-step-accuracy">2.4 TBA STEP Accuracy</h3>
+<ul>
 <li><code>measure accuracy</code> of our predictions i.e.&nbsp;<code>Mean Absolute Error (MAE)</code>.
 <ul>
 <li>For each actual output/value <code>y</code>, what is our <code>predicted y</code>.</li>
-<li>Since predictions can be <code>above or below</code> the actual value, we apply an absolute function to measure the difference or <code>loss</code>. That is, the MAE is also known as our <code>Loss Function</code>. An alternate popular loss function is the <code>Mean Squared Function (MSE)</code>4. <code>updating parameters</code> to</li>
+<li>Since predictions can be <code>above or below</code> the actual value, we apply an absolute function to measure the difference or <code>loss</code>. That is, the MAE is also known as our <code>Loss Function</code>. An alternate popular loss function is the `Mean Squared Function (MSE)</li>
+</ul></li>
+</ul>
+</section>
+<section id="tba-step-update-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="tba-step-update-parameters">2.4 TBA STEP UPDATE PARAMETERS</h3>
+<ul>
+<li><code>updating parameters</code> to
+<ul>
 <li><code>improve accuracy</code> of our predictions (i.e.&nbsp;decrease difference between our predictions and data)</li>
 <li><code>do it automatically</code>: the art of improving our model or <code>learning</code> is called <code>gradient descent</code>.<br>
 </li>
 </ul></li>
-</ol>
-<ul>
 <li><code>neural network</code>: Once the model is accuracy we are happy with, this is our <code>neural network</code>.</li>
 </ul>
 <p>Quite simple really?</p>
 </section>
 </section>
-</section>
 <section id="simulate-data" class="level2">
 <h2 class="anchored" data-anchor-id="simulate-data">2. Simulate Data</h2>
 <p>Simulate content</p>
-<div id="cell-12" class="cell" data-execution_count="2">
+<div id="cell-18" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np, torch</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
@@ -380,12 +520,12 @@ window.Quarto = {
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>actual_y_values_realistic_tsr <span class="op">=</span> add_noise(actual_y_values_unrealistic_tsr, <span class="fl">0.15</span>, <span class="fl">1.5</span>) <span class="co"># use actualy y-values + add noise - to create simulated real data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-13" class="cell" data-execution_count="2">
+<div id="cell-19" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#now that we have a set of (actual realistic) 'data'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. try 'model' it with a quadratic equation </span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. create loss function - mean absolute error - difference between each point of actual y vs predicted y at each x, find difference and then absolute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-14" class="cell" data-execution_count="3">
+<div id="cell-20" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># actual_x_values[:5],actual_y_values_realistic[:5]</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create quad function with parameters</span></span>
@@ -411,7 +551,7 @@ window.Quarto = {
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>mae(actual_y_values_realistic_tsr,predicted_quad111_y_values_tsr)</span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-15" class="cell" data-execution_count="4">
+<div id="cell-21" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(actual_y_values_realistic_tsr,predicted_quad111_y_values_tsr)</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
@@ -425,7 +565,7 @@ window.Quarto = {
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, predicted_quad111_y_values_tsr)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-16" class="cell" data-execution_count="5">
+<div id="cell-22" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(actual_x_values_tsr, predicted_quad111_y_values_tsr)</span></span>
@@ -434,7 +574,7 @@ window.Quarto = {
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.plot(actual_x_values_tsr, predicted_quad111_y_values_tsr, <span class="st">'r'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-17" class="cell" data-execution_count="6">
+<div id="cell-23" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -450,7 +590,7 @@ window.Quarto = {
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    plt.ylim((<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>))</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(actual_x_values_for_plotting_tsr, interactive_predicted_quad_y_values_tsr, <span class="st">'r'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-execution_count="1">
+<div id="cell-27" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.basics <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -498,25 +638,25 @@ window.Quarto = {
 </script>
 </div>
 </div>
-<div id="cell-22" class="cell">
+<div id="cell-28" class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rectified_linear(m,b,x):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> m<span class="op">*</span>x<span class="op">+</span>b</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.clip(y, <span class="fl">0.</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-23" class="cell">
+<div id="cell-29" class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plot_function(partial(rectified_linear, <span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-24" class="cell">
+<div id="cell-30" class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rectified_linear2(m,b,x): <span class="cf">return</span> F.relu(m<span class="op">*</span>x<span class="op">+</span>b)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plot_function(partial(rectified_linear2, <span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-25" class="cell">
+<div id="cell-31" class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(m<span class="op">=</span><span class="fl">1.5</span>, b<span class="op">=</span><span class="fl">1.5</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_relu(m, b):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    plot_function(partial(rectified_linear, m,b), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-26" class="cell">
+<div id="cell-32" class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> double_relu(m1,b1,m2,b2,x):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rectified_linear(m1,b1,x) <span class="op">+</span> rectified_linear(m2,b2,x)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
