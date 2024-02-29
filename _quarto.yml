@@ -20,5 +20,6 @@ website:
 format:
   html:
     theme:
-      dark: solar
+      # dark: solar
+      dark: [solar, theme-dark.scss]      
       light: cosmo
