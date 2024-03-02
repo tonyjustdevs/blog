@@ -8,7 +8,7 @@
 
 <meta name="author" content="Tony Phung">
 <meta name="dcterms.date" content="2024-03-02">
-<meta name="description" content="A function to add gaussian noise to existing data">
+<meta name="description" content="A function to add gaussian noise">
 
 <title>Tony’s blog - Let’s Make Some Noise</title>
 <style>
@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">Let’s Make Some Noise</h1>
                   <div>
         <div class="description">
-          A function to add gaussian noise to existing data
+          A function to add gaussian noise
         </div>
       </div>
                           <div class="quarto-categories">
@@ -216,9 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#the-function" id="toc-the-function" class="nav-link" data-scroll-target="#the-function">3. The Function</a>
   <ul class="collapse">
-  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">3.1 Parameters</a></li>
-  <li><a href="#function-body" id="toc-function-body" class="nav-link" data-scroll-target="#function-body">3.2 Function Body:</a></li>
-  <li><a href="#return-value" id="toc-return-value" class="nav-link" data-scroll-target="#return-value">3.3 Return Value:</a></li>
+  <li><a href="#noise-function" id="toc-noise-function" class="nav-link" data-scroll-target="#noise-function">3.1 <code>noise</code> function</a></li>
+  <li><a href="#add_noise-function" id="toc-add_noise-function" class="nav-link" data-scroll-target="#add_noise-function">3.2 <code>add_noise</code> function</a></li>
+  <li><a href="#differences" id="toc-differences" class="nav-link" data-scroll-target="#differences">3.3 Differences:</a></li>
   </ul></li>
   <li><a href="#real-world-applications" id="toc-real-world-applications" class="nav-link" data-scroll-target="#real-world-applications">4. Real World Applications</a>
   <ul class="collapse">
@@ -281,26 +281,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-function" class="level1">
 <h1>3. The Function</h1>
-<p>Lets write a simple function named <code>noise</code> that add <code>Gaussian</code> noise to an existing array.</p>
+<p>Lets write a simple function named <code>noise</code> and <code>add_noise</code> that add <code>Gaussian</code> noise to an existing array.</p>
 <div id="cell-5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> noise(y, scale): </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.random.normal(scale<span class="op">=</span>scale, size<span class="op">=</span>y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="parameters" class="level2">
-<h2 class="anchored" data-anchor-id="parameters">3.1 Parameters</h2>
-<p><code>y</code>: - The input array to which noise will be added.</p>
-<p><code>scale</code>: - The standard deviation of the added noise (a floating-point number). - A higher value for scale results in larger variations in the noise.</p>
+<section id="noise-function" class="level2">
+<h2 class="anchored" data-anchor-id="noise-function">3.1 <code>noise</code> function</h2>
+<p>This function generates random noise using NumPy’s <code>random.normal</code> function.</p>
+<ul>
+<li><code>y</code>: numpy or pytorch <strong><em>array</em></strong><br>
+</li>
+<li><code>scale</code>: <strong><em>standard deviation</em></strong> of the normal distribution from which the noise is drawn.</li>
+<li><code>output</code>: array of random values with the <strong><em>same shape</em></strong> as the input array <code>y</code>.</li>
+</ul>
+<div id="cell-7" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_noise(x, mult, add): </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> (<span class="dv">1</span><span class="op">+</span>noise(x, mult)) <span class="op">+</span> noise(x, add)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="function-body" class="level2">
-<h2 class="anchored" data-anchor-id="function-body">3.2 Function Body:</h2>
-<p><code>np.random.normal(scale=scale, size=y.shape)</code>: - This line utilizes the <strong><em>normal function</em></strong> from NumPy’s random module.</p>
-<p><code>scale=scale</code>: - The <strong><em>standard deviation</em></strong> of the generated noise distribution.</p>
-<p><code>size=y.shape</code>: - Ensures that the generated noise array has the same shape as the input array <code>y</code>. - Allows <strong><em>element-wise</em></strong> addition of noise to the original data.</p>
+<section id="add_noise-function" class="level2">
+<h2 class="anchored" data-anchor-id="add_noise-function">3.2 <code>add_noise</code> function</h2>
+<p>This function uses the <code>noise</code> function to add noise to the input <code>x</code>:</p>
+<ul>
+<li><code>* (1 + noise(x, mult))</code>: The <strong><em>multiplicative noise</em></strong> is applied by multiplying <code>x</code> with.</li>
+<li><code>+ noise(x, add)</code>: The <strong><em>additive noise</em></strong> is added directly to the result of the multiplicative part.</li>
+</ul>
 </section>
-<section id="return-value" class="level2">
-<h2 class="anchored" data-anchor-id="return-value">3.3 Return Value:</h2>
-<p><code>returned array</code>: - contains random values drawn from a <strong><em>normal distribution</em></strong> with the specified standard deviation (<code>scale</code>). - Has the <strong><em>same shape</em></strong> as the input array <code>y</code>.</p>
+<section id="differences" class="level2">
+<h2 class="anchored" data-anchor-id="differences">3.3 Differences:</h2>
+<p>The <code>noise</code> function generates:</p>
+<ul>
+<li>random noise independently of any input array,</li>
+<li>using a specified scale.</li>
+<li>It’s a standalone function for generating random noise.</li>
+</ul>
+<p>The <code>add_noise</code> function is specifically designed to:</p>
+<ul>
+<li>apply noise to an input array x.</li>
+<li>combines both multiplicative and additive noise components,</li>
+<li>allowing for a more complex noise model.</li>
+</ul>
 </section>
 </section>
 <section id="real-world-applications" class="level1">
