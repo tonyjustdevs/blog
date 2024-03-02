@@ -242,20 +242,50 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a>
   <ul class="collapse">
   <li><a href="#the-mission" id="toc-the-mission" class="nav-link" data-scroll-target="#the-mission">1.1 The Mission</a></li>
-  <li><a href="#the-mathematical-model" id="toc-the-mathematical-model" class="nav-link" data-scroll-target="#the-mathematical-model">1.2 The Mathematical Model</a></li>
-  <li><a href="#laymens-mathematical-model" id="toc-laymens-mathematical-model" class="nav-link" data-scroll-target="#laymens-mathematical-model">1.2.1 Laymens (mathematical model):</a></li>
-  <li><a href="#simple-examples-of-mathematical-models" id="toc-simple-examples-of-mathematical-models" class="nav-link" data-scroll-target="#simple-examples-of-mathematical-models">1.3 Simple Examples (of mathematical models)</a></li>
-  </ul></li>
-  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">2 Steps</a>
+  <li><a href="#the-mathematical-model" id="toc-the-mathematical-model" class="nav-link" data-scroll-target="#the-mathematical-model">1.2 The Mathematical Model</a>
   <ul class="collapse">
-  <li><a href="#step-1-choose-create-the-general-quadratic-equationmodel" id="toc-step-1-choose-create-the-general-quadratic-equationmodel" class="nav-link" data-scroll-target="#step-1-choose-create-the-general-quadratic-equationmodel">2.1 [Step 1]: Choose (Create) the General Quadratic Equation/Model</a></li>
-  <li><a href="#step-2-make-predictions" id="toc-step-2-make-predictions" class="nav-link" data-scroll-target="#step-2-make-predictions">2.2 [Step 2]: Make Predictions!</a></li>
-  <li><a href="#the-real-step-2-2a-set-the-parameters-a-b-and-c" id="toc-the-real-step-2-2a-set-the-parameters-a-b-and-c" class="nav-link" data-scroll-target="#the-real-step-2-2a-set-the-parameters-a-b-and-c">2.3 The Real Step 2: 2a Set the Parameters <code>a, b, and c</code></a></li>
-  <li><a href="#step-2b-input-x" id="toc-step-2b-input-x" class="nav-link" data-scroll-target="#step-2b-input-x">2.3 Step 2b: Input <code>x</code></a></li>
+  <li><a href="#laymens-mathematical-model" id="toc-laymens-mathematical-model" class="nav-link" data-scroll-target="#laymens-mathematical-model">1.2.1 Laymens (mathematical model):</a></li>
+  </ul></li>
+  <li><a href="#mathematical-models-examples" id="toc-mathematical-models-examples" class="nav-link" data-scroll-target="#mathematical-models-examples">1.3 Mathematical models examples</a></li>
+  </ul></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">2. Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#choose-a-model" id="toc-choose-a-model" class="nav-link" data-scroll-target="#choose-a-model">2.1 Choose a Model</a>
+  <ul class="collapse">
+  <li><a href="#quadratic-equation-example" id="toc-quadratic-equation-example" class="nav-link" data-scroll-target="#quadratic-equation-example">2.1.1 Quadratic Equation Example</a></li>
+  </ul></li>
+  <li><a href="#make-predictions-with-our-model" id="toc-make-predictions-with-our-model" class="nav-link" data-scroll-target="#make-predictions-with-our-model">2.2 Make Predictions with our Model</a></li>
+  <li><a href="#starting-inputs-variables-x_1-x_2-...-x_n" id="toc-starting-inputs-variables-x_1-x_2-...-x_n" class="nav-link" data-scroll-target="#starting-inputs-variables-x_1-x_2-...-x_n">2.3 <strong><em>Starting</em></strong> Inputs Variables <span class="math inline">\(x_1, x_2, ... , x_n\)</span></a>
+  <ul class="collapse">
+  <li><a href="#good-starting-inputs-variables" id="toc-good-starting-inputs-variables" class="nav-link" data-scroll-target="#good-starting-inputs-variables">2.3.1 Good Starting Inputs Variables</a></li>
+  <li><a href="#bad-starting-inputs" id="toc-bad-starting-inputs" class="nav-link" data-scroll-target="#bad-starting-inputs">2.3.2 Bad Starting Inputs</a></li>
+  </ul></li>
+  <li><a href="#starting-coefficients-x_1-x_2-...-x_n" id="toc-starting-coefficients-x_1-x_2-...-x_n" class="nav-link" data-scroll-target="#starting-coefficients-x_1-x_2-...-x_n">2.4 <strong><em>Starting</em></strong> Coefficients <span class="math inline">\(x_1, x_2, ... , x_n\)</span></a>
+  <ul class="collapse">
+  <li><a href="#about-zero" id="toc-about-zero" class="nav-link" data-scroll-target="#about-zero">2.4.1 About Zero</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">2.4.1.1 Example</a></li>
+  <li><a href="#titanic" id="toc-titanic" class="nav-link" data-scroll-target="#titanic">2.4.2 Titanic</a></li>
+  <li><a href="#preset-coefficients-and-pre-trained-models" id="toc-preset-coefficients-and-pre-trained-models" class="nav-link" data-scroll-target="#preset-coefficients-and-pre-trained-models">2.4.3 Preset Coefficients and Pre-trained Models</a></li>
+  <li><a href="#isnt-it-all-relative" id="toc-isnt-it-all-relative" class="nav-link" data-scroll-target="#isnt-it-all-relative">2.4.4 Isn’t it all relative?</a></li>
+  </ul></li>
+  <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation">3. Normalisation</a></li>
+  <li><a href="#numerical-data-techniques" id="toc-numerical-data-techniques" class="nav-link" data-scroll-target="#numerical-data-techniques">3.1 Numerical Data Techniques:</a>
+  <ul class="collapse">
+  <li><a href="#problem-with-normalised-data" id="toc-problem-with-normalised-data" class="nav-link" data-scroll-target="#problem-with-normalised-data">3.1.1 Problem with Normalised Data</a></li>
+  <li><a href="#benefits-to-gradient-descent" id="toc-benefits-to-gradient-descent" class="nav-link" data-scroll-target="#benefits-to-gradient-descent">3.1.2 Benefits to Gradient Descent</a></li>
+  </ul></li>
+  <li><a href="#categorial-data-techniques" id="toc-categorial-data-techniques" class="nav-link" data-scroll-target="#categorial-data-techniques">3.2 Categorial Data Techniques:</a></li>
+  </ul></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">4. Model</a>
+  <ul class="collapse">
+  <li><a href="#create-the-quadratic-equation" id="toc-create-the-quadratic-equation" class="nav-link" data-scroll-target="#create-the-quadratic-equation">4.1 Create the Quadratic Equation</a></li>
+  <li><a href="#plot-function" id="toc-plot-function" class="nav-link" data-scroll-target="#plot-function">4.2 Plot Function</a>
+  <ul class="collapse">
   <li><a href="#tba-step-accuracy" id="toc-tba-step-accuracy" class="nav-link" data-scroll-target="#tba-step-accuracy">2.4 TBA STEP Accuracy</a></li>
   <li><a href="#tba-step-update-parameters" id="toc-tba-step-update-parameters" class="nav-link" data-scroll-target="#tba-step-update-parameters">2.4 TBA STEP UPDATE PARAMETERS</a></li>
   </ul></li>
   <li><a href="#simulate-data" id="toc-simulate-data" class="nav-link" data-scroll-target="#simulate-data">2. Simulate Data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -278,10 +308,10 @@ window.Quarto = {
 <li><p>The concepts and math are brand new to me (or done a decade ago), these posts help me express things in my way, which is usually the very lay way. It is a pretty raw thoughts at each step of the concepts and ideas I’m trying to understand; Con-steps? Step-deas? (Sorry ❄️).</p></li>
 <li><p>Also, without writing them down, I’ll end up forgetting most of how and what I thought to conceive these concepts (I need to improve my vocabulary), i.e.&nbsp;it will be like these thoughts had never had happened (loss and irretrievable from the black-hole that is my mind ⚫).</p></li>
 </ul>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
-<section id="the-mission" class="level3">
-<h3 class="anchored" data-anchor-id="the-mission">1.1 The Mission</h3>
+<section id="introduction" class="level1">
+<h1>1. Introduction</h1>
+<section id="the-mission" class="level2">
+<h2 class="anchored" data-anchor-id="the-mission">1.1 The Mission</h2>
 <p><img src="mission.jpg" class="img-fluid"></p>
 <p><strong>[Mission]</strong>:</p>
 <ul>
@@ -297,8 +327,8 @@ window.Quarto = {
 </ul>
 <p>This seems like a good appraoch to tackle the mission.</p>
 </section>
-<section id="the-mathematical-model" class="level3">
-<h3 class="anchored" data-anchor-id="the-mathematical-model">1.2 The Mathematical Model</h3>
+<section id="the-mathematical-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-mathematical-model">1.2 The Mathematical Model</h2>
 <p><code>Create a Linear Model</code> (or mathematical function) given some <code>(real world) data</code> (data that represents something we want to predict given similar input) in the form <span class="math display">\[y = a_1x_1 + a_2x_2 + ... a_nx_n\]</span> It is called <code>Linear</code> because our inputs <code>x</code> are of degree 1.</p>
 <ul>
 <li>Each <code>inputs</code> (<code>x1, x2, ..., xn</code>) is multiplied by their corresponding <code>coefficients</code> or <code>parameters</code> (<code>a1, a2, ..., an</code>), i.e.: <span class="math display">\[a_1x_1 + a_2x_2 + ...\]</span>
@@ -308,7 +338,6 @@ window.Quarto = {
 </ul></li>
 <li>The output <code>y</code> (known as <code>predictions</code>) is calculated by <code>summing all the scaled parameters</code> together: <code>a1x1 + a2x2 + ...</code>: <span class="math display">\[F(x) = y = a_1x_1 + a_2x_2 + ... + a_nx_n\]</span></li>
 </ul>
-</section>
 <section id="laymens-mathematical-model" class="level3">
 <h3 class="anchored" data-anchor-id="laymens-mathematical-model">1.2.1 Laymens (mathematical model):</h3>
 <ul>
@@ -320,8 +349,9 @@ window.Quarto = {
 <li>If it has a large coefficient, then it would impact the overall sum, hence prediction. Probably shouldnt disregard this parameter.</li>
 </ul>
 </section>
-<section id="simple-examples-of-mathematical-models" class="level3">
-<h3 class="anchored" data-anchor-id="simple-examples-of-mathematical-models">1.3 Simple Examples (of mathematical models)</h3>
+</section>
+<section id="mathematical-models-examples" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-models-examples">1.3 Mathematical models examples</h2>
 <p>Two simple examples (single input <code>x</code> and a single output <code>y</code>) can be visualised on the <code>2D-plane</code>:</p>
 <ul>
 <li>A <code>straight line</code> where input <code>x</code> is the horizontal-axis and output: <code>F(x)</code> and <code>y</code> is on the vertical-axis is with the formula we all know and love: <span class="math display">\[ F(x) = mx + b \]</span></li>
@@ -331,82 +361,74 @@ window.Quarto = {
 <li>A <code>quadratic line</code> is: <span class="math display">\[F(x) = ax^2 + bx + c\]</span></li>
 </ul>
 <p><strong>Note</strong>: <strong><em>Our model should <code>generalise a mathematical function</code> (or find out the core characteristics and relationships ) given our set of data, so once we know that, we can predict unseen data with similar traits.</em></strong></p>
-<p>For a quadratic, what combination of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> will help us predict closely the value we want given some random <span class="math inline">\(x\)</span> and then another <span class="math inline">\(x\)</span>, in fact, how about all future values of <span class="math inline">\(x\)</span> as we want and have good predictions all of them on average <span class="math inline">\(x\)</span>? That’s what we are trying to do!</p>
+<ul>
+<li><p>For a quadratic equation, what combination of <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> will help us predict closely the value we want given some random <span class="math inline">\(x\)</span></p></li>
+<li><p>How about all of <span class="math inline">\(x\)</span> as we want and have good predictions all of them on average <span class="math inline">\(x\)</span>? That’s what we are trying to do!</p></li>
+</ul>
 </section>
 </section>
-<section id="steps" class="level2">
-<h2 class="anchored" data-anchor-id="steps">2 Steps</h2>
-<section id="step-1-choose-create-the-general-quadratic-equationmodel" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-choose-create-the-general-quadratic-equationmodel">2.1 [Step 1]: Choose (Create) the General Quadratic Equation/Model</h3>
-<p>Assume a quadratic equation: <code>F(x) = ax^2 + bx + c</code> can help us model some real world phenomena (e.g.&nbsp;throwing a ball or driving then stopping).</p>
+<section id="data-preparation" class="level1">
+<h1>2. Data Preparation</h1>
+<section id="choose-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="choose-a-model">2.1 Choose a Model</h2>
+<p>Why are we talking about models where the title is <code>Data Preparation</code>?</p>
+<p>As seen in our <code>Mission</code> statement, we wish to create a model to solve problems. In my mind, this means we should have some mental model of what we are trying to solve, and then we decide what data that goes into the model.</p>
+<p>If we just have some data without a sense of how it fits into a particular model in mind, how will know what to do with data, whether the data is relevant, its just a piece of data.</p>
+<p>Once we established our first model (we could change it later) then we can process our data to enter the model.</p>
+<section id="quadratic-equation-example" class="level3">
+<h3 class="anchored" data-anchor-id="quadratic-equation-example">2.1.1 Quadratic Equation Example</h3>
+<ul>
+<li>Assume a quadratic equation: <code>F(x) = ax^2 + bx + c</code> can help us model some real world phenomena (e.g.&nbsp;throwing a ball or driving then stopping).</li>
+</ul>
 <p><img src="quad_real_world.jpg" class="img-fluid"></p>
 </section>
-<section id="step-2-make-predictions" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-make-predictions">2.2 [Step 2]: Make Predictions!</h3>
-<p>Okay I wish it was that easy, but <strong><em>But what does making predictions mean and how do you do it</em></strong>?</p>
-<p>Actually, in this context, it’s as simple as plugging in the different input values and their coefficients (<code>a,b,c,x</code>) to our quadaratic equation to see what output value (<code>y</code>) we get.</p>
-<p>In other words, calculate the <code>F(x)</code> (predictions) by using different combinations of our inputs <code>x</code> and parameters <code>a,b,c</code> with the equation <code>F(x) = ax^2 + bx + c</code>. Simple!</p>
-<p>Wait no, but how do we know what <code>input variables x</code> and combinations <code>coefficients a,b,c</code> to use? Surely not just anything random? Kinda yes but also no.</p>
-<p>So in order to make useful predictions, we should have <strong>systematic way</strong> to decide what <strong><em><code>starting</code></em></strong> coefficients and variables to use.</p>
-<section id="long-laymens-on-using-good-starting-coefficients-and-variables" class="level4">
-<h4 class="anchored" data-anchor-id="long-laymens-on-using-good-starting-coefficients-and-variables">2.2.1 <strong>LONG Laymens</strong> on using good <strong><em>starting</em></strong> coefficients and variables</h4>
-<p>A <code>Good</code> set of inputs:</p>
+</section>
+<section id="make-predictions-with-our-model" class="level2">
+<h2 class="anchored" data-anchor-id="make-predictions-with-our-model">2.2 Make Predictions with our Model</h2>
+<p>Great! We have our model, lets start making predictions!</p>
+<p>Not quite. There are alot of missing components that has not been decided in our equation.</p>
+<p>Also <strong><em>what does it mean to even make a prediction and how do we do it</em></strong>?</p>
 <ul>
-<li>Say we want to produce a model that guesses whether a passenger on the Titanic <strong>Survived</strong> and <strong>Didnt Survive</strong>.
-<ul>
-<li>A pretty good set of input variables would be data on actual passengers of the titanic and on whether they survived or not.<br>
-</li>
-<li>A model could learn what characteristics of these passengers and then adjust the parameters, say <code>gender</code> or <code>age</code> to see if the prediction is better or worse, knowing already the survivability of the passenger in the first place.</li>
-</ul></li>
+<li><p>In our <code>mathematical model</code> context, it’s as simple as plugging in the different input values (<code>x</code>) and their coefficients (<code>a,b,c</code>) to our quadaratic equation (<code>F(x) = ax^2 + bx + c</code>) to see what output value (<code>y</code>) we get.</p></li>
+<li><p>In other words, calculate the <code>F(x)</code> (predictions) by using different combinations of our inputs <code>x</code> and parameters <code>a,b,c</code> with the equation <code>F(x) = ax^2 + bx + c</code>. Simple!</p></li>
 </ul>
-<p>A <code>Bad</code> set of inputs:</p>
+<p>But what combinations <code>a,b,c and x</code> do we to use? - Surely not random? Well kind of yes but also no.</p>
+<p>Note: input variables are known as <code>features</code> and coefficients are known as <code>parameters</code>. So, I’ll use them interchangeably.</p>
+<p><strong><em>[QUESTION]</em></strong>: - To make useful and relevant predictions, is there some <strong>systematic way</strong> to decide what <strong><em>starting</em></strong> <strong><em><code>parameters</code>(<span class="math inline">\(a, b, c\)</span>)</em></strong> and <strong><em><code>features</code>(<span class="math inline">\(x_1, x_2\)</span>)</em></strong> to use?</p>
+</section>
+<section id="starting-inputs-variables-x_1-x_2-...-x_n" class="level2">
+<h2 class="anchored" data-anchor-id="starting-inputs-variables-x_1-x_2-...-x_n">2.3 <strong><em>Starting</em></strong> Inputs Variables <span class="math inline">\(x_1, x_2, ... , x_n\)</span></h2>
+<p>The question is <span class="math inline">\(x\)</span>’s do we start with?</p>
+<p>Lets discuss a model that is a little more complex than a line on a 2-D plane.</p>
+<p>Say we want a predictive model that guesses whether a passenger on the Titanic: - <strong>Survived</strong> and - <strong>Did not Survive</strong></p>
+<section id="good-starting-inputs-variables" class="level3">
+<h3 class="anchored" data-anchor-id="good-starting-inputs-variables">2.3.1 Good Starting Inputs Variables</h3>
 <ul>
-<li>would be perhaps characteristics about passengers wouldnt probably not impact their survivability like:
-<ul>
-<li><code>their favourite colour</code> or<br>
-</li>
-<li><code>their dominant hand</code> or<br>
-</li>
-<li><code>ear, finger, arm, or toe lengths</code> (within each group of adults and kids)</li>
-</ul></li>
+<li>A <code>good set</code> of input variables would be data on actual passengers of the titanic and information on whether they survived or not.</li>
+<li>The learning model would learn about all the characteristics of these passengers and then adjust the parameters and scale towards characteristics that matter and and vice version on passengers and their survivability.</li>
+<li>Through the training process, the model may find some characteristics to be irrelevant (perhaps ear length), but that is not the focus of this part of the process. This part of the process is where to start.</li>
 </ul>
-<p>An <code>even worse</code> set of inputs (moving towards the bad <code>validation set</code> territory, more on this later).</p>
-<ul>
-<li>would be getting data from unrelated sources (and sorry to state the obvious), such as:
-<ul>
-<li>the cohort of 2015 Applied Finance Graduates from Macquarie University, Sydney,<br>
-</li>
-<li>a group people picked at random off streets of Binh Thanh Saigon, Vietnam,<br>
-</li>
-<li>a group of online matches from a popular dating app obtained by a user.<br>
-These groups technically surivived the Titanic so the model will say all their characteristics of everyone are useful, which isnt a great predictor (it’ll predict being born after the Titanic sunk gives you a 100% chance of surviving the Titanic 🤭)</li>
-</ul></li>
-</ul>
-<p>For coefficients, I heard its <strong><em>more of an art than a science</em></strong> on what are good starting parameter values (although I assume later there are some cool algorithms that give us a hand in the future).</p>
-<ul>
-<li>Logically it would make sense that initially <strong>input dominate parameters</strong> (input values are large relative to their coefficients) and then they’re scaled by a <strong>parameter</strong> according to importance through the neural network.<br>
-</li>
-<li>This means, start with <strong>relatively low value parameters</strong> (to it’s input variables) and let these coefficients adjust (<code>learn</code> through <code>gradient descent</code>) to larger values, whether positive or negative.<br>
-</li>
-<li>In other words start with coefficients <strong>about zero</strong>.<br>
-</li>
-<li>Okay that kinda makes sense but lets talk through an example:
-<ul>
-<li>Lets assume we have a parameters should be relatively large and positive (for e.g.&nbsp;being a female or child in first class on the Titanic is probably two good parameters for survivability).<br>
-</li>
-<li>If the parameter starts off large and negative then this causes the model to take alot of iterations to learn and adjust the parameter to be positive. And vice versa.<br>
-</li>
-<li>So if we set all near zero, it will simply take <code>less time on average</code> for most models for each parameter to get to whether they need to go (<code>optimisation?</code>) considering we don’t know what parameters matter or not, so its random for us, ie, it can be positive or negative, we just don’t know (<strong><em>assuming there is no super obvious characteristic that would dominate a model, in which case, maybe its better to put a larger value? perhaps that isnt a data science way to do things though, I’m not sure yet</em></strong>).
-<ul>
-<li>From my understanding, by initially <code>setting the some coefficients initially</code> and then adjust the model to our data, this is actually called <code>learning with a pre-trained model</code> (not set by us). The pre-trained model has already been run and complete by someone else and we are teaching the model learn about our data on top of its knowledge.<br>
-</li>
-<li>Most of what I’ll be initially doing is <code>Building a Learner from a Pre-trained Model</code>. In the future, I hope to learn to build the Pre-Trained models from scratch, if its a useful endeavour?<br>
-</li>
-<li>Popular examples of pre-trained models are <code>ResNet50</code>, which are trained on (millions of) pictures with 50 layers deep neural network.<br>
-</li>
-</ul></li>
-</ul></li>
-<li>Another example to drive it home to start between <code>-0.5 to 0.5</code>:
+</section>
+<section id="bad-starting-inputs" class="level3">
+<h3 class="anchored" data-anchor-id="bad-starting-inputs">2.3.2 Bad Starting Inputs</h3>
+<p>An <code>even worse</code> set of inputs (moving towards the bad <code>validation set</code> territory, more on this later). Data from unrelated sources (sorry to state the obvious) such as:<br>
+- the cohort of 2015 Applied Finance Graduates from Macquarie University, Sydney,<br>
+- a group people picked at random off streets of Binh Thanh Saigon, Vietnam,<br>
+- a group of online matches from a popular dating app obtained by a user.<br>
+These groups technically surivived the Titanic so the model will say all their characteristics of everyone are useful, which isnt a great predictor (it’ll predict being born after the Titanic sunk gives you a 100% chance of surviving the Titanic 🤭)</p>
+</section>
+</section>
+<section id="starting-coefficients-x_1-x_2-...-x_n" class="level2">
+<h2 class="anchored" data-anchor-id="starting-coefficients-x_1-x_2-...-x_n">2.4 <strong><em>Starting</em></strong> Coefficients <span class="math inline">\(x_1, x_2, ... , x_n\)</span></h2>
+<p>I heard determeting starting coefficients is <strong><em>more of an art than a science</em></strong> (Lets assume later there are some cool algorithms that give us a hand in the future).</p>
+<section id="about-zero" class="level3">
+<h3 class="anchored" data-anchor-id="about-zero">2.4.1 About Zero</h3>
+<p>It would make sense that initially <strong>input dominate parameters</strong> (input values are large relative to their coefficients) and then they’re scaled by a <strong>parameter</strong> according to importance through the neural network.<br>
+- This means, start with <strong>relatively low value parameters</strong> (to it’s input variables) and let these coefficients adjust (<code>learn</code> through <code>gradient descent</code>) to larger values, whether positive or negative.<br>
+- In other words start with coefficients <strong>about zero</strong>.</p>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">2.4.1.1 Example</h3>
 <ul>
 <li>Say we play a game where I tell you to choose a starting value and take count by 1 towards my guess and you want to choose a starting value to minimise the count on average.<br>
 </li>
@@ -415,56 +437,134 @@ These groups technically surivived the Titanic so the model will say all their c
 <li>You’d probably pick zero because its common sense! (I hope it is)<br>
 </li>
 <li>It’s kind of same in our model, except we dont pick zero itself because it ruins the math (explain later).</li>
-</ul></li>
-</ul>
-<p><strong><em>That sounds well and good but:</em></strong></p>
-<ol type="1">
-<li>Doesnt a coefficients <strong>relativeness</strong> depend on the actual value of its <strong>corresponding input parameter</strong>. So shouldnt the starting coefficient be set <strong>relative to its corresponding starting input parameter</strong>, and not just an <code>arbitrary range of -0.5 to 0.5</code>? and also</li>
-<li>Input parameters can <strong>range drastically</strong> <strong>within itself</strong> and <strong>relative to other variables</strong>! For example:</li>
-</ol>
-<ul>
-<li><code>age</code> could be range <code>from 1 to 130</code> years old<br>
-</li>
-<li><code>Amount of money fundraised or donated</code> by people could range <code>0 to billions</code><br>
-</li>
-<li><code>Lenght of the petals of a plum flower</code> could range <code>0.1 mm to 40 mm</code>.<br>
-</li>
-<li><code>x-values</code> of any line function could be negative <span class="math inline">\(\infty\)</span> to positive <span class="math inline">\(\infty\)</span> (ngl I wanted to use the <span class="math inline">\(\infty\)</span> sign for once in my life ♾️)</li>
-</ul>
-<p><strong><em>How does it make sense to just arbitrarily choose -0.5 to 0.5 then?</em></strong></p>
-<p><code>insert explanation of normalisation of data</code><br>
-<code>insert explanation of dummy variables</code></p>
-<p>Thus, I’ll use randomly generated values between -0.5 and +0.5 (-1.0 and +1.0 could also work)</p>
-</section>
-</section>
-<section id="the-real-step-2-2a-set-the-parameters-a-b-and-c" class="level3">
-<h3 class="anchored" data-anchor-id="the-real-step-2-2a-set-the-parameters-a-b-and-c">2.3 The Real Step 2: 2a Set the Parameters <code>a, b, and c</code></h3>
-<ul>
-<li><strong>[Action]</strong>: Set our parameters to be random numbers.</li>
 </ul>
 </section>
-<section id="step-2b-input-x" class="level3">
-<h3 class="anchored" data-anchor-id="step-2b-input-x">2.3 Step 2b: Input <code>x</code></h3>
-<p>Set a range values input values.</p>
-<ul>
-<li><strong>Note</strong>: In real world and here there is always a set of real world data.</li>
-<li>Unfortunately computers can really interpret photos or audio or text in its aesthestic form like humans. Fortunately, these different modes can be represented with numbers which computers are very good at handling.
-<ul>
-<li>A <strong>picture</strong> are made up on pixels. Each pixel is a combination of a 3 parameters input (R,G,B) to create the colour.</li>
-<li>A piece of <strong>Text</strong> can be decomposed into words and letters and be labelled with integers too.</li>
-</ul></li>
-</ul>
-<p>For our model, given that we have some <code>real y-values</code> mapped to some <code>input x-values</code>, we should at least have predictions on those x-values to see how our predicted y-values are doing (known as <code>accuracy</code>, more later), calculate each <code>F(x1), F(x2), etc</code>, by going through each combination <code>a,b,c and x</code>:</p>
-<ul>
-<li><code>F(x1) = a1x2^2 + b1x1 + c1</code> (prediction 1 <code>y1 or F(x1) or F(x1,a1,b1,c1)</code> given this specific set of input variable <code>x1</code> and parameters <code>a1, b1, c1</code>)</li>
-<li><code>F(x2) = a2x2^2 + b2x2 + c2</code>, (prediction 2)… etc</li>
-</ul>
+<section id="titanic" class="level3">
+<h3 class="anchored" data-anchor-id="titanic">2.4.2 Titanic</h3>
+<p>Lets assume we have a parameters should be relatively large and positive (for e.g.&nbsp;being a female or child in first class on the Titanic is probably two good parameters for survivability).<br>
+- If the parameter starts off large and negative then this causes the model to take alot of iterations to learn and adjust the parameter to be positive. And vice versa.<br>
+- So if we set all near zero, it will simply take <code>less time on average</code> for most models for each parameter to get to whether they need to go (<code>optimisation?</code>) considering we don’t know what parameters matter or not, so its random for us, ie, it can be positive or negative, we just don’t know (<strong><em>assuming there is no super obvious characteristic that would dominate a model, in which case, maybe its better to put a larger value? perhaps that isnt a data science way to do things though, I’m not sure yet</em></strong>).</p>
+</section>
+<section id="preset-coefficients-and-pre-trained-models" class="level3">
+<h3 class="anchored" data-anchor-id="preset-coefficients-and-pre-trained-models">2.4.3 Preset Coefficients and Pre-trained Models</h3>
+<p><code>Setting some coefficients initially</code> (rather than using all random coefficients) and then training the model to the training set, this is actually called <code>learning with a pre-trained model</code> (not set by us). - This pre-trained model has already been run and completed by someone else and we are teaching the model learn about our data on top of its knowledge.<br>
+- Most of what I’ll be initially doing is <code>Building a Learner from a Pre-trained Model</code>. In the future, I hope to learn to build the Pre-Trained models from scratch, if its a useful endeavour?<br>
+- Popular examples of pre-trained models are <code>ResNet50</code>, which are trained on (millions of) pictures with 50 layers deep neural network.</p>
+</section>
+<section id="isnt-it-all-relative" class="level3">
+<h3 class="anchored" data-anchor-id="isnt-it-all-relative">2.4.4 Isn’t it all relative?</h3>
+<p>Doesn’t a coefficients <strong>relativeness</strong> depend on the actual value of its <strong>corresponding input parameter</strong>. - So shouldn’t the starting coefficient be set <strong>relative to its corresponding starting input parameter</strong>, and - Not just an <code>arbitrary range of -0.5 to 0.5</code>?</p>
+<p>Also, input variables can <strong>range drastically</strong> <strong>within itself</strong> and <strong>relative to other variables</strong>! For example: - <code>age</code> could be range <code>from 1 to 130</code> years old<br>
+- <code>Amount of money fundraised or donated</code> by people could range <code>0 to billions</code><br>
+- <code>Lenght of the petals of a plum flower</code> could range <code>0.1 mm to 40 mm</code>.<br>
+- <code>x-values</code> of any line function could be negative <span class="math inline">\(\infty\)</span> to positive <span class="math inline">\(\infty\)</span> (ngl I wanted to use the <span class="math inline">\(\infty\)</span> sign for once in my life ♾️)</p>
+<p>With all these unaswered questions…</p>
+<p><strong><em>Does it still make sense to just choose coefficients about zero? (-0.5 to 0.5)?</em></strong></p>
+<p>Yes, because of normalisation.</p>
+</section>
+</section>
+<section id="normalisation" class="level2">
+<h2 class="anchored" data-anchor-id="normalisation">3. Normalisation</h2>
+<p><code>Data normalization</code> (in ML) refers to the process of <code>scaling</code> and <code>standardizing</code> the features of a dataset. - This ensures all <code>features contribute equally to the learning process</code> - To avoid issues related to <code>different scales and units</code> in the input data.</p>
+<p>Are there different techniques for <code>numeric</code> versis <code>categorical</code> data? Absolutely.</p>
+</section>
+<section id="numerical-data-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-data-techniques">3.1 Numerical Data Techniques:</h2>
+<p><strong><em>Min-Max Scaling</em></strong>: - Scales the data to a specific range, often [0, 1].</p>
+<p><strong><em>Standardization (Z-score normalization)</em></strong>: - Scales the data to have a mean of 0 and a standard deviation of 1.</p>
+<p><strong><em>Robust Scaling</em></strong>: - Uses the median and interquartile range (IQR) instead of the mean and standard deviation (Similar to standardization). Robust Scaling is less sensitive to outliers than standardization.</p>
+<p><strong><em>Log Transformation</em></strong>: - Applied when the data is skewed, and you want to reduce the impact of large values.</p>
+<p><strong><em>Normalization in Neural Networks</em></strong>: - Normalize input features to zero mean and unit variance. Batch normalization layers can also be used within the network to normalize the activations of hidden layers during training.</p>
+<section id="problem-with-normalised-data" class="level3">
+<h3 class="anchored" data-anchor-id="problem-with-normalised-data">3.1.1 Problem with Normalised Data</h3>
+<p>During gradient descent, the algorithm updates the model weights based on the direction of the steepest descent in the cost function (error).</p>
+<p>For simple linear regression model to predict housing prices based on two features: square footage (ft²) and number of bedrooms: - the large values of square footage will have a <code>much stronger influence</code> on the <code>gradient calculation</code> compared to the number of bedrooms. - This can lead the algorithm to prioritize changes based on square footage, potentially neglecting the impact of bedrooms on price.</p>
+</section>
+<section id="benefits-to-gradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="benefits-to-gradient-descent">3.1.2 Benefits to Gradient Descent</h3>
+<p>Gradient descent is an iterative optimization algorithm commonly used in machine learning for training models. It aims to find the minimum of a cost function by adjusting model parameters iteratively.</p>
+<p><strong><em>Gradient Descent Sensitivity to Scale</em></strong>: - The scale of the input features directly influences the scale of the gradients. Features with larger scales can dominate the learning process and cause the algorithm to converge slowly or not converge at all.</p>
+<p><strong><em>Equalizing the Influence of Features</em></strong>: - Normalizing data ensures that all features have a similar scale, <code>preventing the algorithm from being biased</code> towards features with larger magnitudes. - This equalization is particularly important when features have different units or scales, as it allows each feature to contribute proportionally to the model’s parameter updates during training.</p>
+<p><strong><em>Faster Convergence</em></strong>: - Normalization often leads to <code>faster convergence</code> during training. With well-scaled features, the algorithm can take more substantial steps towards the minimum of the cost function, <code>reducing the number of iterations</code> needed for convergence.</p>
+<p><strong><em>Improved Numerical Stability</em></strong>: - Normalization enhances the numerical stability of the optimization process. It helps prevent issues like <code>vanishing or exploding gradients</code>, which can occur when working with features of vastly different magnitudes.</p>
+<p><strong><em>Regularization Considerations</em></strong>: - Some regularization techniques, such as L1 and L2 regularization, are sensitive to the scale of features. Normalizing features ensures that regularization terms act uniformly across all features, leading to a fair and effective regularization.</p>
+</section>
+</section>
+<section id="categorial-data-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="categorial-data-techniques">3.2 Categorial Data Techniques:</h2>
+<p>Categorical data itself cannot be normalized in the same way numerical data is</p>
+<p><strong><em>Dummy Variables or (One-Hot Encoding)</em></strong>: - Create a new binary feature for each category within the original categorical variable. - Each new feature gets a value of 1 if the data point belongs to that category, and 0 otherwise. - This is a more robust approach.</p>
+<p><strong><em>Label Encoding</em></strong>: - Assign a unique numerical value (integer) to each category. - For example, “Blue” = 1, “Brown” = 2, and “Green” = 3 for eye color categories.</p>
+</section>
+</section>
+<section id="model" class="level1">
+<h1>4. Model</h1>
+<p>Lets create a quadratic equation to model some data.</p>
+<section id="create-the-quadratic-equation" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-quadratic-equation">4.1 Create the Quadratic Equation</h2>
+<div id="cell-26" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quad_fn(a,b,c,x): <span class="cf">return</span> a<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">*</span>x <span class="op">+</span> c </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> custom_quad_fn(a,b,c): <span class="cf">return</span> partial(quad_fn, a,b,c) <span class="co"># partial fixes a b c</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>quad_111 <span class="op">=</span> custom_quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>quad_111 <span class="co"># quadratic function f(x): 1(x)^2 + 1(x) + 1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>quad_111(<span class="dv">1</span>) <span class="co"># quadratic function f(1): 1(1)^2 + 1(1) + 1 = 1 + 1 + 1 = 3 </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>3</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-function" class="level2">
+<h2 class="anchored" data-anchor-id="plot-function">4.2 Plot Function</h2>
+<p><strong><em>Inputs</em></strong>: - custom_quad_fn (above) (partial_fn) - x-limits (min, max)(numeric) - colour (str) - y-limit (numeric)</p>
+<p><strong><em>Outputs</em></strong>: - x-values (tensor): creates 2-D tensor of x-values for plotting based on x-limits - f(x) (tensor) : output of custom_quad_fn based on x-values (tensor)</p>
+<div id="cell-28" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> torch</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ***Inputs***: </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - custom_quad_fn (above) (partial_fn) </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - x-limits (min, max)(numeric) </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - colour (str)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># - y-limit (numeric)  </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># quad_111(1) # quadratic function f(1): 1(1)^2 + 1(1) + 1 = 1 + 1 + 1 = 3 </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># quad_111(2) # quadratic function f(2): 1(2)^2 + 1(2) + 1 = 4 + 2 + 1 = 7</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># quad_111(3) # quadratic function f(3): 1(3)^2 + 1(3) + 1 = 9 + 3 + 1 = 13 </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>min_y, max_y <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, <span class="dv">13</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>min_x, max_x <span class="op">=</span> <span class="op">-</span><span class="fl">2.1</span>, <span class="fl">2.1</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># a,b,c = 3,2,1</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># quad_custom_fn = custom_quad_fn(a,b,c)</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>quad_321 <span class="op">=</span> custom_quad_fn(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>) <span class="co"># og function</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_quad(quad_abc,min_x<span class="op">=-</span><span class="fl">2.1</span>, max_x <span class="op">=</span> <span class="fl">2.1</span>, min_y<span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, max_y<span class="op">=</span> <span class="dv">13</span> ):</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    x_tnsr <span class="op">=</span> torch.linspace(min_x, max_x,steps<span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    x_tnsr <span class="op">=</span> x_tnsr[:,<span class="va">None</span>] <span class="co">## WHY?</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    y_tnsr_output <span class="op">=</span> quad_abc(x_tnsr) <span class="co"># the shape of y follows x</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    plt.ylim(min_y,max_y)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    plt.plot(x_tnsr, y_tnsr_output)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>NameError: name 'interact' is not defined</code></pre>
+</div>
+</div>
+<div id="cell-29" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from ipywidgets import interact</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from fastai.basics import *</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> noise(x, scale): <span class="cf">return</span> np.random.normal(scale<span class="op">=</span>scale, size<span class="op">=</span>x.shape)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_noise(x, mult, add): <span class="cf">return</span> x <span class="op">*</span> (<span class="dv">1</span><span class="op">+</span>noise(x,mult)) <span class="op">+</span> noise(x,add)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><strong>Note</strong>:</p>
 <ul>
 <li>These coefficients are started as <code>random</code> because we have to start somewhere.</li>
 <li>Starting off random parameters is generally a good practice, the art is then to incrementally updating our coefficients (known as <code>gradient descent</code>) to make our model (<code>neural network</code>) do better (<code>improving accuracy</code> or <code>decreasing our loss function</code>) at each iteration (known as <code>epoch</code>).</li>
 </ul>
-</section>
 <section id="tba-step-accuracy" class="level3">
 <h3 class="anchored" data-anchor-id="tba-step-accuracy">2.4 TBA STEP Accuracy</h3>
 <ul>
@@ -492,180 +592,181 @@ These groups technically surivived the Titanic so the model will say all their c
 <section id="simulate-data" class="level2">
 <h2 class="anchored" data-anchor-id="simulate-data">2. Simulate Data</h2>
 <p>Simulate content</p>
-<div id="cell-18" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np, torch</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> noise(x, scale): <span class="cf">return</span> np.random.normal(scale<span class="op">=</span>scale, size<span class="op">=</span>x.shape)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_noise(x, mult, add): <span class="cf">return</span> x <span class="op">*</span> (<span class="dv">1</span><span class="op">+</span>noise(x,mult)) <span class="op">+</span> noise(x,add)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>actual_x_values_tsr <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, steps<span class="op">=</span><span class="dv">20</span>)[:,<span class="va">None</span>] <span class="co"># simulate 20 actual x-values + shape to 2D tensor</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> actual_function(x): <span class="cf">return</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># In reality we don't have a real function like this to use, </span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># however we use this + add noise, which simulates real data</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># then we try to model this noisey data</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>actual_y_values_unrealistic_tsr <span class="op">=</span> actual_function(actual_x_values_tsr)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="co"># actual y-values of funtion we use to find</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#  but again, these values are not realistic because they're based on the real function - something that doenst exist in real life,</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># its like having the exact function that determines whether a photo is a cat or not</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># we can only approximate functions and its parameters</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># in real world, data has noise,</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># introduce data to these unrealistic real values to product realistic actual values</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># okay so why dont we need to add noise to actual_x_values? its any input is realistic/real world</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># any photo is can be asked 'is it a cat?'</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># any passenger with any characters can be asked 'did the passenger survive?</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>actual_y_values_realistic_tsr <span class="op">=</span> add_noise(actual_y_values_unrealistic_tsr, <span class="fl">0.15</span>, <span class="fl">1.5</span>) <span class="co"># use actualy y-values + add noise - to create simulated real data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-33" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np, torch</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> noise(x, scale): <span class="cf">return</span> np.random.normal(scale<span class="op">=</span>scale, size<span class="op">=</span>x.shape)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_noise(x, mult, add): <span class="cf">return</span> x <span class="op">*</span> (<span class="dv">1</span><span class="op">+</span>noise(x,mult)) <span class="op">+</span> noise(x,add)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>actual_x_values_tsr <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, steps<span class="op">=</span><span class="dv">20</span>)[:,<span class="va">None</span>] <span class="co"># simulate 20 actual x-values + shape to 2D tensor</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> actual_function(x): <span class="cf">return</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># In reality we don't have a real function like this to use, </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># however we use this + add noise, which simulates real data</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># then we try to model this noisey data</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>actual_y_values_unrealistic_tsr <span class="op">=</span> actual_function(actual_x_values_tsr)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> <span class="co"># actual y-values of funtion we use to find</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#  but again, these values are not realistic because they're based on the real function - something that doenst exist in real life,</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># its like having the exact function that determines whether a photo is a cat or not</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># we can only approximate functions and its parameters</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># in real world, data has noise,</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># introduce data to these unrealistic real values to product realistic actual values</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># okay so why dont we need to add noise to actual_x_values? its any input is realistic/real world</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># any photo is can be asked 'is it a cat?'</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># any passenger with any characters can be asked 'did the passenger survive?</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>actual_y_values_realistic_tsr <span class="op">=</span> add_noise(actual_y_values_unrealistic_tsr, <span class="fl">0.15</span>, <span class="fl">1.5</span>) <span class="co"># use actualy y-values + add noise - to create simulated real data </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-19" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#now that we have a set of (actual realistic) 'data'</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. try 'model' it with a quadratic equation </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. create loss function - mean absolute error - difference between each point of actual y vs predicted y at each x, find difference and then absolute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-34" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#now that we have a set of (actual realistic) 'data'</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. try 'model' it with a quadratic equation </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. create loss function - mean absolute error - difference between each point of actual y vs predicted y at each x, find difference and then absolute</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-20" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># actual_x_values[:5],actual_y_values_realistic[:5]</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create quad function with parameters</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quad_fn(a,b,c,x): <span class="cf">return</span> a<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">*</span>x <span class="op">+</span> c</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x1 <span class="op">=</span> quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x1  <span class="co"># 3 = (1*1^2) + (1*1) + (1) = 1+1+1</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x2 <span class="op">=</span> quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x2  <span class="co"># 7 = (1*2^2) + (2*1) + (2) = 4+2+1</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Its quite cumbersome to put a new x-value through the function, to get a corresponding predicted y-value</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ideally we can provide a list of xs to get a list of predicted ys (x-tensor -&gt; f -&gt; y-tensor)</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># and also the coefficients are parameterised</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mk_quad_fn(a,b,c): <span class="cf">return</span> partial(quad_fn,a,b,c)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>quad111 <span class="op">=</span> mk_quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># quad111(actual_x_values)</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>predicted_quad111_y_values_tsr <span class="op">=</span> quad111(actual_x_values_tsr) <span class="co"># remember is a 2d tensor due to added dimension with: [:,None]</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># we have actual-yand predicted-y data, lets compare them</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mae(actual, preds): <span class="cf">return</span> <span class="bu">abs</span>(preds<span class="op">-</span>actual).mean()</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>mae(actual_y_values_realistic_tsr,predicted_quad111_y_values_tsr)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-35" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># actual_x_values[:5],actual_y_values_realistic[:5]</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create quad function with parameters</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quad_fn(a,b,c,x): <span class="cf">return</span> a<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">*</span>x <span class="op">+</span> c</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x1 <span class="op">=</span> quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x1  <span class="co"># 3 = (1*1^2) + (1*1) + (1) = 1+1+1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x2 <span class="op">=</span> quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>y_a1_b1_c1_x2  <span class="co"># 7 = (1*2^2) + (2*1) + (2) = 4+2+1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Its quite cumbersome to put a new x-value through the function, to get a corresponding predicted y-value</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ideally we can provide a list of xs to get a list of predicted ys (x-tensor -&gt; f -&gt; y-tensor)</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># and also the coefficients are parameterised</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mk_quad_fn(a,b,c): <span class="cf">return</span> partial(quad_fn,a,b,c)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>quad111 <span class="op">=</span> mk_quad_fn(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># quad111(actual_x_values)</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>predicted_quad111_y_values_tsr <span class="op">=</span> quad111(actual_x_values_tsr) <span class="co"># remember is a 2d tensor due to added dimension with: [:,None]</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># we have actual-yand predicted-y data, lets compare them</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mae(actual, preds): <span class="cf">return</span> <span class="bu">abs</span>(preds<span class="op">-</span>actual).mean()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>mae(actual_y_values_realistic_tsr,predicted_quad111_y_values_tsr)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(actual_y_values_realistic_tsr,predicted_quad111_y_values_tsr)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot predictions</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># for predictions, graphically it will look better to plot a line </span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># rather than just a coressponding y-prediction to each actual y</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># lets do just corresponding ones first to see what it looks like</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, predicted_quad111_y_values_tsr)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-36" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(actual_y_values_realistic_tsr,predicted_quad111_y_values_tsr)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot predictions</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># for predictions, graphically it will look better to plot a line </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># rather than just a coressponding y-prediction to each actual y</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># lets do just corresponding ones first to see what it looks like</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, predicted_quad111_y_values_tsr)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-22" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(actual_x_values_tsr, predicted_quad111_y_values_tsr)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot y-line prediction</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.plot(actual_x_values_tsr, predicted_quad111_y_values_tsr, <span class="st">'r'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-37" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(actual_x_values_tsr, predicted_quad111_y_values_tsr)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot y-line prediction</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>plt.plot(actual_x_values_tsr, predicted_quad111_y_values_tsr, <span class="st">'r'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(a<span class="op">=</span><span class="dv">1</span>,b<span class="op">=</span><span class="dv">1</span>,c<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_both(a,b,c):</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># interactive_predicted_quad_y_values_tsr = custom_quad_fn(actual_x_values_tsr)</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    actual_x_values_for_plotting_tsr <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="fl">2.1</span>,<span class="fl">2.1</span>,<span class="dv">100</span>)[:,<span class="va">None</span>]</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    custom_quad_fn <span class="op">=</span> mk_quad_fn(a,b,c)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    interactive_predicted_quad_y_values_tsr <span class="op">=</span> custom_quad_fn(actual_x_values_for_plotting_tsr)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    plt.ylim((<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>))</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(actual_x_values_for_plotting_tsr, interactive_predicted_quad_y_values_tsr, <span class="st">'r'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-38" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(a<span class="op">=</span><span class="dv">1</span>,b<span class="op">=</span><span class="dv">1</span>,c<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_both(a,b,c):</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># interactive_predicted_quad_y_values_tsr = custom_quad_fn(actual_x_values_tsr)</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    plt.scatter(actual_x_values_tsr, actual_y_values_realistic_tsr)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    actual_x_values_for_plotting_tsr <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="fl">2.1</span>,<span class="fl">2.1</span>,<span class="dv">100</span>)[:,<span class="va">None</span>]</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    custom_quad_fn <span class="op">=</span> mk_quad_fn(a,b,c)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    interactive_predicted_quad_y_values_tsr <span class="op">=</span> custom_quad_fn(actual_x_values_for_plotting_tsr)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    plt.ylim((<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>))</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(actual_x_values_for_plotting_tsr, interactive_predicted_quad_y_values_tsr, <span class="st">'r'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.basics <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">'figure'</span>, dpi<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_function(f, title<span class="op">=</span><span class="va">None</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">2.1</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">2.1</span>, color<span class="op">=</span><span class="st">'r'</span>, ylim<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> torch.linspace(<span class="bu">min</span>,<span class="bu">max</span>, <span class="dv">100</span>)[:,<span class="va">None</span>]</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ylim: plt.ylim(ylim)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, f(x), color)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> title <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: plt.title(title)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x): <span class="cf">return</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_function(f, "$3x^2 + 2x + 1$")</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quad(a, b, c, x): <span class="cf">return</span> a<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">*</span>x <span class="op">+</span> c</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mk_quad(a,b,c): <span class="cf">return</span> partial(quad, a,b,c)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># f2 = mk_quad(3,2,1)</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_function(f2)</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> noise(x, scale): <span class="cf">return</span> np.random.normal(scale<span class="op">=</span>scale, size<span class="op">=</span>x.shape)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_noise(x, mult, add): <span class="cf">return</span> x <span class="op">*</span> (<span class="dv">1</span><span class="op">+</span>noise(x,mult)) <span class="op">+</span> noise(x,add)</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, steps<span class="op">=</span><span class="dv">20</span>)[:,<span class="va">None</span>]</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> add_noise(f(x), <span class="fl">0.15</span>, <span class="fl">1.5</span>)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(a<span class="op">=</span><span class="fl">1.1</span>, b<span class="op">=</span><span class="fl">1.1</span>, c<span class="op">=</span><span class="fl">1.1</span>)</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_quad(a, b, c):</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    plt.scatter(x,y)</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    plot_function(mk_quad(a,b,c), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>))</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-42" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.basics <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">'figure'</span>, dpi<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_function(f, title<span class="op">=</span><span class="va">None</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">2.1</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">2.1</span>, color<span class="op">=</span><span class="st">'r'</span>, ylim<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> torch.linspace(<span class="bu">min</span>,<span class="bu">max</span>, <span class="dv">100</span>)[:,<span class="va">None</span>]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ylim: plt.ylim(ylim)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, f(x), color)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> title <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: plt.title(title)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x): <span class="cf">return</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_function(f, "$3x^2 + 2x + 1$")</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quad(a, b, c, x): <span class="cf">return</span> a<span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> b<span class="op">*</span>x <span class="op">+</span> c</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mk_quad(a,b,c): <span class="cf">return</span> partial(quad, a,b,c)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># f2 = mk_quad(3,2,1)</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_function(f2)</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> noise(x, scale): <span class="cf">return</span> np.random.normal(scale<span class="op">=</span>scale, size<span class="op">=</span>x.shape)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_noise(x, mult, add): <span class="cf">return</span> x <span class="op">*</span> (<span class="dv">1</span><span class="op">+</span>noise(x,mult)) <span class="op">+</span> noise(x,add)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, steps<span class="op">=</span><span class="dv">20</span>)[:,<span class="va">None</span>]</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> add_noise(f(x), <span class="fl">0.15</span>, <span class="fl">1.5</span>)</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(a<span class="op">=</span><span class="fl">1.1</span>, b<span class="op">=</span><span class="fl">1.1</span>, c<span class="op">=</span><span class="fl">1.1</span>)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_quad(a, b, c):</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    plt.scatter(x,y)</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    plot_function(mk_quad(a,b,c), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">13</span>))</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"7f347031dbe44a7184565f5e30bc26bd","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 </div>
-<div id="cell-28" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rectified_linear(m,b,x):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> m<span class="op">*</span>x<span class="op">+</span>b</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.clip(y, <span class="fl">0.</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-43" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rectified_linear(m,b,x):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> m<span class="op">*</span>x<span class="op">+</span>b</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.clip(y, <span class="fl">0.</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-29" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plot_function(partial(rectified_linear, <span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-44" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plot_function(partial(rectified_linear, <span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-30" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rectified_linear2(m,b,x): <span class="cf">return</span> F.relu(m<span class="op">*</span>x<span class="op">+</span>b)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plot_function(partial(rectified_linear2, <span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-45" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rectified_linear2(m,b,x): <span class="cf">return</span> F.relu(m<span class="op">*</span>x<span class="op">+</span>b)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plot_function(partial(rectified_linear2, <span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-31" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(m<span class="op">=</span><span class="fl">1.5</span>, b<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_relu(m, b):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    plot_function(partial(rectified_linear, m,b), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-46" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(m<span class="op">=</span><span class="fl">1.5</span>, b<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_relu(m, b):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    plot_function(partial(rectified_linear, m,b), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-32" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> double_relu(m1,b1,m2,b2,x):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rectified_linear(m1,b1,x) <span class="op">+</span> rectified_linear(m2,b2,x)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(m1<span class="op">=-</span><span class="fl">1.5</span>, b1<span class="op">=-</span><span class="fl">1.5</span>, m2<span class="op">=</span><span class="fl">1.5</span>, b2<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_double_relu(m1, b1, m2, b2):</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    plot_function(partial(double_relu, m1,b1,m2,b2), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-47" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> double_relu(m1,b1,m2,b2,x):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rectified_linear(m1,b1,x) <span class="op">+</span> rectified_linear(m2,b2,x)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="at">@interact</span>(m1<span class="op">=-</span><span class="fl">1.5</span>, b1<span class="op">=-</span><span class="fl">1.5</span>, m2<span class="op">=</span><span class="fl">1.5</span>, b2<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_double_relu(m1, b1, m2, b2):</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    plot_function(partial(double_relu, m1,b1,m2,b2), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
