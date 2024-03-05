@@ -1,37 +1,27 @@
 [
   {
-    "listing": "/notes.html",
+    "listing": "/leetcode.html",
     "items": [
-      "/posts/notes/coding/3-bash.html",
-      "/posts/notes/linear_algebra/6-more_eigen_egs.html",
-      "/posts/notes/linear_algebra/4-diagonlisation.html",
-      "/posts/notes/linear_algebra/5-similar_matrices.html",
-      "/posts/notes/coding/2-linux_setup.html",
-      "/posts/notes/coding/1-github_resolve.html",
-      "/posts/notes/linear_algebra/3-eigen_examples.html",
-      "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
-      "/posts/notes/linear_algebra/1-chg_of_bse.html"
-    ]
-  },
-  {
-    "listing": "/kaggle.html",
-    "items": [
-      "/posts/kaggle/2-us-patents-offline/index.html",
-      "/posts/kaggle/1-us-patents/index.html"
+      "/posts/leetcode/4-search_a_2d_matrix/LC74.html",
+      "/posts/leetcode/3-binary_search/LC704.html",
+      "/posts/leetcode/2-reverse_polish_notation/LC150.html",
+      "/posts/leetcode/1-min_stack/LC155.html",
+      "/posts/leetcode/0-welcome_to_lc/index.html"
     ]
   },
   {
     "listing": "/index.html",
     "items": [
-      "/posts/2024-03-02-nice_and_noisy/index.html",
+      "/posts/2024-03-05-neural_networks_revisted/index.html",
       "/posts/2024-03-01-neural_network_basics_revisited/index.html",
+      "/posts/2024-03-02-nice_and_noisy/index.html",
       "/posts/notes/coding/3-bash.html",
       "/posts/notes/linear_algebra/6-more_eigen_egs.html",
-      "/posts/notes/linear_algebra/4-diagonlisation.html",
       "/posts/notes/linear_algebra/5-similar_matrices.html",
+      "/posts/notes/linear_algebra/4-diagonlisation.html",
       "/posts/notes/coding/2-linux_setup.html",
-      "/posts/notes/coding/1-github_resolve.html",
       "/posts/notes/linear_algebra/3-eigen_examples.html",
+      "/posts/notes/coding/1-github_resolve.html",
       "/posts/kaggle/2-us-patents-offline/index.html",
       "/posts/kaggle/1-us-patents/index.html",
       "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
@@ -50,8 +40,8 @@
       "/posts/2024-01-25-99_gradio_app/index.html",
       "/posts/2024-01-24-99_multi_classifier/index.html",
       "/posts/2024-01-23-99-testing-different_archs/index.html",
-      "/posts/2024-01-19-98_embed_gradio_hgface/index.html",
       "/posts/2024-01-19-99_saving_a_fastai_model/index.html",
+      "/posts/2024-01-19-98_embed_gradio_hgface/index.html",
       "/posts/2024-01-18-99_rice_vs_noodles/index.html",
       "/posts/2024-01-16-96_post_with_git_clone/index.html",
       "/posts/2024-01-16-97_post_with_notebook/index.html",
@@ -60,13 +50,24 @@
     ]
   },
   {
-    "listing": "/leetcode.html",
+    "listing": "/notes.html",
     "items": [
-      "/posts/leetcode/4-search_a_2d_matrix/LC74.html",
-      "/posts/leetcode/3-binary_search/LC704.html",
-      "/posts/leetcode/2-reverse_polish_notation/LC150.html",
-      "/posts/leetcode/1-min_stack/LC155.html",
-      "/posts/leetcode/0-welcome_to_lc/index.html"
+      "/posts/notes/coding/3-bash.html",
+      "/posts/notes/linear_algebra/6-more_eigen_egs.html",
+      "/posts/notes/linear_algebra/5-similar_matrices.html",
+      "/posts/notes/linear_algebra/4-diagonlisation.html",
+      "/posts/notes/coding/2-linux_setup.html",
+      "/posts/notes/linear_algebra/3-eigen_examples.html",
+      "/posts/notes/coding/1-github_resolve.html",
+      "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
+      "/posts/notes/linear_algebra/1-chg_of_bse.html"
+    ]
+  },
+  {
+    "listing": "/kaggle.html",
+    "items": [
+      "/posts/kaggle/2-us-patents-offline/index.html",
+      "/posts/kaggle/1-us-patents/index.html"
     ]
   }
 ]
