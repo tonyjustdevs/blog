@@ -37,51 +37,39 @@
     <lastmod>2024-03-05T05:48:12.206Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-98_embed_gradio_hgface/index.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-99_saving_a_fastai_model/index.html</loc>
     <lastmod>2024-03-05T05:48:10.306Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-05-neural_networks_revisted/index.html</loc>
-    <lastmod>2024-03-05T10:31:33.327Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/index.html</loc>
     <lastmod>2024-03-05T05:48:11.546Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/2-us-patents-offline/index.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-11-relu/index.html</loc>
+    <lastmod>2024-03-12T16:33:28.301Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/index.html</loc>
     <lastmod>2024-03-05T05:48:12.226Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-23-99-testing-different_archs/index.html</loc>
-    <lastmod>2024-03-05T05:48:10.616Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-98_huggingface/index.html</loc>
+    <lastmod>2024-03-05T05:48:11.536Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-98_post_without_code/index.html</loc>
-    <lastmod>2024-03-05T05:48:10.206Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-18-99_rice_vs_noodles/index.html</loc>
+    <lastmod>2024-03-05T05:48:10.216Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/3-binary_search/LC704.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/0-welcome_to_lc/index.html</loc>
     <lastmod>2024-03-05T05:48:12.236Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/4-search_a_2d_matrix/LC74.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/1-min_stack/LC155.html</loc>
     <lastmod>2024-03-05T05:48:12.236Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/2-reverse_polish_notation/LC150.html</loc>
-    <lastmod>2024-03-05T05:48:12.236Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-96_post_with_git_clone/index.html</loc>
-    <lastmod>2024-03-05T05:48:10.206Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/about.html</loc>
-    <lastmod>2024-03-05T05:48:10.206Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/index.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-97_post_with_notebook/index.html</loc>
     <lastmod>2024-03-05T05:48:10.206Z</lastmod>
   </url>
   <url>
@@ -89,27 +77,39 @@
     <lastmod>2024-03-05T05:48:10.206Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-97_post_with_notebook/index.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/index.html</loc>
     <lastmod>2024-03-05T05:48:10.206Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/1-min_stack/LC155.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/about.html</loc>
+    <lastmod>2024-03-05T05:48:10.206Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-96_post_with_git_clone/index.html</loc>
+    <lastmod>2024-03-05T05:48:10.206Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/2-reverse_polish_notation/LC150.html</loc>
     <lastmod>2024-03-05T05:48:12.236Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/0-welcome_to_lc/index.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/4-search_a_2d_matrix/LC74.html</loc>
     <lastmod>2024-03-05T05:48:12.236Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-18-99_rice_vs_noodles/index.html</loc>
-    <lastmod>2024-03-05T05:48:10.216Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/3-binary_search/LC704.html</loc>
+    <lastmod>2024-03-05T05:48:12.236Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-98_huggingface/index.html</loc>
-    <lastmod>2024-03-05T05:48:11.536Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-98_post_without_code/index.html</loc>
+    <lastmod>2024-03-05T05:48:10.206Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/index.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-23-99-testing-different_archs/index.html</loc>
+    <lastmod>2024-03-05T05:48:10.616Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/2-us-patents-offline/index.html</loc>
     <lastmod>2024-03-05T05:48:12.226Z</lastmod>
   </url>
   <url>
@@ -118,15 +118,11 @@
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-02-nice_and_noisy/index.html</loc>
-    <lastmod>2024-03-05T05:48:12.226Z</lastmod>
+    <lastmod>2024-03-11T09:14:20.724Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-99_saving_a_fastai_model/index.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-98_embed_gradio_hgface/index.html</loc>
     <lastmod>2024-03-05T05:48:10.306Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-01-neural_network_basics_revisited/index.html</loc>
-    <lastmod>2024-03-05T05:48:12.226Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-31-99_neural_network_basics/index.html</loc>
