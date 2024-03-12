@@ -243,17 +243,17 @@ window.Quarto = {
   <li><a href="#torch.nn.functional.relu" id="toc-torch.nn.functional.relu" class="nav-link" data-scroll-target="#torch.nn.functional.relu">2.4 <code>torch.nn.functional.relu</code></a></li>
   </ul></li>
   <li><a href="#single-relu-plotter" id="toc-single-relu-plotter" class="nav-link" data-scroll-target="#single-relu-plotter">3. Single ReLU plotter</a></li>
-  <li><a href="#double-relu-plotter" id="toc-double-relu-plotter" class="nav-link" data-scroll-target="#double-relu-plotter">3. Double ReLU plotter</a></li>
-  <li><a href="#gradient-descent-on-double-relu" id="toc-gradient-descent-on-double-relu" class="nav-link" data-scroll-target="#gradient-descent-on-double-relu">4. Gradient Descent on Double ReLU</a>
+  <li><a href="#double-relu-plotter" id="toc-double-relu-plotter" class="nav-link" data-scroll-target="#double-relu-plotter">4. Double ReLU plotter</a></li>
+  <li><a href="#gradient-descent-on-double-relu" id="toc-gradient-descent-on-double-relu" class="nav-link" data-scroll-target="#gradient-descent-on-double-relu">5. Gradient Descent on Double ReLU</a>
   <ul class="collapse">
-  <li><a href="#create-noisey-data-we-wish-to-model" id="toc-create-noisey-data-we-wish-to-model" class="nav-link" data-scroll-target="#create-noisey-data-we-wish-to-model">4.1 Create noisey data we wish to model</a></li>
-  <li><a href="#recreate-double-relu-functions-learnt-earlier" id="toc-recreate-double-relu-functions-learnt-earlier" class="nav-link" data-scroll-target="#recreate-double-relu-functions-learnt-earlier">4.2 Recreate Double ReLU functions learnt earlier</a></li>
-  <li><a href="#create-mae-calculate-and-loss-function" id="toc-create-mae-calculate-and-loss-function" class="nav-link" data-scroll-target="#create-mae-calculate-and-loss-function">4.3 Create MAE calculate and Loss Function</a></li>
-  <li><a href="#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" id="toc-loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" class="nav-link" data-scroll-target="#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5">4.4 Loss is <code>4.1318</code> with original input tensor([<code>0.5,0.5,-0.5,-0.5</code>])</a></li>
-  <li><a href="#loss-with-gradient-descent-after-40-epochs" id="toc-loss-with-gradient-descent-after-40-epochs" class="nav-link" data-scroll-target="#loss-with-gradient-descent-after-40-epochs">4.5 <code>1.96</code> Loss with Gradient Descent after 40 epochs</a></li>
-  <li><a href="#predictions-blue-line-vs-data-red-dots" id="toc-predictions-blue-line-vs-data-red-dots" class="nav-link" data-scroll-target="#predictions-blue-line-vs-data-red-dots">4.6 Predictions (blue line) vs Data (red dots)</a></li>
+  <li><a href="#create-noisey-data-we-wish-to-model" id="toc-create-noisey-data-we-wish-to-model" class="nav-link" data-scroll-target="#create-noisey-data-we-wish-to-model">5.1 Create noisey data we wish to model</a></li>
+  <li><a href="#recreate-double-relu-functions-learnt-earlier" id="toc-recreate-double-relu-functions-learnt-earlier" class="nav-link" data-scroll-target="#recreate-double-relu-functions-learnt-earlier">5.2 Recreate Double ReLU functions learnt earlier</a></li>
+  <li><a href="#create-mae-calculate-and-loss-function" id="toc-create-mae-calculate-and-loss-function" class="nav-link" data-scroll-target="#create-mae-calculate-and-loss-function">5.3 Create MAE calculate and Loss Function</a></li>
+  <li><a href="#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" id="toc-loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" class="nav-link" data-scroll-target="#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5">5.4 Loss is <code>4.1318</code> with original input tensor([<code>0.5,0.5,-0.5,-0.5</code>])</a></li>
+  <li><a href="#loss-with-gradient-descent-after-40-epochs" id="toc-loss-with-gradient-descent-after-40-epochs" class="nav-link" data-scroll-target="#loss-with-gradient-descent-after-40-epochs">5.5 <code>1.96</code> Loss with Gradient Descent after 40 epochs</a></li>
+  <li><a href="#predictions-blue-line-vs-data-red-dots" id="toc-predictions-blue-line-vs-data-red-dots" class="nav-link" data-scroll-target="#predictions-blue-line-vs-data-red-dots">5.6 Predictions (blue line) vs Data (red dots)</a></li>
   </ul></li>
-  <li><a href="#completed" id="toc-completed" class="nav-link" data-scroll-target="#completed">5. Completed</a></li>
+  <li><a href="#completed" id="toc-completed" class="nav-link" data-scroll-target="#completed">6. Completed</a></li>
   </ul>
 </nav>
     </div>
@@ -412,7 +412,7 @@ window.Quarto = {
 </div>
 </section>
 <section id="double-relu-plotter" class="level1">
-<h1>3. Double ReLU plotter</h1>
+<h1>4. Double ReLU plotter</h1>
 <div id="cell-17" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> nn</span>
@@ -449,9 +449,9 @@ window.Quarto = {
 </div>
 </section>
 <section id="gradient-descent-on-double-relu" class="level1">
-<h1>4. Gradient Descent on Double ReLU</h1>
+<h1>5. Gradient Descent on Double ReLU</h1>
 <section id="create-noisey-data-we-wish-to-model" class="level2">
-<h2 class="anchored" data-anchor-id="create-noisey-data-we-wish-to-model">4.1 Create noisey data we wish to model</h2>
+<h2 class="anchored" data-anchor-id="create-noisey-data-we-wish-to-model">5.1 Create noisey data we wish to model</h2>
 <div id="cell-20" class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> nn</span>
@@ -483,8 +483,8 @@ window.Quarto = {
 </div>
 </section>
 <section id="recreate-double-relu-functions-learnt-earlier" class="level2">
-<h2 class="anchored" data-anchor-id="recreate-double-relu-functions-learnt-earlier">4.2 Recreate Double ReLU functions learnt earlier</h2>
-<div id="cell-22" class="cell">
+<h2 class="anchored" data-anchor-id="recreate-double-relu-functions-learnt-earlier">5.2 Recreate Double ReLU functions learnt earlier</h2>
+<div id="cell-22" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu_dbl_fn(m1,b1,m2,b2,x):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    y1 <span class="op">=</span> m1<span class="op">*</span>x<span class="op">+</span>b1</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    y2 <span class="op">=</span> m2<span class="op">*</span>x<span class="op">+</span>b2</span>
@@ -495,7 +495,7 @@ window.Quarto = {
 </div>
 </section>
 <section id="create-mae-calculate-and-loss-function" class="level2">
-<h2 class="anchored" data-anchor-id="create-mae-calculate-and-loss-function">4.3 Create MAE calculate and Loss Function</h2>
+<h2 class="anchored" data-anchor-id="create-mae-calculate-and-loss-function">5.3 Create MAE calculate and Loss Function</h2>
 <div id="cell-24" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_mae(actual, preds): <span class="cf">return</span> torch.<span class="bu">abs</span>(actual<span class="op">-</span>preds).mean()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -507,7 +507,7 @@ window.Quarto = {
 </div>
 </section>
 <section id="loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" class="level2">
-<h2 class="anchored" data-anchor-id="loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5">4.4 Loss is <code>4.1318</code> with original input tensor([<code>0.5,0.5,-0.5,-0.5</code>])</h2>
+<h2 class="anchored" data-anchor-id="loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5">5.4 Loss is <code>4.1318</code> with original input tensor([<code>0.5,0.5,-0.5,-0.5</code>])</h2>
 <p>Original model predictions (blue line) are not great, not very close to our data (red dots)</p>
 <p>That makes sense since I arbitrarily chose the parameters of <code>0.5</code> and <code>-0.5</code></p>
 <div id="cell-26" class="cell" data-execution_count="20">
@@ -545,7 +545,7 @@ window.Quarto = {
 </div>
 </section>
 <section id="loss-with-gradient-descent-after-40-epochs" class="level2">
-<h2 class="anchored" data-anchor-id="loss-with-gradient-descent-after-40-epochs">4.5 <code>1.96</code> Loss with Gradient Descent after 40 epochs</h2>
+<h2 class="anchored" data-anchor-id="loss-with-gradient-descent-after-40-epochs">5.5 <code>1.96</code> Loss with Gradient Descent after 40 epochs</h2>
 <div id="cell-29" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>m1b1_m2b2_tsr <span class="op">=</span> torch.tensor([<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.5</span>],requires_grad<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -601,7 +601,7 @@ loss_40: 1.96 - [tensor([ 4.4251,  2.5245, -3.3031,  0.8250], requires_grad=True
 </div>
 </section>
 <section id="predictions-blue-line-vs-data-red-dots" class="level2">
-<h2 class="anchored" data-anchor-id="predictions-blue-line-vs-data-red-dots">4.6 Predictions (blue line) vs Data (red dots)</h2>
+<h2 class="anchored" data-anchor-id="predictions-blue-line-vs-data-red-dots">5.6 Predictions (blue line) vs Data (red dots)</h2>
 <p>New Parameters has created a Double ReLU predictions shaped closer to the Noisey Data as seen below!</p>
 <div id="cell-31" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu_dbl_interactive_plotter_fn(m1,b1,m2,b2):</span>
@@ -631,7 +631,7 @@ loss_40: 1.96 - [tensor([ 4.4251,  2.5245, -3.3031,  0.8250], requires_grad=True
 </section>
 </section>
 <section id="completed" class="level1">
-<h1>5. Completed</h1>
+<h1>6. Completed</h1>
 <p>I managed to apply <code>gradient descent</code> to a <code>double relu</code> and reduce errror by 50%, not bad!</p>
 <p>In a future post, I’ll fit more ReLUs to see how close we can get to our data.</p>
 
