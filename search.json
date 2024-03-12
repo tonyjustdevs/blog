@@ -182,207 +182,214 @@
     "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Host on HuggingFace"
   },
   {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html",
-    "title": "How To Setup a Kaggle API",
-    "section": "",
-    "text": "I’m planning to learn and test myself with competitions on Kaggle.\nKaggle is a place with real-world problems where Data Scientists and alike can go against each other to solve problems with Machine Learning.\nFrom my understanding:\n- There is a validation set where your model is tested against and a public leader board to see how you’re going.\n- At the end of the competition, there is an unseen test set where everyones models is tested against and where the final rankings are determined.\n- This is quite reflective of real world where preparing a representative validation set is vital, thus will perform well on the test set.\n- A common mistake for newbs is over-fitting to the validation set. I’m ready to make that mistake 🤣.\nAs for the Kaggle API, you can download the kernel which is the necessary datasets and source files to do the competitions.\nAlternatively, I can use the notebooks on their website. I plan to try doing competitions both ways.\nThis is how I set up my Kaggle API"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
-    "title": "How To Setup a Kaggle API",
-    "section": "1. Install Library",
-    "text": "1. Install Library\npip install python"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
-    "title": "How To Setup a Kaggle API",
-    "section": "2. Create API token (.json file)",
-    "text": "2. Create API token (.json file)\n\nGo to Kaggle\n\nGo to Settings\n\nCreate New Token"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
-    "title": "How To Setup a Kaggle API",
-    "section": "3. Save to your local .kaggle folder (Windows)",
-    "text": "3. Save to your local .kaggle folder (Windows)\nLocation: C:\\Users\\&lt;Windows-username&gt;\\.kaggle\\kaggle.json\nKaggle Github Reference\n\n3.1 Pasted into the wrong folder?\nIf you did something wrong then ran kaggle in the terminal, you’ll an error (telling you where to put it):"
-  },
-  {
-    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
-    "href": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
-    "title": "How To Setup a Kaggle API",
-    "section": "4 Start Kaggling",
-    "text": "4 Start Kaggling\n\nimport kaggle\n??kaggle\n\nType:        module\nString form: &lt;module 'kaggle' from 'c:\\\\Users\\\\tonyp\\\\miniconda3\\\\envs\\\\fastai\\\\Lib\\\\site-packages\\\\kaggle\\\\__init__.py'&gt;\nFile:        c:\\users\\tonyp\\miniconda3\\envs\\fastai\\lib\\site-packages\\kaggle\\__init__.py\nSource:     \n#!/usr/bin/python\n#\n# Copyright 2024 Kaggle Inc\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n# coding=utf-8\nfrom __future__ import absolute_import\nfrom kaggle.api.kaggle_api_extended import KaggleApi\nfrom kaggle.api_client import ApiClient\n\napi = KaggleApi(ApiClient())\napi.authenticate()"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
-    "title": "Saving a Fast AI Model",
-    "section": "",
-    "text": "This is a short tutorial to save (export) down a fast ai model (pkl file)."
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
-    "title": "Saving a Fast AI Model",
-    "section": "1. Load Fast AI Libaries and Download Dataset",
-    "text": "1. Load Fast AI Libaries and Download Dataset\n\n!pip install -Uqq fastai\nfrom fastai.vision.all import *\n\n\npath = untar_data(URLs.PETS)/'images'\n\n\npath\n\nPath('C:/Users/tonyp/.fastai/data/oxford-iiit-pet/images')\n\n\nIf you ran it in GoogleColab or Kaggle (recommended, its faster) then it’ll be stored in the cloud. \nIf you ran it locally, its stored on your machine and you can take a look at the all the cute images! (Not recommended, its slow)"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
-    "title": "Saving a Fast AI Model",
-    "section": "2. Labelling Function",
-    "text": "2. Labelling Function\n\ndef is_cat(x): return x[0].isupper()\n\nOur data must be consistently labelled and parsed through into the model.\nFor this particular dataset, filenames starting with a Capital letter denotes a Cat, vice versa for a Non-Cat (Dog, in this case).\n\n\n\nPet Filenames\n\n\nLets write a function to handle the files names to get our labels (psuedo-code):\n1. Parse in file name and\n2. Obtain the first character and\n3. Check whether it is an upper case,\n4. If True, then it is a Cat.\nThere are various ways for us to supply the labelling to our model, in a previous blog Rice vs Noodles, the label was supplied via the parent folders name (rice folder and noodle folder).\n\nFast AI provides various helpful functions for common ways data is labelled to parse into our models\nFast AI Docs - Transforms - Label"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
-    "title": "Saving a Fast AI Model",
-    "section": "3. DataLoader",
-    "text": "3. DataLoader\nCreate the Dataloader and supply the labelling function we wrote into label_func.\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
-    "title": "Saving a Fast AI Model",
-    "section": "4. Fine-tune (Non-GPU vs GPU)",
-    "text": "4. Fine-tune (Non-GPU vs GPU)\nI attempted to fine-tune via Kaggle (GPU) and Locally (No GPU) and not suprisingly it is incredibly faster with a GPU setup.\nNvidia (and maybe other) GPUs are designed to be able to take multiple images at once (batches) grouped together (tensors) (I think 64 images at once), whereas a laptop without a GPU like mine will be processing 1 image at a time.\n\nlearn = vision_learner(dls, resnet18, metrics=error_rate)\nlearn.fine_tune(3)\n\nGPU took 35 seconds an epoch \nNon-GPU took 8 minutes an epoch"
-  },
-  {
-    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
-    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
-    "title": "Saving a Fast AI Model",
-    "section": "5. Export the model",
-    "text": "5. Export the model\n\nlearn.export('catdogmodel.pkl')\n\nIn Kaggle, the model will be saved on their cloud and you can access it by using right-hand sidebar under Notebook -&gt; Data -&gt; Output\n\nIt’s only 46 Mb!, not too shabby!\n\nThats it! We’ll go through how to use a saved/exported model in an upcoming post."
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html",
-    "href": "posts/2024-01-25-99_gradio_app/index.html",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "",
-    "text": "This post shows how to create a Gradio App (app.py) and run it locally in a browser. This app should:\nThis post is part of a series:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Upload to HuggingFace account"
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html#part-2-create-gradio-application-file-app.py",
-    "href": "posts/2024-01-25-99_gradio_app/index.html#part-2-create-gradio-application-file-app.py",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "Part 2: Create Gradio application file (app.py)",
-    "text": "Part 2: Create Gradio application file (app.py)"
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html#import-gradio-and-fast-ai-libraries",
-    "href": "posts/2024-01-25-99_gradio_app/index.html#import-gradio-and-fast-ai-libraries",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "1. Import Gradio and Fast AI libraries",
-    "text": "1. Import Gradio and Fast AI libraries\n\nfrom fastai.vision.all import * \nimport gradio as gr\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn("
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html#import-learner-.pkl-file",
-    "href": "posts/2024-01-25-99_gradio_app/index.html#import-learner-.pkl-file",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "2. Import Learner (.pkl file)",
-    "text": "2. Import Learner (.pkl file)\nRecall, this file was created and exported in Part 1\n\nIf you’re running on a Linux, you shouldn’t have any import issues.\n\nIf you’re running a Windows PC, you’ll likely to experience an error.\n\n\npets_learner = load_learner('pets_learner.pkl') \n\nNotImplementedError: cannot instantiate 'PosixPath' on your system\n\n\n\n2.1 Import Learner Error (.pkl file) Solution (Windows only)\nI found a solution here.\nNot too sure why this happens, probably linux vs windows compatibility, forward vs backlashes probably?\nImport the pathlib library below and run the code below to fix the paths:\nNote:\n- This fix is only required during the testing phase of our Gradio App.\n- This testing phase is defined as being able to run the Gradio App locally.\n- When we Upload to HuggingFace Spaces, this code fix is not required (because HF is run on Linux, hence no Posix issues, from my understanding)\n\n# only run to import pkl in windows when youre doing testing in windows | when run in hus | its run via dock images ie linux ie no problems\nimport pathlib # \ntemp = pathlib.PosixPath\npathlib.PosixPath = pathlib.WindowsPath\n\n\npets_learner = load_learner('pets_learner.pkl')"
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html#predict-the-breed-with-imported-learner",
-    "href": "posts/2024-01-25-99_gradio_app/index.html#predict-the-breed-with-imported-learner",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "3 Predict the Breed with Imported Learner",
-    "text": "3 Predict the Breed with Imported Learner\n\n3.1 Import Local Image\n\npet1 = PILImage.create('pet1.jpg')\npet1.thumbnail((224,224))\npet1\n\n\n\n\n\n\n\n\n\n\n3.2 Make prediction\nUse predict() to make prediction on the uploaded local image. The results will have 3 items:\n1. The prediction of the breed.\n2. Index of the Tensor (in point 3.)\n3. A Tensor of length 37. Why the odd number?\n- These are the probabilities of each unique breeds in our data!\n- Recall in Part 1, we determined the different categories by using a custom labelling function\n\nres = pets_learner.predict(pet1)\nres\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/1 00:00&lt;?]\n    \n    \n\n\n('Bombay',\n tensor(3),\n tensor([3.4475e-02, 1.7813e-03, 8.1388e-03, 6.3685e-01, 6.0993e-03, 4.8830e-04,\n         5.0747e-02, 8.8036e-03, 2.1084e-01, 3.4832e-02, 9.6598e-04, 7.6646e-04,\n         6.3764e-04, 2.5949e-04, 8.7999e-05, 1.3308e-03, 6.6650e-05, 5.7116e-05,\n         9.0377e-04, 6.9052e-05, 2.0095e-04, 2.1758e-05, 2.5767e-04, 2.1859e-05,\n         3.8547e-05, 1.6165e-06, 6.2601e-05, 4.3552e-05, 1.4901e-04, 9.6175e-05,\n         1.0010e-04, 1.3717e-04, 2.7684e-04, 5.5386e-05, 5.7012e-05, 4.6809e-05,\n         2.2643e-04]))\n\n\n\n\n3.3 What is the probabilities representing?\nThe probabilities tensor from predict() are the unique categories in our data and are stored in our dataloader\n\ncategories = pets_learner.dls.vocab \ncategories\n\n['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_Shorthair', 'Egyptian_Mau', 'Maine_Coon', 'Persian', 'Ragdoll', 'Russian_Blue', 'Siamese', 'Sphynx', 'american_bulldog', 'american_pit_bull_terrier', 'basset_hound', 'beagle', 'boxer', 'chihuahua', 'english_cocker_spaniel', 'english_setter', 'german_shorthaired', 'great_pyrenees', 'havanese', 'japanese_chin', 'keeshond', 'leonberger', 'miniature_pinscher', 'newfoundland', 'pomeranian', 'pug', 'saint_bernard', 'samoyed', 'scottish_terrier', 'shiba_inu', 'staffordshire_bull_terrier', 'wheaten_terrier', 'yorkshire_terrier']\n\n\n\n\n3.4 The prediction and probabilities of our image\n\n# get index of predction\nidx = res[1]\n\n# store list of probalities of our predction\nprobabilities = res[2]\n\n# get breed and probability of our prediction\ncategories[idx],probabilities[idx]\n\n\n('Bombay', tensor(0.6369))\n\n\n\n\n3.5 Probability of every category available\n\ndef classify_image_fn(img):\n    prediction, idx, probabilities = pets_learner.predict(img)\n    return dict(zip(categories, map(float, probabilities)))\n\nclassify_image_fn(pet1)     # names and probabilities\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\n{'Abyssinian': 0.034474823623895645,\n 'Bengal': 0.0017812795704230666,\n 'Birman': 0.008138809353113174,\n 'Bombay': 0.6368528604507446,\n 'British_Shorthair': 0.006099338177591562,\n 'Egyptian_Mau': 0.0004883029614575207,\n 'Maine_Coon': 0.05074741691350937,\n 'Persian': 0.008803554810583591,\n 'Ragdoll': 0.21084259450435638,\n 'Russian_Blue': 0.03483246639370918,\n 'Siamese': 0.0009659799397923052,\n 'Sphynx': 0.0007664564182050526,\n 'american_bulldog': 0.0006376394885592163,\n 'american_pit_bull_terrier': 0.0002594943216536194,\n 'basset_hound': 8.799932402325794e-05,\n 'beagle': 0.0013307805638760328,\n 'boxer': 6.664981629000977e-05,\n 'chihuahua': 5.711586709367111e-05,\n 'english_cocker_spaniel': 0.0009037724230438471,\n 'english_setter': 6.905203190399334e-05,\n 'german_shorthaired': 0.00020094779029022902,\n 'great_pyrenees': 2.1758336515631527e-05,\n 'havanese': 0.0002576670085545629,\n 'japanese_chin': 2.1859435946680605e-05,\n 'keeshond': 3.85471066692844e-05,\n 'leonberger': 1.616517351976654e-06,\n 'miniature_pinscher': 6.26009568804875e-05,\n 'newfoundland': 4.355219061835669e-05,\n 'pomeranian': 0.00014901049144100398,\n 'pug': 9.617456089472398e-05,\n 'saint_bernard': 0.0001000974079943262,\n 'samoyed': 0.0001371700782328844,\n 'scottish_terrier': 0.00027684049564413726,\n 'shiba_inu': 5.5386270105373114e-05,\n 'staffordshire_bull_terrier': 5.701235932065174e-05,\n 'wheaten_terrier': 4.680879646912217e-05,\n 'yorkshire_terrier': 0.0002264348149765283}"
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html#run-local-gradio-app",
-    "href": "posts/2024-01-25-99_gradio_app/index.html#run-local-gradio-app",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "4 Run local Gradio App",
-    "text": "4 Run local Gradio App\nTheres a variety of ways to alter the app, I’ve set the size of the images and provided some examples:\n\ngr_image = gr.Image(width=244, height=244)\ngr_label = gr.Label()\n\ninput_examples = ['pet1.jpg','pet2.jpg','pet3.jpg','pet4.jpg','pet5.jpg']\nintf = gr.Interface(fn=classify_image_fn,\n                    inputs=gr_image,    \n                    outputs=gr_label,\n                    examples=input_examples)\nintf.launch(inline=False)\n\nRunning on local URL:  http://127.0.0.1:7863\n\nTo create a public link, set `share=True` in `launch()`.\n\n\n\n\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4.1 Open Local Gradio App\nOpen the URL provided in your favourite browser\n\n\n\n4.2 Test it out\nThe app knows a pug when it sees one! The app is ready."
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html#export-app.py",
-    "href": "posts/2024-01-25-99_gradio_app/index.html#export-app.py",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "5. Export (app.py)",
-    "text": "5. Export (app.py)\nGradio app must be all inside a app.py script when being deployed on HuggingFaces.\nThankfully, there is a library to export all the cell-blocks from our notebook (.ipynb) to python script (app.py).\nReference\n\n5.1 Put directives at front of notebook\n\nPlace ‘#| default_exp app’ in a python codeblock in front of the the notebook\n\n\n\n\n5.2 Choose the cellblocks to export\n\nPlace ‘#| export’ in front of each codeblock you need to export\n\n\n\n\n5.3 Run nbdev and export\n\nfrom nbdev.export import nb_export\nnb_export('app.ipynb')\n\nThis will create a new folder as home directory and place in the app.py"
-  },
-  {
-    "objectID": "posts/2024-01-25-99_gradio_app/index.html#to-be-continued",
-    "href": "posts/2024-01-25-99_gradio_app/index.html#to-be-continued",
-    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
-    "section": "To be Continued…",
-    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Upload to HuggingFace account"
-  },
-  {
-    "objectID": "posts/2024-03-11-relu/index.html#numpy.maximum",
-    "href": "posts/2024-03-11-relu/index.html#numpy.maximum",
+    "objectID": "posts/2024-03-13-relu/index.html#numpy.maximum",
+    "href": "posts/2024-03-13-relu/index.html#numpy.maximum",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "2.1 numpy.maximum",
     "text": "2.1 numpy.maximum\n\nimport numpy as np\n\ndef sgl_relu_np(m,b,x):\n    y = m*x+b\n    relu_y = np.maximum(y,0)\n    return relu_y \n\nsgl_relu_np(1,1,1)\n\n2"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#torch.clip---version-1",
-    "href": "posts/2024-03-11-relu/index.html#torch.clip---version-1",
+    "objectID": "posts/2024-03-13-relu/index.html#torch.clip---version-1",
+    "href": "posts/2024-03-13-relu/index.html#torch.clip---version-1",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "2.2 torch.clip - version 1",
     "text": "2.2 torch.clip - version 1\nNote: torch.clip won’t work because it accepts tensors only, and the below function is inputting python native types\n\nimport torch\n\ndef sgl_relu_pytclip_v1(m,b,x):\n    y = m*x+b # input to torch needs to be a tensor, ie y=mx+b doesnt work as seen in error:\n    print(type(y))\n    return torch.clip(y,0.)\n    \n\nsgl_relu_pytclip_v1(1,1,1)\n\n&lt;class 'int'&gt;\n\n\nTypeError: clip() received an invalid combination of arguments - got (int, float), but expected one of:\n * (Tensor input, Tensor min, Tensor max, *, Tensor out)\n * (Tensor input, Number min, Number max, *, Tensor out)"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#torch.clip---version-2",
-    "href": "posts/2024-03-11-relu/index.html#torch.clip---version-2",
+    "objectID": "posts/2024-03-13-relu/index.html#torch.clip---version-2",
+    "href": "posts/2024-03-13-relu/index.html#torch.clip---version-2",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "2.3 torch.clip - version 2",
     "text": "2.3 torch.clip - version 2\n\ndef sgl_relu_pytclip_v2(m,b,x):\n    xs_tsr = torch.tensor(x)\n    y = m*xs_tsr+b # convert inputs to tensor first\n    print(type(y))\n    return torch.clip(y,0.)\n    \nsgl_relu_pytclip_v2(1,1,1)\n\n&lt;class 'torch.Tensor'&gt;\n\n\ntensor(2.)"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#torch.nn.functional.relu",
-    "href": "posts/2024-03-11-relu/index.html#torch.nn.functional.relu",
+    "objectID": "posts/2024-03-13-relu/index.html#torch.nn.functional.relu",
+    "href": "posts/2024-03-13-relu/index.html#torch.nn.functional.relu",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "2.4 torch.nn.functional.relu",
     "text": "2.4 torch.nn.functional.relu\nnn.relu also only takes Tensor input. I’ll use this function going forward.\n\nimport torch.nn.functional as nn\n\ndef sgl_relu_nn(m,b,x):\n    xs_tsr = torch.tensor(x)\n    ys_tsr = m*xs_tsr+b # convert inputs to tensor first\n    relu_y = nn.relu(ys_tsr)\n    print(type(relu_y))\n    return relu_y\n\nsgl_relu_nn(1,1,1)\n\n&lt;class 'torch.Tensor'&gt;\n\n\ntensor(2)"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#create-noisey-data-we-wish-to-model",
-    "href": "posts/2024-03-11-relu/index.html#create-noisey-data-we-wish-to-model",
+    "objectID": "posts/2024-03-13-relu/index.html#create-noisey-data-we-wish-to-model",
+    "href": "posts/2024-03-13-relu/index.html#create-noisey-data-we-wish-to-model",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "5.1 Create noisey data we wish to model",
     "text": "5.1 Create noisey data we wish to model\n\nimport torch\nimport torch.nn.functional as nn\nfrom functools import partial\nimport matplotlib.pyplot as plt\nfrom ipywidgets import interact\n\ndef quad_fn(a,b,c,x): return a*x**2 + b*x + c\ndef quad_abc_fn(a,b,c): return partial(quad_fn,a,b,c)\n\nog_a= 3\nog_b= 2\nog_c= 1\n\nxs_100_tsr = torch.linspace(-2.1,2.1,steps=100)\nquad_og_model = quad_abc_fn(og_a,og_b,og_c)\n\nnp.random.seed(42)\n\ndef noise(tsr, scale): return np.random.normal(scale=scale,size=tsr.shape)\ndef add_scale_noise_to_tsr(tsr,scale,additive):\n    tsr = tsr+tsr*noise(tsr, scale)\n    tsr = tsr+noise(tsr, additive)\n    return tsr\n\nxs_20_tsr = torch.linspace(-2,2,steps=20)\nys_20_og_tsr = quad_og_model(xs_20_tsr)\nys_20_noisey_tsr = add_scale_noise_to_tsr(ys_20_og_tsr,0.15,1.5)"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#recreate-double-relu-functions-learnt-earlier",
-    "href": "posts/2024-03-11-relu/index.html#recreate-double-relu-functions-learnt-earlier",
+    "objectID": "posts/2024-03-13-relu/index.html#recreate-double-relu-functions-learnt-earlier",
+    "href": "posts/2024-03-13-relu/index.html#recreate-double-relu-functions-learnt-earlier",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "5.2 Recreate Double ReLU functions learnt earlier",
     "text": "5.2 Recreate Double ReLU functions learnt earlier\n\ndef relu_dbl_fn(m1,b1,m2,b2,x):\n    y1 = m1*x+b1\n    y2 = m2*x+b2\n    return nn.relu(y1) + nn.relu(y2)\n\n\ndef relu_dbl_m1b1m2b2_fn(m1,b1,m2,b2): return partial(relu_dbl_fn,m1,b1,m2,b2)"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#create-mae-calculate-and-loss-function",
-    "href": "posts/2024-03-11-relu/index.html#create-mae-calculate-and-loss-function",
+    "objectID": "posts/2024-03-13-relu/index.html#create-mae-calculate-and-loss-function",
+    "href": "posts/2024-03-13-relu/index.html#create-mae-calculate-and-loss-function",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "5.3 Create MAE calculate and Loss Function",
     "text": "5.3 Create MAE calculate and Loss Function\n\ndef calc_mae(actual, preds): return torch.abs(actual-preds).mean()\n\ndef relu_2_loss_function(params):\n    def relu_dbl_m1b1m2b2_fn(m1,b1,m2,b2): return partial(relu_dbl_fn,m1,b1,m2,b2)\n    relu_dbl_m1b1m2b2_model = relu_dbl_m1b1m2b2_fn(*params)\n    ys_preds_20_tsr = relu_dbl_m1b1m2b2_model(xs_20_tsr)\n    return calc_mae(ys_20_noisey_tsr,ys_preds_20_tsr)"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5",
-    "href": "posts/2024-03-11-relu/index.html#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5",
+    "objectID": "posts/2024-03-13-relu/index.html#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5",
+    "href": "posts/2024-03-13-relu/index.html#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "5.4 Loss is 4.1318 with original input tensor([0.5,0.5,-0.5,-0.5])",
     "text": "5.4 Loss is 4.1318 with original input tensor([0.5,0.5,-0.5,-0.5])\nOriginal model predictions (blue line) are not great, not very close to our data (red dots)\nThat makes sense since I arbitrarily chose the parameters of 0.5 and -0.5\n\nm1b1_m2b2_tsr = torch.tensor([0.5,0.5,-0.5,-0.5],requires_grad=True)\nrelu_2_loss_function(m1b1_m2b2_tsr)\n\ntensor(4.1318, dtype=torch.float64, grad_fn=&lt;MeanBackward0&gt;)\n\n\n\n# @interact(m1=0.5,b1=0.5,m2=-.5,b2=-.5)\ndef relu_dbl_interactive_plotter_fn(m1,b1,m2,b2):\n    xs_sgl_100_tsr = torch.linspace(-4.1,4.1,steps=100)\n    \n    relu_dbl_m1b1m2b2_model = relu_dbl_m1b1m2b2_fn(m1,b1,m2,b2)\n    ys_dbl_m1b1m2b2_100_tsr = relu_dbl_m1b1m2b2_model(xs_sgl_100_tsr)\n\n    plt.xlim((-2,2))\n    plt.ylim((-1,15))\n    plt.plot(xs_sgl_100_tsr, ys_dbl_m1b1m2b2_100_tsr)\n    plt.scatter(xs_20_tsr,ys_20_noisey_tsr, color='r')\n\n    # print(ys_20_noisey_tsr)\n    ys_dbl_preds_20_tsr = relu_dbl_m1b1m2b2_model(xs_20_tsr)\n    mae = calc_mae(ys_20_noisey_tsr, ys_dbl_preds_20_tsr)\n    plt.title(label=f\"mae: {mae:.2f}\")\nrelu_dbl_interactive_plotter_fn(0.5,0.5,-0.5,-0.5)"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#loss-with-gradient-descent-after-40-epochs",
-    "href": "posts/2024-03-11-relu/index.html#loss-with-gradient-descent-after-40-epochs",
+    "objectID": "posts/2024-03-13-relu/index.html#loss-with-gradient-descent-after-40-epochs",
+    "href": "posts/2024-03-13-relu/index.html#loss-with-gradient-descent-after-40-epochs",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "5.5 1.96 Loss with Gradient Descent after 40 epochs",
     "text": "5.5 1.96 Loss with Gradient Descent after 40 epochs\n\nm1b1_m2b2_tsr = torch.tensor([0.5,0.5,-0.5,-0.5],requires_grad=True)\n\nfor i in range(40):\n    loss = relu_2_loss_function(m1b1_m2b2_tsr)\n    loss.backward()\n\n    with torch.no_grad():\n        m1b1_m2b2_tsr -= m1b1_m2b2_tsr.grad*0.01\n        print(f\"loss_{i+1}: {loss:.2f} - [{m1b1_m2b2_tsr}]\")\n\nloss_1: 4.13 - [tensor([ 0.5049,  0.5045, -0.5039, -0.4975], requires_grad=True)]\nloss_2: 4.13 - [tensor([ 0.5147,  0.5135, -0.5118, -0.4925], requires_grad=True)]\nloss_3: 4.11 - [tensor([ 0.5295,  0.5260, -0.5237, -0.4850], requires_grad=True)]\nloss_4: 4.09 - [tensor([ 0.5493,  0.5420, -0.5399, -0.4745], requires_grad=True)]\nloss_5: 4.07 - [tensor([ 0.5741,  0.5615, -0.5606, -0.4610], requires_grad=True)]\nloss_6: 4.04 - [tensor([ 0.6038,  0.5845, -0.5857, -0.4445], requires_grad=True)]\nloss_7: 4.00 - [tensor([ 0.6386,  0.6110, -0.6153, -0.4250], requires_grad=True)]\nloss_8: 3.95 - [tensor([ 0.6784,  0.6410, -0.6488, -0.4030], requires_grad=True)]\nloss_9: 3.90 - [tensor([ 0.7237,  0.6740, -0.6865, -0.3785], requires_grad=True)]\nloss_10: 3.85 - [tensor([ 0.7744,  0.7100, -0.7282, -0.3515], requires_grad=True)]\nloss_11: 3.78 - [tensor([ 0.8306,  0.7490, -0.7742, -0.3215], requires_grad=True)]\nloss_12: 3.71 - [tensor([ 0.8916,  0.7900, -0.8245, -0.2885], requires_grad=True)]\nloss_13: 3.65 - [tensor([ 0.9573,  0.8330, -0.8791, -0.2525], requires_grad=True)]\nloss_14: 3.57 - [tensor([ 1.0277,  0.8780, -0.9379, -0.2140], requires_grad=True)]\nloss_15: 3.50 - [tensor([ 1.1028,  0.9250, -1.0008, -0.1730], requires_grad=True)]\nloss_16: 3.41 - [tensor([ 1.1827,  0.9740, -1.0679, -0.1295], requires_grad=True)]\nloss_17: 3.33 - [tensor([ 1.2674,  1.0250, -1.1392, -0.0835], requires_grad=True)]\nloss_18: 3.24 - [tensor([ 1.3567,  1.0780, -1.2146, -0.0355], requires_grad=True)]\nloss_19: 3.15 - [tensor([ 1.4508,  1.1330, -1.2941,  0.0145], requires_grad=True)]\nloss_20: 3.05 - [tensor([ 1.5497,  1.1900, -1.3776,  0.0665], requires_grad=True)]\nloss_21: 2.94 - [tensor([ 1.6533,  1.2490, -1.4653,  0.1205], requires_grad=True)]\nloss_22: 2.84 - [tensor([ 1.7616,  1.3100, -1.5559,  0.1755], requires_grad=True)]\nloss_23: 2.74 - [tensor([ 1.8746,  1.3730, -1.6496,  0.2310], requires_grad=True)]\nloss_24: 2.65 - [tensor([ 1.9926,  1.4375, -1.7457,  0.2860], requires_grad=True)]\nloss_25: 2.57 - [tensor([ 2.1154,  1.5035, -1.8419,  0.3385], requires_grad=True)]\nloss_26: 2.51 - [tensor([ 2.2432,  1.5710, -1.9384,  0.3885], requires_grad=True)]\nloss_27: 2.45 - [tensor([ 2.3758,  1.6400, -2.0349,  0.4360], requires_grad=True)]\nloss_28: 2.39 - [tensor([ 2.5133,  1.7105, -2.1317,  0.4810], requires_grad=True)]\nloss_29: 2.33 - [tensor([ 2.6552,  1.7815, -2.2286,  0.5235], requires_grad=True)]\nloss_30: 2.27 - [tensor([ 2.8015,  1.8530, -2.3256,  0.5635], requires_grad=True)]\nloss_31: 2.23 - [tensor([ 2.9509,  1.9240, -2.4228,  0.6010], requires_grad=True)]\nloss_32: 2.19 - [tensor([ 3.1036,  1.9945, -2.5202,  0.6360], requires_grad=True)]\nloss_33: 2.16 - [tensor([ 3.2595,  2.0645, -2.6177,  0.6685], requires_grad=True)]\nloss_34: 2.12 - [tensor([ 3.4186,  2.1340, -2.7154,  0.6985], requires_grad=True)]\nloss_35: 2.07 - [tensor([ 3.5809,  2.2030, -2.8133,  0.7260], requires_grad=True)]\nloss_36: 2.05 - [tensor([ 3.7455,  2.2705, -2.9113,  0.7510], requires_grad=True)]\nloss_37: 2.03 - [tensor([ 3.9124,  2.3365, -3.0094,  0.7735], requires_grad=True)]\nloss_38: 2.01 - [tensor([ 4.0815,  2.4010, -3.1077,  0.7935], requires_grad=True)]\nloss_39: 1.98 - [tensor([ 4.2528,  2.4640, -3.2062,  0.8110], requires_grad=True)]\nloss_40: 1.96 - [tensor([ 4.4251,  2.5245, -3.3031,  0.8250], requires_grad=True)]"
   },
   {
-    "objectID": "posts/2024-03-11-relu/index.html#predictions-blue-line-vs-data-red-dots",
-    "href": "posts/2024-03-11-relu/index.html#predictions-blue-line-vs-data-red-dots",
+    "objectID": "posts/2024-03-13-relu/index.html#predictions-blue-line-vs-data-red-dots",
+    "href": "posts/2024-03-13-relu/index.html#predictions-blue-line-vs-data-red-dots",
     "title": "Rectified Linear Unit (ReLU)",
     "section": "5.6 Predictions (blue line) vs Data (red dots)",
     "text": "5.6 Predictions (blue line) vs Data (red dots)\nNew Parameters has created a Double ReLU predictions shaped closer to the Noisey Data as seen below!\n\ndef relu_dbl_interactive_plotter_fn(m1,b1,m2,b2):\n    xs_sgl_100_tsr = torch.linspace(-4.1,4.1,steps=100)\n    \n    relu_dbl_m1b1m2b2_model = relu_dbl_m1b1m2b2_fn(m1,b1,m2,b2)\n    ys_dbl_m1b1m2b2_100_tsr = relu_dbl_m1b1m2b2_model(xs_sgl_100_tsr)\n\n    plt.xlim((-2,2))\n    plt.ylim((-1,15))\n    plt.plot(xs_sgl_100_tsr, ys_dbl_m1b1m2b2_100_tsr)\n    plt.scatter(xs_20_tsr,ys_20_noisey_tsr, color='r')\n\n    # print(ys_20_noisey_tsr)\n    ys_dbl_preds_20_tsr = relu_dbl_m1b1m2b2_model(xs_20_tsr)\n    mae = calc_mae(ys_20_noisey_tsr, ys_dbl_preds_20_tsr)\n    plt.title(label=f\"mae: {mae:.2f}\")\nrelu_dbl_interactive_plotter_fn(m1=4.4251,  b1=2.5245, m2=-3.3031,  b2=0.8250)"
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "1. Introduction",
+    "text": "1. Introduction\nEmbedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!"
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "2. Background",
+    "text": "2. Background\nThis App will guess whether an image is a Cat or Dog with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.\nAll doggos🐕 & cats🐈 image examples has never been viewed by the Model and it makes a prediction in milliseconds! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!\nThe App isn’t perfect:\n- It guesses Incorrectly with great 95% confidence a cat as a dog!\nI’m thrilled to be able to build the app, get it hosted and embed it all in one day for the first time! Alot of firsts today!"
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "3. Future stuff",
+    "text": "3. Future stuff\n[1]: Multi-Image Uploader + Predictor.\n[2]: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.\n[4]: Upgrade the rice vs noodle model an App and hosted.\n[4]: Learn some HTML/CSS to make things prettier."
+  },
+  {
+    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
+    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
+    "title": "Deploying My First Live App & it’s a Neural Network!",
+    "section": "4. Heres the App!",
+    "text": "4. Heres the App!"
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#statistical-properties",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#statistical-properties",
+    "title": "Let’s Make Some Noise",
+    "section": "2.1 Statistical Properties",
+    "text": "2.1 Statistical Properties\n\nGaussian noise is characterized by a normal distribution, which is well-studied and has known statistical properties.\nThis makes it easy to model and analyze mathematically."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#central-limit-theorem",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#central-limit-theorem",
+    "title": "Let’s Make Some Noise",
+    "section": "2.2 Central Limit Theorem:",
+    "text": "2.2 Central Limit Theorem:\n\nThe Central Limit Theorem states that the sum (or average) of a large number of independent, identically distributed random variables, each with finite mean and variance, will be approximately normally distributed.\nThis property makes Gaussian noise a natural choice in many scenarios where the noise is a result of multiple independent factors."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#mathematical-simplicity",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#mathematical-simplicity",
+    "title": "Let’s Make Some Noise",
+    "section": "2.3 Mathematical Simplicity:",
+    "text": "2.3 Mathematical Simplicity:\n\nThe normal distribution has simple and well-defined mathematical properties, making it easy to work with in analytical and computational contexts."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#robustness-in-estimation",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#robustness-in-estimation",
+    "title": "Let’s Make Some Noise",
+    "section": "2.4 Robustness in Estimation:",
+    "text": "2.4 Robustness in Estimation:\n\nMany statistical estimation methods, including maximum likelihood estimation, assume that the underlying noise follows a Gaussian distribution.\nThis can lead to more robust parameter estimates when the actual noise is close to Gaussian."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#convenient-in-machine-learning",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#convenient-in-machine-learning",
+    "title": "Let’s Make Some Noise",
+    "section": "2.5 Convenient in Machine Learning:",
+    "text": "2.5 Convenient in Machine Learning:\n\nIn machine learning, adding Gaussian noise can act as a form of regularization, preventing overfitting by introducing a controlled amount of randomness during training. It is also commonly used in generative models, such as Gaussian Mixture Models (GMMs)."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#noise-function",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#noise-function",
+    "title": "Let’s Make Some Noise",
+    "section": "3.1 noise function",
+    "text": "3.1 noise function\nThis function generates random noise using NumPy’s random.normal function.\n\ny: numpy or pytorch array\n\nscale: standard deviation of the normal distribution from which the noise is drawn.\noutput: array of random values with the same shape as the input array y.\n\n\ndef add_noise(x, mult, add): \n    return x * (1+noise(x, mult)) + noise(x, add)"
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#add_noise-function",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#add_noise-function",
+    "title": "Let’s Make Some Noise",
+    "section": "3.2 add_noise function",
+    "text": "3.2 add_noise function\nThis function uses the noise function to add noise to the input x:\n\n* (1 + noise(x, mult)): The multiplicative noise is applied by multiplying x with.\n+ noise(x, add): The additive noise is added directly to the result of the multiplicative part."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#differences",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#differences",
+    "title": "Let’s Make Some Noise",
+    "section": "3.3 Differences:",
+    "text": "3.3 Differences:\nThe noise function generates:\n\nrandom noise independently of any input array,\nusing a specified scale.\nIt’s a standalone function for generating random noise.\n\nThe add_noise function is specifically designed to:\n\napply noise to an input array x.\ncombines both multiplicative and additive noise components,\nallowing for a more complex noise model."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#regularization-and-preventing-memorization",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#regularization-and-preventing-memorization",
+    "title": "Let’s Make Some Noise",
+    "section": "4.1 Regularization and Preventing Memorization:",
+    "text": "4.1 Regularization and Preventing Memorization:\nAvoid and  Discouraging Overfitting:\n\nAdding random noise to the input data can act as a form of regularization, preventing the model from fitting the training data too closely.\nThis can improve the generalization of the model to new, unseen data.\nModels that are too complex may memorize the training data instead of learning the underlying patterns.\nAdding noise makes it more challenging for the model to memorize specific examples and encourages it to focus on general patterns."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#data-augmentation",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#data-augmentation",
+    "title": "Let’s Make Some Noise",
+    "section": "4.2 Data Augmentation:",
+    "text": "4.2 Data Augmentation:\nIncreased Variability:\n\nIntroducing noise during training can artificially increase the variability in the dataset.\nThis can be particularly useful when dealing with limited training data, helping the model generalize better to different variations of the input."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#robustness-testing",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#robustness-testing",
+    "title": "Let’s Make Some Noise",
+    "section": "4.3 Robustness Testing:",
+    "text": "4.3 Robustness Testing:\nModel Robustness:\n\nAdding noise during training can make the model more robust to variations and uncertainties in real-world data.\nThis is especially important when the model needs to perform well on data that may have different levels of noise or unexpected variations."
+  },
+  {
+    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#stochasticity-in-training",
+    "href": "posts/2024-03-02-nice_and_noisy/index.html#stochasticity-in-training",
+    "title": "Let’s Make Some Noise",
+    "section": "4.4 Stochasticity in Training:",
+    "text": "4.4 Stochasticity in Training:\nEncouraging Exploration:\n\nDuring the training process, introducing randomness can encourage the model to explore different parts of the parameter space.\nThis can be especially beneficial in reinforcement learning or optimization problems, helping to avoid getting stuck in local minima."
+  },
+  {
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html",
+    "href": "posts/2024-02-03-neural_network_basics/index.html",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "",
+    "text": "In Neural Network Basics: Part 2, the parameters of a function were found (optimised) to Minimise the Loss Function. The Loss Function chosen was the Mean Absolute Error, it could have been chosen to be the Mean Squared Error.\nBut What is the mathematical function if the wish to model something more complex like predicting the breed of Cat?\nUnfortunately, its unlikely the relationship between the parameters and whether a pixel is part of a Maine Coon 🐈 is a Quadratic, its going to be something more complicated.\nThankfully, there exists the infinitely flexible function known as Rectified Linear Unit (ReLU)"
+  },
+  {
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
+    "href": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "1. Rectified Linear Unit (ReLU)",
+    "text": "1. Rectified Linear Unit (ReLU)\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nfrom functools import partial\n\n\n1.1 Function\nThe function does two things:\n1. Calculate the output of a line\n2. If the output is smaller than zero, return zero\n\ndef rectified_linear(m,b,x):\n    y = m*x+b\n    return torch.clip(y,0.)\n\n\n\n1.2 Create A Custom ReLU Method\n\ndef custom_relu_fn(m,b): return partial(rectified_linear,m,b)\n\n\n\n1.3 Create y = 1x + 1 with Custom ReLU Method\n\nfn_11 = custom_relu_fn(1,1)\nfn_11\n\nfunctools.partial(&lt;function rectified_linear at 0x00000220331C9D00&gt;, 1, 1)\n\n\n\n\n1.4 ReLU y = 1x+ 1 Plot\n\nx = torch.linspace(-2.1,2.1,20)\nplt.plot(x,fn_11(x))\n\n\n\n\n\n\n\n\n\n1.4.1 Interactive ReLU\n\nplt.rc('figure', dpi=90)\n\n@interact(m=1.2, b=1.2)\ndef plot_relu(m, b):\n    min, max = -4.1, 4.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(rectified_linear, m,b)\n    ylim=(-1,4)\n    plt.ylim(ylim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n\n1.5 Double ReLU Function\n\ndef double_relu(m1,b1,m2,b2,x):\n    return rectified_linear(m1,b1) + rectified_linear(m2,b2) \n\n\n1.5.1 Interactive Double ReLU\n\nplt.rc('figure', dpi=90)\n\ndef dbl_rectified_linear(m1, b1,m2,b2,x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2)\ndef plot_dbl_relu(m1,b1,m2,b2):\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(dbl_rectified_linear, m1,b1,m2,b2)\n    ylim=(-1,4)\n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n1.5.1 Triple ReLU for Good Measure!\n\ndef trple_rectified_linear(m1, b1, m2, b2, m3, b3, x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x) + rectified_linear(m3,b3,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2, m3=0.5, b3=0.5)\ndef plot_trple_relu(m1,b1,m2,b2,m3,b3):\n# static variables\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    \n# update partial to include extra parameters m3, b3\n    triple_relu_fn_y = partial(trple_rectified_linear, m1,b1,m2,b2,m3,b3)\n\n# static variables\n    ylim=(-1,4) \n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, triple_relu_fn_y(x))"
+  },
+  {
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
+    "href": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "2. ReLU is An Infinitely Flexible Function",
+    "text": "2. ReLU is An Infinitely Flexible Function\nThere could be arbitrarily many ReLus added together to form any function!\nThe previous functions are of a single input x i.e. 2-Dimensions.\nReLU’s could be added together over as many dimensions as desired, i.e. ReLU’s over surfaces or ReLU’s over 3D, 4D 5D etc.\nBut adding these ReLU’s, this means there are arbitrary amount of parameters related to each ReLU, how can these parameters be calculated?\nIn Part 2, a optimisation method called Gradient Descent was used to determine Parameters.\nThat’s Deep Learning in a nutshell. Beyond this, Tweaks are to:\n- make it faster\n- require less data"
+  },
+  {
+    "objectID": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
+    "href": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
+    "title": "Neural Network Basics (Part 3)",
+    "section": "Neural Network Basics Completed.",
+    "text": "Neural Network Basics Completed.\nGo back to a previous post:\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
   },
   {
     "objectID": "posts/kaggle/1-us-patents/index.html#import-a-pretrained-language-model",
@@ -571,7 +578,7 @@
     "href": "index.html",
     "title": "blog",
     "section": "",
-    "text": "Rectified Linear Unit (ReLU)\n\n\n\n\n\n\nbasics\n\n\n\nReLU from scratch with Gradient Descent\n\n\n\n\n\nMar 12, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s Make Some Noise\n\n\n\n\n\n\nbasics\n\n\n\nA function to add gaussian noise\n\n\n\n\n\nMar 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nBash Basics\n\n\n\n\n\n\ncoding\n\n\n\nLearning Bash from scratch\n\n\n\n\n\nFeb 28, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nMore Eigen examples\n\n\n\n\n\n\nlinear algebra\n\n\n\nA few more worked examples\n\n\n\n\n\nFeb 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nIt’s nice to be similar (matrices)\n\n\n\n\n\n\nlinear algebra\n\n\n\nShort working equating eigenvalues between two similar matrices\n\n\n\n\n\nFeb 22, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDiagonal Matrices are trivial\n\n\n\n\n\n\nlinear algebra\n\n\n\nShowing the wonderful characteristics of Diagonal Matrices\n\n\n\n\n\nFeb 22, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSetting up a Data Science Machine\n\n\n\n\n\n\ncoding\n\n\n\nHow to setup a Linux-based Python on a Windows PC for Data Science and Deep Learning Projects\n\n\n\n\n\nFeb 21, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigenvales and Eigenvectors Example\n\n\n\n\n\n\nlinear algebra\n\n\n\nWorking out some algebraic examples\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nAutomate the closing of Issues in Github Projects\n\n\n\n\n\n\ncoding\n\n\n\nHow to automate the closing of an issue in Github Projects via a Commit Message\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nA Basic NLP model - [Competition Version]\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 17, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nA Basic NLP model\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks in a Spreadsheet (Attempt 1)\n\n\n\n\n\n\nspreadsheet\n\n\n\nA failed attempt to apply neural network concepts in a spreadsheet\n\n\n\n\n\nFeb 4, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 3)\n\n\n\n\n\n\nbasics\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nbasics\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nbasics\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\napp\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\napp\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\nclassifier\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\napp\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nclassifier\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nquarto test\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
+    "text": "Rectified Linear Unit (ReLU)\n\n\n\n\n\n\nbasics\n\n\n\nReLU from scratch with Gradient Descent\n\n\n\n\n\nMar 13, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s Make Some Noise\n\n\n\n\n\n\nbasics\n\n\n\nA function to add gaussian noise\n\n\n\n\n\nMar 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nBash Basics\n\n\n\n\n\n\ncoding\n\n\n\nLearning Bash from scratch\n\n\n\n\n\nFeb 28, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nMore Eigen examples\n\n\n\n\n\n\nlinear algebra\n\n\n\nA few more worked examples\n\n\n\n\n\nFeb 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nIt’s nice to be similar (matrices)\n\n\n\n\n\n\nlinear algebra\n\n\n\nShort working equating eigenvalues between two similar matrices\n\n\n\n\n\nFeb 22, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDiagonal Matrices are trivial\n\n\n\n\n\n\nlinear algebra\n\n\n\nShowing the wonderful characteristics of Diagonal Matrices\n\n\n\n\n\nFeb 22, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSetting up a Data Science Machine\n\n\n\n\n\n\ncoding\n\n\n\nHow to setup a Linux-based Python on a Windows PC for Data Science and Deep Learning Projects\n\n\n\n\n\nFeb 21, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigenvales and Eigenvectors Example\n\n\n\n\n\n\nlinear algebra\n\n\n\nWorking out some algebraic examples\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nAutomate the closing of Issues in Github Projects\n\n\n\n\n\n\ncoding\n\n\n\nHow to automate the closing of an issue in Github Projects via a Commit Message\n\n\n\n\n\nFeb 20, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nA Basic NLP model - [Competition Version]\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 17, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nA Basic NLP model\n\n\n\n\n\n\nNLP\n\n\nkaggle\n\n\n\nTraining my first NLP Model\n\n\n\n\n\nFeb 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nEigen is my valentines in 2024\n\n\n\n\n\n\nlinear algebra\n\n\n\nEigenvalues and Eigenvectors Mind-Map\n\n\n\n\n\nFeb 14, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 74. Search a 2D Matrix\n\n\n\n\n\n\nleetcode\n\n\n\nAlmost the same as binary search problem\n\n\n\n\n\nFeb 10, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 704. Binary Search\n\n\n\n\n\n\nleetcode\n\n\n\nFirst binary search question\n\n\n\n\n\nFeb 9, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNotes: Change of Basis\n\n\n\n\n\n\nlinear algebra\n\n\n\nAn interpretation of change of basis\n\n\n\n\n\nFeb 8, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 150. Evaluate Reverse Polish Notation\n\n\n\n\n\n\nleetcode\n\n\n\nImplement a Stack Class using Postfix Notation\n\n\n\n\n\nFeb 7, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nLC: 155. Min Stack\n\n\n\n\n\n\nleetcode\n\n\n\nAn introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class\n\n\n\n\n\nFeb 6, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\n❄️LeetCode Posts❄️\n\n\n\n\n\n\nleetcode\n\n\nhello world\n\n\n\nA page to archive my (naively hopeful daily) leetcode attempts.\n\n\n\n\n\nFeb 5, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Networks in a Spreadsheet (Attempt 1)\n\n\n\n\n\n\nspreadsheet\n\n\n\nA failed attempt to apply neural network concepts in a spreadsheet\n\n\n\n\n\nFeb 4, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 3)\n\n\n\n\n\n\nbasics\n\n\n\nCreating the ReLU Function \n\n\n\n\n\nFeb 3, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 2)\n\n\n\n\n\n\nbasics\n\n\n\nOptimising with Gradient Descent\n\n\n\n\n\nFeb 2, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Basics (Part 1)\n\n\n\n\n\n\nbasics\n\n\n\nManually fitting a Line (Quadratic Function) to a dataset\n\n\n\n\n\nJan 31, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Setup a Kaggle API\n\n\n\n\n\n\nkaggle\n\n\n\nContinuing my Data Science journey with Kaggle\n\n\n\n\n\nJan 27, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)\n\n\n\n\n\n\napp\n\n\n\nHost a neural network app live on HuggingFace\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)\n\n\n\n\n\n\napp\n\n\n\nCreate a local neural network Gradio App\n\n\n\n\n\nJan 25, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 1)\n\n\n\n\n\n\nclassifier\n\n\n\nCreate a simple neural network model\n\n\n\n\n\nJan 24, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nHow to choose a different Deep-Learning Model Architecture\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nSaving a Fast AI Model\n\n\n\n\n\n\ntutorial\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nDeploying My First Live App & it’s a Neural Network!\n\n\n\n\n\n\napp\n\n\n\n\n\n\n\n\n\nJan 19, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nImage Classifier 1: Noodles vs Rice\n\n\n\n\n\n\nclassifier\n\n\n\n\n\n\n\n\n\nJan 18, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Git Clone\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Sample Jupyter Notebook\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nPost Without Code\n\n\n\n\n\n\nquarto test\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nquarto test\n\n\nhello world\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nTony Phung\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -777,144 +784,137 @@
     "text": "6. Results\nIt worked!"
   },
   {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html",
-    "href": "posts/2024-02-03-neural_network_basics/index.html",
-    "title": "Neural Network Basics (Part 3)",
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html",
+    "href": "posts/2024-01-25-99_gradio_app/index.html",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
     "section": "",
-    "text": "In Neural Network Basics: Part 2, the parameters of a function were found (optimised) to Minimise the Loss Function. The Loss Function chosen was the Mean Absolute Error, it could have been chosen to be the Mean Squared Error.\nBut What is the mathematical function if the wish to model something more complex like predicting the breed of Cat?\nUnfortunately, its unlikely the relationship between the parameters and whether a pixel is part of a Maine Coon 🐈 is a Quadratic, its going to be something more complicated.\nThankfully, there exists the infinitely flexible function known as Rectified Linear Unit (ReLU)"
+    "text": "This post shows how to create a Gradio App (app.py) and run it locally in a browser. This app should:\nThis post is part of a series:\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Upload to HuggingFace account"
   },
   {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
-    "href": "posts/2024-02-03-neural_network_basics/index.html#rectified-linear-unit-relu",
-    "title": "Neural Network Basics (Part 3)",
-    "section": "1. Rectified Linear Unit (ReLU)",
-    "text": "1. Rectified Linear Unit (ReLU)\n\nfrom ipywidgets import interact\nfrom fastai.basics import *\nfrom functools import partial\n\n\n1.1 Function\nThe function does two things:\n1. Calculate the output of a line\n2. If the output is smaller than zero, return zero\n\ndef rectified_linear(m,b,x):\n    y = m*x+b\n    return torch.clip(y,0.)\n\n\n\n1.2 Create A Custom ReLU Method\n\ndef custom_relu_fn(m,b): return partial(rectified_linear,m,b)\n\n\n\n1.3 Create y = 1x + 1 with Custom ReLU Method\n\nfn_11 = custom_relu_fn(1,1)\nfn_11\n\nfunctools.partial(&lt;function rectified_linear at 0x00000220331C9D00&gt;, 1, 1)\n\n\n\n\n1.4 ReLU y = 1x+ 1 Plot\n\nx = torch.linspace(-2.1,2.1,20)\nplt.plot(x,fn_11(x))\n\n\n\n\n\n\n\n\n\n1.4.1 Interactive ReLU\n\nplt.rc('figure', dpi=90)\n\n@interact(m=1.2, b=1.2)\ndef plot_relu(m, b):\n    min, max = -4.1, 4.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(rectified_linear, m,b)\n    ylim=(-1,4)\n    plt.ylim(ylim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n\n1.5 Double ReLU Function\n\ndef double_relu(m1,b1,m2,b2,x):\n    return rectified_linear(m1,b1) + rectified_linear(m2,b2) \n\n\n1.5.1 Interactive Double ReLU\n\nplt.rc('figure', dpi=90)\n\ndef dbl_rectified_linear(m1, b1,m2,b2,x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2)\ndef plot_dbl_relu(m1,b1,m2,b2):\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    fn_fixed = partial(dbl_rectified_linear, m1,b1,m2,b2)\n    ylim=(-1,4)\n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, fn_fixed(x))\n\n\n\n\n\n\n\n1.5.1 Triple ReLU for Good Measure!\n\ndef trple_rectified_linear(m1, b1, m2, b2, m3, b3, x): \n    return rectified_linear(m1,b1,x) + rectified_linear(m2,b2,x) + rectified_linear(m3,b3,x)\n \n@interact(m1=-1.2, b1=-1.2,m2=1.2, b2=1.2, m3=0.5, b3=0.5)\ndef plot_trple_relu(m1,b1,m2,b2,m3,b3):\n# static variables\n    min, max = -3.1, 3.1\n    x = torch.linspace(min,max, 100)[:,None]\n    \n# update partial to include extra parameters m3, b3\n    triple_relu_fn_y = partial(trple_rectified_linear, m1,b1,m2,b2,m3,b3)\n\n# static variables\n    ylim=(-1,4) \n    xlim=(-4,4)\n    plt.ylim(ylim)\n    plt.xlim(xlim)\n    plt.axvline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.axhline(0, color='gray', linestyle='dotted', linewidth=2)\n    plt.plot(x, triple_relu_fn_y(x))"
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html#part-2-create-gradio-application-file-app.py",
+    "href": "posts/2024-01-25-99_gradio_app/index.html#part-2-create-gradio-application-file-app.py",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
+    "section": "Part 2: Create Gradio application file (app.py)",
+    "text": "Part 2: Create Gradio application file (app.py)"
   },
   {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
-    "href": "posts/2024-02-03-neural_network_basics/index.html#relu-is-an-infinitely-flexible-function",
-    "title": "Neural Network Basics (Part 3)",
-    "section": "2. ReLU is An Infinitely Flexible Function",
-    "text": "2. ReLU is An Infinitely Flexible Function\nThere could be arbitrarily many ReLus added together to form any function!\nThe previous functions are of a single input x i.e. 2-Dimensions.\nReLU’s could be added together over as many dimensions as desired, i.e. ReLU’s over surfaces or ReLU’s over 3D, 4D 5D etc.\nBut adding these ReLU’s, this means there are arbitrary amount of parameters related to each ReLU, how can these parameters be calculated?\nIn Part 2, a optimisation method called Gradient Descent was used to determine Parameters.\nThat’s Deep Learning in a nutshell. Beyond this, Tweaks are to:\n- make it faster\n- require less data"
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html#import-gradio-and-fast-ai-libraries",
+    "href": "posts/2024-01-25-99_gradio_app/index.html#import-gradio-and-fast-ai-libraries",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
+    "section": "1. Import Gradio and Fast AI libraries",
+    "text": "1. Import Gradio and Fast AI libraries\n\nfrom fastai.vision.all import * \nimport gradio as gr\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\torchvision\\io\\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?\n  warn("
   },
   {
-    "objectID": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
-    "href": "posts/2024-02-03-neural_network_basics/index.html#neural-network-basics-completed.",
-    "title": "Neural Network Basics (Part 3)",
-    "section": "Neural Network Basics Completed.",
-    "text": "Neural Network Basics Completed.\nGo back to a previous post:\nNeural Network Basics: Part 1\nNeural Network Basics: Part 2\nNeural Network Basics: Part 3"
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html#import-learner-.pkl-file",
+    "href": "posts/2024-01-25-99_gradio_app/index.html#import-learner-.pkl-file",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
+    "section": "2. Import Learner (.pkl file)",
+    "text": "2. Import Learner (.pkl file)\nRecall, this file was created and exported in Part 1\n\nIf you’re running on a Linux, you shouldn’t have any import issues.\n\nIf you’re running a Windows PC, you’ll likely to experience an error.\n\n\npets_learner = load_learner('pets_learner.pkl') \n\nNotImplementedError: cannot instantiate 'PosixPath' on your system\n\n\n\n2.1 Import Learner Error (.pkl file) Solution (Windows only)\nI found a solution here.\nNot too sure why this happens, probably linux vs windows compatibility, forward vs backlashes probably?\nImport the pathlib library below and run the code below to fix the paths:\nNote:\n- This fix is only required during the testing phase of our Gradio App.\n- This testing phase is defined as being able to run the Gradio App locally.\n- When we Upload to HuggingFace Spaces, this code fix is not required (because HF is run on Linux, hence no Posix issues, from my understanding)\n\n# only run to import pkl in windows when youre doing testing in windows | when run in hus | its run via dock images ie linux ie no problems\nimport pathlib # \ntemp = pathlib.PosixPath\npathlib.PosixPath = pathlib.WindowsPath\n\n\npets_learner = load_learner('pets_learner.pkl')"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#statistical-properties",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#statistical-properties",
-    "title": "Let’s Make Some Noise",
-    "section": "2.1 Statistical Properties",
-    "text": "2.1 Statistical Properties\n\nGaussian noise is characterized by a normal distribution, which is well-studied and has known statistical properties.\nThis makes it easy to model and analyze mathematically."
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html#predict-the-breed-with-imported-learner",
+    "href": "posts/2024-01-25-99_gradio_app/index.html#predict-the-breed-with-imported-learner",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
+    "section": "3 Predict the Breed with Imported Learner",
+    "text": "3 Predict the Breed with Imported Learner\n\n3.1 Import Local Image\n\npet1 = PILImage.create('pet1.jpg')\npet1.thumbnail((224,224))\npet1\n\n\n\n\n\n\n\n\n\n\n3.2 Make prediction\nUse predict() to make prediction on the uploaded local image. The results will have 3 items:\n1. The prediction of the breed.\n2. Index of the Tensor (in point 3.)\n3. A Tensor of length 37. Why the odd number?\n- These are the probabilities of each unique breeds in our data!\n- Recall in Part 1, we determined the different categories by using a custom labelling function\n\nres = pets_learner.predict(pet1)\nres\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n    \n      \n      0.00% [0/1 00:00&lt;?]\n    \n    \n\n\n('Bombay',\n tensor(3),\n tensor([3.4475e-02, 1.7813e-03, 8.1388e-03, 6.3685e-01, 6.0993e-03, 4.8830e-04,\n         5.0747e-02, 8.8036e-03, 2.1084e-01, 3.4832e-02, 9.6598e-04, 7.6646e-04,\n         6.3764e-04, 2.5949e-04, 8.7999e-05, 1.3308e-03, 6.6650e-05, 5.7116e-05,\n         9.0377e-04, 6.9052e-05, 2.0095e-04, 2.1758e-05, 2.5767e-04, 2.1859e-05,\n         3.8547e-05, 1.6165e-06, 6.2601e-05, 4.3552e-05, 1.4901e-04, 9.6175e-05,\n         1.0010e-04, 1.3717e-04, 2.7684e-04, 5.5386e-05, 5.7012e-05, 4.6809e-05,\n         2.2643e-04]))\n\n\n\n\n3.3 What is the probabilities representing?\nThe probabilities tensor from predict() are the unique categories in our data and are stored in our dataloader\n\ncategories = pets_learner.dls.vocab \ncategories\n\n['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_Shorthair', 'Egyptian_Mau', 'Maine_Coon', 'Persian', 'Ragdoll', 'Russian_Blue', 'Siamese', 'Sphynx', 'american_bulldog', 'american_pit_bull_terrier', 'basset_hound', 'beagle', 'boxer', 'chihuahua', 'english_cocker_spaniel', 'english_setter', 'german_shorthaired', 'great_pyrenees', 'havanese', 'japanese_chin', 'keeshond', 'leonberger', 'miniature_pinscher', 'newfoundland', 'pomeranian', 'pug', 'saint_bernard', 'samoyed', 'scottish_terrier', 'shiba_inu', 'staffordshire_bull_terrier', 'wheaten_terrier', 'yorkshire_terrier']\n\n\n\n\n3.4 The prediction and probabilities of our image\n\n# get index of predction\nidx = res[1]\n\n# store list of probalities of our predction\nprobabilities = res[2]\n\n# get breed and probability of our prediction\ncategories[idx],probabilities[idx]\n\n\n('Bombay', tensor(0.6369))\n\n\n\n\n3.5 Probability of every category available\n\ndef classify_image_fn(img):\n    prediction, idx, probabilities = pets_learner.predict(img)\n    return dict(zip(categories, map(float, probabilities)))\n\nclassify_image_fn(pet1)     # names and probabilities\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\n{'Abyssinian': 0.034474823623895645,\n 'Bengal': 0.0017812795704230666,\n 'Birman': 0.008138809353113174,\n 'Bombay': 0.6368528604507446,\n 'British_Shorthair': 0.006099338177591562,\n 'Egyptian_Mau': 0.0004883029614575207,\n 'Maine_Coon': 0.05074741691350937,\n 'Persian': 0.008803554810583591,\n 'Ragdoll': 0.21084259450435638,\n 'Russian_Blue': 0.03483246639370918,\n 'Siamese': 0.0009659799397923052,\n 'Sphynx': 0.0007664564182050526,\n 'american_bulldog': 0.0006376394885592163,\n 'american_pit_bull_terrier': 0.0002594943216536194,\n 'basset_hound': 8.799932402325794e-05,\n 'beagle': 0.0013307805638760328,\n 'boxer': 6.664981629000977e-05,\n 'chihuahua': 5.711586709367111e-05,\n 'english_cocker_spaniel': 0.0009037724230438471,\n 'english_setter': 6.905203190399334e-05,\n 'german_shorthaired': 0.00020094779029022902,\n 'great_pyrenees': 2.1758336515631527e-05,\n 'havanese': 0.0002576670085545629,\n 'japanese_chin': 2.1859435946680605e-05,\n 'keeshond': 3.85471066692844e-05,\n 'leonberger': 1.616517351976654e-06,\n 'miniature_pinscher': 6.26009568804875e-05,\n 'newfoundland': 4.355219061835669e-05,\n 'pomeranian': 0.00014901049144100398,\n 'pug': 9.617456089472398e-05,\n 'saint_bernard': 0.0001000974079943262,\n 'samoyed': 0.0001371700782328844,\n 'scottish_terrier': 0.00027684049564413726,\n 'shiba_inu': 5.5386270105373114e-05,\n 'staffordshire_bull_terrier': 5.701235932065174e-05,\n 'wheaten_terrier': 4.680879646912217e-05,\n 'yorkshire_terrier': 0.0002264348149765283}"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#central-limit-theorem",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#central-limit-theorem",
-    "title": "Let’s Make Some Noise",
-    "section": "2.2 Central Limit Theorem:",
-    "text": "2.2 Central Limit Theorem:\n\nThe Central Limit Theorem states that the sum (or average) of a large number of independent, identically distributed random variables, each with finite mean and variance, will be approximately normally distributed.\nThis property makes Gaussian noise a natural choice in many scenarios where the noise is a result of multiple independent factors."
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html#run-local-gradio-app",
+    "href": "posts/2024-01-25-99_gradio_app/index.html#run-local-gradio-app",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
+    "section": "4 Run local Gradio App",
+    "text": "4 Run local Gradio App\nTheres a variety of ways to alter the app, I’ve set the size of the images and provided some examples:\n\ngr_image = gr.Image(width=244, height=244)\ngr_label = gr.Label()\n\ninput_examples = ['pet1.jpg','pet2.jpg','pet3.jpg','pet4.jpg','pet5.jpg']\nintf = gr.Interface(fn=classify_image_fn,\n                    inputs=gr_image,    \n                    outputs=gr_label,\n                    examples=input_examples)\nintf.launch(inline=False)\n\nRunning on local URL:  http://127.0.0.1:7863\n\nTo create a public link, set `share=True` in `launch()`.\n\n\n\n\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4.1 Open Local Gradio App\nOpen the URL provided in your favourite browser\n\n\n\n4.2 Test it out\nThe app knows a pug when it sees one! The app is ready."
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#mathematical-simplicity",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#mathematical-simplicity",
-    "title": "Let’s Make Some Noise",
-    "section": "2.3 Mathematical Simplicity:",
-    "text": "2.3 Mathematical Simplicity:\n\nThe normal distribution has simple and well-defined mathematical properties, making it easy to work with in analytical and computational contexts."
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html#export-app.py",
+    "href": "posts/2024-01-25-99_gradio_app/index.html#export-app.py",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
+    "section": "5. Export (app.py)",
+    "text": "5. Export (app.py)\nGradio app must be all inside a app.py script when being deployed on HuggingFaces.\nThankfully, there is a library to export all the cell-blocks from our notebook (.ipynb) to python script (app.py).\nReference\n\n5.1 Put directives at front of notebook\n\nPlace ‘#| default_exp app’ in a python codeblock in front of the the notebook\n\n\n\n\n5.2 Choose the cellblocks to export\n\nPlace ‘#| export’ in front of each codeblock you need to export\n\n\n\n\n5.3 Run nbdev and export\n\nfrom nbdev.export import nb_export\nnb_export('app.ipynb')\n\nThis will create a new folder as home directory and place in the app.py"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#robustness-in-estimation",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#robustness-in-estimation",
-    "title": "Let’s Make Some Noise",
-    "section": "2.4 Robustness in Estimation:",
-    "text": "2.4 Robustness in Estimation:\n\nMany statistical estimation methods, including maximum likelihood estimation, assume that the underlying noise follows a Gaussian distribution.\nThis can lead to more robust parameter estimates when the actual noise is close to Gaussian."
+    "objectID": "posts/2024-01-25-99_gradio_app/index.html#to-be-continued",
+    "href": "posts/2024-01-25-99_gradio_app/index.html#to-be-continued",
+    "title": "How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)",
+    "section": "To be Continued…",
+    "text": "To be Continued…\nPart 1: Create Learner (.pkl file)\nPart 2: Create Gradio application file (app.py)\nPart 3: Upload to HuggingFace account"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#convenient-in-machine-learning",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#convenient-in-machine-learning",
-    "title": "Let’s Make Some Noise",
-    "section": "2.5 Convenient in Machine Learning:",
-    "text": "2.5 Convenient in Machine Learning:\n\nIn machine learning, adding Gaussian noise can act as a form of regularization, preventing overfitting by introducing a controlled amount of randomness during training. It is also commonly used in generative models, such as Gaussian Mixture Models (GMMs)."
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html",
+    "title": "Saving a Fast AI Model",
+    "section": "",
+    "text": "This is a short tutorial to save (export) down a fast ai model (pkl file)."
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#noise-function",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#noise-function",
-    "title": "Let’s Make Some Noise",
-    "section": "3.1 noise function",
-    "text": "3.1 noise function\nThis function generates random noise using NumPy’s random.normal function.\n\ny: numpy or pytorch array\n\nscale: standard deviation of the normal distribution from which the noise is drawn.\noutput: array of random values with the same shape as the input array y.\n\n\ndef add_noise(x, mult, add): \n    return x * (1+noise(x, mult)) + noise(x, add)"
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#load-fast-ai-libaries-and-download-dataset",
+    "title": "Saving a Fast AI Model",
+    "section": "1. Load Fast AI Libaries and Download Dataset",
+    "text": "1. Load Fast AI Libaries and Download Dataset\n\n!pip install -Uqq fastai\nfrom fastai.vision.all import *\n\n\npath = untar_data(URLs.PETS)/'images'\n\n\npath\n\nPath('C:/Users/tonyp/.fastai/data/oxford-iiit-pet/images')\n\n\nIf you ran it in GoogleColab or Kaggle (recommended, its faster) then it’ll be stored in the cloud. \nIf you ran it locally, its stored on your machine and you can take a look at the all the cute images! (Not recommended, its slow)"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#add_noise-function",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#add_noise-function",
-    "title": "Let’s Make Some Noise",
-    "section": "3.2 add_noise function",
-    "text": "3.2 add_noise function\nThis function uses the noise function to add noise to the input x:\n\n* (1 + noise(x, mult)): The multiplicative noise is applied by multiplying x with.\n+ noise(x, add): The additive noise is added directly to the result of the multiplicative part."
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#labelling-function",
+    "title": "Saving a Fast AI Model",
+    "section": "2. Labelling Function",
+    "text": "2. Labelling Function\n\ndef is_cat(x): return x[0].isupper()\n\nOur data must be consistently labelled and parsed through into the model.\nFor this particular dataset, filenames starting with a Capital letter denotes a Cat, vice versa for a Non-Cat (Dog, in this case).\n\n\n\nPet Filenames\n\n\nLets write a function to handle the files names to get our labels (psuedo-code):\n1. Parse in file name and\n2. Obtain the first character and\n3. Check whether it is an upper case,\n4. If True, then it is a Cat.\nThere are various ways for us to supply the labelling to our model, in a previous blog Rice vs Noodles, the label was supplied via the parent folders name (rice folder and noodle folder).\n\nFast AI provides various helpful functions for common ways data is labelled to parse into our models\nFast AI Docs - Transforms - Label"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#differences",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#differences",
-    "title": "Let’s Make Some Noise",
-    "section": "3.3 Differences:",
-    "text": "3.3 Differences:\nThe noise function generates:\n\nrandom noise independently of any input array,\nusing a specified scale.\nIt’s a standalone function for generating random noise.\n\nThe add_noise function is specifically designed to:\n\napply noise to an input array x.\ncombines both multiplicative and additive noise components,\nallowing for a more complex noise model."
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#dataloader",
+    "title": "Saving a Fast AI Model",
+    "section": "3. DataLoader",
+    "text": "3. DataLoader\nCreate the Dataloader and supply the labelling function we wrote into label_func.\n\ndls = ImageDataLoaders.from_name_func('.',\n    get_image_files(path), valid_pct=0.2, seed=42,\n    label_func=is_cat,\n    item_tfms=Resize(192))\n\nc:\\Users\\tonyp\\miniconda3\\envs\\fastai\\Lib\\site-packages\\fastai\\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'\n  return getattr(torch, 'has_mps', False)"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#regularization-and-preventing-memorization",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#regularization-and-preventing-memorization",
-    "title": "Let’s Make Some Noise",
-    "section": "4.1 Regularization and Preventing Memorization:",
-    "text": "4.1 Regularization and Preventing Memorization:\nAvoid and  Discouraging Overfitting:\n\nAdding random noise to the input data can act as a form of regularization, preventing the model from fitting the training data too closely.\nThis can improve the generalization of the model to new, unseen data.\nModels that are too complex may memorize the training data instead of learning the underlying patterns.\nAdding noise makes it more challenging for the model to memorize specific examples and encourages it to focus on general patterns."
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#fine-tune-non-gpu-vs-gpu",
+    "title": "Saving a Fast AI Model",
+    "section": "4. Fine-tune (Non-GPU vs GPU)",
+    "text": "4. Fine-tune (Non-GPU vs GPU)\nI attempted to fine-tune via Kaggle (GPU) and Locally (No GPU) and not suprisingly it is incredibly faster with a GPU setup.\nNvidia (and maybe other) GPUs are designed to be able to take multiple images at once (batches) grouped together (tensors) (I think 64 images at once), whereas a laptop without a GPU like mine will be processing 1 image at a time.\n\nlearn = vision_learner(dls, resnet18, metrics=error_rate)\nlearn.fine_tune(3)\n\nGPU took 35 seconds an epoch \nNon-GPU took 8 minutes an epoch"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#data-augmentation",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#data-augmentation",
-    "title": "Let’s Make Some Noise",
-    "section": "4.2 Data Augmentation:",
-    "text": "4.2 Data Augmentation:\nIncreased Variability:\n\nIntroducing noise during training can artificially increase the variability in the dataset.\nThis can be particularly useful when dealing with limited training data, helping the model generalize better to different variations of the input."
+    "objectID": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
+    "href": "posts/2024-01-19-99_saving_a_fastai_model/index.html#export-the-model",
+    "title": "Saving a Fast AI Model",
+    "section": "5. Export the model",
+    "text": "5. Export the model\n\nlearn.export('catdogmodel.pkl')\n\nIn Kaggle, the model will be saved on their cloud and you can access it by using right-hand sidebar under Notebook -&gt; Data -&gt; Output\n\nIt’s only 46 Mb!, not too shabby!\n\nThats it! We’ll go through how to use a saved/exported model in an upcoming post."
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#robustness-testing",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#robustness-testing",
-    "title": "Let’s Make Some Noise",
-    "section": "4.3 Robustness Testing:",
-    "text": "4.3 Robustness Testing:\nModel Robustness:\n\nAdding noise during training can make the model more robust to variations and uncertainties in real-world data.\nThis is especially important when the model needs to perform well on data that may have different levels of noise or unexpected variations."
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html",
+    "title": "How To Setup a Kaggle API",
+    "section": "",
+    "text": "I’m planning to learn and test myself with competitions on Kaggle.\nKaggle is a place with real-world problems where Data Scientists and alike can go against each other to solve problems with Machine Learning.\nFrom my understanding:\n- There is a validation set where your model is tested against and a public leader board to see how you’re going.\n- At the end of the competition, there is an unseen test set where everyones models is tested against and where the final rankings are determined.\n- This is quite reflective of real world where preparing a representative validation set is vital, thus will perform well on the test set.\n- A common mistake for newbs is over-fitting to the validation set. I’m ready to make that mistake 🤣.\nAs for the Kaggle API, you can download the kernel which is the necessary datasets and source files to do the competitions.\nAlternatively, I can use the notebooks on their website. I plan to try doing competitions both ways.\nThis is how I set up my Kaggle API"
   },
   {
-    "objectID": "posts/2024-03-02-nice_and_noisy/index.html#stochasticity-in-training",
-    "href": "posts/2024-03-02-nice_and_noisy/index.html#stochasticity-in-training",
-    "title": "Let’s Make Some Noise",
-    "section": "4.4 Stochasticity in Training:",
-    "text": "4.4 Stochasticity in Training:\nEncouraging Exploration:\n\nDuring the training process, introducing randomness can encourage the model to explore different parts of the parameter space.\nThis can be especially beneficial in reinforcement learning or optimization problems, helping to avoid getting stuck in local minima."
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#install-library",
+    "title": "How To Setup a Kaggle API",
+    "section": "1. Install Library",
+    "text": "1. Install Library\npip install python"
   },
   {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#introduction",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "1. Introduction",
-    "text": "1. Introduction\nEmbedding a classic Convolutional Neural Network (CNN) Gradio ‘Cat versus Dog’ classifier Gradio App, hosted on HuggingFace Spaces, into my Quarto Blog. What a mouthful!"
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#create-api-token-.json-file",
+    "title": "How To Setup a Kaggle API",
+    "section": "2. Create API token (.json file)",
+    "text": "2. Create API token (.json file)\n\nGo to Kaggle\n\nGo to Settings\n\nCreate New Token"
   },
   {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#background",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "2. Background",
-    "text": "2. Background\nThis App will guess whether an image is a Cat or Dog with a level of confidence using a deep learning neural network based on 700 mbs of labelled photos of dogs and cats. I’ll post more information on the model itself in a different post.\nAll doggos🐕 & cats🐈 image examples has never been viewed by the Model and it makes a prediction in milliseconds! Images supplied by my good friends in Australia 🦘 and Vietnam 🍜. Thanks guys!\nThe App isn’t perfect:\n- It guesses Incorrectly with great 95% confidence a cat as a dog!\nI’m thrilled to be able to build the app, get it hosted and embed it all in one day for the first time! Alot of firsts today!"
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#save-to-your-local-.kaggle-folder-windows",
+    "title": "How To Setup a Kaggle API",
+    "section": "3. Save to your local .kaggle folder (Windows)",
+    "text": "3. Save to your local .kaggle folder (Windows)\nLocation: C:\\Users\\&lt;Windows-username&gt;\\.kaggle\\kaggle.json\nKaggle Github Reference\n\n3.1 Pasted into the wrong folder?\nIf you did something wrong then ran kaggle in the terminal, you’ll an error (telling you where to put it):"
   },
   {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#future-stuff",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "3. Future stuff",
-    "text": "3. Future stuff\n[1]: Multi-Image Uploader + Predictor.\n[2]: Explain how I built the Gradio App, got it hosted Hugging Face, and embedded here.\n[4]: Upgrade the rice vs noodle model an App and hosted.\n[4]: Learn some HTML/CSS to make things prettier."
-  },
-  {
-    "objectID": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
-    "href": "posts/2024-01-19-98_embed_gradio_hgface/index.html#heres-the-app",
-    "title": "Deploying My First Live App & it’s a Neural Network!",
-    "section": "4. Heres the App!",
-    "text": "4. Heres the App!"
+    "objectID": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
+    "href": "posts/2024-01-27-99_kaggle_api/index.html#start-kaggling",
+    "title": "How To Setup a Kaggle API",
+    "section": "4 Start Kaggling",
+    "text": "4 Start Kaggling\n\nimport kaggle\n??kaggle\n\nType:        module\nString form: &lt;module 'kaggle' from 'c:\\\\Users\\\\tonyp\\\\miniconda3\\\\envs\\\\fastai\\\\Lib\\\\site-packages\\\\kaggle\\\\__init__.py'&gt;\nFile:        c:\\users\\tonyp\\miniconda3\\envs\\fastai\\lib\\site-packages\\kaggle\\__init__.py\nSource:     \n#!/usr/bin/python\n#\n# Copyright 2024 Kaggle Inc\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n# coding=utf-8\nfrom __future__ import absolute_import\nfrom kaggle.api.kaggle_api_extended import KaggleApi\nfrom kaggle.api_client import ApiClient\n\napi = KaggleApi(ApiClient())\napi.authenticate()"
   },
   {
     "objectID": "posts/2024-01-31-99_neural_network_basics/index.html",
