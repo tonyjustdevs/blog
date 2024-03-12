@@ -339,8 +339,8 @@
     "objectID": "posts/2024-03-11-relu/index.html#torch.nn.functional.relu",
     "href": "posts/2024-03-11-relu/index.html#torch.nn.functional.relu",
     "title": "Rectified Linear Unit (ReLU)",
-    "section": "2.3 torch.nn.functional.relu",
-    "text": "2.3 torch.nn.functional.relu\nnn.relu also only takes Tensor input. I’ll use this function going forward.\n\nimport torch.nn.functional as nn\n\ndef sgl_relu_nn(m,b,x):\n    xs_tsr = torch.tensor(x)\n    ys_tsr = m*xs_tsr+b # convert inputs to tensor first\n    relu_y = nn.relu(ys_tsr)\n    print(type(relu_y))\n    return relu_y\n\nsgl_relu_nn(1,1,1)\n\n&lt;class 'torch.Tensor'&gt;\n\n\ntensor(2)"
+    "section": "2.4 torch.nn.functional.relu",
+    "text": "2.4 torch.nn.functional.relu\nnn.relu also only takes Tensor input. I’ll use this function going forward.\n\nimport torch.nn.functional as nn\n\ndef sgl_relu_nn(m,b,x):\n    xs_tsr = torch.tensor(x)\n    ys_tsr = m*xs_tsr+b # convert inputs to tensor first\n    relu_y = nn.relu(ys_tsr)\n    print(type(relu_y))\n    return relu_y\n\nsgl_relu_nn(1,1,1)\n\n&lt;class 'torch.Tensor'&gt;\n\n\ntensor(2)"
   },
   {
     "objectID": "posts/2024-03-11-relu/index.html#create-noisey-data-we-wish-to-model",
