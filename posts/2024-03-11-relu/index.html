@@ -251,7 +251,7 @@ window.Quarto = {
   <li><a href="#create-mae-calculate-and-loss-function" id="toc-create-mae-calculate-and-loss-function" class="nav-link" data-scroll-target="#create-mae-calculate-and-loss-function">4.3 Create MAE calculate and Loss Function</a></li>
   <li><a href="#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" id="toc-loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" class="nav-link" data-scroll-target="#loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5">4.4 Loss is <code>4.1318</code> with original input tensor([<code>0.5,0.5,-0.5,-0.5</code>])</a></li>
   <li><a href="#loss-with-gradient-descent-after-40-epochs" id="toc-loss-with-gradient-descent-after-40-epochs" class="nav-link" data-scroll-target="#loss-with-gradient-descent-after-40-epochs">4.5 <code>1.96</code> Loss with Gradient Descent after 40 epochs</a></li>
-  <li><a href="#mae-in-chart-is-2.03-instead-of-1.96-but-its-close-enough." id="toc-mae-in-chart-is-2.03-instead-of-1.96-but-its-close-enough." class="nav-link" data-scroll-target="#mae-in-chart-is-2.03-instead-of-1.96-but-its-close-enough.">4.6 MAE in chart is <code>2.03</code> instead of <code>1.96</code>, but its close enough.</a></li>
+  <li><a href="#predictions-blue-line-vs-data-red-dots" id="toc-predictions-blue-line-vs-data-red-dots" class="nav-link" data-scroll-target="#predictions-blue-line-vs-data-red-dots">4.6 Predictions (blue line) vs Data (red dots)</a></li>
   </ul></li>
   <li><a href="#completed" id="toc-completed" class="nav-link" data-scroll-target="#completed">5. Completed</a></li>
   </ul>
@@ -508,6 +508,8 @@ window.Quarto = {
 </section>
 <section id="loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5" class="level2">
 <h2 class="anchored" data-anchor-id="loss-is-4.1318-with-original-input-tensor0.50.5-0.5-0.5">4.4 Loss is <code>4.1318</code> with original input tensor([<code>0.5,0.5,-0.5,-0.5</code>])</h2>
+<p>Original model predictions (blue line) are not great, not very close to our data (red dots)</p>
+<p>That makes sense since I arbitrarily chose the parameters of <code>0.5</code> and <code>-0.5</code></p>
 <div id="cell-26" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m1b1_m2b2_tsr <span class="op">=</span> torch.tensor([<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.5</span>],requires_grad<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>relu_2_loss_function(m1b1_m2b2_tsr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -515,7 +517,7 @@ window.Quarto = {
 <pre><code>tensor(4.1318, dtype=torch.float64, grad_fn=&lt;MeanBackward0&gt;)</code></pre>
 </div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="52">
+<div id="cell-27" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># @interact(m1=0.5,b1=0.5,m2=-.5,b2=-.5)</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu_dbl_interactive_plotter_fn(m1,b1,m2,b2):</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    xs_sgl_100_tsr <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="fl">4.1</span>,<span class="fl">4.1</span>,steps<span class="op">=</span><span class="dv">100</span>)</span>
@@ -523,10 +525,10 @@ window.Quarto = {
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    relu_dbl_m1b1m2b2_model <span class="op">=</span> relu_dbl_m1b1m2b2_fn(m1,b1,m2,b2)</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    ys_dbl_m1b1m2b2_100_tsr <span class="op">=</span> relu_dbl_m1b1m2b2_model(xs_sgl_100_tsr)</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    plt.xlim((<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    plt.ylim((<span class="op">-</span><span class="dv">1</span>,<span class="dv">6</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    plt.xlim((<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    plt.ylim((<span class="op">-</span><span class="dv">1</span>,<span class="dv">15</span>))</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs_sgl_100_tsr, ys_dbl_m1b1m2b2_100_tsr)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    plt.scatter(xs_20_tsr,ys_20_noisey_tsr)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    plt.scatter(xs_20_tsr,ys_20_noisey_tsr, color<span class="op">=</span><span class="st">'r'</span>)</span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(ys_20_noisey_tsr)</span></span>
 <span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    ys_dbl_preds_20_tsr <span class="op">=</span> relu_dbl_m1b1m2b2_model(xs_20_tsr)</span>
@@ -598,20 +600,20 @@ loss_40: 1.96 - [tensor([ 4.4251,  2.5245, -3.3031,  0.8250], requires_grad=True
 </div>
 </div>
 </section>
-<section id="mae-in-chart-is-2.03-instead-of-1.96-but-its-close-enough." class="level2">
-<h2 class="anchored" data-anchor-id="mae-in-chart-is-2.03-instead-of-1.96-but-its-close-enough.">4.6 MAE in chart is <code>2.03</code> instead of <code>1.96</code>, but its close enough.</h2>
-<p>Gotta figure out why it isnt matching exactly.</p>
-<div id="cell-31" class="cell" data-execution_count="56">
+<section id="predictions-blue-line-vs-data-red-dots" class="level2">
+<h2 class="anchored" data-anchor-id="predictions-blue-line-vs-data-red-dots">4.6 Predictions (blue line) vs Data (red dots)</h2>
+<p>New Parameters has created a Double ReLU predictions shaped closer to the Noisey Data as seen below!</p>
+<div id="cell-31" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> relu_dbl_interactive_plotter_fn(m1,b1,m2,b2):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    xs_sgl_100_tsr <span class="op">=</span> torch.linspace(<span class="op">-</span><span class="fl">4.1</span>,<span class="fl">4.1</span>,steps<span class="op">=</span><span class="dv">100</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    relu_dbl_m1b1m2b2_model <span class="op">=</span> relu_dbl_m1b1m2b2_fn(m1,b1,m2,b2)</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    ys_dbl_m1b1m2b2_100_tsr <span class="op">=</span> relu_dbl_m1b1m2b2_model(xs_sgl_100_tsr)</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    plt.xlim((<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    plt.ylim((<span class="op">-</span><span class="dv">1</span>,<span class="dv">6</span>))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    plt.xlim((<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    plt.ylim((<span class="op">-</span><span class="dv">1</span>,<span class="dv">15</span>))</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs_sgl_100_tsr, ys_dbl_m1b1m2b2_100_tsr)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    plt.scatter(xs_20_tsr,ys_20_noisey_tsr)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    plt.scatter(xs_20_tsr,ys_20_noisey_tsr, color<span class="op">=</span><span class="st">'r'</span>)</span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(ys_20_noisey_tsr)</span></span>
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    ys_dbl_preds_20_tsr <span class="op">=</span> relu_dbl_m1b1m2b2_model(xs_20_tsr)</span>
@@ -631,6 +633,7 @@ loss_40: 1.96 - [tensor([ 4.4251,  2.5245, -3.3031,  0.8250], requires_grad=True
 <section id="completed" class="level1">
 <h1>5. Completed</h1>
 <p>I managed to apply <code>gradient descent</code> to a <code>double relu</code> and reduce errror by 50%, not bad!</p>
+<p>In a future post, I’ll fit more ReLUs to see how close we can get to our data.</p>
 
 
 </section>
