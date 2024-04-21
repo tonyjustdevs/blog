@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-03-15">
-<meta name="description" content="Titanic from scratch">
+<meta name="dcterms.date" content="2024-04-21">
+<meta name="description" content="Deep learning from scratch">
 
-<title>Tony’s blog - Titanic Neural Networks</title>
+<title>Tony’s blog - Deep Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,14 +130,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Titanic Neural Networks</h1>
+      <h1 class="title">Deep Learning</h1>
                   <div>
         <div class="description">
-          Titanic from scratch
+          Deep learning from scratch
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">basics</div>
+                <div class="quarto-category">deep learning</div>
               </div>
                   </div>
   </div>
@@ -155,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 15, 2024</p>
+        <p class="date">April 21, 2024</p>
       </div>
     </div>
     
@@ -172,7 +172,31 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">2. Python</a></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem">2. The Problem</a></li>
+  <li><a href="#the-approach" id="toc-the-approach" class="nav-link" data-scroll-target="#the-approach">3. The Approach</a></li>
+  <li><a href="#the-analysis" id="toc-the-analysis" class="nav-link" data-scroll-target="#the-analysis">4. The Analysis</a>
+  <ul class="collapse">
+  <li><a href="#input-level---normalised-input-data---idep_mxn" id="toc-input-level---normalised-input-data---idep_mxn" class="nav-link" data-scroll-target="#input-level---normalised-input-data---idep_mxn">4.1 Input Level - Normalised Input Data - <code>idep_mxn</code></a></li>
+  <li><a href="#input-level---coeffs---layer-1---l1_nxq" id="toc-input-level---coeffs---layer-1---l1_nxq" class="nav-link" data-scroll-target="#input-level---coeffs---layer-1---l1_nxq">4.2 Input Level - Coeffs - Layer 1 - <code>L1_nxq</code></a></li>
+  <li><a href="#input-level---coeffs---layer-2---l2_qx1" id="toc-input-level---coeffs---layer-2---l2_qx1" class="nav-link" data-scroll-target="#input-level---coeffs---layer-2---l2_qx1">4.3 Input Level - Coeffs - Layer 2 - <code>L2_qx1</code></a></li>
+  <li><a href="#input-level---coeffs---constant---const_1" id="toc-input-level---coeffs---constant---const_1" class="nav-link" data-scroll-target="#input-level---coeffs---constant---const_1">4.4 Input Level - Coeffs - Constant - <code>CONST_1</code></a></li>
+  <li><a href="#intermediary-calcs---idepl1---pred_pset_hl_mxq" id="toc-intermediary-calcs---idepl1---pred_pset_hl_mxq" class="nav-link" data-scroll-target="#intermediary-calcs---idepl1---pred_pset_hl_mxq">4.5 Intermediary Calcs - idep@L1 - <code>pred_PSET_HL_mxq</code></a></li>
+  <li><a href="#intermediary-calcs---reluidepl1---pset_hl_mxq" id="toc-intermediary-calcs---reluidepl1---pset_hl_mxq" class="nav-link" data-scroll-target="#intermediary-calcs---reluidepl1---pset_hl_mxq">4.6 Intermediary Calcs - relu(idep@L1) - <code>PSET_HL_mxq</code></a></li>
+  <li><a href="#final-preds---pset_hl_mxql2---preds_mx1" id="toc-final-preds---pset_hl_mxql2---preds_mx1" class="nav-link" data-scroll-target="#final-preds---pset_hl_mxql2---preds_mx1">4.7 Final Preds - PSET_HL_mxq@L2 - <code>PREDS_mx1</code></a></li>
+  <li><a href="#final-preds---preds_mx1-const_1---preds_c_mx1" id="toc-final-preds---preds_mx1-const_1---preds_c_mx1" class="nav-link" data-scroll-target="#final-preds---preds_mx1-const_1---preds_c_mx1">4.8 Final Preds - PREDS_mx1 + CONST_1 - <code>PREDS_C_mx1</code></a></li>
+  <li><a href="#final-preds---sigmoidpreds_c_mx1---sgm_preds_c_mx1" id="toc-final-preds---sigmoidpreds_c_mx1---sgm_preds_c_mx1" class="nav-link" data-scroll-target="#final-preds---sigmoidpreds_c_mx1---sgm_preds_c_mx1">4.9 Final Preds - Sigmoid(PREDS_C_mx1) - <code>SGM_PREDS_C_mx1</code></a></li>
+  <li><a href="#loss--" id="toc-loss--" class="nav-link" data-scroll-target="#loss--">4.10 - Loss -</a></li>
+  </ul></li>
+  <li><a href="#the-bug" id="toc-the-bug" class="nav-link" data-scroll-target="#the-bug">5. The Bug</a>
+  <ul class="collapse">
+  <li><a href="#input-level---dep-variable---dep_mx1" id="toc-input-level---dep-variable---dep_mx1" class="nav-link" data-scroll-target="#input-level---dep-variable---dep_mx1">5.1 Input Level - Dep Variable - <code>dep_mx1</code></a></li>
+  </ul></li>
+  <li><a href="#the-fix" id="toc-the-fix" class="nav-link" data-scroll-target="#the-fix">6. The Fix</a>
+  <ul class="collapse">
+  <li><a href="#adding-trailing-dimension-none" id="toc-adding-trailing-dimension-none" class="nav-link" data-scroll-target="#adding-trailing-dimension-none">6.1 Adding Trailing Dimension <code>[:,None]</code></a></li>
+  <li><a href="#check-new-loss" id="toc-check-new-loss" class="nav-link" data-scroll-target="#check-new-loss">6.2 Check New Loss</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">7. Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -183,11 +207,138 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<p><img src="imgs/5debug.jpg" class="img-fluid"></p>
 <section id="introduction" class="level1">
 <h1>1. Introduction</h1>
+<p>I’ve coded from scratch a neural network using Kaggle Titanic dataset based on a Jeremy Howard’s popular NN-model.</p>
+<p>I noticed descrepancies in Loss between my model and the reference model and will attempt debug My Model (TP) without looking at the Reference Models (RM) code.</p>
 </section>
-<section id="python" class="level1">
-<h1>2. Python</h1>
+<section id="the-problem" class="level1">
+<h1>2. The Problem</h1>
+<p>Loss differences (from 2nd epoch onwards):</p>
+<ul>
+<li>TP-Loss: 0.544 (epoch_1), 0.538 (epoch_2)</li>
+<li>RM-Loss: 0.543 (epoch_1), 0.532 (epoch_2)</li>
+</ul>
+<p>The difference grows per epoch.</p>
+<p><img src="imgs/5debug1_loss_diff.jpg" class="img-fluid"></p>
+</section>
+<section id="the-approach" class="level1">
+<h1>3. The Approach</h1>
+<p>This neural network model only has <code>one-hidden-layer</code>.<br>
+I’ve decided to test differences at 3 stages:</p>
+<ol type="1">
+<li><strong>Input level</strong> (input data, coefficients, and constants)</li>
+<li><strong>Intermediary Calculations</strong> (hidden layers and relu)</li>
+<li><strong>Predictions</strong> (predictions and sigmoid)</li>
+<li><strong>Update Coefficients</strong> (gradients and updated coefficients)</li>
+</ol>
+</section>
+<section id="the-analysis" class="level1">
+<h1>4. The Analysis</h1>
+<section id="input-level---normalised-input-data---idep_mxn" class="level3">
+<h3 class="anchored" data-anchor-id="input-level---normalised-input-data---idep_mxn">4.1 Input Level - Normalised Input Data - <code>idep_mxn</code></h3>
+<p><strong>EPOCH 1 and 2</strong>: OKAY (data-matching) <img src="imgs/5debug41_idep_mxn.jpg" class="img-fluid"></p>
+</section>
+<section id="input-level---coeffs---layer-1---l1_nxq" class="level3">
+<h3 class="anchored" data-anchor-id="input-level---coeffs---layer-1---l1_nxq">4.2 Input Level - Coeffs - Layer 1 - <code>L1_nxq</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching) <img src="imgs/5debug42_l1_nxq.jpg" class="img-fluid"></p>
+</section>
+<section id="input-level---coeffs---layer-2---l2_qx1" class="level3">
+<h3 class="anchored" data-anchor-id="input-level---coeffs---layer-2---l2_qx1">4.3 Input Level - Coeffs - Layer 2 - <code>L2_qx1</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching) <img src="imgs/5debug43_l2_qx1.jpg" class="img-fluid"></p>
+</section>
+<section id="input-level---coeffs---constant---const_1" class="level3">
+<h3 class="anchored" data-anchor-id="input-level---coeffs---constant---const_1">4.4 Input Level - Coeffs - Constant - <code>CONST_1</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching)<br>
+<img src="imgs/5debug44_const_1.jpg" class="img-fluid"></p>
+</section>
+<section id="intermediary-calcs---idepl1---pred_pset_hl_mxq" class="level3">
+<h3 class="anchored" data-anchor-id="intermediary-calcs---idepl1---pred_pset_hl_mxq">4.5 Intermediary Calcs - idep@L1 - <code>pred_PSET_HL_mxq</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching) <img src="imgs/5debug45_idepl1_mxq.jpg" class="img-fluid"></p>
+</section>
+<section id="intermediary-calcs---reluidepl1---pset_hl_mxq" class="level3">
+<h3 class="anchored" data-anchor-id="intermediary-calcs---reluidepl1---pset_hl_mxq">4.6 Intermediary Calcs - relu(idep@L1) - <code>PSET_HL_mxq</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching) <img src="imgs/5debug46_relu_idepl1_mxq.jpg" class="img-fluid"></p>
+</section>
+<section id="final-preds---pset_hl_mxql2---preds_mx1" class="level3">
+<h3 class="anchored" data-anchor-id="final-preds---pset_hl_mxql2---preds_mx1">4.7 Final Preds - PSET_HL_mxq@L2 - <code>PREDS_mx1</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching)<br>
+<img src="imgs/5debug47_preds_mx1.jpg" class="img-fluid"></p>
+</section>
+<section id="final-preds---preds_mx1-const_1---preds_c_mx1" class="level3">
+<h3 class="anchored" data-anchor-id="final-preds---preds_mx1-const_1---preds_c_mx1">4.8 Final Preds - PREDS_mx1 + CONST_1 - <code>PREDS_C_mx1</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching)<br>
+<img src="imgs/5debug48_preds_c_mx1.jpg" class="img-fluid"></p>
+</section>
+<section id="final-preds---sigmoidpreds_c_mx1---sgm_preds_c_mx1" class="level3">
+<h3 class="anchored" data-anchor-id="final-preds---sigmoidpreds_c_mx1---sgm_preds_c_mx1">4.9 Final Preds - Sigmoid(PREDS_C_mx1) - <code>SGM_PREDS_C_mx1</code></h3>
+<p><strong>EPOCH 1</strong>: OKAY (data-matching)<br>
+<img src="imgs/5debug49_sgm_preds_c_mx1.jpg" class="img-fluid"></p>
+</section>
+<section id="loss--" class="level3">
+<h3 class="anchored" data-anchor-id="loss--">4.10 - Loss -</h3>
+<p><strong>EPOCH 1</strong>: <strong>NOT OKAY, Loss values different from 4th decimals</strong></p>
+<p>Since Loss is created taking the absolute difference (then mean) between the:</p>
+<ul>
+<li><code>predictions</code> and</li>
+<li>(actual) <code>dependent variables</code></li>
+</ul>
+<p>Lets validate across the neural network models:</p>
+<ul>
+<li><code>Dependent</code> Variable (“Survived”)<br>
+</li>
+<li><code>Predictions</code></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>TP</td>
+<td>0.543<strong><em>3918237686157</em></strong></td>
+</tr>
+<tr class="even">
+<td>RM</td>
+<td>0.543<strong><em>9100861549377</em></strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="the-bug" class="level1">
+<h1>5. The Bug</h1>
+<section id="input-level---dep-variable---dep_mx1" class="level3">
+<h3 class="anchored" data-anchor-id="input-level---dep-variable---dep_mx1">5.1 Input Level - Dep Variable - <code>dep_mx1</code></h3>
+<p><strong>EPOCH 1</strong>: <strong>NOT OKAY</strong>:- **Dimensions are different!</p>
+<p><strong>Found the Bug!</strong></p>
+<ul>
+<li>TP-dimensions: [<strong><em>713,1</em></strong>]</li>
+<li>RM-dimensions: [<strong><em>713</em></strong>]</li>
+</ul>
+<p><img src="imgs/5debug50_dep_mx1.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="the-fix" class="level1">
+<h1>6. The Fix</h1>
+<section id="adding-trailing-dimension-none" class="level3">
+<h3 class="anchored" data-anchor-id="adding-trailing-dimension-none">6.1 Adding Trailing Dimension <code>[:,None]</code></h3>
+<p><strong>Solution</strong>: Add trailing dimesion for dependent variables, fixing the predictions calculation, thus loss.</p>
+<p><img src="imgs/5debug51_dep_add_dim_fix.jpg" class="img-fluid"></p>
+</section>
+<section id="check-new-loss" class="level3">
+<h3 class="anchored" data-anchor-id="check-new-loss">6.2 Check New Loss</h3>
+<p><strong>It matches EXACTLY!</strong></p>
+<p><img src="imgs/5debug52_loss_matching.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>7. Conclusion</h1>
+<p>It goes to show how important getting the <code>correct dimensions</code> can change things so <code>subtley</code> and <code>materially</code> at the same time.</p>
 
 
 </section>
