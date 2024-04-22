@@ -224,14 +224,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#one-epoch" id="toc-one-epoch" class="nav-link" data-scroll-target="#one-epoch">4.5 One Epoch</a></li>
   <li><a href="#train-model-with-30-epochs" id="toc-train-model-with-30-epochs" class="nav-link" data-scroll-target="#train-model-with-30-epochs">4.6 Train Model with 30 Epochs</a></li>
   </ul></li>
-  <li><a href="#accuracy" id="toc-accuracy" class="nav-link" data-scroll-target="#accuracy">5. Accuracy</a></li>
-  <li><a href="#submit-to-kaggles" id="toc-submit-to-kaggles" class="nav-link" data-scroll-target="#submit-to-kaggles">6. Submit to Kaggles</a>
+  <li><a href="#submit-to-kaggles" id="toc-submit-to-kaggles" class="nav-link" data-scroll-target="#submit-to-kaggles">5. Submit to Kaggles</a>
   <ul class="collapse">
-  <li><a href="#prepare-test-set" id="toc-prepare-test-set" class="nav-link" data-scroll-target="#prepare-test-set">6.1 Prepare Test-Set</a></li>
-  <li><a href="#predictions-on-test-set" id="toc-predictions-on-test-set" class="nav-link" data-scroll-target="#predictions-on-test-set">6.2 Predictions on Test-Set</a></li>
-  <li><a href="#create-submission-csv" id="toc-create-submission-csv" class="nav-link" data-scroll-target="#create-submission-csv">6.3 Create Submission CSV</a></li>
+  <li><a href="#prepare-test-set" id="toc-prepare-test-set" class="nav-link" data-scroll-target="#prepare-test-set">5.1 Prepare Test-Set</a></li>
+  <li><a href="#predictions-on-test-set" id="toc-predictions-on-test-set" class="nav-link" data-scroll-target="#predictions-on-test-set">5.2 Predictions on Test-Set</a></li>
+  <li><a href="#create-submission-csv" id="toc-create-submission-csv" class="nav-link" data-scroll-target="#create-submission-csv">5.3 Create Submission CSV</a></li>
   </ul></li>
-  <li><a href="#success" id="toc-success" class="nav-link" data-scroll-target="#success">7. Success!</a></li>
+  <li><a href="#success" id="toc-success" class="nav-link" data-scroll-target="#success">6. Success!</a></li>
   </ul>
 </nav>
     </div>
@@ -536,47 +535,36 @@ dtype: int64</code></pre>
 </div>
 </section>
 </section>
-<section id="accuracy" class="level2">
-<h2 class="anchored" data-anchor-id="accuracy">5. Accuracy</h2>
-<div id="cell-38" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> acc(val_indep,val_dep,coeffs): </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (val_dep.<span class="bu">bool</span>()<span class="op">==</span>(calc_preds_deeplearning(val_indep,coeffs)<span class="op">&gt;</span><span class="fl">0.5</span>)).<span class="bu">float</span>().mean()</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>acc(val_idep_mxn,val_dep_mx1,coeffs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>tensor(0.8258)</code></pre>
-</div>
-</div>
-</section>
 <section id="submit-to-kaggles" class="level2">
-<h2 class="anchored" data-anchor-id="submit-to-kaggles">6. Submit to Kaggles</h2>
+<h2 class="anchored" data-anchor-id="submit-to-kaggles">5. Submit to Kaggles</h2>
 <section id="prepare-test-set" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-test-set">6.1 Prepare Test-Set</h3>
-<div id="cell-41" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>tst_df <span class="op">=</span> pd.read_csv(path<span class="op">/</span><span class="st">'test.csv'</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>tst_df[<span class="st">'Fare'</span>] <span class="op">=</span> tst_df.Fare.fillna(<span class="dv">0</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>tst_df.fillna(modes, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>tst_df[<span class="st">'LogFare'</span>] <span class="op">=</span> np.log(tst_df[<span class="st">'Fare'</span>]<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>tst_df <span class="op">=</span> pd.get_dummies(tst_df, columns<span class="op">=</span>[<span class="st">"Sex"</span>,<span class="st">"Pclass"</span>,<span class="st">"Embarked"</span>], dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>tst_indep <span class="op">=</span> torch.tensor(tst_df[indep_cols].values, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>tst_indep <span class="op">=</span> tst_indep <span class="op">/</span> maxes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h3 class="anchored" data-anchor-id="prepare-test-set">5.1 Prepare Test-Set</h3>
+<div id="cell-39" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tst_df <span class="op">=</span> pd.read_csv(path<span class="op">/</span><span class="st">'test.csv'</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>tst_df[<span class="st">'Fare'</span>] <span class="op">=</span> tst_df.Fare.fillna(<span class="dv">0</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>tst_df.fillna(modes, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>tst_df[<span class="st">'LogFare'</span>] <span class="op">=</span> np.log(tst_df[<span class="st">'Fare'</span>]<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>tst_df <span class="op">=</span> pd.get_dummies(tst_df, columns<span class="op">=</span>[<span class="st">"Sex"</span>,<span class="st">"Pclass"</span>,<span class="st">"Embarked"</span>], dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>tst_indep <span class="op">=</span> torch.tensor(tst_df[indep_cols].values, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>tst_indep <span class="op">=</span> tst_indep <span class="op">/</span> maxes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="predictions-on-test-set" class="level3">
-<h3 class="anchored" data-anchor-id="predictions-on-test-set">6.2 Predictions on Test-Set</h3>
-<div id="cell-43" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tst_df[<span class="st">'Survived'</span>] <span class="op">=</span> (calc_preds_deeplearning(tst_indep, coeffs)<span class="op">&gt;</span><span class="fl">0.5</span>).<span class="bu">int</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h3 class="anchored" data-anchor-id="predictions-on-test-set">5.2 Predictions on Test-Set</h3>
+<div id="cell-41" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>tst_df[<span class="st">'Survived'</span>] <span class="op">=</span> (calc_preds_deeplearning(tst_indep, coeffs)<span class="op">&gt;</span><span class="fl">0.5</span>).<span class="bu">int</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="create-submission-csv" class="level3">
-<h3 class="anchored" data-anchor-id="create-submission-csv">6.3 Create Submission CSV</h3>
-<div id="cell-45" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>titanic_submission_df <span class="op">=</span> tst_df[[<span class="st">'PassengerId'</span>,<span class="st">'Survived'</span>]]</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>titanic_submission_df.to_csv(<span class="st">'titanic_submission.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h3 class="anchored" data-anchor-id="create-submission-csv">5.3 Create Submission CSV</h3>
+<div id="cell-43" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>titanic_submission_df <span class="op">=</span> tst_df[[<span class="st">'PassengerId'</span>,<span class="st">'Survived'</span>]]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>titanic_submission_df.to_csv(<span class="st">'titanic_submission.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-46" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>kaggle.api.competition_submit(file_name<span class="op">=</span><span class="st">'titanic_submission.csv'</span>, </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                              message<span class="op">=</span><span class="st">'20240420_tit_submission'</span>, </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                              competition<span class="op">=</span><span class="st">'titanic'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-44" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>kaggle.api.competition_submit(file_name<span class="op">=</span><span class="st">'titanic_submission.csv'</span>, </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                              message<span class="op">=</span><span class="st">'20240420_tit_submission'</span>, </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                              competition<span class="op">=</span><span class="st">'titanic'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Warning: Looks like you're using an outdated API Version, please consider updating (server 1.6.12 / client 1.6.6)</code></pre>
 </div>
@@ -591,7 +579,7 @@ dtype: int64</code></pre>
 </section>
 </section>
 <section id="success" class="level2">
-<h2 class="anchored" data-anchor-id="success">7. Success!</h2>
+<h2 class="anchored" data-anchor-id="success">6. Success!</h2>
 <p>I’ve finally completed building my first deep-learning neural-network model from scratch and successfully submitting to Kaggle with 77.75% Accuracy.</p>
 
 
