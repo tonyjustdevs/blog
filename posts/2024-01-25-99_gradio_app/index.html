@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.557">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2024-01-25">
 <meta name="description" content="Create a local neural network Gradio App">
 
-<title>Tony’s blog - How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)</title>
+<title>How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2) – Tony’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -157,7 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -281,7 +281,50 @@ Part 3: Upload to <strong>HuggingFace</strong> account</p>
 <div id="cell-6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pets_learner <span class="op">=</span> load_learner(<span class="st">'pets_learner.pkl'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>NotImplementedError: cannot instantiate 'PosixPath' on your system</code></pre>
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">NotImplementedError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[4], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> pets_learner <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">load_learner</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">pets_learner.pkl</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span> 
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\learner.py:446</span>, in <span class="ansi-cyan-fg">load_learner</span><span class="ansi-blue-fg ansi-bold">(fname, cpu, pickle_module)</span>
+<span class="ansi-green-fg">    444</span> distrib_barrier()
+<span class="ansi-green-fg">    445</span> map_loc <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">cpu</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> cpu <span style="font-weight:bold;color:rgb(0,135,0)">else</span> default_device()
+<span class="ansi-green-fg ansi-bold">--&gt; 446</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>: res <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">torch</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">load</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">fname</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">map_location</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">map_loc</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">pickle_module</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">pickle_module</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    447</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e: 
+<span class="ansi-green-fg">    448</span>     e<span style="color:rgb(98,98,98)">.</span>args <span style="color:rgb(98,98,98)">=</span> [<span style="color:rgb(175,0,0)">f</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Custom classes or functions exported with your `Learner` not available in namespace.</span><span style="color:rgb(175,0,0)">\</span><span style="color:rgb(175,0,0)">Re-declare/import before loading:</span><span style="font-weight:bold;color:rgb(175,95,0)">\n</span><span style="font-weight:bold;color:rgb(175,95,0)">\t</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>e<span style="color:rgb(98,98,98)">.</span>args[<span style="color:rgb(98,98,98)">0</span>]<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span style="color:rgb(175,0,0)">"</span>]
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\torch\serialization.py:1014</span>, in <span class="ansi-cyan-fg">load</span><span class="ansi-blue-fg ansi-bold">(f, map_location, pickle_module, weights_only, mmap, **pickle_load_args)</span>
+<span class="ansi-green-fg">   1012</span>             <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">RuntimeError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e:
+<span class="ansi-green-fg">   1013</span>                 <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> pickle<span style="color:rgb(98,98,98)">.</span>UnpicklingError(UNSAFE_MESSAGE <span style="color:rgb(98,98,98)">+</span> <span style="color:rgb(0,135,0)">str</span>(e)) <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
+<span class="ansi-green-fg ansi-bold">-&gt; 1014</span>         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_load</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">opened_zipfile</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1015</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">map_location</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1016</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">pickle_module</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1017</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">overall_storage</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">overall_storage</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1018</span> <span class="ansi-yellow-bg">                     </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">pickle_load_args</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   1019</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> mmap:
+<span class="ansi-green-fg">   1020</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">RuntimeError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">mmap can only be used with files saved with </span><span style="color:rgb(175,0,0)">"</span>,
+<span class="ansi-green-fg">   1021</span>                        <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">`torch.save(_use_new_zipfile_serialization=True), </span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg">   1022</span>                        <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">please torch.save your checkpoint with this option in order to use mmap.</span><span style="color:rgb(175,0,0)">"</span>)
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\torch\serialization.py:1422</span>, in <span class="ansi-cyan-fg">_load</span><span class="ansi-blue-fg ansi-bold">(zip_file, map_location, pickle_module, pickle_file, overall_storage, **pickle_load_args)</span>
+<span class="ansi-green-fg">   1420</span> unpickler <span style="color:rgb(98,98,98)">=</span> UnpicklerWrapper(data_file, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>pickle_load_args)
+<span class="ansi-green-fg">   1421</span> unpickler<span style="color:rgb(98,98,98)">.</span>persistent_load <span style="color:rgb(98,98,98)">=</span> persistent_load
+<span class="ansi-green-fg ansi-bold">-&gt; 1422</span> result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">unpickler</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">load</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   1424</span> torch<span style="color:rgb(98,98,98)">.</span>_utils<span style="color:rgb(98,98,98)">.</span>_validate_loaded_sparse_tensors()
+<span class="ansi-green-fg">   1425</span> torch<span style="color:rgb(98,98,98)">.</span>_C<span style="color:rgb(98,98,98)">.</span>_log_api_usage_metadata(
+<span class="ansi-green-fg">   1426</span>     <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">torch.load.metadata</span><span style="color:rgb(175,0,0)">"</span>, {<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">serialization_id</span><span style="color:rgb(175,0,0)">"</span>: zip_file<span style="color:rgb(98,98,98)">.</span>serialization_id()}
+<span class="ansi-green-fg">   1427</span> )
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\pathlib.py:873</span>, in <span class="ansi-cyan-fg">Path.__new__</span><span class="ansi-blue-fg ansi-bold">(cls, *args, **kwargs)</span>
+<span class="ansi-green-fg">    871</span> <span style="color:rgb(0,135,0)">self</span> <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">cls</span><span style="color:rgb(98,98,98)">.</span>_from_parts(args)
+<span class="ansi-green-fg">    872</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_flavour<span style="color:rgb(98,98,98)">.</span>is_supported:
+<span class="ansi-green-fg ansi-bold">--&gt; 873</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">NotImplementedError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">cannot instantiate </span><span style="font-weight:bold;color:rgb(175,95,135)">%r</span><span style="color:rgb(175,0,0)"> on your system</span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg">    874</span>                               <span style="color:rgb(98,98,98)">%</span> (<span style="color:rgb(0,135,0)">cls</span><span style="color:rgb(98,98,98)">.</span><span style="color:rgb(0,0,135)">__name__</span>,))
+<span class="ansi-green-fg">    875</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span>
+
+<span class="ansi-red-fg ansi-bold">NotImplementedError</span>: cannot instantiate 'PosixPath' on your system</pre>
+</div>
 </div>
 </div>
 <section id="import-learner-error-.pkl-file-solution-windows-only" class="level3">
@@ -294,13 +337,13 @@ Not too sure why this happens, probably linux vs windows compatibility, forward 
 - This <strong>testing</strong> phase is defined as being able to run the Gradio App locally.<br>
 - When we <strong>Upload to HuggingFace</strong> Spaces, this code fix is not required (because HF is run on Linux, hence no Posix issues, from my understanding)</p>
 <div id="cell-8" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only run to import pkl in windows when youre doing testing in windows | when run in hus | its run via dock images ie linux ie no problems</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pathlib <span class="co"># </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pathlib.PosixPath</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pathlib.PosixPath <span class="op">=</span> pathlib.WindowsPath</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only run to import pkl in windows when youre doing testing in windows | when run in hus | its run via dock images ie linux ie no problems</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pathlib <span class="co"># </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pathlib.PosixPath</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pathlib.PosixPath <span class="op">=</span> pathlib.WindowsPath</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-9" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pets_learner <span class="op">=</span> load_learner(<span class="st">'pets_learner.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pets_learner <span class="op">=</span> load_learner(<span class="st">'pets_learner.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -309,9 +352,9 @@ Not too sure why this happens, probably linux vs windows compatibility, forward 
 <section id="import-local-image" class="level3">
 <h3 class="anchored" data-anchor-id="import-local-image">3.1 Import Local Image</h3>
 <div id="cell-12" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pet1 <span class="op">=</span> PILImage.create(<span class="st">'pet1.jpg'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pet1.thumbnail((<span class="dv">224</span>,<span class="dv">224</span>))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pet1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pet1 <span class="op">=</span> PILImage.create(<span class="st">'pet1.jpg'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pet1.thumbnail((<span class="dv">224</span>,<span class="dv">224</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pet1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <figure class="figure">
@@ -330,8 +373,8 @@ Not too sure why this happens, probably linux vs windows compatibility, forward 
 - These are the probabilities of each unique breeds in our data!<br>
 - Recall in Part 1, we determined the different categories by using a <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/pt1_create_learner.html#a-different-labelling-function">custom labelling function</a></p>
 <div id="cell-14" class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> pets_learner.predict(pet1)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> pets_learner.predict(pet1)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
   return getattr(torch, 'has_mps', False)</code></pre>
@@ -379,8 +422,8 @@ Not too sure why this happens, probably linux vs windows compatibility, forward 
 <h3 class="anchored" data-anchor-id="what-is-the-probabilities-representing">3.3 What is the probabilities representing?</h3>
 <p>The probabilities tensor from <code>predict()</code> are the unique categories in our data and are stored in our dataloader</p>
 <div id="cell-16" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> pets_learner.dls.vocab </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>categories</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> pets_learner.dls.vocab </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>categories</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_Shorthair', 'Egyptian_Mau', 'Maine_Coon', 'Persian', 'Ragdoll', 'Russian_Blue', 'Siamese', 'Sphynx', 'american_bulldog', 'american_pit_bull_terrier', 'basset_hound', 'beagle', 'boxer', 'chihuahua', 'english_cocker_spaniel', 'english_setter', 'german_shorthaired', 'great_pyrenees', 'havanese', 'japanese_chin', 'keeshond', 'leonberger', 'miniature_pinscher', 'newfoundland', 'pomeranian', 'pug', 'saint_bernard', 'samoyed', 'scottish_terrier', 'shiba_inu', 'staffordshire_bull_terrier', 'wheaten_terrier', 'yorkshire_terrier']</code></pre>
 </div>
@@ -389,15 +432,15 @@ Not too sure why this happens, probably linux vs windows compatibility, forward 
 <section id="the-prediction-and-probabilities-of-our-image" class="level3">
 <h3 class="anchored" data-anchor-id="the-prediction-and-probabilities-of-our-image">3.4 The prediction and probabilities of our image</h3>
 <div id="cell-18" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get index of predction</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> res[<span class="dv">1</span>]</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># store list of probalities of our predction</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> res[<span class="dv">2</span>]</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get breed and probability of our prediction</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>categories[idx],probabilities[idx]</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get index of predction</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> res[<span class="dv">1</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># store list of probalities of our predction</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> res[<span class="dv">2</span>]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get breed and probability of our prediction</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>categories[idx],probabilities[idx]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>('Bombay', tensor(0.6369))</code></pre>
 </div>
@@ -406,11 +449,11 @@ Not too sure why this happens, probably linux vs windows compatibility, forward 
 <section id="probability-of-every-category-available" class="level3">
 <h3 class="anchored" data-anchor-id="probability-of-every-category-available">3.5 Probability of every category available</h3>
 <div id="cell-20" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_image_fn(img):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    prediction, idx, probabilities <span class="op">=</span> pets_learner.predict(img)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">dict</span>(<span class="bu">zip</span>(categories, <span class="bu">map</span>(<span class="bu">float</span>, probabilities)))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>classify_image_fn(pet1)     <span class="co"># names and probabilities</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_image_fn(img):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    prediction, idx, probabilities <span class="op">=</span> pets_learner.predict(img)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">dict</span>(<span class="bu">zip</span>(categories, <span class="bu">map</span>(<span class="bu">float</span>, probabilities)))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>classify_image_fn(pet1)     <span class="co"># names and probabilities</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
   return getattr(torch, 'has_mps', False)</code></pre>
@@ -482,15 +525,15 @@ Not too sure why this happens, probably linux vs windows compatibility, forward 
 <h2 class="anchored" data-anchor-id="run-local-gradio-app">4 Run local Gradio App</h2>
 <p>Theres a variety of ways to alter the app, I’ve set the size of the images and provided some examples:</p>
 <div id="cell-22" class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>gr_image <span class="op">=</span> gr.Image(width<span class="op">=</span><span class="dv">244</span>, height<span class="op">=</span><span class="dv">244</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>gr_label <span class="op">=</span> gr.Label()</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>input_examples <span class="op">=</span> [<span class="st">'pet1.jpg'</span>,<span class="st">'pet2.jpg'</span>,<span class="st">'pet3.jpg'</span>,<span class="st">'pet4.jpg'</span>,<span class="st">'pet5.jpg'</span>]</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>intf <span class="op">=</span> gr.Interface(fn<span class="op">=</span>classify_image_fn,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                    inputs<span class="op">=</span>gr_image,    </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                    outputs<span class="op">=</span>gr_label,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                    examples<span class="op">=</span>input_examples)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>intf.launch(inline<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gr_image <span class="op">=</span> gr.Image(width<span class="op">=</span><span class="dv">244</span>, height<span class="op">=</span><span class="dv">244</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gr_label <span class="op">=</span> gr.Label()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>input_examples <span class="op">=</span> [<span class="st">'pet1.jpg'</span>,<span class="st">'pet2.jpg'</span>,<span class="st">'pet3.jpg'</span>,<span class="st">'pet4.jpg'</span>,<span class="st">'pet5.jpg'</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>intf <span class="op">=</span> gr.Interface(fn<span class="op">=</span>classify_image_fn,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                    inputs<span class="op">=</span>gr_image,    </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                    outputs<span class="op">=</span>gr_label,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                    examples<span class="op">=</span>input_examples)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>intf.launch(inline<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running on local URL:  http://127.0.0.1:7863
 
@@ -501,10 +544,6 @@ To create a public link, set `share=True` in `launch()`.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
-  return getattr(torch, 'has_mps', False)
-c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
-  return getattr(torch, 'has_mps', False)
-c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
   return getattr(torch, 'has_mps', False)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -528,6 +567,10 @@ c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263
 <div class="cell-output cell-output-display">
 
 </div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  return getattr(torch, 'has_mps', False)</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 
 <style>
@@ -548,6 +591,10 @@ c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263
 </div>
 <div class="cell-output cell-output-display">
 
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  return getattr(torch, 'has_mps', False)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 
@@ -604,8 +651,8 @@ c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263
 <section id="run-nbdev-and-export" class="level3">
 <h3 class="anchored" data-anchor-id="run-nbdev-and-export">5.3 Run nbdev and export</h3>
 <div id="cell-28" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nbdev.export <span class="im">import</span> nb_export</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>nb_export(<span class="st">'app.ipynb'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nbdev.export <span class="im">import</span> nb_export</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nb_export(<span class="st">'app.ipynb'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create a new folder as home directory and place in the <code>app.py</code></p>
 <p><img src="gradio_app.jpg" class="img-fluid"></p>
@@ -800,18 +847,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -843,7 +879,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
@@ -851,7 +909,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
