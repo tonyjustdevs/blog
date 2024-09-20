@@ -10,8 +10,29 @@
     ]
   },
   {
+    "listing": "/notes.html",
+    "items": [
+      "/posts/notes/coding/9-symlinks.html",
+      "/posts/notes/coding/8-quarto_on_wsl.html",
+      "/posts/notes/coding/7-virtual_environments.html",
+      "/posts/notes/coding/6-measuring_accuracy.html",
+      "/posts/notes/coding/5-debug_1l_nn.html",
+      "/posts/notes/coding/4-wsl_new_user.html",
+      "/posts/notes/coding/3-bash.html",
+      "/posts/notes/linear_algebra/6-more_eigen_egs.html",
+      "/posts/notes/linear_algebra/5-similar_matrices.html",
+      "/posts/notes/linear_algebra/4-diagonlisation.html",
+      "/posts/notes/coding/2-linux_setup.html",
+      "/posts/notes/linear_algebra/3-eigen_examples.html",
+      "/posts/notes/coding/1-github_resolve.html",
+      "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
+      "/posts/notes/linear_algebra/1-chg_of_bse.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
+      "/posts/notes/coding/9-symlinks.html",
       "/posts/notes/coding/8-quarto_on_wsl.html",
       "/posts/notes/coding/7-virtual_environments.html",
       "/posts/2024-05-07_latent_factors_matrix/index.html",
@@ -57,25 +78,6 @@
       "/posts/2024-01-16-97_post_with_notebook/index.html",
       "/posts/2024-01-16-98_post_without_code/index.html",
       "/posts/2024-01-16-99_welcome/index.html"
-    ]
-  },
-  {
-    "listing": "/notes.html",
-    "items": [
-      "/posts/notes/coding/8-quarto_on_wsl.html",
-      "/posts/notes/coding/7-virtual_environments.html",
-      "/posts/notes/coding/6-measuring_accuracy.html",
-      "/posts/notes/coding/5-debug_1l_nn.html",
-      "/posts/notes/coding/4-wsl_new_user.html",
-      "/posts/notes/coding/3-bash.html",
-      "/posts/notes/linear_algebra/6-more_eigen_egs.html",
-      "/posts/notes/linear_algebra/5-similar_matrices.html",
-      "/posts/notes/linear_algebra/4-diagonlisation.html",
-      "/posts/notes/coding/2-linux_setup.html",
-      "/posts/notes/linear_algebra/3-eigen_examples.html",
-      "/posts/notes/coding/1-github_resolve.html",
-      "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
-      "/posts/notes/linear_algebra/1-chg_of_bse.html"
     ]
   },
   {
