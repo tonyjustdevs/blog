@@ -539,123 +539,123 @@
     "text": "Learning how to quarto blog.\nThis is a post with just this sentence."
   },
   {
-    "objectID": "posts/leetcode/3-binary_search/LC704.html",
-    "href": "posts/leetcode/3-binary_search/LC704.html",
-    "title": "LC: 704. Binary Search",
-    "section": "",
-    "text": "link to my leetcode profile"
-  },
-  {
-    "objectID": "posts/leetcode/3-binary_search/LC704.html#problem-description",
-    "href": "posts/leetcode/3-binary_search/LC704.html#problem-description",
-    "title": "LC: 704. Binary Search",
-    "section": "1. Problem Description",
-    "text": "1. Problem Description\nGiven an array of integers nums which is sorted in: - ascending order, and an - integer target, - write a function to search target in nums. - If target exists, then - return its index. Otherwise, - return -1\nYou must write an algorithm with O(log n) runtime complexity.\n\n1.1 Example 1:\nInput: nums = [-1,0,3,5,9,12]\ntarget = 9\nOutput: 4\nExplanation: 9 exists in nums and its index is 4\n\n\n1.2 Example 2:\nInput: nums = [-1,0,3,5,9,12]\ntarget = 2\nOutput: -1\nExplanation: 2 does not exist in nums so return -1"
-  },
-  {
-    "objectID": "posts/leetcode/3-binary_search/LC704.html#code",
-    "href": "posts/leetcode/3-binary_search/LC704.html#code",
-    "title": "LC: 704. Binary Search",
-    "section": "3. Code",
-    "text": "3. Code\nTest the cases that its larger, smaller and on the split.\n\n3.1 larger than binary split\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n           # [[0],  1, {2}, 3, *4*, [5]]\n           # [[-1], 0, {3}, 5, *9*, [12]] \n            if nums[m]&lt;target: #if 3&lt;9:\n                l = m + 1\n           # [[3], *4*, [5]]\n           # [[5], *9*, [12]] \n            elif nums[m]&gt;target:\n                r = m\n            else:\n                return m\n        return -1\n    \narr = [-1,0,3,5,9,12]\nsoln = Solution()\nsoln.search(arr, 9)\n\n4\n\n\n\n\n3.2 less than binary split\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n           # [[0],1,{2},3,*4*,[5]]\n           # [{-1}, 9, {10}, 11, 12, [12]] \n            \n            if nums[m]&lt;target:\n                l = m + 1\n\n           # [[0],*1*,{2},3,*4*,[5]]\n           # [{-1}, *9*, {10}, 11, 12, [12]] \n                \n            elif nums[m]&gt;target:\n                \n           # [[0],*1*,[2],3,*4*,[5]]\n           # [{-1}, *9*, [10], 11, 12, [12]]                \n                r = m\n            else:\n                return m\n        return -1\n\narr = [-1,9,10,11,12,12]\nsoln = Solution()\nsoln.search(arr, 9)\n\n1\n\n\n\n\n3.3 On a split\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n           # [[0],1,{2},3,*4*,[5]]\n           # [{7}, 8, {*9*}, 11, 12, [13]] \n            \n            if nums[m]&lt;target:\n                l = m + 1                \n            elif nums[m]&gt;target:          \n                r = m\n            else:\n                return m\n        return -1\n    \n\narr = [7,7,9,11,12,13]\nsoln = Solution()\nsoln.search(arr, 9)\n\n2\n\n\n\n\n4.4 Clean version\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n            if nums[m]&lt;target:\n                l = m + 1                \n            elif nums[m]&gt;target:\n                r = m\n            else:\n                return m\n        return -1"
-  },
-  {
-    "objectID": "posts/leetcode/3-binary_search/LC704.html#submit",
-    "href": "posts/leetcode/3-binary_search/LC704.html#submit",
-    "title": "LC: 704. Binary Search",
-    "section": "6. Submit",
-    "text": "6. Submit\nMiddle of the pack \nGo to Main Blog\nGo to LeetCode Blog"
-  },
-  {
-    "objectID": "posts/leetcode/4-search_a_2d_matrix/LC74.html",
-    "href": "posts/leetcode/4-search_a_2d_matrix/LC74.html",
-    "title": "LC: 74. Search a 2D Matrix",
-    "section": "",
-    "text": "link to my leetcode profile"
-  },
-  {
-    "objectID": "posts/leetcode/4-search_a_2d_matrix/LC74.html#problem-description",
-    "href": "posts/leetcode/4-search_a_2d_matrix/LC74.html#problem-description",
-    "title": "LC: 74. Search a 2D Matrix",
-    "section": "1. Problem Description",
-    "text": "1. Problem Description\nYou are given an m x n integer matrix matrix with the following two properties:\nEach row is sorted in non-decreasing order.\nThe first integer of each row is greater than the last integer of the previous row.\nGiven an integer target, return true if target is in matrix or false otherwise.\nYou must write a solution in O(log(m * n)) time complexity."
-  },
-  {
-    "objectID": "posts/leetcode/4-search_a_2d_matrix/LC74.html#code",
-    "href": "posts/leetcode/4-search_a_2d_matrix/LC74.html#code",
-    "title": "LC: 74. Search a 2D Matrix",
-    "section": "2. Code",
-    "text": "2. Code\n\nFlatten array then\nUse code from binary search\n\n\nclass Solution:\n    def searchMatrix(self, matrix: [[int]], target: int) -&gt; bool:\n        # its a ascending matrix,\n        # 1. turn into array then \n        # 2. apply binsearch \n        arr = [element for row in matrix for element in row]\n\n        l = 0\n        r = len(arr)\n\n        if r==1:\n            if target == l[0]:\n                return True\n            else: return False\n\n        while l&lt;r:\n            m = (l+r)//2\n            if arr[m]&lt;target:\n                l = m + 1                \n            elif arr[m]&gt;target:\n                r = m\n            else:                \n                return True\n        return False\n\n\nsoln = Solution()\n# soln.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],3)\n# soln.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],13)\n# soln.searchMatrix([[1,3]],3)"
-  },
-  {
-    "objectID": "posts/leetcode/4-search_a_2d_matrix/LC74.html#submit",
-    "href": "posts/leetcode/4-search_a_2d_matrix/LC74.html#submit",
-    "title": "LC: 74. Search a 2D Matrix",
-    "section": "3. Submit",
-    "text": "3. Submit\n\nGo to Main Blog\nGo to LeetCode Blog"
-  },
-  {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html",
+    "objectID": "posts/leetcode/LC150.html",
+    "href": "posts/leetcode/LC150.html",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "",
-    "text": "link to question + submission\nlink to my leetcode profile"
+    "text": "link to my leetcode profile"
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#problem-description",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#problem-description",
+    "objectID": "posts/leetcode/LC150.html#problem-description",
+    "href": "posts/leetcode/LC150.html#problem-description",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "1. Problem Description",
     "text": "1. Problem Description\nYou are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation (RPN).\nInput: Evaluate the input RPN arithmetic expression.\nOutput: Return an integer that represents the value of the expression.\nRules:\n1. The valid operators are ‘+’, ‘-’, ‘*’, and ‘/’.\n2. Each operand may be an integer or another expression.\n3. The division between two integers always truncates toward zero\n4. There will not be any division by zero.\n5. The input represents a valid arithmetic expression in a reverse polish notation.\n6. The answer and all the intermediate calculations can be represented in a 32-bit integer."
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#leetcode-examples",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#leetcode-examples",
+    "objectID": "posts/leetcode/LC150.html#leetcode-examples",
+    "href": "posts/leetcode/LC150.html#leetcode-examples",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "2. LeetCode Examples",
     "text": "2. LeetCode Examples\n\n2.1 Example 1\nInput: tokens = [\"2\",\"1\",\"+\",\"3\",\"*\"]\nOutput: 9\nExplanation: ((2 + 1) * 3) = 9\n\n\n2.2 Example 2\nInput: tokens = [\"4\",\"13\",\"5\",\"/\",\"+\"]\nOutput: 6\nExplanation: (4 + (13 / 5)) = 6\n\n\n2.3 Example 3\nInput: tokens = [\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"]\nOutput: 22\nExplanation:\n((10 * (6 / ((9 + 3) * -11))) + 17) + 5\n= ((10 * (6 / (12 * -11))) + 17) + 5\n= ((10 * (6 / -132)) + 17) + 5\n= ((10 * 0) + 17) + 5\n= (0 + 17) + 5\n= 17 + 5\n= 22"
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#background-and-analysis",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#background-and-analysis",
+    "objectID": "posts/leetcode/LC150.html#background-and-analysis",
+    "href": "posts/leetcode/LC150.html#background-and-analysis",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "3. Background and Analysis",
     "text": "3. Background and Analysis\nThe wiki explains this is also known as postfix notation, the operators follow their operands, in contrast to prefix (Polish) notation (operators precede their operands).\n\n3.1 Wiki Example\nTo add 3 and 4 together, the expression is [3 4 +] rather than [3 + 4].\n- The conventional notation expression [3 − 4 + 5] becomes [3 4 − 5 +] in reverse Polish notation:\n- 4 is first subtracted from 3, then - 5 is added to it.\n\n\n3.2 Stack Explanation\nThe concept of a stack, a last-in/first-out construct. In the example [3 4 −]:\n1. push 3 to stack: [3] 2. push 4 to stack; ie 4 is now on top, 3 below it: [3 4] 3. apply subtraction operator: - Remove top two items from the stack: - performs 3 − 4, and 4. push the result of −1 to top of stack.\n\n\n3.3 Stack Explanation Table\n\n3.3.1 Example 1: [3 4 −] with all steps\n\n\n\n\n\n\n\n\n\nPython Pseudocode\nStack_Expected\nOutput_Expected\nComments\n\n\n\n\nrpn_obj = rpn_cls()\n[  ]\nnull\ninitialise stack\n\n\nrpn_obj.push(3)\n[3]\nnull\npush 3 to stack_top\n\n\nrpn_obj.push(4)\n[3,4]\nnull\npush 4 to stack_top\n\n\nrpn_obj.op()[pt_1]: .pop(top 2)\n[  ]\n[3,4]\npop [3] [4] stack_top_2\n\n\nrpn_obj.op()[pt_2]: .op(top 2)\n[-1]\n[3,4]\noperate(3,4,-) on stack_top_2\n\n\nrpn_obj.op()[pt_3]: .truncate(res)\n[-1]\n-1\nint(result), truncate to zero as per Rule_3\n\n\nrpn_obj.op()[pt_4]: .return()\n[-1]\n-1\nreturn operated result\n\n\nrpn_obj.op()[pt_5]: .push(result)\n[-1]\nnull\npush results stack_top\n\n\n\n\n\n3.3.2 Example 2: [3 4 × 5 6 × +] with concise steps\n\n\n\n\n\n\n\n\nPython Pseudocode\nStack_Expected\nComments\n\n\n\n\nrpn_obj = rpn_cls()\n[  ]\ninitialise stack\n\n\nrpn_obj.push(3)\n[3]\npush 3 to stack_top\n\n\nrpn_obj.push(4)\n[3,4]\npush 4 to stack_top\n\n\nrpn_obj.op(x)\n[12]\nrem top_2 3,4, op 3*4, push top 12\n\n\nrpn_obj.push(5)\n[12,5]\npush 5 to stack_top\n\n\nrpn_obj.push(6)\n[12,5,6]\npush 6 to stack_top\n\n\nrpn_obj.op(x)\n[12,30]\nrem top_2 5,6, op 5*6, push top 30\n\n\nrpn_obj.op(+)\n[meaning of life]\nrem top_2 12,30, op 12+30, push top 42\n\n\n\n\n\n\n3.3 Why?\nThe advantage of RPN is it:\n- removes the need for order of operations and parentheses that are required by infix notation and\n- can be evaluated linearly, left-to-right.\nFor example, the infix expression (3 × 4) + (5 × 6) becomes [3 4 × 5 6 × +] in reverse Polish notation.*"
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#coding",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#coding",
+    "objectID": "posts/leetcode/LC150.html#coding",
+    "href": "posts/leetcode/LC150.html#coding",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "4. Coding",
     "text": "4. Coding\n\n4.1 Write pseudo-python-code\n\nclass Solution:\n    def evalRPN(self, tokens: [str]) -&gt; int:\n        # Rule 5: Input expression is valid, no check required, \n        # ie doesn't start with operateor\n        if len(tokens) ==0: # check if no token \n            return 0 # Probably not needed due for R5 but wrote save time in case \n\n        stack = [] #initialise stack\n        stack.append(tokens[0])  # first item is valid due to R5 so set it to stk\n\n        ### [1]     operator functions/mapping (*,-,+,/)\n        ### [2]     .pop_top_2(stack):    \n        ### [3]     .operate(top_2_items, operator #[2.1]): \n\n        for i in range(1,len(tokens)):\n            # stack = [2]\n            curr_chr = tokens[i]\n\n            if curr_chr in operators:\n                top_2_items = [top_2, top_1] = pop_top_2(stack) # [1]\n                # [validation]: do spot check stacked removed top 2\n                res   = operate(top_2_items,curr_chr) #[2]\n                stack.append(res)\n\n            else: # is a valid integer so just append to top\n                stack.append(curr_chr)\n        return stack\n\n\n\n4.2 Write Required Functions\n\nclass Solution:\n    def evalRPN(self, tokens: [str]) -&gt; int:\n        if len(tokens) == 0: \n            return 0 \n        stack = []\n        stack.append(int(tokens[0])) \n\n        operators = ['*', '+', '-', '/'] \n\n        def operate(operator,x2,x1):\n            print(f\"operator: {operator}, top2:{x2}, top1:{x1}\")\n            if operator == '+':\n                return x2+x1\n            elif operator == '-':\n                return x2-x1\n            elif operator == '*':\n                return x2*x1\n            elif operator == '/':\n                return int(x2/x1)\n            else:\n                print(\"unknown operator!\")\n                return False\n                \n        def pop_top_2(stack):\n            print(len(stack))\n            if len(stack) &lt;2:\n                print(\"Stack too short!\")\n                return False\n            else:\n                top_1 = stack.pop()\n                top_2 = stack.pop()\n                top_2_items = [top_2,top_1]\n                print(top_2_items)\n            return top_2_items\n\n        for i in range(1,len(tokens)):\n            curr_chr = tokens[i]\n            if curr_chr in operators:\n                operator = curr_chr\n                top_2_items = pop_top_2(stack) \n                res   = operate(operator, top_2_items[0],top_2_items[1])\n                stack.append(res)\n            else: \n                stack.append(int(curr_chr))\n        print(stack)\n        return stack\nsoln = Solution()"
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#test-functionality",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#test-functionality",
+    "objectID": "posts/leetcode/LC150.html#test-functionality",
+    "href": "posts/leetcode/LC150.html#test-functionality",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "5. Test Functionality",
     "text": "5. Test Functionality\n\n5.1 Case 1 Expected 9\n\nsoln.evalRPN([\"2\",\"1\",\"+\",\"3\",\"*\"])\n\n2\n[2, 1]\noperator: +, top2:2, top1:1\n2\n[3, 3]\noperator: *, top2:3, top1:3\n[9]\n\n\n[9]\n\n\n\n\n5.2 Case 2 Expected 6\n\nsoln.evalRPN([\"4\",\"13\",\"5\",\"/\",\"+\"])\n\n3\n[13, 5]\noperator: /, top2:13, top1:5\n2\n[4, 2]\noperator: +, top2:4, top1:2\n[6]\n\n\n[6]\n\n\n\n\n5.3 Case 2 Expected 22\n\nsoln.evalRPN([\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"])  \n\n4\n[9, 3]\noperator: +, top2:9, top1:3\n4\n[12, -11]\noperator: *, top2:12, top1:-11\n3\n[6, -132]\noperator: /, top2:6, top1:-132\n2\n[10, 0]\noperator: *, top2:10, top1:0\n2\n[0, 17]\noperator: +, top2:0, top1:17\n2\n[17, 5]\noperator: +, top2:17, top1:5\n[22]\n\n\n[22]"
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#clean-version",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#clean-version",
+    "objectID": "posts/leetcode/LC150.html#clean-version",
+    "href": "posts/leetcode/LC150.html#clean-version",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "6. Clean Version",
     "text": "6. Clean Version\n\nclass Solution:\n    def evalRPN_clean(self, tokens: [str]) -&gt; int:\n        stack = []\n        stack.append(int(tokens[0])) \n        operators = ['*', '+', '-', '/'] \n\n        def operate(operator,x2,x1):\n            if operator == '+':\n                return x2+x1\n            elif operator == '-':\n                return x2-x1\n            elif operator == '*':\n                return x2*x1\n            else:\n                return int(x2/x1)\n\n        def pop_top_2(stack):\n            top_1 = stack.pop()\n            top_2 = stack.pop()\n            return [top_2,top_1]\n\n        for i in range(1,len(tokens)):\n            curr_chr = tokens[i]\n            if curr_chr in operators:\n                top_2_items = pop_top_2(stack) \n                res   = operate(curr_chr, top_2_items[0],top_2_items[1])\n                stack.append(res)\n            else: \n                stack.append(int(curr_chr))\n        return stack[0] ############### fixed after submission 2  ###############\nsoln = Solution()\n\nsoln.evalRPN_clean([\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"])\n\n22\n\n\n\n6.1 Clean Check\n\nsoln.evalRPN_clean([\"2\",\"1\",\"+\",\"3\",\"*\"])\n\n9\n\n\n\nsoln.evalRPN_clean([\"4\",\"13\",\"5\",\"/\",\"+\"])\n\n6\n\n\n\nsoln.evalRPN_clean([\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"])\n\n22"
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#submit",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#submit",
+    "objectID": "posts/leetcode/LC150.html#submit",
+    "href": "posts/leetcode/LC150.html#submit",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "7. Submit",
     "text": "7. Submit\n\nFirst attempt Failed, because I returned the stack as a list with result as the first item.\nSecond attempt Accepted! Quick fix after indexing out the value form the list. Not a bad result.\n\nTop 40% in Speed and\nTop 20% in Memory."
   },
   {
-    "objectID": "posts/leetcode/2-reverse_polish_notation/LC150.html#notes-to-self.",
-    "href": "posts/leetcode/2-reverse_polish_notation/LC150.html#notes-to-self.",
+    "objectID": "posts/leetcode/LC150.html#notes-to-self.",
+    "href": "posts/leetcode/LC150.html#notes-to-self.",
     "title": "LC: 150. Evaluate Reverse Polish Notation",
     "section": "6. Notes to self.",
     "text": "6. Notes to self.\nThis took alot of time setting up the problem, the solving part was quite fast.\nI need to be more seemless in set up!\n[Future Iterations 1]: Incorporate best solutions from LC\n[Future Iterations 2]: Attempt iterations for speed and memory\nGo to Main Blog\nGo to LeetCode Blog"
+  },
+  {
+    "objectID": "posts/leetcode/LC155.html",
+    "href": "posts/leetcode/LC155.html",
+    "title": "LC: 155. Min Stack",
+    "section": "",
+    "text": "link to my leetcode profile"
+  },
+  {
+    "objectID": "posts/leetcode/LC155.html#problem-description",
+    "href": "posts/leetcode/LC155.html#problem-description",
+    "title": "LC: 155. Min Stack",
+    "section": "1. Problem Description",
+    "text": "1. Problem Description\nDesign a stack that supports push, pop, top, and retrieving the minimum element in constant time.\nImplement the MinStack class:\n1. MinStack() initializes the stack object.\n2. void push(int val) pushes the element val onto the stack.\n3. void pop() removes the element on the top of the stack.\n4. int top() gets the top element of the stack.\n5. int getMin() retrieves the minimum element in the stack.\n\n1.1 LeetCode example\nInput:\n[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"top\",\"getMin\"]\n[[],[-2],[0],[-3],[],[],[],[]]\nOutput:\n[null,null,null,null,-3,null,0,-2]"
+  },
+  {
+    "objectID": "posts/leetcode/LC155.html#analysis",
+    "href": "posts/leetcode/LC155.html#analysis",
+    "title": "LC: 155. Min Stack",
+    "section": "2. Analysis",
+    "text": "2. Analysis\nI’ve decomposed the Inputs (code + variables) and expected outputs (stack and return values) for each line of code run.\n[Future Iteration 1]: Learn how to assert or include code that checks inputs what they are expected in an automatic way (The Output_Mine should be filled later hopefully automatically. For now, I eyeball the results and have LeetCode accept whether its passing or failing)\n[Future Iteration 2]: I’m using Python Lists, I could do the same attempt with chr and string types as parentheses are simply characters.\n\n2.1 Summary Table\n\n\n\nPython_Executed\nStack_Expected\nOutput_Expected\nOutput_Mine\n\n\n\n\nMinStack minStack = new MinStack();\n[]\nnull\nasdf\n\n\nminStack.push(-2);\n[-2]\nnull\nasdf\n\n\nminStack.push(0)\n[0,-2]\nnull\nasdf\n\n\nminStack.push(-3);\n[-3,0,-2]\nnull\nasdf\n\n\nminStack.getMin()\n[-3,0,-2]\n-3\nasdf\n\n\nminStack.pop()\n[0,-2]\nnull\nasdf\n\n\nminStack.top()\n[0,-2]\n0\nasdf\n\n\nminStack.getMin()\n[0,-2]\n-2\nasdf"
+  },
+  {
+    "objectID": "posts/leetcode/LC155.html#code",
+    "href": "posts/leetcode/LC155.html#code",
+    "title": "LC: 155. Min Stack",
+    "section": "3. Code",
+    "text": "3. Code\nWrite the MinStack() class and its requried methods.\n\nclass MinStack():\n    def __init__(self):\n        self.stack = [] # create empty list\n\n    def push(self, val: int) -&gt; None:\n        self.stack.append(val) # add value to end of list\n\n    def pop(self) -&gt; None:\n        self.stack.pop() # remove last val of the list\n\n    def top(self) -&gt; int:\n        return self.stack[-1] # in a list, top of stack is the last item list[-1]\n    \n    def getMin(self) -&gt; int:\n        return min(self.stack)"
+  },
+  {
+    "objectID": "posts/leetcode/LC155.html#test-functionality",
+    "href": "posts/leetcode/LC155.html#test-functionality",
+    "title": "LC: 155. Min Stack",
+    "section": "4. Test Functionality",
+    "text": "4. Test Functionality\n\nminStack = MinStack()\n\n\nminStack.push(-2);\n\n\nminStack.push(0);\nminStack.stack\n\n[-2, 0]\n\n\n\nminStack.push(-3);\nminStack.stack\n\n[-2, 0, -3]\n\n\n\nminStack.getMin() # // return -3\n# minStack.stack\n\n-3\n\n\n\nminStack.pop();\nminStack.stack\n\n[-2, 0]\n\n\n\nminStack.top() # return 0\n\n0\n\n\n\nminStack.getMin() # return -2\n\n-2"
+  },
+  {
+    "objectID": "posts/leetcode/LC155.html#submit",
+    "href": "posts/leetcode/LC155.html#submit",
+    "title": "LC: 155. Min Stack",
+    "section": "5. Submit",
+    "text": "5. Submit\nThe code is slow but great memory management.\nAt the my current level, I’m happy to simply solve the problems. I don’t usually solve Mediums that easily."
+  },
+  {
+    "objectID": "posts/leetcode/LC155.html#some-commentary",
+    "href": "posts/leetcode/LC155.html#some-commentary",
+    "title": "LC: 155. Min Stack",
+    "section": "6. Some Commentary",
+    "text": "6. Some Commentary\nThe question is framed from a Java’s perspective hence there are types in front of each declaration:\n- void pop()\n- int top()\n- new MinStack()\nNote: I’ve never touched Java 🤭.\nJava is a Static-Typed whilst Python is a Dynamically-Type.\n\nJava requires variables and method return values be explicitly declared at compile-time.\nPython data types are determined at runtime.\n\nPython doesn’t require explicit type declarations for variables, function return types, or when creating objects.\n\n\nThat is, since I’m using Python, so I won’t need to declare my return types when creating a method of a class.\nGo to Main Blog\nGo to LeetCode Blog"
+  },
+  {
+    "objectID": "posts/leetcode/index.html",
+    "href": "posts/leetcode/index.html",
+    "title": "❄️LeetCode Posts❄️",
+    "section": "",
+    "text": "link to leetcode profile here\n\nCreated new leetcode.qmd based on front page index.qmd and\n\nDirected contents to point here: contents: posts/lc_posts.\n\nProbably not the ideal blog + folder structure but it’ll do the job👌.\nI don’t claim to be a web-designer in any sense 😂.\nI began 3 months ago with no algorithm or data structures academic background at all. The Easys were definitey not Easy to me as you can see from the number of submissions.\nThe majority of submissions were 2-3 months ago and I made no attempts in January 2024 👏.\nThis page should keep me accountable and these fingers minty as a mojito on a hot day 🍹."
   },
   {
     "objectID": "posts/2024-01-16-97_post_with_notebook/index.html",
@@ -728,60 +728,60 @@
     "text": "5.3 Decision Tree with minimum 50 leaf nodes\n\nm_DecTree_min50nodes = DecisionTreeClassifier(min_samples_leaf=50)\nm_DecTree_min50nodes.fit(trn_idep, trn_dep)\ndraw_tree(m_DecTree_min50nodes, trn_idep, size=25)\n\n\n\n\n\n\n\n\n\n5.3.1 Loss (DTree, min 50 leaf nodes)\nMAE 18.4% (previous model 22.4%)\n\nmean_absolute_error(val_dep, m_DecTree_min50nodes.predict(val_idep))\n\n0.18385650224215247"
   },
   {
-    "objectID": "posts/leetcode/1-min_stack/LC155.html",
-    "href": "posts/leetcode/1-min_stack/LC155.html",
-    "title": "LC: 155. Min Stack",
+    "objectID": "posts/leetcode/LC704.html",
+    "href": "posts/leetcode/LC704.html",
+    "title": "LC: 704. Binary Search",
     "section": "",
-    "text": "link to the submission, you can see the question but a login is required to see my results\nlink to my leetcode profile"
+    "text": "link to my leetcode profile"
   },
   {
-    "objectID": "posts/leetcode/1-min_stack/LC155.html#problem-description",
-    "href": "posts/leetcode/1-min_stack/LC155.html#problem-description",
-    "title": "LC: 155. Min Stack",
+    "objectID": "posts/leetcode/LC704.html#problem-description",
+    "href": "posts/leetcode/LC704.html#problem-description",
+    "title": "LC: 704. Binary Search",
     "section": "1. Problem Description",
-    "text": "1. Problem Description\nDesign a stack that supports push, pop, top, and retrieving the minimum element in constant time.\nImplement the MinStack class:\n1. MinStack() initializes the stack object.\n2. void push(int val) pushes the element val onto the stack.\n3. void pop() removes the element on the top of the stack.\n4. int top() gets the top element of the stack.\n5. int getMin() retrieves the minimum element in the stack.\n\n1.1 LeetCode example\nInput:\n[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"top\",\"getMin\"]\n[[],[-2],[0],[-3],[],[],[],[]]\nOutput:\n[null,null,null,null,-3,null,0,-2]"
+    "text": "1. Problem Description\nGiven an array of integers nums which is sorted in:\n- ascending order, and an\n- integer target,\n- write a function to search target in nums.\n\nIf target exists, then\n\nreturn its index\n\n\nOtherwise,\n\nreturn -1\n\n\nYou must write an algorithm with O(log n) runtime complexity.\n\n1.1 Example 1:\nInput: nums = [-1,0,3,5,9,12]\ntarget = 9\nOutput: 4\nExplanation: 9 exists in nums and its index is 4\n\n\n1.2 Example 2:\nInput: nums = [-1,0,3,5,9,12]\ntarget = 2\nOutput: -1\nExplanation: 2 does not exist in nums so return -1"
   },
   {
-    "objectID": "posts/leetcode/1-min_stack/LC155.html#analysis",
-    "href": "posts/leetcode/1-min_stack/LC155.html#analysis",
-    "title": "LC: 155. Min Stack",
-    "section": "2. Analysis",
-    "text": "2. Analysis\nI’ve decomposed the Inputs (code + variables) and expected outputs (stack and return values) for each line of code run.\n[Future Iteration 1]: Learn how to assert or include code that checks inputs what they are expected in an automatic way (The Output_Mine should be filled later hopefully automatically. For now, I eyeball the results and have LeetCode accept whether its passing or failing)\n[Future Iteration 2]: I’m using Python Lists, I could do the same attempt with chr and string types as parentheses are simply characters.\n\n2.1 Summary Table\n\n\n\nPython_Executed\nStack_Expected\nOutput_Expected\nOutput_Mine\n\n\n\n\nMinStack minStack = new MinStack();\n[]\nnull\nasdf\n\n\nminStack.push(-2);\n[-2]\nnull\nasdf\n\n\nminStack.push(0)\n[0,-2]\nnull\nasdf\n\n\nminStack.push(-3);\n[-3,0,-2]\nnull\nasdf\n\n\nminStack.getMin()\n[-3,0,-2]\n-3\nasdf\n\n\nminStack.pop()\n[0,-2]\nnull\nasdf\n\n\nminStack.top()\n[0,-2]\n0\nasdf\n\n\nminStack.getMin()\n[0,-2]\n-2\nasdf"
-  },
-  {
-    "objectID": "posts/leetcode/1-min_stack/LC155.html#code",
-    "href": "posts/leetcode/1-min_stack/LC155.html#code",
-    "title": "LC: 155. Min Stack",
+    "objectID": "posts/leetcode/LC704.html#code",
+    "href": "posts/leetcode/LC704.html#code",
+    "title": "LC: 704. Binary Search",
     "section": "3. Code",
-    "text": "3. Code\nWrite the MinStack() class and its requried methods.\n\nclass MinStack():\n    def __init__(self):\n        self.stack = [] # create empty list\n\n    def push(self, val: int) -&gt; None:\n        self.stack.append(val) # add value to end of list\n\n    def pop(self) -&gt; None:\n        self.stack.pop() # remove last val of the list\n\n    def top(self) -&gt; int:\n        return self.stack[-1] # in a list, top of stack is the last item list[-1]\n    \n    def getMin(self) -&gt; int:\n        return min(self.stack)"
+    "text": "3. Code\nTest the cases that its larger, smaller and on the split.\n\n3.1 larger than binary split\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n           # [[0],  1, {2}, 3, *4*, [5]]\n           # [[-1], 0, {3}, 5, *9*, [12]] \n            if nums[m]&lt;target: #if 3&lt;9:\n                l = m + 1\n           # [[3], *4*, [5]]\n           # [[5], *9*, [12]] \n            elif nums[m]&gt;target:\n                r = m\n            else:\n                return m\n        return -1\n    \narr = [-1,0,3,5,9,12]\nsoln = Solution()\nsoln.search(arr, 9)\n\n4\n\n\n\n\n3.2 less than binary split\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n           # [[0],1,{2},3,*4*,[5]]\n           # [{-1}, 9, {10}, 11, 12, [12]] \n            \n            if nums[m]&lt;target:\n                l = m + 1\n\n           # [[0],*1*,{2},3,*4*,[5]]\n           # [{-1}, *9*, {10}, 11, 12, [12]] \n                \n            elif nums[m]&gt;target:\n                \n           # [[0],*1*,[2],3,*4*,[5]]\n           # [{-1}, *9*, [10], 11, 12, [12]]                \n                r = m\n            else:\n                return m\n        return -1\n\narr = [-1,9,10,11,12,12]\nsoln = Solution()\nsoln.search(arr, 9)\n\n1\n\n\n\n\n3.3 On a split\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n           # [[0],1,{2},3,*4*,[5]]\n           # [{7}, 8, {*9*}, 11, 12, [13]] \n            \n            if nums[m]&lt;target:\n                l = m + 1                \n            elif nums[m]&gt;target:          \n                r = m\n            else:\n                return m\n        return -1\n    \n\narr = [7,7,9,11,12,13]\nsoln = Solution()\nsoln.search(arr, 9)\n\n2\n\n\n\n\n4.4 Clean version\n\nclass Solution:\n    def search(self, nums: [int], target: int) -&gt; int:\n        l = 0\n        r = len(nums)\n\n        while l&lt;r:\n            m = (l+r)//2\n            if nums[m]&lt;target:\n                l = m + 1                \n            elif nums[m]&gt;target:\n                r = m\n            else:\n                return m\n        return -1"
   },
   {
-    "objectID": "posts/leetcode/1-min_stack/LC155.html#test-functionality",
-    "href": "posts/leetcode/1-min_stack/LC155.html#test-functionality",
-    "title": "LC: 155. Min Stack",
-    "section": "4. Test Functionality",
-    "text": "4. Test Functionality\n\nminStack = MinStack()\n\n\nminStack.push(-2);\n\n\nminStack.push(0);\nminStack.stack\n\n[-2, 0]\n\n\n\nminStack.push(-3);\nminStack.stack\n\n[-2, 0, -3]\n\n\n\nminStack.getMin() # // return -3\n# minStack.stack\n\n-3\n\n\n\nminStack.pop();\nminStack.stack\n\n[-2, 0]\n\n\n\nminStack.top() # return 0\n\n0\n\n\n\nminStack.getMin() # return -2\n\n-2"
+    "objectID": "posts/leetcode/LC704.html#submit",
+    "href": "posts/leetcode/LC704.html#submit",
+    "title": "LC: 704. Binary Search",
+    "section": "6. Submit",
+    "text": "6. Submit\nMiddle of the pack \nGo to Main Blog\nGo to LeetCode Blog"
   },
   {
-    "objectID": "posts/leetcode/1-min_stack/LC155.html#submit",
-    "href": "posts/leetcode/1-min_stack/LC155.html#submit",
-    "title": "LC: 155. Min Stack",
-    "section": "5. Submit",
-    "text": "5. Submit\nThe code is slow but great memory management.\nAt the my current level, I’m happy to simply solve the problems. I don’t usually solve Mediums that easily."
-  },
-  {
-    "objectID": "posts/leetcode/1-min_stack/LC155.html#some-commentary",
-    "href": "posts/leetcode/1-min_stack/LC155.html#some-commentary",
-    "title": "LC: 155. Min Stack",
-    "section": "6. Some Commentary",
-    "text": "6. Some Commentary\nThe question is framed from a Java’s perspective hence there are types in front of each declaration:\n- void pop()\n- int top()\n- new MinStack()\nNote: I’ve never touched Java 🤭.\nJava is a Static-Typed whilst Python is a Dynamically-Type.\n\nJava requires variables and method return values be explicitly declared at compile-time.\nPython data types are determined at runtime.\n\nPython doesn’t require explicit type declarations for variables, function return types, or when creating objects.\n\n\nThat is, since I’m using Python, so I won’t need to declare my return types when creating a method of a class."
-  },
-  {
-    "objectID": "posts/leetcode/0-welcome_to_lc/index.html",
-    "href": "posts/leetcode/0-welcome_to_lc/index.html",
-    "title": "❄️LeetCode Posts❄️",
+    "objectID": "posts/leetcode/LC74.html",
+    "href": "posts/leetcode/LC74.html",
+    "title": "LC: 74. Search a 2D Matrix",
     "section": "",
-    "text": "link to leetcode profile here\n\nCreated new leetcode.qmd based on front page index.qmd and\n\nDirected contents to point here: contents: posts/lc_posts.\n\nProbably not the ideal blog + folder structure but it’ll do the job👌.\nI don’t claim to be a web-designer in any sense 😂.\nI began 3 months ago with no algorithm or data structures academic background at all. The Easys were definitey not Easy to me as you can see from the number of submissions.\nThe majority of submissions were 2-3 months ago and I made no attempts in January 2024 👏.\nThis page should keep me accountable and these fingers minty as a mojito on a hot day 🍹."
+    "text": "link to my leetcode profile"
+  },
+  {
+    "objectID": "posts/leetcode/LC74.html#problem-description",
+    "href": "posts/leetcode/LC74.html#problem-description",
+    "title": "LC: 74. Search a 2D Matrix",
+    "section": "1. Problem Description",
+    "text": "1. Problem Description\nYou are given an m x n integer matrix matrix with the following two properties:\nEach row is sorted in non-decreasing order.\nThe first integer of each row is greater than the last integer of the previous row.\nGiven an integer target, return true if target is in matrix or false otherwise.\nYou must write a solution in O(log(m * n)) time complexity."
+  },
+  {
+    "objectID": "posts/leetcode/LC74.html#code",
+    "href": "posts/leetcode/LC74.html#code",
+    "title": "LC: 74. Search a 2D Matrix",
+    "section": "2. Code",
+    "text": "2. Code\n\nFlatten array then\nUse code from binary search\n\n\nclass Solution:\n    def searchMatrix(self, matrix: [[int]], target: int) -&gt; bool:\n        # its a ascending matrix,\n        # 1. turn into array then \n        # 2. apply binsearch \n        arr = [element for row in matrix for element in row]\n\n        l = 0\n        r = len(arr)\n\n        if r==1:\n            if target == l[0]:\n                return True\n            else: return False\n\n        while l&lt;r:\n            m = (l+r)//2\n            if arr[m]&lt;target:\n                l = m + 1                \n            elif arr[m]&gt;target:\n                r = m\n            else:                \n                return True\n        return False\n\n\nsoln = Solution()\n# soln.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],3)\n# soln.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]],13)\n# soln.searchMatrix([[1,3]],3)"
+  },
+  {
+    "objectID": "posts/leetcode/LC74.html#submit",
+    "href": "posts/leetcode/LC74.html#submit",
+    "title": "LC: 74. Search a 2D Matrix",
+    "section": "3. Submit",
+    "text": "3. Submit\n\nGo to Main Blog\nGo to LeetCode Blog"
   },
   {
     "objectID": "posts/2024-01-18-99_rice_vs_noodles/index.html",

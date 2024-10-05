@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2024-02-06">
+<meta name="description" content="An introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class">
 
-<title>leetcode – Tony’s blog</title>
+<title>LC: 155. Min Stack – Tony’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,65 +105,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -138,7 +116,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Tony’s blog</span>
     </a>
   </div>
@@ -149,19 +127,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">about</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./kaggle.html"> 
+    <a class="nav-link" href="../../kaggle.html"> 
 <span class="menu-text">kaggle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./leetcode.html" aria-current="page"> 
+    <a class="nav-link" href="../../leetcode.html"> 
 <span class="menu-text">leetcode</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./notes.html"> 
+    <a class="nav-link" href="../../notes.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item compact">
@@ -185,215 +163,259 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">leetcode</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">LC: 155. Min Stack</h1>
+                  <div>
+        <div class="description">
+          An introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">leetcode</div>
+              </div>
+                  </div>
   </div>
-  <div class="quarto-title-meta column-page-left">
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
     </div>
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 6, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="hello world">hello world <span class="quarto-category-count">(1)</span></div><div class="category" data-category="leetcode">leetcode <span class="quarto-category-count">(5)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#problem-description" id="toc-problem-description" class="nav-link active" data-scroll-target="#problem-description">1. Problem Description</a>
+  <ul class="collapse">
+  <li><a href="#leetcode-example" id="toc-leetcode-example" class="nav-link" data-scroll-target="#leetcode-example">1.1 LeetCode example</a></li>
+  </ul></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">2. Analysis</a>
+  <ul class="collapse">
+  <li><a href="#summary-table" id="toc-summary-table" class="nav-link" data-scroll-target="#summary-table">2.1 Summary Table</a></li>
+  </ul></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">3. Code</a></li>
+  <li><a href="#test-functionality" id="toc-test-functionality" class="nav-link" data-scroll-target="#test-functionality">4. Test Functionality</a></li>
+  <li><a href="#submit" id="toc-submit" class="nav-link" data-scroll-target="#submit">5. Submit</a></li>
+  <li><a href="#some-commentary" id="toc-some-commentary" class="nav-link" data-scroll-target="#some-commentary">6. Some Commentary</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-marquee column-page-left">
-  <div class="about-image-container">
-  </div>
-  <div class="about-contents">
-     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="leetcode" data-listing-date-sort="1707498000000" data-listing-file-modified-sort="1728144212827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="92">
-<div class="thumbnail">
-<p><a href="./posts/leetcode/LC74.html" class="no-external"></a></p><a href="./posts/leetcode/LC74.html" class="no-external">
-<p><img loading="lazy" src="./posts/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/leetcode/LC74.html" class="no-external"></a></p>
+
+
+
+<p><img src="imgs/leetcode.jpg" class="img-fluid"></p>
+<p><a href="https://leetcode.com/tonyjustdevs/">link to my leetcode profile</a></p>
+<section id="problem-description" class="level2">
+<h2 class="anchored" data-anchor-id="problem-description">1. Problem Description</h2>
+<p>Design a stack that supports <code>push</code>, <code>pop</code>, <code>top</code>, and retrieving the <code>minimum</code> element in constant time.</p>
+<p>Implement the <code>MinStack</code> class:<br>
+1. <code>MinStack()</code> initializes the stack object.<br>
+2. void <code>push(int val)</code> pushes the element val onto the stack.<br>
+3. void <code>pop()</code> removes the element on the top of the stack.<br>
+4. int <code>top()</code> gets the top element of the stack.<br>
+5. int <code>getMin()</code> retrieves the minimum element in the stack.</p>
+<section id="leetcode-example" class="level3">
+<h3 class="anchored" data-anchor-id="leetcode-example">1.1 LeetCode example</h3>
+<p>Input:<br>
+<code>["MinStack","push","push","push","getMin","pop","top","getMin"]</code><br>
+<code>[[],[-2],[0],[-3],[],[],[],[]]</code></p>
+<p>Output:<br>
+<code>[null,null,null,null,-3,null,0,-2]</code></p>
+</section>
+</section>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">2. Analysis</h2>
+<p>I’ve decomposed the Inputs (code + variables) and expected outputs (stack and return values) for each line of code run.</p>
+<p><strong>[Future Iteration 1]</strong>: Learn how to <code>assert</code> or include code that checks inputs what they are expected in an automatic way (The Output_Mine should be filled later hopefully automatically. For now, I eyeball the results and have LeetCode accept whether its passing or failing)</p>
+<p><strong>[Future Iteration 2]</strong>: I’m using Python <code>Lists</code>, I could do the same attempt with <code>chr</code> and <code>string</code> types as parentheses are simply characters.</p>
+<section id="summary-table" class="level3">
+<h3 class="anchored" data-anchor-id="summary-table">2.1 Summary Table</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Python_Executed</th>
+<th>Stack_Expected</th>
+<th>Output_Expected</th>
+<th>Output_Mine</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MinStack minStack = new MinStack();</td>
+<td>[]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.push(-2);</td>
+<td>[-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="odd">
+<td>minStack.push(0)</td>
+<td>[0,-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.push(-3);</td>
+<td>[-3,0,-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="odd">
+<td>minStack.getMin()</td>
+<td>[-3,0,-2]</td>
+<td>-3</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.pop()</td>
+<td>[0,-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="odd">
+<td>minStack.top()</td>
+<td>[0,-2]</td>
+<td>0</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.getMin()</td>
+<td>[0,-2]</td>
+<td>-2</td>
+<td>asdf</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">3. Code</h2>
+<p>Write the MinStack() class and its requried methods.</p>
+<div id="cell-5" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinStack():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.stack <span class="op">=</span> [] <span class="co"># create empty list</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, val: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.stack.append(val) <span class="co"># add value to end of list</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.stack.pop() <span class="co"># remove last val of the list</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> top(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.stack[<span class="op">-</span><span class="dv">1</span>] <span class="co"># in a list, top of stack is the last item list[-1]</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getMin(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">min</span>(<span class="va">self</span>.stack) </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/leetcode/LC74.html" class="no-external">LC: 74. Search a 2D Matrix</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/leetcode/LC74.html" class="no-external"></a>
+</section>
+<section id="test-functionality" class="level2">
+<h2 class="anchored" data-anchor-id="test-functionality">4. Test Functionality</h2>
+<div id="cell-7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>minStack <span class="op">=</span> MinStack()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
-leetcode
+<div id="cell-8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>minStack.push(<span class="op">-</span><span class="dv">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="listing-description">
-<a href="./posts/leetcode/LC74.html" class="no-external">Almost the same as binary search problem</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/leetcode/LC74.html" class="no-external">
-<div class="listing-date">
-Feb 10, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="leetcode" data-listing-date-sort="1707411600000" data-listing-file-modified-sort="1728144229557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="170">
-<div class="thumbnail">
-<p><a href="./posts/leetcode/LC704.html" class="no-external"></a></p><a href="./posts/leetcode/LC704.html" class="no-external">
-<p><img loading="lazy" src="./posts/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/leetcode/LC704.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/leetcode/LC704.html" class="no-external">LC: 704. Binary Search</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/leetcode/LC704.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
-leetcode
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/leetcode/LC704.html" class="no-external">First binary search question</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/leetcode/LC704.html" class="no-external">
-<div class="listing-date">
-Feb 9, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="leetcode" data-listing-date-sort="1707238800000" data-listing-file-modified-sort="1728144212827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1218">
-<div class="thumbnail">
-<p><a href="./posts/leetcode/LC150.html" class="no-external"></a></p><a href="./posts/leetcode/LC150.html" class="no-external">
-<p><img loading="lazy" src="./posts/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/leetcode/LC150.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/leetcode/LC150.html" class="no-external">LC: 150. Evaluate Reverse Polish Notation</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/leetcode/LC150.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
-leetcode
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/leetcode/LC150.html" class="no-external">Implement a Stack Class using Postfix Notation</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/leetcode/LC150.html" class="no-external">
-<div class="listing-date">
-Feb 7, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="leetcode" data-listing-date-sort="1707152400000" data-listing-file-modified-sort="1728144212827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="451">
-<div class="thumbnail">
-<p><a href="./posts/leetcode/LC155.html" class="no-external"></a></p><a href="./posts/leetcode/LC155.html" class="no-external">
-<p><img loading="lazy" src="./posts/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/leetcode/LC155.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/leetcode/LC155.html" class="no-external">LC: 155. Min Stack</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/leetcode/LC155.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
-leetcode
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/leetcode/LC155.html" class="no-external">An introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/leetcode/LC155.html" class="no-external">
-<div class="listing-date">
-Feb 6, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
+<div id="cell-9" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>minStack.push(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>minStack.stack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>[-2, 0]</code></pre>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="leetcode,hello world" data-listing-date-sort="1707066000000" data-listing-file-modified-sort="1728144212837" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="112">
-<div class="thumbnail">
-<p><a href="./posts/leetcode/index.html" class="no-external"></a></p><a href="./posts/leetcode/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/leetcode/imgs/leetcode_coming.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/leetcode/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/leetcode/index.html" class="no-external">❄️LeetCode Posts❄️</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/leetcode/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
-leetcode
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('hello world'); return false;">
-hello world
+<div id="cell-10" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>minStack.push(<span class="op">-</span><span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>minStack.stack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>[-2, 0, -3]</code></pre>
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/leetcode/index.html" class="no-external">A page to archive my (naively hopeful daily) leetcode attempts.</a>
+<div id="cell-11" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>minStack.getMin() <span class="co"># // return -3</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># minStack.stack</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>-3</code></pre>
 </div>
 </div>
-<div class="metadata">
-<a href="./posts/leetcode/index.html" class="no-external">
-<div class="listing-date">
-Feb 5, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
+<div id="cell-12" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>minStack.pop()<span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>minStack.stack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[-2, 0]</code></pre>
 </div>
 </div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> 
-    <div class="about-footer"><div class="about-links">
-  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
+<div id="cell-13" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>minStack.top() <span class="co"># return 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>0</code></pre>
 </div>
 </div>
-  </div>
+<div id="cell-14" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>minStack.getMin() <span class="co"># return -2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>-2</code></pre>
 </div>
- <!-- /main -->
+</div>
+</section>
+<section id="submit" class="level2">
+<h2 class="anchored" data-anchor-id="submit">5. Submit</h2>
+<p>The code is slow but great memory management.</p>
+<p>At the my current level, I’m happy to simply solve the problems. I don’t usually solve Mediums that easily.</p>
+<p><img src="imgs/155-1.jpg" class="img-fluid"></p>
+</section>
+<section id="some-commentary" class="level2">
+<h2 class="anchored" data-anchor-id="some-commentary">6. Some Commentary</h2>
+<p>The question is framed from a <code>Java</code>’s perspective hence there are <code>types</code> in front of each declaration:<br>
+- <code>void pop()</code><br>
+- <code>int top()</code><br>
+- <code>new MinStack()</code></p>
+<p><strong>Note</strong>: I’ve never touched Java 🤭.</p>
+<p>Java is a <strong>Static-Typed</strong> whilst Python is a <strong>Dynamically-Type</strong>.</p>
+<ul>
+<li>Java <strong>requires</strong> variables and method return values be <strong>explicitly declared</strong> at <strong>compile-time</strong>.</li>
+<li>Python <strong>data types</strong> are determined at <strong>runtime</strong>.
+<ul>
+<li>Python <strong>doesn’t require</strong> explicit type declarations for variables, function return types, or when creating objects.</li>
+</ul></li>
+</ul>
+<p>That is, since I’m using Python, so I won’t need to declare my return types when creating a method of a class.</p>
+<p><a href="https://tonyjustdevs.github.io/blog/">Go to Main Blog</a><br>
+<a href="https://tonyjustdevs.github.io/blog/leetcode.html">Go to LeetCode Blog</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -558,6 +580,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

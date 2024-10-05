@@ -2,11 +2,11 @@
   {
     "listing": "/leetcode.html",
     "items": [
-      "/posts/leetcode/4-search_a_2d_matrix/LC74.html",
-      "/posts/leetcode/3-binary_search/LC704.html",
-      "/posts/leetcode/2-reverse_polish_notation/LC150.html",
-      "/posts/leetcode/1-min_stack/LC155.html",
-      "/posts/leetcode/0-welcome_to_lc/index.html"
+      "/posts/leetcode/LC74.html",
+      "/posts/leetcode/LC704.html",
+      "/posts/leetcode/LC150.html",
+      "/posts/leetcode/LC155.html",
+      "/posts/leetcode/index.html"
     ]
   },
   {
@@ -60,12 +60,12 @@
       "/posts/kaggle/2-us-patents-offline/index.html",
       "/posts/kaggle/1-us-patents/index.html",
       "/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html",
-      "/posts/leetcode/4-search_a_2d_matrix/LC74.html",
-      "/posts/leetcode/3-binary_search/LC704.html",
+      "/posts/leetcode/LC74.html",
+      "/posts/leetcode/LC704.html",
       "/posts/notes/linear_algebra/1-chg_of_bse.html",
-      "/posts/leetcode/2-reverse_polish_notation/LC150.html",
-      "/posts/leetcode/1-min_stack/LC155.html",
-      "/posts/leetcode/0-welcome_to_lc/index.html",
+      "/posts/leetcode/LC150.html",
+      "/posts/leetcode/LC155.html",
+      "/posts/leetcode/index.html",
       "/posts/2024-02-04-neural_network_spreadsheet/index.html",
       "/posts/2024-02-03-neural_network_basics/index.html",
       "/posts/2024-02-02-neural_network_basics/index.html",
