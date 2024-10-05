@@ -6,7 +6,7 @@ categories: [leetcode, hello world]
 description: A page to archive my (naively hopeful daily) leetcode attempts.
 ---
 
-![](leetcode_coming.jpg)
+![](imgs/leetcode_coming.jpg)
 
 [link to leetcode profile here](https://leetcode.com/tonyjustdevs/)
 
@@ -22,4 +22,4 @@ The majority of submissions were 2-3 months ago and I made no attempts in Januar
 
 This page should keep me accountable and these fingers minty as a mojito on a hot day 🍹.
 
-![](leet_summary.jpg)
+![](imgs/leet_summary.jpg)
