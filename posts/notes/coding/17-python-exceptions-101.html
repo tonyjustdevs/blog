@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-10-23">
-<meta name="description" content="Learning How To Contribute to Open Source Projects as a Beginner">
+<meta name="dcterms.date" content="2024-10-28">
+<meta name="description" content="Learning to be exceptional">
 
-<title>Open Source as a Beginner – Tony’s blog</title>
+<title>Python Exceptions 101 – Tony’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -130,14 +164,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Open Source as a Beginner</h1>
+      <h1 class="title">Python Exceptions 101</h1>
                   <div>
         <div class="description">
-          Learning How To Contribute to Open Source Projects as a Beginner
+          Learning to be exceptional
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">python</div>
+                <div class="quarto-category">vscode</div>
               </div>
                   </div>
   </div>
@@ -155,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 23, 2024</p>
+        <p class="date">October 28, 2024</p>
       </div>
     </div>
     
@@ -171,30 +205,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#questions-to-be-answered" id="toc-questions-to-be-answered" class="nav-link active" data-scroll-target="#questions-to-be-answered">1. Questions to be answered</a></li>
-  <li><a href="#what-is-open-source" id="toc-what-is-open-source" class="nav-link" data-scroll-target="#what-is-open-source">2. What is open source?</a></li>
-  <li><a href="#how-to-get-started" id="toc-how-to-get-started" class="nav-link" data-scroll-target="#how-to-get-started">3. How to get started?</a></li>
-  <li><a href="#how-to-submit-a-pr-request" id="toc-how-to-submit-a-pr-request" class="nav-link" data-scroll-target="#how-to-submit-a-pr-request">4. How to Submit a PR Request?</a>
+  <li><a href="#what-is-a-python-exception" id="toc-what-is-a-python-exception" class="nav-link active" data-scroll-target="#what-is-a-python-exception">1. What is a Python <code>Exception</code></a></li>
+  <li><a href="#built-in-exception-examples" id="toc-built-in-exception-examples" class="nav-link" data-scroll-target="#built-in-exception-examples">2. Built-in Exception Examples</a>
   <ul class="collapse">
-  <li><a href="#step-by-steps" id="toc-step-by-steps" class="nav-link" data-scroll-target="#step-by-steps">4.1 Step-by-Steps</a></li>
-  <li><a href="#advantages-of-above-steps" id="toc-advantages-of-above-steps" class="nav-link" data-scroll-target="#advantages-of-above-steps">4.2 Advantages of Above Steps</a></li>
+  <li><a href="#zerodivisionerror" id="toc-zerodivisionerror" class="nav-link" data-scroll-target="#zerodivisionerror">2.1 <code>ZeroDivisionError</code></a></li>
+  <li><a href="#keyerror" id="toc-keyerror" class="nav-link" data-scroll-target="#keyerror">2.2 <code>KeyError</code></a></li>
+  <li><a href="#nameerror" id="toc-nameerror" class="nav-link" data-scroll-target="#nameerror">2.3 <code>NameError</code></a></li>
+  <li><a href="#indexerror" id="toc-indexerror" class="nav-link" data-scroll-target="#indexerror">2.4 <code>IndexError</code></a></li>
   </ul></li>
-  <li><a href="#lets-do-it-myself" id="toc-lets-do-it-myself" class="nav-link" data-scroll-target="#lets-do-it-myself">5. Let’s do it myself!</a>
+  <li><a href="#exception-handler-try-except" id="toc-exception-handler-try-except" class="nav-link" data-scroll-target="#exception-handler-try-except">3. Exception-Handler: <code>try-except</code></a></li>
+  <li><a href="#call-stack" id="toc-call-stack" class="nav-link" data-scroll-target="#call-stack">4. <code>Call stack</code></a>
   <ul class="collapse">
-  <li><a href="#fork-a-repo-first-contributions" id="toc-fork-a-repo-first-contributions" class="nav-link" data-scroll-target="#fork-a-repo-first-contributions">5.1 Fork a repo <code>first contributions</code></a></li>
-  <li><a href="#clone-your-forked-repo-tonyjustdevsfirst-contributions" id="toc-clone-your-forked-repo-tonyjustdevsfirst-contributions" class="nav-link" data-scroll-target="#clone-your-forked-repo-tonyjustdevsfirst-contributions">5.2 Clone your forked repo <code>tonyjustdevs/first-contributions</code></a></li>
-  <li><a href="#create-local-branch" id="toc-create-local-branch" class="nav-link" data-scroll-target="#create-local-branch">5.3 Create local branch</a>
-  <ul class="collapse">
-  <li><a href="#clone-to-local-with-windows-terminal" id="toc-clone-to-local-with-windows-terminal" class="nav-link" data-scroll-target="#clone-to-local-with-windows-terminal">5.3.1 Clone to local with Windows Terminal</a></li>
-  <li><a href="#create-local-branch-with-vs-codes-terminal" id="toc-create-local-branch-with-vs-codes-terminal" class="nav-link" data-scroll-target="#create-local-branch-with-vs-codes-terminal">5.3.2 Create Local Branch with VS Code’s Terminal</a></li>
+  <li><a href="#call-stack-examples" id="toc-call-stack-examples" class="nav-link" data-scroll-target="#call-stack-examples">4.1 <code>Call stack</code> Examples</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#make-changes-via-ide-vscode" id="toc-make-changes-via-ide-vscode" class="nav-link" data-scroll-target="#make-changes-via-ide-vscode">6. Make Changes via IDE (VSCode)</a></li>
-  <li><a href="#create-pull-requests" id="toc-create-pull-requests" class="nav-link" data-scroll-target="#create-pull-requests">7. Create Pull Requests</a></li>
-  <li><a href="#wait-for-it-to-be-merged" id="toc-wait-for-it-to-be-merged" class="nav-link" data-scroll-target="#wait-for-it-to-be-merged">8. Wait for it to be Merged</a></li>
-  <li><a href="#merge-successful" id="toc-merge-successful" class="nav-link" data-scroll-target="#merge-successful">9. Merge Successful!</a></li>
-  <li><a href="#dont-forget-to-star-it" id="toc-dont-forget-to-star-it" class="nav-link" data-scroll-target="#dont-forget-to-star-it">10. Don’t forget to Star🌟 it</a></li>
-  <li><a href="#dont-let-the-fame-get-to-you-tony" id="toc-dont-let-the-fame-get-to-you-tony" class="nav-link" data-scroll-target="#dont-let-the-fame-get-to-you-tony">11. Don’t let the fame get to you Tony</a></li>
   </ul>
 </nav>
     </div>
@@ -205,158 +228,191 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><img src="imgs/16opensource.jpg" class="img-fluid"></p>
-<p><a href="https://www.freecodecamp.org/news/how-to-contribute-to-open-source-projects-beginners-guide/">FreeCodeCamp Open Source Beginners Guide</a></p>
-<section id="questions-to-be-answered" class="level1">
-<h1>1. Questions to be answered</h1>
+<section id="what-is-a-python-exception" class="level1">
+<h1>1. What is a Python <code>Exception</code></h1>
 <ul>
-<li>What exactly is open source?</li>
-<li>How can you get started contributing?</li>
-<li>What should you expect?</li>
-</ul>
-</section>
-<section id="what-is-open-source" class="level1">
-<h1>2. What is open source?</h1>
-<p>A projects where it’s source code is:</p>
+<li>A condition when something <em>unexpected</em> occured, they are:
 <ul>
-<li>made available</li>
-<li>to the public to
+<li>Also knowns as an `error’</li>
+<li>Represented by an <code>object</code> of a <em>specific type</em> (descriptive name eg. <code>ZeroDivisionError</code>)</li>
+<li>Inherit from <code>BaseException</code> class (since all python classes are hierarchical)
 <ul>
-<li>view,</li>
-<li>use,</li>
-<li>modify, and</li>
-<li>distribute under a permissive license.</li>
-</ul></li>
-</ul>
-</section>
-<section id="how-to-get-started" class="level1">
-<h1>3. How to get started?</h1>
-<p>Level 1 Checklist:</p>
-<ul>
-<li>Check out if it has a license file.</li>
-<li>Check when the last commit was made. This will help you know if the maintainers are active and also give you an estimate on how long it will take to respond to your contribution.</li>
-<li>Look for the number of contributors.</li>
-<li>Check how often people make commits.</li>
-</ul>
-<p>Level 2 Checklist:</p>
-<ul>
-<li>Does it have any open issues?</li>
-<li>How long does it take for maintainers to respond?</li>
-<li>Is there an active discussion on an issue?</li>
-<li>Are the issues getting closed regularly?</li>
-<li>How many open pull requests are there?</li>
-<li>How recently was the latest pull requests merged?</li>
-<li>Do the maintainers thank people for contributing?</li>
-</ul>
-</section>
-<section id="how-to-submit-a-pr-request" class="level1">
-<h1>4. How to Submit a PR Request?</h1>
-<section id="step-by-steps" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-steps">4.1 Step-by-Steps</h2>
-<ul>
-<li>Fork: os project becomes “https://github.com/<yourusername>/projectname”</yourusername></li>
-<li>Clone:<code>git clone https://github.com/&lt;YourUserName&gt;/&lt;projectname&gt;</code>
-<ul>
-<li>this creates a copy of project on local machine</li>
-</ul></li>
-<li>Create local folder + branch: cd to folder + eg <code>git checkout -b tonyjustdev-branch</code>
-<ul>
-<li>see all changes: <code>git status</code></li>
-<li>add all changes: <code>git add *</code></li>
-<li>commit changes: <code>git commit -m "message here"</code><br>
+<li>ie a subclass of <code>BaseException</code> (inherits from thereof)<br>
 </li>
-<li>push to remote: <code>git push origin tonyjustdev-branch</code></li>
 </ul></li>
-</ul>
-</section>
-<section id="advantages-of-above-steps" class="level2">
-<h2 class="anchored" data-anchor-id="advantages-of-above-steps">4.2 Advantages of Above Steps</h2>
+</ul></li>
+<li>These exceptions that happen automatically (Python automically creates the exception object when something unexpected) are called <code>built-in</code> exceptions. <!-- [RESEARCH] Implicitly raised/exception? --> <!-- [LINK] https://docs.python.org/3/library/exceptions.html --></li>
+<li>Exceptions can also be manually <code>raised</code> by the developer (discussed later).</li>
+<li>After being <code>raised</code>, the exception can be <code>caught</code> by an <code>exception handler</code>
 <ul>
-<li>It allows you to contribute to another repo without needing administrative privileges to make changes to the repo.</li>
-<li>It allows others to review your changes and suggest corrections, additions, edits, and so on.</li>
-<li>It gives repo administrators control over what gets added to their project repo.</li>
+<li>The exception handler allows developers to decide what happens to a program, after catching a specific type of exception.</li>
+</ul></li>
+<li><strong>[IMPORTANT]</strong> If an exception is not <code>caught</code> and <code>handled</code>, Python automatically terminates the program!</li>
 </ul>
+<section id="is-a-subclass-of-exception-a-subclass-of-baseexception" class="level4">
+<h4 class="anchored" data-anchor-id="is-a-subclass-of-exception-a-subclass-of-baseexception">1.1.1 Is a <code>subclass</code> of <code>Exception</code> a <code>subclass</code> of <code>BaseException</code>?</h4>
+<p>Yes. Benefit: This relationship allows for: - using a catch-all exceptions clause like <code>except BaseException</code>, when needed. `</p>
+<div id="cell-3" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(<span class="pp">Exception</span>(),<span class="pp">BaseException</span>))     </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(<span class="pp">Exception</span>(),<span class="pp">Exception</span>))         </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print(isinstance(Exception(),BaseException())) # TypeError: arg2 must be type</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(<span class="pp">Exception</span>,<span class="pp">BaseException</span>))       <span class="co"># False: arg1 must be instance rather than class</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(<span class="pp">BaseException</span>(),<span class="pp">Exception</span>))         </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">issubclass</span>(<span class="pp">ZeroDivisionError</span>,<span class="pp">Exception</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">issubclass</span>(<span class="pp">ZeroDivisionError</span>,<span class="pp">BaseException</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">issubclass</span>(<span class="pp">Exception</span>,<span class="pp">Exception</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">issubclass</span>(<span class="pp">Exception</span>,<span class="pp">BaseException</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">issubclass</span>(<span class="pp">BaseException</span>,<span class="pp">BaseException</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">issubclass</span>(<span class="pp">BaseException</span>,<span class="pp">Exception</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True
+True
+False
+False
+True
+True
+True
+True
+True
+False</code></pre>
+</div>
+</div>
 </section>
 </section>
-<section id="lets-do-it-myself" class="level1">
-<h1>5. Let’s do it myself!</h1>
-<section id="fork-a-repo-first-contributions" class="level2">
-<h2 class="anchored" data-anchor-id="fork-a-repo-first-contributions">5.1 Fork a repo <code>first contributions</code></h2>
-<p>By <strong>forking</strong> a repo, I am creating a copy of the particular repository in my own github account:</p>
-<ul>
-<li>Click <code>fork</code> button on top right of the repo</li>
-<li>Rename <strong>[Repository name]</strong> (if you want)</li>
-<li>Click <code>Create fork</code></li>
-</ul>
-<p>Repo used: https://github.com/firstcontributions/first-contributions.</p>
-<p><img src="imgs/16os1.jpg" class="img-fluid"></p>
+<section id="built-in-exception-examples" class="level1">
+<h1>2. Built-in Exception Examples</h1>
+<section id="zerodivisionerror" class="level2">
+<h2 class="anchored" data-anchor-id="zerodivisionerror">2.1 <code>ZeroDivisionError</code></h2>
+<p>Dividing by zero.</p>
+<div id="cell-6" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ZeroDivisionError</span>                         Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[29], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(98,98,98)" class="ansi-yellow-bg">1</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">/</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">0</span>)
+
+<span class="ansi-red-fg">ZeroDivisionError</span>: division by zero</pre>
+</div>
+</div>
+</div>
 </section>
-<section id="clone-your-forked-repo-tonyjustdevsfirst-contributions" class="level2">
-<h2 class="anchored" data-anchor-id="clone-your-forked-repo-tonyjustdevsfirst-contributions">5.2 Clone your forked repo <code>tonyjustdevs/first-contributions</code></h2>
-<ul>
-<li>Copy URL and <code>git clone &lt;your copied url&gt;</code></li>
-</ul>
-<p><img src="imgs/16os2.jpg" class="img-fluid"></p>
+<section id="keyerror" class="level2">
+<h2 class="anchored" data-anchor-id="keyerror">2.2 <code>KeyError</code></h2>
+<p>Key does not exist in a dictionary.</p>
+<div id="cell-8" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usernames_dicts <span class="op">=</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1'</span>:<span class="st">'oreo'</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'69'</span>:<span class="st">'lilo'</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'420'</span>:<span class="st">'stitch'</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(usernames_dicts[<span class="st">'1'</span>])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(usernames_dicts[<span class="st">'69'</span>])</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(usernames_dicts[<span class="st">'666'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>oreo
+lilo</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[32], line 9</span>
+<span class="ansi-green-fg ansi-bold">      7</span> <span style="color:rgb(0,135,0)">print</span>(usernames_dicts[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">1</span><span style="color:rgb(175,0,0)">'</span>])
+<span class="ansi-green-fg ansi-bold">      8</span> <span style="color:rgb(0,135,0)">print</span>(usernames_dicts[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">69</span><span style="color:rgb(175,0,0)">'</span>])
+<span class="ansi-green-fg">----&gt; 9</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-bg">usernames_dicts</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">666</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span>)
+
+<span class="ansi-red-fg">KeyError</span>: '666'</pre>
+</div>
+</div>
+</div>
 </section>
-<section id="create-local-branch" class="level2">
-<h2 class="anchored" data-anchor-id="create-local-branch">5.3 Create local branch</h2>
-<section id="clone-to-local-with-windows-terminal" class="level3">
-<h3 class="anchored" data-anchor-id="clone-to-local-with-windows-terminal">5.3.1 Clone to local with Windows Terminal</h3>
-<p>My current workflow involves firstly opening VSCode , then creating/switching to a branch in the Terminal of VSCode.</p>
-<ul>
-<li>cd to cloned folder</li>
-<li>open vscode</li>
-<li>create/switch to new branch</li>
-</ul>
-<p>(I have not had a chance to test whether there a difference to creating the branch first before launching VS Code. I currently run almost all terminal commands in VSCode’s Terminal rather than Windows Terminal)</p>
-<p><img src="imgs/16os3.jpg" class="img-fluid"></p>
+<section id="nameerror" class="level2">
+<h2 class="anchored" data-anchor-id="nameerror">2.3 <code>NameError</code></h2>
+<p>Variable does not exist.</p>
+<div id="cell-10" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>b<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">/</span>b)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">/</span>c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[33], line 4</span>
+<span class="ansi-green-fg ansi-bold">      2</span> b<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">2</span>
+<span class="ansi-green-fg ansi-bold">      3</span> <span style="color:rgb(0,135,0)">print</span>(a<span style="color:rgb(98,98,98)">/</span>b)
+<span class="ansi-green-fg">----&gt; 4</span> <span style="color:rgb(0,135,0)">print</span>(a<span style="color:rgb(98,98,98)">/</span><span class="ansi-yellow-bg">c</span>)
+
+<span class="ansi-red-fg">NameError</span>: name 'c' is not defined</pre>
+</div>
+</div>
+</div>
 </section>
-<section id="create-local-branch-with-vs-codes-terminal" class="level3">
-<h3 class="anchored" data-anchor-id="create-local-branch-with-vs-codes-terminal">5.3.2 Create Local Branch with VS Code’s Terminal</h3>
-<p>VSCode shows which branch you’re currently in which is neat.</p>
-<p><img src="imgs/16os4.jpg" class="img-fluid"></p>
+<section id="indexerror" class="level2">
+<h2 class="anchored" data-anchor-id="indexerror">2.4 <code>IndexError</code></h2>
+<p>Index does not exist.</p>
+<div id="cell-12" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cool_array <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cool_array[<span class="dv">0</span>])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cool_array[<span class="dv">1</span>])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cool_array[<span class="dv">2</span>])</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cool_array[<span class="dv">4</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1
+2
+3</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">IndexError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[37], line 5</span>
+<span class="ansi-green-fg ansi-bold">      3</span> <span style="color:rgb(0,135,0)">print</span>(cool_array[<span style="color:rgb(98,98,98)">1</span>])
+<span class="ansi-green-fg ansi-bold">      4</span> <span style="color:rgb(0,135,0)">print</span>(cool_array[<span style="color:rgb(98,98,98)">2</span>])
+<span class="ansi-green-fg">----&gt; 5</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-bg">cool_array</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">4</span><span class="ansi-yellow-bg">]</span>)
+
+<span class="ansi-red-fg">IndexError</span>: list index out of range</pre>
+</div>
+</div>
+</div>
 </section>
 </section>
+<section id="exception-handler-try-except" class="level1">
+<h1>3. Exception-Handler: <code>try-except</code></h1>
+<p>When an exception is raised (automatically or manually): - Python stops the current flow of execution and - Python looks for an <code>exception handler</code> (must match the type of exception raised) - Where does it look? in the <code>call stack</code> (next section)</p>
+<p>Exception handlers can be created with the <code>try-except</code> statements: <code>try</code>: statements in here are run but may error <code>except ExceptionType</code>: if the error</p>
+<p>If you don’t specify an <code>ExceptionType</code> in a try-except block (i.e., if you write just except:), Python catches all exceptions derived from BaseException, but it typically captures exceptions derived from Exception, which covers most common errors. This is called a bare except, and it will catch almost any error that occurs in the try block.</p>
+<div id="cell-15" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If you don't specify an exception type in a try-except block (i.e., if you write just except:), Python catches all exceptions derived from BaseException, but it typically captures exceptions derived from Exception, which covers most common errors. This is called a bare except, and it will catch almost any error that occurs in the try block.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="make-changes-via-ide-vscode" class="level1">
-<h1>6. Make Changes via IDE (VSCode)</h1>
-<ul>
-<li>Add myself to <code>Contributors.md</code>, <strong><em>preview</em></strong>, then <strong><em>save</em></strong> the file [Label 1 &amp; 2]</li>
-<li>Check status: <code>git status</code> [Label 3]</li>
-<li>Add changes (local branch): <code>git add Contributors.md</code> [Label 3]</li>
-<li>Commit: <code>git commit -m "Add your-name to Contributors list"</code> [Label 3]</li>
-<li>Push (remote branch): <code>git push -u origin your-branch-name</code> [Label 3]</li>
-</ul>
-<p><img src="imgs/16os5.jpg" class="img-fluid"></p>
-</section>
-<section id="create-pull-requests" class="level1">
-<h1>7. Create Pull Requests</h1>
-<ul>
-<li>Go to your forked repo and you should see a <strong>Compare &amp; pull request</strong> button to click. Click it.</li>
-</ul>
-<p><img src="imgs/16os6.jpg" class="img-fluid"></p>
-<ul>
-<li>Then Submit via <strong>Create pull request</strong> button.</li>
-</ul>
-<p><img src="imgs/16os7.jpg" class="img-fluid"></p>
-</section>
-<section id="wait-for-it-to-be-merged" class="level1">
-<h1>8. Wait for it to be Merged</h1>
-<p><img src="imgs/16os8.jpg" class="img-fluid"></p>
-</section>
-<section id="merge-successful" class="level1">
-<h1>9. Merge Successful!</h1>
-<p><img src="imgs/16os9.jpg" class="img-fluid"></p>
-</section>
-<section id="dont-forget-to-star-it" class="level1">
-<h1>10. Don’t forget to Star🌟 it</h1>
-<p><img src="imgs/16os10.jpg" class="img-fluid"></p>
-</section>
-<section id="dont-let-the-fame-get-to-you-tony" class="level1">
-<h1>11. Don’t let the fame get to you Tony</h1>
-<p><img src="imgs/16os11.jpg" class="img-fluid"></p>
+<section id="call-stack" class="level1">
+<h1>4. <code>Call stack</code></h1>
+<p>A <code>call stack</code> is an ordered list of functions that are currently being executed.</p>
+<section id="call-stack-examples" class="level2">
+<h2 class="anchored" data-anchor-id="call-stack-examples">4.1 <code>Call stack</code> Examples</h2>
+<p>Imagine a program that calls function A, which calls function B, which calls function C:<br>
+- call stack is consists: A -&gt; B -&gt; C</p>
+<p>When an exception is raised, Python looks for an exception hanlder in this from: - back to front in the call stacks: C -&gt; B -&gt; A</p>
+<p>Leveraging <code>atexit</code> for Clean-Up</p>
+<p>The <code>atexit</code> module allows developers to:<br>
+- register functions to be called upon normal program termination, - providing a straightforward way to clean up resources, - such as files or network connections. - This ensures that your program exits <strong><em>gracefully</em></strong>, even in the face of <strong>unhandled exceptions</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="imgs/17exceptionstree.jpg" class="img-fluid figure-img"></p>
+<figcaption>Exceptions: Tree Diagram</figcaption>
+</figure>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -596,7 +652,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

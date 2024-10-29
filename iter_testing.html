@@ -6,11 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-10-23">
-<meta name="description" content="Learning How To Contribute to Open Source Projects as a Beginner">
 
-<title>Open Source as a Beginner – Tony’s blog</title>
+<title>iter_testing – Tony's blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,27 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,14 +106,14 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Tony’s blog</span>
     </a>
   </div>
@@ -93,19 +124,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../about.html"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">about</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../kaggle.html"> 
+    <a class="nav-link" href="./kaggle.html"> 
 <span class="menu-text">kaggle</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../leetcode.html"> 
+    <a class="nav-link" href="./leetcode.html"> 
 <span class="menu-text">leetcode</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../notes.html"> 
+    <a class="nav-link" href="./notes.html"> 
 <span class="menu-text">notes</span></a>
   </li>  
   <li class="nav-item compact">
@@ -127,237 +158,135 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Open Source as a Beginner</h1>
-                  <div>
-        <div class="description">
-          Learning How To Contribute to Open Source Projects as a Beginner
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">python</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Tony Phung </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">October 23, 2024</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#questions-to-be-answered" id="toc-questions-to-be-answered" class="nav-link active" data-scroll-target="#questions-to-be-answered">1. Questions to be answered</a></li>
-  <li><a href="#what-is-open-source" id="toc-what-is-open-source" class="nav-link" data-scroll-target="#what-is-open-source">2. What is open source?</a></li>
-  <li><a href="#how-to-get-started" id="toc-how-to-get-started" class="nav-link" data-scroll-target="#how-to-get-started">3. How to get started?</a></li>
-  <li><a href="#how-to-submit-a-pr-request" id="toc-how-to-submit-a-pr-request" class="nav-link" data-scroll-target="#how-to-submit-a-pr-request">4. How to Submit a PR Request?</a>
-  <ul class="collapse">
-  <li><a href="#step-by-steps" id="toc-step-by-steps" class="nav-link" data-scroll-target="#step-by-steps">4.1 Step-by-Steps</a></li>
-  <li><a href="#advantages-of-above-steps" id="toc-advantages-of-above-steps" class="nav-link" data-scroll-target="#advantages-of-above-steps">4.2 Advantages of Above Steps</a></li>
-  </ul></li>
-  <li><a href="#lets-do-it-myself" id="toc-lets-do-it-myself" class="nav-link" data-scroll-target="#lets-do-it-myself">5. Let’s do it myself!</a>
-  <ul class="collapse">
-  <li><a href="#fork-a-repo-first-contributions" id="toc-fork-a-repo-first-contributions" class="nav-link" data-scroll-target="#fork-a-repo-first-contributions">5.1 Fork a repo <code>first contributions</code></a></li>
-  <li><a href="#clone-your-forked-repo-tonyjustdevsfirst-contributions" id="toc-clone-your-forked-repo-tonyjustdevsfirst-contributions" class="nav-link" data-scroll-target="#clone-your-forked-repo-tonyjustdevsfirst-contributions">5.2 Clone your forked repo <code>tonyjustdevs/first-contributions</code></a></li>
-  <li><a href="#create-local-branch" id="toc-create-local-branch" class="nav-link" data-scroll-target="#create-local-branch">5.3 Create local branch</a>
-  <ul class="collapse">
-  <li><a href="#clone-to-local-with-windows-terminal" id="toc-clone-to-local-with-windows-terminal" class="nav-link" data-scroll-target="#clone-to-local-with-windows-terminal">5.3.1 Clone to local with Windows Terminal</a></li>
-  <li><a href="#create-local-branch-with-vs-codes-terminal" id="toc-create-local-branch-with-vs-codes-terminal" class="nav-link" data-scroll-target="#create-local-branch-with-vs-codes-terminal">5.3.2 Create Local Branch with VS Code’s Terminal</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#make-changes-via-ide-vscode" id="toc-make-changes-via-ide-vscode" class="nav-link" data-scroll-target="#make-changes-via-ide-vscode">6. Make Changes via IDE (VSCode)</a></li>
-  <li><a href="#create-pull-requests" id="toc-create-pull-requests" class="nav-link" data-scroll-target="#create-pull-requests">7. Create Pull Requests</a></li>
-  <li><a href="#wait-for-it-to-be-merged" id="toc-wait-for-it-to-be-merged" class="nav-link" data-scroll-target="#wait-for-it-to-be-merged">8. Wait for it to be Merged</a></li>
-  <li><a href="#merge-successful" id="toc-merge-successful" class="nav-link" data-scroll-target="#merge-successful">9. Merge Successful!</a></li>
-  <li><a href="#dont-forget-to-star-it" id="toc-dont-forget-to-star-it" class="nav-link" data-scroll-target="#dont-forget-to-star-it">10. Don’t forget to Star🌟 it</a></li>
-  <li><a href="#dont-let-the-fame-get-to-you-tony" id="toc-dont-let-the-fame-get-to-you-tony" class="nav-link" data-scroll-target="#dont-let-the-fame-get-to-you-tony">11. Don’t let the fame get to you Tony</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 
 
+<div id="cell-0" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. create a iterable</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pets_tupl <span class="op">=</span> (<span class="st">"oreo"</span>, <span class="st">"kiwi"</span>, <span class="st">"ollie"</span>, <span class="st">"elle"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pets_dict <span class="op">=</span> {<span class="st">"oreo"</span> :<span class="st">"kitty"</span>,<span class="st">"kiwi"</span> :<span class="st">"doggo"</span>,<span class="st">"ollie"</span>:<span class="st">"doggo"</span>,<span class="st">"elle"</span> :<span class="st">"kitty"</span>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># print(pets_dict)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. convert iterable to iterator it.__iter__()</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>pets_tupl_iter <span class="op">=</span> pets_tupl.<span class="fu">__iter__</span>()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. iterate through it.__next__()</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>()) <span class="co"># oreo</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>()) <span class="co"># kiwi</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>()) <span class="co"># ollie</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>()) <span class="co"># elle</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>()) <span class="co"># StopIteration exception</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>('oreo', 'kiwi', 'ollie', 'elle')
+&lt;tuple_iterator object at 0x7f4da05fc100&gt;
+oreo
+kiwi
+ollie
+elle</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">StopIteration</span>                             Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 18</span>
+<span class="ansi-green-fg ansi-bold">     16</span> <span style="color:rgb(0,135,0)">print</span>(pets_tupl_iter<span style="color:rgb(98,98,98)">.</span><span style="color:rgb(0,0,255)">__next__</span>()) <span style="font-style:italic;color:rgb(95,135,135)"># ollie</span>
+<span class="ansi-green-fg ansi-bold">     17</span> <span style="color:rgb(0,135,0)">print</span>(pets_tupl_iter<span style="color:rgb(98,98,98)">.</span><span style="color:rgb(0,0,255)">__next__</span>()) <span style="font-style:italic;color:rgb(95,135,135)"># elle</span>
+<span class="ansi-green-fg">---&gt; 18</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-bg">pets_tupl_iter</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span style="color:rgb(0,0,255)" class="ansi-yellow-bg">__next__</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>) <span style="font-style:italic;color:rgb(95,135,135)"># StopIteration exception</span>
 
-<p><img src="imgs/16opensource.jpg" class="img-fluid"></p>
-<p><a href="https://www.freecodecamp.org/news/how-to-contribute-to-open-source-projects-beginners-guide/">FreeCodeCamp Open Source Beginners Guide</a></p>
-<section id="questions-to-be-answered" class="level1">
-<h1>1. Questions to be answered</h1>
-<ul>
-<li>What exactly is open source?</li>
-<li>How can you get started contributing?</li>
-<li>What should you expect?</li>
-</ul>
-</section>
-<section id="what-is-open-source" class="level1">
-<h1>2. What is open source?</h1>
-<p>A projects where it’s source code is:</p>
-<ul>
-<li>made available</li>
-<li>to the public to
-<ul>
-<li>view,</li>
-<li>use,</li>
-<li>modify, and</li>
-<li>distribute under a permissive license.</li>
-</ul></li>
-</ul>
-</section>
-<section id="how-to-get-started" class="level1">
-<h1>3. How to get started?</h1>
-<p>Level 1 Checklist:</p>
-<ul>
-<li>Check out if it has a license file.</li>
-<li>Check when the last commit was made. This will help you know if the maintainers are active and also give you an estimate on how long it will take to respond to your contribution.</li>
-<li>Look for the number of contributors.</li>
-<li>Check how often people make commits.</li>
-</ul>
-<p>Level 2 Checklist:</p>
-<ul>
-<li>Does it have any open issues?</li>
-<li>How long does it take for maintainers to respond?</li>
-<li>Is there an active discussion on an issue?</li>
-<li>Are the issues getting closed regularly?</li>
-<li>How many open pull requests are there?</li>
-<li>How recently was the latest pull requests merged?</li>
-<li>Do the maintainers thank people for contributing?</li>
-</ul>
-</section>
-<section id="how-to-submit-a-pr-request" class="level1">
-<h1>4. How to Submit a PR Request?</h1>
-<section id="step-by-steps" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-steps">4.1 Step-by-Steps</h2>
-<ul>
-<li>Fork: os project becomes “https://github.com/<yourusername>/projectname”</yourusername></li>
-<li>Clone:<code>git clone https://github.com/&lt;YourUserName&gt;/&lt;projectname&gt;</code>
-<ul>
-<li>this creates a copy of project on local machine</li>
-</ul></li>
-<li>Create local folder + branch: cd to folder + eg <code>git checkout -b tonyjustdev-branch</code>
-<ul>
-<li>see all changes: <code>git status</code></li>
-<li>add all changes: <code>git add *</code></li>
-<li>commit changes: <code>git commit -m "message here"</code><br>
-</li>
-<li>push to remote: <code>git push origin tonyjustdev-branch</code></li>
-</ul></li>
-</ul>
-</section>
-<section id="advantages-of-above-steps" class="level2">
-<h2 class="anchored" data-anchor-id="advantages-of-above-steps">4.2 Advantages of Above Steps</h2>
-<ul>
-<li>It allows you to contribute to another repo without needing administrative privileges to make changes to the repo.</li>
-<li>It allows others to review your changes and suggest corrections, additions, edits, and so on.</li>
-<li>It gives repo administrators control over what gets added to their project repo.</li>
-</ul>
-</section>
-</section>
-<section id="lets-do-it-myself" class="level1">
-<h1>5. Let’s do it myself!</h1>
-<section id="fork-a-repo-first-contributions" class="level2">
-<h2 class="anchored" data-anchor-id="fork-a-repo-first-contributions">5.1 Fork a repo <code>first contributions</code></h2>
-<p>By <strong>forking</strong> a repo, I am creating a copy of the particular repository in my own github account:</p>
-<ul>
-<li>Click <code>fork</code> button on top right of the repo</li>
-<li>Rename <strong>[Repository name]</strong> (if you want)</li>
-<li>Click <code>Create fork</code></li>
-</ul>
-<p>Repo used: https://github.com/firstcontributions/first-contributions.</p>
-<p><img src="imgs/16os1.jpg" class="img-fluid"></p>
-</section>
-<section id="clone-your-forked-repo-tonyjustdevsfirst-contributions" class="level2">
-<h2 class="anchored" data-anchor-id="clone-your-forked-repo-tonyjustdevsfirst-contributions">5.2 Clone your forked repo <code>tonyjustdevs/first-contributions</code></h2>
-<ul>
-<li>Copy URL and <code>git clone &lt;your copied url&gt;</code></li>
-</ul>
-<p><img src="imgs/16os2.jpg" class="img-fluid"></p>
-</section>
-<section id="create-local-branch" class="level2">
-<h2 class="anchored" data-anchor-id="create-local-branch">5.3 Create local branch</h2>
-<section id="clone-to-local-with-windows-terminal" class="level3">
-<h3 class="anchored" data-anchor-id="clone-to-local-with-windows-terminal">5.3.1 Clone to local with Windows Terminal</h3>
-<p>My current workflow involves firstly opening VSCode , then creating/switching to a branch in the Terminal of VSCode.</p>
-<ul>
-<li>cd to cloned folder</li>
-<li>open vscode</li>
-<li>create/switch to new branch</li>
-</ul>
-<p>(I have not had a chance to test whether there a difference to creating the branch first before launching VS Code. I currently run almost all terminal commands in VSCode’s Terminal rather than Windows Terminal)</p>
-<p><img src="imgs/16os3.jpg" class="img-fluid"></p>
-</section>
-<section id="create-local-branch-with-vs-codes-terminal" class="level3">
-<h3 class="anchored" data-anchor-id="create-local-branch-with-vs-codes-terminal">5.3.2 Create Local Branch with VS Code’s Terminal</h3>
-<p>VSCode shows which branch you’re currently in which is neat.</p>
-<p><img src="imgs/16os4.jpg" class="img-fluid"></p>
-</section>
-</section>
-</section>
-<section id="make-changes-via-ide-vscode" class="level1">
-<h1>6. Make Changes via IDE (VSCode)</h1>
-<ul>
-<li>Add myself to <code>Contributors.md</code>, <strong><em>preview</em></strong>, then <strong><em>save</em></strong> the file [Label 1 &amp; 2]</li>
-<li>Check status: <code>git status</code> [Label 3]</li>
-<li>Add changes (local branch): <code>git add Contributors.md</code> [Label 3]</li>
-<li>Commit: <code>git commit -m "Add your-name to Contributors list"</code> [Label 3]</li>
-<li>Push (remote branch): <code>git push -u origin your-branch-name</code> [Label 3]</li>
-</ul>
-<p><img src="imgs/16os5.jpg" class="img-fluid"></p>
-</section>
-<section id="create-pull-requests" class="level1">
-<h1>7. Create Pull Requests</h1>
-<ul>
-<li>Go to your forked repo and you should see a <strong>Compare &amp; pull request</strong> button to click. Click it.</li>
-</ul>
-<p><img src="imgs/16os6.jpg" class="img-fluid"></p>
-<ul>
-<li>Then Submit via <strong>Create pull request</strong> button.</li>
-</ul>
-<p><img src="imgs/16os7.jpg" class="img-fluid"></p>
-</section>
-<section id="wait-for-it-to-be-merged" class="level1">
-<h1>8. Wait for it to be Merged</h1>
-<p><img src="imgs/16os8.jpg" class="img-fluid"></p>
-</section>
-<section id="merge-successful" class="level1">
-<h1>9. Merge Successful!</h1>
-<p><img src="imgs/16os9.jpg" class="img-fluid"></p>
-</section>
-<section id="dont-forget-to-star-it" class="level1">
-<h1>10. Don’t forget to Star🌟 it</h1>
-<p><img src="imgs/16os10.jpg" class="img-fluid"></p>
-</section>
-<section id="dont-let-the-fame-get-to-you-tony" class="level1">
-<h1>11. Don’t let the fame get to you Tony</h1>
-<p><img src="imgs/16os11.jpg" class="img-fluid"></p>
+<span class="ansi-red-fg">StopIteration</span>: </pre>
+</div>
+</div>
+</div>
+<div id="cell-1" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pets_tupl <span class="op">=</span> (<span class="st">"oreo"</span>, <span class="st">"kiwi"</span>, <span class="st">"ollie"</span>, <span class="st">"elle"</span>) <span class="co"># 1. create a iterable</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pets_tupl_iter1 <span class="op">=</span> pets_tupl.<span class="fu">__iter__</span>()   <span class="co"># 2a. it -&gt; itr </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pets_tupl_iter2 <span class="op">=</span> <span class="bu">iter</span>(pets_tupl)       <span class="co"># 2b. it -&gt; itr</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter1)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;tuple_iterator object at 0x7f4da05234f0&gt;
+&lt;tuple_iterator object at 0x7f4da050eec0&gt;</code></pre>
+</div>
+</div>
+<div id="cell-2" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter1.<span class="fu">__next__</span>())  <span class="co"># oreo</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(pets_tupl_iter1))      <span class="co"># kiwi </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter1.<span class="fu">__next__</span>())  <span class="co"># ollie</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">next</span>(pets_tupl_iter1))      <span class="co"># elle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>oreo
+kiwi
+ollie
+elle</code></pre>
+</div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(pets_tupl.<span class="fu">__iter__</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on tuple_iterator object:
+
+class tuple_iterator(object)
+ |  Methods defined here:
+ |  
+ |  __getattribute__(self, name, /)
+ |      Return getattr(self, name).
+ |  
+ |  __iter__(self, /)
+ |      Implement iter(self).
+ |  
+ |  __length_hint__(...)
+ |      Private method returning an estimate of len(list(it)).
+ |  
+ |  __next__(self, /)
+ |      Implement next(self).
+ |  
+ |  __reduce__(...)
+ |      Return state information for pickling.
+ |  
+ |  __setstate__(...)
+ |      Set state information for unpickling.
+</code></pre>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pets_tupl <span class="op">=</span> (<span class="st">"oreo"</span>, <span class="st">"kiwi"</span>, <span class="st">"ollie"</span>, <span class="st">"elle"</span>) <span class="co"># 1. create a iterable</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pets_tupl_iter1 <span class="op">=</span> pets_tupl.<span class="fu">__iter__</span>()   <span class="co"># 2a. it -&gt; itr </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pets_tupl_iter2 <span class="op">=</span> pets_tupl.<span class="fu">__iter__</span>()   <span class="co"># 2a. it -&gt; itr </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(pets_tupl_iter1))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(pets_tupl_iter2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>139971379844608
+139971379849840</code></pre>
+</div>
+</div>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. iterate with it.__next__()</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>())</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>())</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>())</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>())</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pets_tupl_iter.<span class="fu">__next__</span>())</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -596,7 +525,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
