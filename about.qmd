@@ -13,7 +13,7 @@ about:
 
 ---
 
-This is a blog will archive my journey into the more data-science/ml/ai space.
+This is a blog is my journey from applied finance into (a hopefully useful) developer.  
 
 **A Poem of Oreo**  
 
