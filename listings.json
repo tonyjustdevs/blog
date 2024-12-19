@@ -12,7 +12,9 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/notes/coding/22-interfaces-over-implementation.html",
+      "/posts/notes/calculus/2-calc_limits_plots_ex2_2_11_21.html",
+      "/posts/notes/coding/23-interfaces-2-protocols.html",
+      "/posts/notes/coding/22-interfaces-1-abc.html",
       "/posts/notes/coding/21-uv-package.html",
       "/posts/notes/coding/20-encapsulation-getter-python.html",
       "/posts/notes/coding/15_exceptions_101.html",
@@ -76,7 +78,9 @@
   {
     "listing": "/notes.html",
     "items": [
-      "/posts/notes/coding/22-interfaces-over-implementation.html",
+      "/posts/notes/calculus/2-calc_limits_plots_ex2_2_11_21.html",
+      "/posts/notes/coding/23-interfaces-2-protocols.html",
+      "/posts/notes/coding/22-interfaces-1-abc.html",
       "/posts/notes/coding/21-uv-package.html",
       "/posts/notes/coding/20-encapsulation-getter-python.html",
       "/posts/notes/coding/15_exceptions_101.html",

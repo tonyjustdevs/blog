@@ -9,40 +9,44 @@
     <lastmod>2024-10-07T11:43:21.896Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/9-symlinks.html</loc>
-    <lastmod>2024-09-20T15:43:00.538Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/8-quarto_on_wsl.html</loc>
+    <lastmod>2024-10-07T17:32:11.447Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/2-linux_setup.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/13-shallow-and-deep.html</loc>
+    <lastmod>2024-10-21T17:07:48.821Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/21-uv-package.html</loc>
+    <lastmod>2024-12-03T16:52:22.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/14-python-classes-101.html</loc>
+    <lastmod>2024-10-22T19:17:03.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/6-measuring_accuracy.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/4-wsl_new_user.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/10-add-script-to-PATH.html</loc>
+    <lastmod>2024-09-20T17:33:30.437Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/3-bash.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/7-virtual_environments.html</loc>
-    <lastmod>2024-09-18T16:18:35.322Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/15_exceptions_101.html</loc>
+    <lastmod>2024-11-13T03:24:33.108Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/19-csharp_on_vscode.html</loc>
-    <lastmod>2024-11-08T00:28:28.538Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/16-open-source-beginners.html</loc>
+    <lastmod>2024-10-27T15:35:33.341Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/18-transfer-multiple-issues-github.html</loc>
-    <lastmod>2024-11-04T22:21:32.164Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/11-github-api.html</loc>
-    <lastmod>2024-10-07T17:31:17.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/22-interfaces-over-implementation.html</loc>
-    <lastmod>2024-12-05T20:33:26.708Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/12-vscode-keybindings-json.html</loc>
-    <lastmod>2024-10-07T18:11:03.626Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/22-interfaces-1-abc.html</loc>
+    <lastmod>2024-12-06T13:51:21.254Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/20-encapsulation-getter-python.html</loc>
@@ -217,40 +221,44 @@
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/16-open-source-beginners.html</loc>
-    <lastmod>2024-10-27T15:35:33.341Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/12-vscode-keybindings-json.html</loc>
+    <lastmod>2024-10-07T18:11:03.626Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/15_exceptions_101.html</loc>
-    <lastmod>2024-11-13T03:24:33.108Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/23-interfaces-2-protocols.html</loc>
+    <lastmod>2024-12-15T15:30:12.809Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/3-bash.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/11-github-api.html</loc>
+    <lastmod>2024-10-07T17:31:17.887Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/18-transfer-multiple-issues-github.html</loc>
+    <lastmod>2024-11-04T22:21:32.164Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/19-csharp_on_vscode.html</loc>
+    <lastmod>2024-11-08T00:28:28.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/7-virtual_environments.html</loc>
+    <lastmod>2024-09-18T16:18:35.322Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/4-wsl_new_user.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/10-add-script-to-PATH.html</loc>
-    <lastmod>2024-09-20T17:33:30.437Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/6-measuring_accuracy.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/2-linux_setup.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/14-python-classes-101.html</loc>
-    <lastmod>2024-10-22T19:17:03.179Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/9-symlinks.html</loc>
+    <lastmod>2024-09-20T15:43:00.538Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/21-uv-package.html</loc>
-    <lastmod>2024-12-03T16:52:22.502Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/13-shallow-and-deep.html</loc>
-    <lastmod>2024-10-21T17:07:48.821Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/8-quarto_on_wsl.html</loc>
-    <lastmod>2024-10-07T17:32:11.447Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/calculus/2-calc_limits_plots_ex2_2_11_21.html</loc>
+    <lastmod>2024-12-19T14:11:53.718Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/kaggle.html</loc>
