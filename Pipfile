@@ -8,6 +8,8 @@ quarto = "*"
 python-dotenv = "*"
 requests = "*"
 mypy = "*"
+pandas = "*"
+matplotlib = "*"
 
 [dev-packages]
 
