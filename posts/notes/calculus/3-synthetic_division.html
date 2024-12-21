@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-12-19">
-<meta name="description" content="Ch2.2: Limit of a Function &amp; Limit Laws (Ex2.2.11-21, Thomas 13e pp.74)">
+<meta name="dcterms.date" content="2024-12-21">
+<meta name="description" content="Learning a factoring technique (from Ex 2.3.85, Thomas 13e pp.77)">
 
-<title>Plotting functions with limits – Tony’s blog</title>
+<title>Calculus: Synthetic Division – Tony’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -193,15 +193,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Plotting functions with limits</h1>
+      <h1 class="title">Calculus: Synthetic Division</h1>
                   <div>
         <div class="description">
-          Ch2.2: Limit of a Function &amp; Limit Laws (Ex2.2.11-21, Thomas 13e pp.74)
+          Learning a factoring technique (from Ex 2.3.85, Thomas 13e pp.77)
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">calculus</div>
-                <div class="quarto-category">limits</div>
               </div>
                   </div>
   </div>
@@ -219,7 +218,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 19, 2024</p>
+        <p class="date">December 21, 2024</p>
       </div>
     </div>
     
@@ -235,13 +234,27 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#jupyter-notebooks-available" id="toc-jupyter-notebooks-available" class="nav-link active" data-scroll-target="#jupyter-notebooks-available">Jupyter Notebooks Available</a></li>
-  <li><a href="#ex2.2.5-lim_xto0fracxx" id="toc-ex2.2.5-lim_xto0fracxx" class="nav-link" data-scroll-target="#ex2.2.5-lim_xto0fracxx">Ex2.2.5: <span class="math inline">\(\lim_{x\to0}\frac{x}{|x|}\)</span></a></li>
-  <li><a href="#ex2.2.11-lim_xto-3x2-13" id="toc-ex2.2.11-lim_xto-3x2-13" class="nav-link" data-scroll-target="#ex2.2.11-lim_xto-3x2-13">Ex2.2.11: <span class="math inline">\(lim_{x\to-3}(x^2-13)\)</span></a></li>
-  <li><a href="#ex2.2.13-lim_xto68x-5x-7" id="toc-ex2.2.13-lim_xto68x-5x-7" class="nav-link" data-scroll-target="#ex2.2.13-lim_xto68x-5x-7">Ex2.2.13: <span class="math inline">\(\lim_{x\to6}8(x-5)(x-7)\)</span></a></li>
-  <li><a href="#ex2.2.15-lim_xto2frac2x511-x3" id="toc-ex2.2.15-lim_xto2frac2x511-x3" class="nav-link" data-scroll-target="#ex2.2.15-lim_xto2frac2x511-x3">Ex2.2.15: <span class="math inline">\(\lim_{x\to2}\frac{2x+5}{11-x^3}\)</span></a></li>
-  <li><a href="#ex2.2.19-lim_xto-35-xfrac43" id="toc-ex2.2.19-lim_xto-35-xfrac43" class="nav-link" data-scroll-target="#ex2.2.19-lim_xto-35-xfrac43">Ex2.2.19: <span class="math inline">\(\lim_{x\to-3}(5-x)^{\frac{4}{3}}\)</span></a></li>
-  <li><a href="#ex2.2.21-lim_xto0frac3sqrt3x11" id="toc-ex2.2.21-lim_xto0frac3sqrt3x11" class="nav-link" data-scroll-target="#ex2.2.21-lim_xto0frac3sqrt3x11">Ex2.2.21: <span class="math inline">\(\lim_{x\to0}\frac{3}{\sqrt{3x+1}+1}\)</span></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#factorising-x3-x2-5x-3" id="toc-factorising-x3-x2-5x-3" class="nav-link" data-scroll-target="#factorising-x3-x2-5x-3">2. Factorising <span class="math inline">\(x^3-x^2-5x-3\)</span></a></li>
+  <li><a href="#synthetic-division-examples" id="toc-synthetic-division-examples" class="nav-link" data-scroll-target="#synthetic-division-examples">3. Synthetic Division Examples</a></li>
+  <li><a href="#ex2.3.85-through-synthetic-division" id="toc-ex2.3.85-through-synthetic-division" class="nav-link" data-scroll-target="#ex2.3.85-through-synthetic-division">4. Ex2.3.85 Through Synthetic Division</a>
+  <ul class="collapse">
+  <li><a href="#synthetic-divison-x3-x2-5x-3-by-x1" id="toc-synthetic-divison-x3-x2-5x-3-by-x1" class="nav-link" data-scroll-target="#synthetic-divison-x3-x2-5x-3-by-x1">4.1 Synthetic divison <span class="math inline">\((x^3-x^2-5x-3)\)</span> by <span class="math inline">\((x+1)\)</span></a></li>
+  <li><a href="#back-to-the-question" id="toc-back-to-the-question" class="nav-link" data-scroll-target="#back-to-the-question">4.2 Back to the question</a></li>
+  </ul></li>
+  <li><a href="#ex2.3.85-through-plotting" id="toc-ex2.3.85-through-plotting" class="nav-link" data-scroll-target="#ex2.3.85-through-plotting">5. Ex2.3.85 Through Plotting</a>
+  <ul class="collapse">
+  <li><a href="#import-libraries" id="toc-import-libraries" class="nav-link" data-scroll-target="#import-libraries">5.1 Import libraries</a></li>
+  <li><a href="#create-xs-xs" id="toc-create-xs-xs" class="nav-link" data-scroll-target="#create-xs-xs">5.2 Create x’s: <code>xs</code></a></li>
+  <li><a href="#create-function-fx" id="toc-create-function-fx" class="nav-link" data-scroll-target="#create-function-fx">5.3 Create function: <code>fx</code></a></li>
+  <li><a href="#lambda-method" id="toc-lambda-method" class="nav-link" data-scroll-target="#lambda-method">5.3.1 <code>lambda</code> method</a></li>
+  <li><a href="#def-method" id="toc-def-method" class="nav-link" data-scroll-target="#def-method">5.3.2 <code>def</code> method</a>
+  <ul class="collapse">
+  <li><a href="#check-definitions-optional" id="toc-check-definitions-optional" class="nav-link" data-scroll-target="#check-definitions-optional">5.3.3 Check definitions [optional]</a></li>
+  </ul></li>
+  <li><a href="#calculate-ys-ys" id="toc-calculate-ys-ys" class="nav-link" data-scroll-target="#calculate-ys-ys">5.4 Calculate y’s: <code>ys</code></a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot">5.5 Plot</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -252,147 +265,157 @@ window.Quarto = {
 
 
 
-<section id="jupyter-notebooks-available" class="level1">
-<h1>Jupyter Notebooks Available</h1>
+<p><img src="imgs/3_synthetic_division.png" class="img-fluid"></p>
+<section id="introduction" class="level1">
+<h1>1. Introduction</h1>
+<p>From <code>Ex 2.3.85, Thomas 13e pp.77</code>:</p>
+<p><span class="math display">\[\lim_{x\to-1}\frac{x^3-x^2-5x-3}{(x+1)^2}\]</span></p>
+</section>
+<section id="factorising-x3-x2-5x-3" class="level1">
+<h1>2. Factorising <span class="math inline">\(x^3-x^2-5x-3\)</span></h1>
+<p>Check <span class="math inline">\(x=-1\)</span> is a factor of numerator <span class="math inline">\(x^3-x^2-5x-3\)</span>:</p>
 <ul>
-<li><a href="https://github.com/tonyjustdevs/learning_calculus/tree/88825b39ff38c00243b7ff472d1d4f7263730a50/ch2_limits_and_continuity/ch2-2_fn_limit_and_limit_laws">Ex 2.2 notebooks github download link</a></li>
+<li><p><strong>Step 1</strong>: Confirm denominator <span class="math inline">\((x+1)^2\)</span> is <span class="math inline">\(zero\)</span> at <span class="math inline">\(x=1\)</span></p></li>
+<li><p><strong>Step 2</strong>: If so, confirm numerator <span class="math inline">\(x^3-x^2-5x-3\)</span> is <span class="math inline">\(zero\)</span> at <span class="math inline">\(x=1\)</span>.</p></li>
 </ul>
+<p>But here, I got stuck as I do not know (or recall) any method to check this.</p>
+<p>Hence after some googling/ai-ing, I found a division technique called <strong>Synthetic Division</strong>.</p>
+<p>Below are two practice examples.</p>
 </section>
-<section id="ex2.2.5-lim_xto0fracxx" class="level1">
-<h1>Ex2.2.5: <span class="math inline">\(\lim_{x\to0}\frac{x}{|x|}\)</span></h1>
-<div id="cell-3" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="dv">20</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> xs[xs <span class="op">!=</span> <span class="dv">0</span>] <span class="co"># remove x=0</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x): <span class="cf">return</span> (x)<span class="op">/</span>(np.<span class="bu">abs</span>(x))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> f(xs)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs,ys)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="synthetic-division-examples" class="level1">
+<h1>3. Synthetic Division Examples</h1>
+<p><img src="imgs/3_synthetic_division.png" class="img-fluid"></p>
+</section>
+<section id="ex2.3.85-through-synthetic-division" class="level1">
+<h1>4. Ex2.3.85 Through Synthetic Division</h1>
+<p><span class="math display">\[\lim_{x\to-1}\frac{x^3-x^2-5x-3}{(x+1)^2}\]</span></p>
+<section id="synthetic-divison-x3-x2-5x-3-by-x1" class="level2">
+<h2 class="anchored" data-anchor-id="synthetic-divison-x3-x2-5x-3-by-x1">4.1 Synthetic divison <span class="math inline">\((x^3-x^2-5x-3)\)</span> by <span class="math inline">\((x+1)\)</span></h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>-1</th>
+<th>+1</th>
+<th>-1</th>
+<th>-5</th>
+<th>-3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(+\)</span></td>
+<td>+0</td>
+<td>-1</td>
+<td>+2</td>
+<td>+3</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(/\)</span></td>
+<td>+1</td>
+<td>-2</td>
+<td>-3</td>
+<td>+<span class="math inline">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Remainder is <span class="math inline">\(0\)</span> (bottom right cell).</p>
+<p>Therefore <span class="math inline">\((x+1)\)</span> is a factor of <span class="math inline">\((x^3-x^2-5x-3)\)</span></p>
+<p>The final line represents the <span class="math inline">\(coefficients\)</span> of the other <strong>factor</strong>, that is:<br>
+<span class="math display">\[x^2-2x-3\]</span></p>
+<p>Therefore <span class="math display">\[(x^3-x^2-5x-3)\]</span><br>
+<span class="math display">\[=(x+1)(x^2-2x-3)\]</span></p>
+</section>
+<section id="back-to-the-question" class="level2">
+<h2 class="anchored" data-anchor-id="back-to-the-question">4.2 Back to the question</h2>
+<p><span class="math display">\[\frac{x^3-x^2-5x-3}{(x+1)^2}\]</span> <span class="math display">\[\frac{(x+1)(x^2-2x-3)}{(x+1)(x+1)}\]</span> <span class="math display">\[\frac{(x^2-2x-3)}{(x+1)}\]</span> <span class="math display">\[\frac{(x-3)(x+1)}{(x+1)}\]</span> <span class="math display">\[{(x-3)}\]</span></p>
+<p><span class="math display">\[\lim_{x\to-1}\frac{x^3-x^2-5x-3}{(x+1)^2}\]</span> <span class="math display">\[\lim_{x\to-1}(x-3)\]</span> <span class="math display">\[(-1-3)\]</span> <span class="math display">\[-4\]</span></p>
+</section>
+</section>
+<section id="ex2.3.85-through-plotting" class="level1">
+<h1>5. Ex2.3.85 Through Plotting</h1>
+<section id="import-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="import-libraries">5.1 Import libraries</h2>
+<div id="cell-12" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-xs-xs" class="level2">
+<h2 class="anchored" data-anchor-id="create-xs-xs">5.2 Create x’s: <code>xs</code></h2>
+<div id="cell-14" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.1</span>,<span class="op">-</span><span class="fl">0.9</span>,<span class="dv">21</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>xs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>array([-1.1 , -1.09, -1.08, -1.07, -1.06, -1.05, -1.04, -1.03, -1.02,
+       -1.01, -1.  , -0.99, -0.98, -0.97, -0.96, -0.95, -0.94, -0.93,
+       -0.92, -0.91, -0.9 ])</code></pre>
+</div>
+</div>
+</section>
+<section id="create-function-fx" class="level2">
+<h2 class="anchored" data-anchor-id="create-function-fx">5.3 Create function: <code>fx</code></h2>
+</section>
+<section id="lambda-method" class="level2">
+<h2 class="anchored" data-anchor-id="lambda-method">5.3.1 <code>lambda</code> method</h2>
+<div id="cell-17" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fx <span class="op">=</span> <span class="kw">lambda</span> x: (x<span class="op">**</span><span class="dv">3</span><span class="op">-</span>x<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">5</span><span class="op">*</span>x<span class="op">-</span><span class="dv">3</span>)<span class="op">/</span>((x<span class="op">+</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="def-method" class="level2">
+<h2 class="anchored" data-anchor-id="def-method">5.3.2 <code>def</code> method</h2>
+<div id="cell-19" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fx2(x): <span class="cf">return</span> (x<span class="op">**</span><span class="dv">3</span><span class="op">-</span>x<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">5</span><span class="op">*</span>x<span class="op">-</span><span class="dv">3</span>)<span class="op">/</span>((x<span class="op">+</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="check-definitions-optional" class="level3">
+<h3 class="anchored" data-anchor-id="check-definitions-optional">5.3.3 Check definitions [optional]</h3>
+<div id="cell-21" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> inspect</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>inspect.getsource(fx)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>inspect.getsource(fx2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>'def fx2(x): return (x**3-x**2-5*x-3)/((x+1)**2)\n'</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="calculate-ys-ys" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-ys-ys">5.4 Calculate y’s: <code>ys</code></h2>
+<div id="cell-23" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> fx(xs)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ys</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_62451/871469998.py:1: RuntimeWarning: invalid value encountered in divide
+  fx = lambda x: (x**3-x**2-5*x-3)/((x+1)**2)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>array([-4.1 , -4.09, -4.08, -4.07, -4.06, -4.05, -4.04, -4.03, -4.02,
+       -4.01,   nan, -3.99, -3.98, -3.97, -3.96, -3.95, -3.94, -3.93,
+       -3.92, -3.91, -3.9 ])</code></pre>
+</div>
+</div>
+</section>
+<section id="plot" class="level2">
+<h2 class="anchored" data-anchor-id="plot">5.5 Plot</h2>
+<div id="cell-25" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(xs,ys,label="Data Points", color='red')</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(xs,ys)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=-</span><span class="dv">1</span>,ymin<span class="op">=</span>ys[<span class="dv">0</span>],ymax<span class="op">=</span>ys[<span class="op">-</span><span class="dv">1</span>],linestyles<span class="op">=</span><span class="st">"dotted"</span>, label<span class="op">=</span><span class="st">"$x=-1$"</span>, colors<span class="op">=</span><span class="st">"red"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(xs, ys, label=r"$\lim_{x\to-1}\frac{x^3-x^2-5x-3}{(x+1)^2}$")</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, ys, label<span class="op">=</span><span class="vs">r'$\lim_{x\to-1}\frac{x^3 - x^2 - 5x - 3}{(x+1)^2}=x-3$'</span>,)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2-calc_limits_plots_ex2_2_11_21_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="3-synthetic_division_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="ex2.2.11-lim_xto-3x2-13" class="level1">
-<h1>Ex2.2.11: <span class="math inline">\(lim_{x\to-3}(x^2-13)\)</span></h1>
-<div id="cell-5" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">3.1</span>, <span class="op">-</span><span class="fl">2.9</span>, <span class="dv">50</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fx(x): <span class="cf">return</span> (x<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">13</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> fx(xs)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>y_x_at_c <span class="op">=</span> fx(<span class="op">-</span><span class="dv">3</span>)<span class="co"># at x=-3</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>y_x_at_c</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs,ys)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=-</span><span class="dv">3</span>, ymax<span class="op">=</span><span class="dv">100</span>, ymin<span class="op">=-</span><span class="dv">100</span>, linestyles<span class="op">=</span><span class="st">"dotted"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2-calc_limits_plots_ex2_2_11_21_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ex2.2.13-lim_xto68x-5x-7" class="level1">
-<h1>Ex2.2.13: <span class="math inline">\(\lim_{x\to6}8(x-5)(x-7)\)</span></h1>
-<div id="cell-7" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x_at_c, abt_x <span class="op">=</span> <span class="dv">6</span>,<span class="fl">0.1</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x_abt_c <span class="op">=</span> (x_at_c <span class="op">-</span> <span class="fl">0.1</span>, x_at_c <span class="op">+</span> <span class="fl">0.1</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(x_abt_c[<span class="dv">0</span>],x_abt_c[<span class="dv">1</span>], <span class="dv">20</span>) <span class="co"># same as np.linspace(5.9, 6.1)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fx(x): <span class="cf">return</span> <span class="dv">8</span><span class="op">*</span>(x<span class="op">-</span><span class="dv">5</span>)<span class="op">*</span>(x<span class="op">-</span><span class="dv">7</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ys<span class="op">=</span>fx(xs)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs,ys)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>y_x_at_c <span class="op">=</span> fx(x<span class="op">=</span>x_at_c)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=</span>x_at_c, ymax<span class="op">=</span><span class="dv">10</span>,ymin<span class="op">=-</span><span class="dv">10</span>, linestyles<span class="op">=</span><span class="st">'dotted'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2-calc_limits_plots_ex2_2_11_21_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ex2.2.15-lim_xto2frac2x511-x3" class="level1">
-<h1>Ex2.2.15: <span class="math inline">\(\lim_{x\to2}\frac{2x+5}{11-x^3}\)</span></h1>
-<div id="cell-9" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x_at_c <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>abt_c <span class="op">=</span> <span class="fl">0.1</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>xs_min <span class="op">=</span> x_at_c <span class="op">-</span> abt_c</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>xs_max <span class="op">=</span> x_at_c <span class="op">+</span> abt_c</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(xs_min,xs_max,<span class="dv">20</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fx(x): <span class="cf">return</span> (<span class="dv">2</span><span class="op">*</span>x<span class="op">+</span><span class="dv">5</span>)<span class="op">/</span>(<span class="dv">11</span><span class="op">-</span>x<span class="op">**</span><span class="dv">3</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> fx(xs)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs, ys, marker<span class="op">=</span><span class="st">"+"</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=</span>x_at_c,linestyles<span class="op">=</span><span class="st">"dotted"</span>, ymax<span class="op">=</span>fx(xs_max),ymin<span class="op">=</span>fx(xs_min))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2-calc_limits_plots_ex2_2_11_21_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ex2.2.19-lim_xto-35-xfrac43" class="level1">
-<h1>Ex2.2.19: <span class="math inline">\(\lim_{x\to-3}(5-x)^{\frac{4}{3}}\)</span></h1>
-<div id="cell-11" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x_at_c <span class="op">=</span> <span class="op">-</span><span class="dv">3</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>abt_c <span class="op">=</span> <span class="fl">0.1</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>xs_min <span class="op">=</span> x_at_c <span class="op">-</span> abt_c</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>xs_max <span class="op">=</span> x_at_c <span class="op">+</span> abt_c</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(xs_min,xs_max,<span class="dv">20</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fx(x): <span class="cf">return</span> (<span class="dv">5</span><span class="op">-</span>x)<span class="op">**</span>(<span class="dv">4</span><span class="op">/</span><span class="dv">3</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> fx(xs)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs, ys, marker<span class="op">=</span><span class="st">"+"</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=</span>x_at_c,linestyles<span class="op">=</span><span class="st">"dotted"</span>, ymax<span class="op">=</span>fx(xs_max),ymin<span class="op">=</span>fx(xs_min))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2-calc_limits_plots_ex2_2_11_21_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="ex2.2.21-lim_xto0frac3sqrt3x11" class="level1">
-<h1>Ex2.2.21: <span class="math inline">\(\lim_{x\to0}\frac{3}{\sqrt{3x+1}+1}\)</span></h1>
-<div id="cell-13" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x_at_c <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>abt_c <span class="op">=</span> <span class="fl">0.1</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>xs_min <span class="op">=</span> x_at_c <span class="op">-</span> abt_c</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>xs_max <span class="op">=</span> x_at_c <span class="op">+</span> abt_c</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(xs_min,xs_max,<span class="dv">20</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fx(x): <span class="cf">return</span> <span class="dv">3</span><span class="op">/</span>(np.sqrt(<span class="dv">3</span><span class="op">*</span>x<span class="op">+</span><span class="dv">1</span>)<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ys <span class="op">=</span> fx(xs)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(xs, ys, marker<span class="op">=</span><span class="st">"+"</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=</span>x_at_c,linestyles<span class="op">=</span><span class="st">"dotted"</span>, ymax<span class="op">=</span>fx(xs_max),ymin<span class="op">=</span>fx(xs_min))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2-calc_limits_plots_ex2_2_11_21_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>The plot shows limit is <span class="math inline">\(-4\)</span></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
