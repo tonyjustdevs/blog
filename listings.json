@@ -12,6 +12,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/notes/calculus/Ch3-1-Ex-17.html",
       "/posts/notes/calculus/4-binomial-theorem.html",
       "/posts/notes/coding/28-big-o-arrays-sets.html",
       "/posts/notes/coding/26-metaclasses.html",
@@ -19,7 +20,6 @@
       "/posts/notes/coding/25-call-magic-method.html",
       "/posts/notes/coding/24-utf-8-encoding.html",
       "/posts/notes/calculus/3-synthetic_division.html",
-      "/posts/notes/calculus/Ch3-1-Ex-17.html",
       "/posts/notes/calculus/2-calc_limits_plots_ex2_2_11_21.html",
       "/posts/notes/coding/23-interfaces-2-protocols.html",
       "/posts/notes/coding/22-interfaces-1-abc.html",
@@ -86,6 +86,7 @@
   {
     "listing": "/notes.html",
     "items": [
+      "/posts/notes/calculus/Ch3-1-Ex-17.html",
       "/posts/notes/calculus/4-binomial-theorem.html",
       "/posts/notes/coding/28-big-o-arrays-sets.html",
       "/posts/notes/coding/26-metaclasses.html",
@@ -93,7 +94,6 @@
       "/posts/notes/coding/25-call-magic-method.html",
       "/posts/notes/coding/24-utf-8-encoding.html",
       "/posts/notes/calculus/3-synthetic_division.html",
-      "/posts/notes/calculus/Ch3-1-Ex-17.html",
       "/posts/notes/calculus/2-calc_limits_plots_ex2_2_11_21.html",
       "/posts/notes/coding/23-interfaces-2-protocols.html",
       "/posts/notes/coding/22-interfaces-1-abc.html",
