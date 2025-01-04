@@ -9,215 +9,67 @@
     <lastmod>2024-10-07T11:43:21.896Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/calculus/3-synthetic_division.html</loc>
-    <lastmod>2024-12-21T09:54:09.866Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/calculus/Ch3-1-Ex-17.html</loc>
+    <lastmod>2025-01-04T10:28:38.957Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/8-quarto_on_wsl.html</loc>
-    <lastmod>2024-10-07T17:32:11.447Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/calculus/2-calc_limits_plots_ex2_2_11_21.html</loc>
+    <lastmod>2024-12-21T09:30:19.656Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/27-singleton-pattern.html</loc>
-    <lastmod>2024-12-31T12:37:44.974Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/9-symlinks.html</loc>
+    <lastmod>2024-09-20T15:43:00.538Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/2-linux_setup.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/13-shallow-and-deep.html</loc>
+    <lastmod>2024-10-21T17:07:48.821Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/24-utf-8-encoding.html</loc>
+    <lastmod>2024-12-23T11:22:10.058Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/4-wsl_new_user.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/21-uv-package.html</loc>
-    <lastmod>2024-12-03T16:52:22.502Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/7-virtual_environments.html</loc>
+    <lastmod>2024-09-18T16:18:35.322Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/14-python-classes-101.html</loc>
-    <lastmod>2024-10-22T19:17:03.179Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/19-csharp_on_vscode.html</loc>
+    <lastmod>2024-11-08T00:28:28.538Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/6-measuring_accuracy.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/10-add-script-to-PATH.html</loc>
+    <lastmod>2024-09-20T17:33:30.437Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/3-bash.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/25-call-magic-method.html</loc>
-    <lastmod>2024-12-30T19:33:26.290Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/18-transfer-multiple-issues-github.html</loc>
-    <lastmod>2024-11-04T22:21:32.164Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/11-github-api.html</loc>
-    <lastmod>2024-10-07T17:31:17.887Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/23-interfaces-2-protocols.html</loc>
-    <lastmod>2024-12-15T15:30:12.809Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/16-open-source-beginners.html</loc>
-    <lastmod>2024-10-27T15:35:33.341Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/12-vscode-keybindings-json.html</loc>
-    <lastmod>2024-10-07T18:11:03.626Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/5-debug_1l_nn.html</loc>
-    <lastmod>2024-09-18T12:42:19.568Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/1-github_resolve.html</loc>
-    <lastmod>2024-09-18T12:42:19.568Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/4-diagonlisation.html</loc>
-    <lastmod>2024-09-18T12:42:19.628Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html</loc>
-    <lastmod>2024-09-18T12:42:19.628Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/1-chg_of_bse.html</loc>
-    <lastmod>2024-09-18T12:42:19.628Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-27-feature_importance_plot/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-99_welcome/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.098Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-31-99_neural_network_basics/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.468Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-27-99_kaggle_api/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.458Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-99_saving_a_fastai_model/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.328Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-05-07_latent_factors_matrix/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-24-one_r_classifier/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.518Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-02-03-neural_network_basics/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.478Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/2-us-patents-offline/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.548Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-23-99-testing-different_archs/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.748Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-98_post_without_code/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.088Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC150.html</loc>
-    <lastmod>2024-10-05T16:03:32.827Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC155.html</loc>
-    <lastmod>2024-10-05T16:03:32.827Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/index.html</loc>
-    <lastmod>2024-10-05T16:03:32.837Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-97_post_with_notebook/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.088Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/notes.html</loc>
-    <lastmod>2024-09-18T12:42:17.078Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.078Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/about.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/15_exceptions_101.html</loc>
     <lastmod>2024-11-13T03:24:33.108Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-96_post_with_git_clone/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.088Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/26-metaclasses.html</loc>
+    <lastmod>2024-12-30T20:01:53.449Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-25-decision_tree_classifier/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.528Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/28-big-o-arrays-sets.html</loc>
+    <lastmod>2025-01-01T16:39:09.227Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC704.html</loc>
-    <lastmod>2024-10-05T16:03:49.557Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/22-interfaces-1-abc.html</loc>
+    <lastmod>2024-12-06T13:51:21.254Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC74.html</loc>
-    <lastmod>2024-10-05T16:03:32.827Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/20-encapsulation-getter-python.html</loc>
+    <lastmod>2024-11-30T07:33:02.120Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-18-99_rice_vs_noodles/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.118Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-98_huggingface/index.html</loc>
-    <lastmod>2024-09-18T12:42:18.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.548Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-26-random_forest/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.528Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/index.html</loc>
-    <lastmod>2024-09-18T12:42:18.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-02-nice_and_noisy/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.508Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-21-deep_learning/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.518Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-98_embed_gradio_hgface/index.html</loc>
-    <lastmod>2024-09-18T12:42:17.328Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-13-relu/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.508Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/index.html</loc>
-    <lastmod>2024-09-18T12:42:18.128Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-02-04-neural_network_spreadsheet/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.488Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/2024-02-02-neural_network_basics/index.html</loc>
-    <lastmod>2024-09-18T12:42:19.468Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/6-more_eigen_egs.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/3-eigen_examples.html</loc>
     <lastmod>2024-09-18T12:42:19.628Z</lastmod>
   </url>
   <url>
@@ -225,64 +77,216 @@
     <lastmod>2024-09-18T12:42:19.628Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/3-eigen_examples.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/6-more_eigen_egs.html</loc>
     <lastmod>2024-09-18T12:42:19.628Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/20-encapsulation-getter-python.html</loc>
-    <lastmod>2024-11-30T07:33:02.120Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-02-02-neural_network_basics/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.468Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/22-interfaces-1-abc.html</loc>
-    <lastmod>2024-12-06T13:51:21.254Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-02-04-neural_network_spreadsheet/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.488Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/28-big-o-arrays-sets.html</loc>
-    <lastmod>2025-01-01T16:39:09.227Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/index.html</loc>
+    <lastmod>2024-09-18T12:42:18.128Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/26-metaclasses.html</loc>
-    <lastmod>2024-12-30T20:01:53.449Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-13-relu/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.508Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/15_exceptions_101.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-98_embed_gradio_hgface/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.328Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-21-deep_learning/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.518Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-03-02-nice_and_noisy/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.508Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/index.html</loc>
+    <lastmod>2024-09-18T12:42:18.878Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-26-random_forest/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.528Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/1-us-patents/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.548Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-25-98_huggingface/index.html</loc>
+    <lastmod>2024-09-18T12:42:18.878Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-18-99_rice_vs_noodles/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC74.html</loc>
+    <lastmod>2024-10-05T16:03:32.827Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC704.html</loc>
+    <lastmod>2024-10-05T16:03:49.557Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-25-decision_tree_classifier/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.528Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-96_post_with_git_clone/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.088Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/about.html</loc>
     <lastmod>2024-11-13T03:24:33.108Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/3-bash.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.078Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/notes.html</loc>
+    <lastmod>2024-09-18T12:42:17.078Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-97_post_with_notebook/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.088Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/index.html</loc>
+    <lastmod>2024-10-05T16:03:32.837Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC155.html</loc>
+    <lastmod>2024-10-05T16:03:32.827Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/leetcode/LC150.html</loc>
+    <lastmod>2024-10-05T16:03:32.827Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-98_post_without_code/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.088Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-23-99-testing-different_archs/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.748Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/kaggle/2-us-patents-offline/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.548Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-02-03-neural_network_basics/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.478Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-24-one_r_classifier/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.518Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-05-07_latent_factors_matrix/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-19-99_saving_a_fastai_model/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.328Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-27-99_kaggle_api/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.458Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-31-99_neural_network_basics/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.468Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-01-16-99_welcome/index.html</loc>
+    <lastmod>2024-09-18T12:42:17.098Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/2024-04-27-feature_importance_plot/index.html</loc>
+    <lastmod>2024-09-18T12:42:19.538Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/1-chg_of_bse.html</loc>
+    <lastmod>2024-09-18T12:42:19.628Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/2-eigenvalues_eigenvectors.html</loc>
+    <lastmod>2024-09-18T12:42:19.628Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/linear_algebra/4-diagonlisation.html</loc>
+    <lastmod>2024-09-18T12:42:19.628Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/1-github_resolve.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/10-add-script-to-PATH.html</loc>
-    <lastmod>2024-09-20T17:33:30.437Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/19-csharp_on_vscode.html</loc>
-    <lastmod>2024-11-08T00:28:28.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/7-virtual_environments.html</loc>
-    <lastmod>2024-09-18T16:18:35.322Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/4-wsl_new_user.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/5-debug_1l_nn.html</loc>
     <lastmod>2024-09-18T12:42:19.568Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/24-utf-8-encoding.html</loc>
-    <lastmod>2024-12-23T11:22:10.058Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/12-vscode-keybindings-json.html</loc>
+    <lastmod>2024-10-07T18:11:03.626Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/13-shallow-and-deep.html</loc>
-    <lastmod>2024-10-21T17:07:48.821Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/16-open-source-beginners.html</loc>
+    <lastmod>2024-10-27T15:35:33.341Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/9-symlinks.html</loc>
-    <lastmod>2024-09-20T15:43:00.538Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/23-interfaces-2-protocols.html</loc>
+    <lastmod>2024-12-15T15:30:12.809Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/notes/calculus/2-calc_limits_plots_ex2_2_11_21.html</loc>
-    <lastmod>2024-12-21T09:30:19.656Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/11-github-api.html</loc>
+    <lastmod>2024-10-07T17:31:17.887Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/18-transfer-multiple-issues-github.html</loc>
+    <lastmod>2024-11-04T22:21:32.164Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/25-call-magic-method.html</loc>
+    <lastmod>2024-12-30T19:33:26.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/6-measuring_accuracy.html</loc>
+    <lastmod>2024-09-18T12:42:19.568Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/14-python-classes-101.html</loc>
+    <lastmod>2024-10-22T19:17:03.179Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/21-uv-package.html</loc>
+    <lastmod>2024-12-03T16:52:22.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/2-linux_setup.html</loc>
+    <lastmod>2024-09-18T12:42:19.568Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/27-singleton-pattern.html</loc>
+    <lastmod>2024-12-31T12:37:44.974Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/coding/8-quarto_on_wsl.html</loc>
+    <lastmod>2024-10-07T17:32:11.447Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/notes/calculus/3-synthetic_division.html</loc>
+    <lastmod>2024-12-21T09:54:09.866Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/notes/calculus/4-binomial-theorem.html</loc>
