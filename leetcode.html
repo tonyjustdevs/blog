@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>coding – Tony’s blog</title>
+<title>LeetCode 💻 – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,8 +80,7 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      page: 25,
-    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      
       searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
@@ -140,7 +139,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Tony’s blog</span>
+    <span class="navbar-title">Tony’s Blog ✍️</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -149,21 +148,74 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computer-science-💻" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computer Science 💻</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
+        <li>
+    <a class="dropdown-item" href="./computerscience.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dsa.html">
+ <span class="dropdown-text">Data Structures and Algorithms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./designpatterns.html">
+ <span class="dropdown-text">Design Patterns</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./coding.html">
+ <span class="dropdown-text">Coding</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./leetcode.html">
+ <span class="dropdown-text">LeetCode</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mathematics-🧮" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mathematics 🧮</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
+        <li>
+    <a class="dropdown-item" href="./mathematics.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./calculus.html">
+ <span class="dropdown-text">Calculus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./linearalgebra.html">
+ <span class="dropdown-text">Linear Algebra</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-science-🧪" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Science 🧪</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
+        <li>
+    <a class="dropdown-item" href="./datascience.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./machinelearning.html">
+ <span class="dropdown-text">Machine Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./kaggle.html">
+ <span class="dropdown-text">Kaggle</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">about</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./kaggle.html"> 
-<span class="menu-text">kaggle</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./leetcode.html" aria-current="page"> 
-<span class="menu-text">coding</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./notes.html"> 
-<span class="menu-text">notes</span></a>
+<span class="menu-text">About 🐈‍⬛</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/tonyjustdevs"> <i class="bi bi-github" role="img">
@@ -187,7 +239,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">coding</h1>
+      <h1 class="title">LeetCode 💻</h1>
                       </div>
   </div>
   <div class="quarto-title-meta column-page-left">
@@ -197,7 +249,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(34)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(2)</span></div><div class="category" data-category="api python">api python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bash">bash <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c#">c# <span class="quarto-category-count">(1)</span></div><div class="category" data-category="coding">coding <span class="quarto-category-count">(10)</span></div><div class="category" data-category="data structures">data structures <span class="quarto-category-count">(2)</span></div><div class="category" data-category="debugging">debugging <span class="quarto-category-count">(1)</span></div><div class="category" data-category="design patterns">design patterns <span class="quarto-category-count">(5)</span></div><div class="category" data-category="github">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="hello world">hello world <span class="quarto-category-count">(1)</span></div><div class="category" data-category="leetcode">leetcode <span class="quarto-category-count">(5)</span></div><div class="category" data-category="linux">linux <span class="quarto-category-count">(3)</span></div><div class="category" data-category="metrics">metrics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(5)</span></div><div class="category" data-category="vscode">vscode <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(4)</span></div><div class="category" data-category="datastructures">datastructures <span class="quarto-category-count">(4)</span></div><div class="category" data-category="hello world">hello world <span class="quarto-category-count">(1)</span></div><div class="category" data-category="leetcode">leetcode <span class="quarto-category-count">(5)</span></div></div></div>
 <!-- main -->
 <div class="quarto-about-marquee column-page-left">
   <div class="about-image-container">
@@ -208,1005 +260,36 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="data structures,algorithms" data-listing-date-sort="1736182800000" data-listing-file-modified-sort="1736266395686" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="378">
+<div class="quarto-post image-right" data-index="0" data-categories="leetcode,datastructures,algorithms" data-listing-date-sort="1707498000000" data-listing-file-modified-sort="1736274940518" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="92">
 <div class="thumbnail">
-<p><a href="./posts/coding/data_structures_and_algorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p><a href="./posts/coding/data_structures_and_algorithms/dsa-003-bin-search-exs.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/data_structures_and_algorithms/imgs/dsa-003-binsearch.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/data_structures_and_algorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p>
+<p><a href="./posts/computerscience/leetcode/leet-074.html" class="no-external"></a></p><a href="./posts/computerscience/leetcode/leet-074.html" class="no-external">
+<p><img loading="lazy" src="./posts/computerscience/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/computerscience/leetcode/leet-074.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-003-bin-search-exs.html" class="no-external">DSA 3: Binary Search - Exercises</a>
+<a href="./posts/computerscience/leetcode/leet-074.html" class="no-external">LC: 74. Search a 2D Matrix</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-003-bin-search-exs.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-003-bin-search-exs.html" class="no-external">Chapter 2 Exercises, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-003-bin-search-exs.html" class="no-external">
-<div class="listing-date">
-Jan 7, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="data structures,algorithms" data-listing-date-sort="1736010000000" data-listing-file-modified-sort="1736266256276" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
-<div class="thumbnail">
-<p><a href="./posts/coding/data_structures_and_algorithms/dsa-002-array-set-exs.html" class="no-external"></a></p><a href="./posts/coding/data_structures_and_algorithms/dsa-002-array-set-exs.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/data_structures_and_algorithms/imgs/dsa-002-array.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/data_structures_and_algorithms/dsa-002-array-set-exs.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-002-array-set-exs.html" class="no-external">DSA 2: Array and Sets - Exercises</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-002-array-set-exs.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-002-array-set-exs.html" class="no-external">Chapter 1 Exercises, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-002-array-set-exs.html" class="no-external">
-<div class="listing-date">
-Jan 5, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="design patterns" data-listing-date-sort="1735664400000" data-listing-file-modified-sort="1736265558256" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="754">
-<div class="thumbnail">
-<p><a href="./posts/coding/data_structures_and_algorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p><a href="./posts/coding/data_structures_and_algorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/data_structures_and_algorithms/imgs/dsa-001-bigo.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/data_structures_and_algorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-001-big-o-arrays-sets.html" class="no-external">DSA 1: Big-O - Arrays and Sets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-001-big-o-arrays-sets.html" class="no-external">Big-O for Array Operations</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/data_structures_and_algorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
-<div class="listing-date">
-Jan 1, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="design patterns" data-listing-date-sort="1735578000000" data-listing-file-modified-sort="1736266825996" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="145">
-<div class="thumbnail">
-<p><a href="./posts/coding/design_patterns/dp-004-singleton-pattern.html" class="no-external"></a></p><a href="./posts/coding/design_patterns/dp-004-singleton-pattern.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/design_patterns/imgs/dp-004-singleton.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/design_patterns/dp-004-singleton-pattern.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/design_patterns/dp-004-singleton-pattern.html" class="no-external">DP 4: Singleton Pattern</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/design_patterns/dp-004-singleton-pattern.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/design_patterns/dp-004-singleton-pattern.html" class="no-external">A Design (or Anti) Pattern Allowing Only A Single Instance</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/design_patterns/dp-004-singleton-pattern.html" class="no-external">
-<div class="listing-date">
-Dec 31, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="coding" data-listing-date-sort="1735578000000" data-listing-file-modified-sort="1736265102666" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="94">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-022-metaclasses.html" class="no-external"></a></p><a href="./posts/coding/code-022-metaclasses.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/26meta.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-022-metaclasses.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-022-metaclasses.html" class="no-external">Code 22: Python Metaclasses - Customising Class Creation</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-022-metaclasses.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-022-metaclasses.html" class="no-external">Being very meta</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-022-metaclasses.html" class="no-external">
-<div class="listing-date">
-Dec 31, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="coding" data-listing-date-sort="1735491600000" data-listing-file-modified-sort="1736265059526" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="52">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-021-call-magic-method.html" class="no-external"></a></p><a href="./posts/coding/code-021-call-magic-method.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/25call.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-021-call-magic-method.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-021-call-magic-method.html" class="no-external">Code 21: Magic Method: <code>__call__</code></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-021-call-magic-method.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-021-call-magic-method.html" class="no-external">Allowing instances to be called like functions</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-021-call-magic-method.html" class="no-external">
-<div class="listing-date">
-Dec 30, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="coding" data-listing-date-sort="1734886800000" data-listing-file-modified-sort="1736265029926" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="430">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-020-utf-8-encoding.html" class="no-external"></a></p><a href="./posts/coding/code-020-utf-8-encoding.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/24utf8.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-020-utf-8-encoding.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-020-utf-8-encoding.html" class="no-external">Code 20: Unicode, UTF-8 and Bytes</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-020-utf-8-encoding.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-020-utf-8-encoding.html" class="no-external">Converting my (Chinese) name to bytes and back</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-020-utf-8-encoding.html" class="no-external">
-<div class="listing-date">
-Dec 23, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="design patterns" data-listing-date-sort="1733504400000" data-listing-file-modified-sort="1736266795976" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="13">
-<div class="thumbnail">
-<p><a href="./posts/coding/design_patterns/dp-003-interfaces-2-protocols.html" class="no-external"></a></p><a href="./posts/coding/design_patterns/dp-003-interfaces-2-protocols.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/design_patterns/imgs/dp-003-protocols.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/design_patterns/dp-003-interfaces-2-protocols.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/design_patterns/dp-003-interfaces-2-protocols.html" class="no-external">[INCOMPLETE] DP 3: Interfaces [Part 2] - Protocols</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/design_patterns/dp-003-interfaces-2-protocols.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/design_patterns/dp-003-interfaces-2-protocols.html" class="no-external">Programming to Interfaces rather than Implementation specificsgit</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/design_patterns/dp-003-interfaces-2-protocols.html" class="no-external">
-<div class="listing-date">
-Dec 7, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="design patterns" data-listing-date-sort="1733418000000" data-listing-file-modified-sort="1736266736736" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="277">
-<div class="thumbnail">
-<p><a href="./posts/coding/design_patterns/dp-002-interfaces-1-abc.html" class="no-external"></a></p><a href="./posts/coding/design_patterns/dp-002-interfaces-1-abc.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/design_patterns/imgs/dp-002-abc.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/design_patterns/dp-002-interfaces-1-abc.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/design_patterns/dp-002-interfaces-1-abc.html" class="no-external">DP 2: Interfaces [Part 1] - <code>ABC</code> Abstract Base Classes</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/design_patterns/dp-002-interfaces-1-abc.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/design_patterns/dp-002-interfaces-1-abc.html" class="no-external">Programming to Interfaces rather than Implementation specifics</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/design_patterns/dp-002-interfaces-1-abc.html" class="no-external">
-<div class="listing-date">
-Dec 6, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="python" data-listing-date-sort="1733158800000" data-listing-file-modified-sort="1736264884306" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="283">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-019-uv-package.html" class="no-external"></a></p><a href="./posts/coding/code-019-uv-package.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/21uv.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-019-uv-package.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-019-uv-package.html" class="no-external">Code 19: <code>uv</code> Python &amp; Package Manager</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-019-uv-package.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
-python
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-019-uv-package.html" class="no-external">A modern alternative to creating &amp; managing Python projects</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-019-uv-package.html" class="no-external">
-<div class="listing-date">
-Dec 3, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="design patterns" data-listing-date-sort="1732899600000" data-listing-file-modified-sort="1736266685316" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="215">
-<div class="thumbnail">
-<p><a href="./posts/coding/design_patterns/dp-001-encapsulation-getter-python.html" class="no-external"></a></p><a href="./posts/coding/design_patterns/dp-001-encapsulation-getter-python.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/design_patterns/imgs/dp-001-getprop.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/design_patterns/dp-001-encapsulation-getter-python.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/design_patterns/dp-001-encapsulation-getter-python.html" class="no-external">DP 1: Encapsulation - Getter Method in Python</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/design_patterns/dp-001-encapsulation-getter-python.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/design_patterns/dp-001-encapsulation-getter-python.html" class="no-external">Using Python’s <code>@property</code> to create a getter method</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/design_patterns/dp-001-encapsulation-getter-python.html" class="no-external">
-<div class="listing-date">
-Nov 30, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-categories="python" data-listing-date-sort="1730739600000" data-listing-file-modified-sort="1736264750786" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="857">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-015_exceptions_101.html" class="no-external"></a></p><a href="./posts/coding/code-015_exceptions_101.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/15e.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-015_exceptions_101.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-015_exceptions_101.html" class="no-external">Code 15: Python Exceptions 101</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-015_exceptions_101.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
-python
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-015_exceptions_101.html" class="no-external">Del ving into Python Exceptions, In-Builts vs Custom Exceptions, Assert, Raise and Exception-Handlers</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-015_exceptions_101.html" class="no-external">
-<div class="listing-date">
-Nov 5, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="12" data-categories="c#,vscode" data-listing-date-sort="1730221200000" data-listing-file-modified-sort="1736264779876" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="988">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-018-csharp_on_vscode.html" class="no-external"></a></p><a href="./posts/coding/code-018-csharp_on_vscode.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/19csvscode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-018-csharp_on_vscode.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-018-csharp_on_vscode.html" class="no-external">Code 18: Introduction to C# in Visual Studio Code</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-018-csharp_on_vscode.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('c#'); return false;">
-c#
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('vscode'); return false;">
-vscode
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-018-csharp_on_vscode.html" class="no-external">Creating, Building and Running Simple C# Console Apps</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-018-csharp_on_vscode.html" class="no-external">
-<div class="listing-date">
-Oct 30, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="13" data-categories="github,bash" data-listing-date-sort="1730134800000" data-listing-file-modified-sort="1736264773176" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="771">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-017-transfer-multiple-issues-github.html" class="no-external"></a></p><a href="./posts/coding/code-017-transfer-multiple-issues-github.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/11ghapi.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-017-transfer-multiple-issues-github.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-017-transfer-multiple-issues-github.html" class="no-external">Code 17: Transfer Multiple Issues via Github API in Bash</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-017-transfer-multiple-issues-github.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('github'); return false;">
-github
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bash'); return false;">
-bash
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-017-transfer-multiple-issues-github.html" class="no-external">Run a simple loop to transfer multiple issues from one repo to another</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-017-transfer-multiple-issues-github.html" class="no-external">
-<div class="listing-date">
-Oct 29, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="14" data-categories="python" data-listing-date-sort="1729616400000" data-listing-file-modified-sort="1736264763606" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="596">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-016-open-source-beginners.html" class="no-external"></a></p><a href="./posts/coding/code-016-open-source-beginners.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/16opensource.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-016-open-source-beginners.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-016-open-source-beginners.html" class="no-external">Code 16: Open Source as a Beginner</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-016-open-source-beginners.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
-python
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-016-open-source-beginners.html" class="no-external">Learning How To Contribute to Open Source Projects as a Beginner</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-016-open-source-beginners.html" class="no-external">
-<div class="listing-date">
-Oct 23, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="15" data-categories="python" data-listing-date-sort="1729616400000" data-listing-file-modified-sort="1736264721116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="246">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-014-python-classes-101.html" class="no-external"></a></p><a href="./posts/coding/code-014-python-classes-101.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/14classes.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-014-python-classes-101.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-014-python-classes-101.html" class="no-external">Code 14: Python Classes Basics 101</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-014-python-classes-101.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
-python
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-014-python-classes-101.html" class="no-external">Python Classes, Instance Objects, Data Attributes and Method Objects</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-014-python-classes-101.html" class="no-external">
-<div class="listing-date">
-Oct 23, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="16" data-categories="python" data-listing-date-sort="1729530000000" data-listing-file-modified-sort="1736264707416" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="289">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-013-shallow-and-deep.html" class="no-external"></a></p><a href="./posts/coding/code-013-shallow-and-deep.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/13copycat.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-013-shallow-and-deep.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-013-shallow-and-deep.html" class="no-external">Code 13: Shallow or Deep?</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-013-shallow-and-deep.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
-python
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-013-shallow-and-deep.html" class="no-external">Learning to copy the right way</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-013-shallow-and-deep.html" class="no-external">
-<div class="listing-date">
-Oct 22, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="17" data-categories="vscode" data-listing-date-sort="1728320400000" data-listing-file-modified-sort="1736264696646" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="98">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-012-vscode-keybindings-json.html" class="no-external"></a></p><a href="./posts/coding/code-012-vscode-keybindings-json.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/12keybinding.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-012-vscode-keybindings-json.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-012-vscode-keybindings-json.html" class="no-external">Code 12: Create new key-bindings in VSCode via JSON file</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-012-vscode-keybindings-json.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('vscode'); return false;">
-vscode
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-012-vscode-keybindings-json.html" class="no-external">A handy keybinding to switch between Terminals in VSCode</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-012-vscode-keybindings-json.html" class="no-external">
-<div class="listing-date">
-Oct 8, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="18" data-categories="api python" data-listing-date-sort="1727715600000" data-listing-file-modified-sort="1736264685306" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="93">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-011-github-api.html" class="no-external"></a></p><a href="./posts/coding/code-011-github-api.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/11ghapi.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-011-github-api.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-011-github-api.html" class="no-external">Code 11: Using Github API via Python</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-011-github-api.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('api python'); return false;">
-api python
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-011-github-api.html" class="no-external">Learn to update an Issue Description with Github’s API</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-011-github-api.html" class="no-external">
-<div class="listing-date">
-Oct 1, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="19" data-categories="linux" data-listing-date-sort="1726851600000" data-listing-file-modified-sort="1736264675216" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="46">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-010-add-script-to-PATH.html" class="no-external"></a></p><a href="./posts/coding/code-010-add-script-to-PATH.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/10bash_scripting.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-010-add-script-to-PATH.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-010-add-script-to-PATH.html" class="no-external">Code 10: Add a script to PATH</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-010-add-script-to-PATH.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('linux'); return false;">
-linux
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-010-add-script-to-PATH.html" class="no-external">Run a script without specifying its path</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-010-add-script-to-PATH.html" class="no-external">
-<div class="listing-date">
-Sep 21, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="20" data-categories="linux" data-listing-date-sort="1726765200000" data-listing-file-modified-sort="1736264665406" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="328">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-009-symlinks.html" class="no-external"></a></p><a href="./posts/coding/code-009-symlinks.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/9symlinks.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-009-symlinks.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-009-symlinks.html" class="no-external">Code 9: Creating and using Symlinks</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-009-symlinks.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('linux'); return false;">
-linux
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-009-symlinks.html" class="no-external">Avoiding unnecessarily duplicating files with Symlinks</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-009-symlinks.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="21" data-categories="linux" data-listing-date-sort="1726592400000" data-listing-file-modified-sort="1736264653616" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="102">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-008-quarto_on_wsl.html" class="no-external"></a></p><a href="./posts/coding/code-008-quarto_on_wsl.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/8quarto.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-008-quarto_on_wsl.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-008-quarto_on_wsl.html" class="no-external">Code 8: How to install Quarto via WSL</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-008-quarto_on_wsl.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('linux'); return false;">
-linux
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-008-quarto_on_wsl.html" class="no-external">Migrating quarto blog from windows to wsl</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-008-quarto_on_wsl.html" class="no-external">
-<div class="listing-date">
-Sep 18, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="22" data-categories="coding" data-listing-date-sort="1721408400000" data-listing-file-modified-sort="1736264645176" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="116">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-007-virtual_environments.html" class="no-external"></a></p><a href="./posts/coding/code-007-virtual_environments.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/7virtual.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-007-virtual_environments.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-007-virtual_environments.html" class="no-external">Code 7: Virtual Environments</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-007-virtual_environments.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-007-virtual_environments.html" class="no-external">Setting up virtual environments to produce reproducible work</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-007-virtual_environments.html" class="no-external">
-<div class="listing-date">
-Jul 20, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="23" data-categories="coding,metrics" data-listing-date-sort="1713718800000" data-listing-file-modified-sort="1736264610686" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="121">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-006-measuring_accuracy.html" class="no-external"></a></p><a href="./posts/coding/code-006-measuring_accuracy.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/6acc.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-006-measuring_accuracy.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-006-measuring_accuracy.html" class="no-external">Code 6: Measuring Model Accuracy</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-006-measuring_accuracy.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('metrics'); return false;">
-metrics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-006-measuring_accuracy.html" class="no-external">Step-by-step guide on how to measure accuracy of a deeplearning model</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-006-measuring_accuracy.html" class="no-external">
-<div class="listing-date">
-Apr 22, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="24" data-categories="coding,debugging" data-listing-date-sort="1712595600000" data-listing-file-modified-sort="1736264380796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="366">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-005-debug_1l_nn.html" class="no-external"></a></p><a href="./posts/coding/code-005-debug_1l_nn.html" class="no-external">
-<p><img loading="lazy" src="./posts/coding/imgs/5debugdp.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-005-debug_1l_nn.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-005-debug_1l_nn.html" class="no-external">Code 5: Debugging a 1-Hidden-Layer Neural Network Model</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-005-debug_1l_nn.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('debugging'); return false;">
-debugging
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-005-debug_1l_nn.html" class="no-external">Documenting my debugging of a neural network model I built from scratch</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-005-debug_1l_nn.html" class="no-external">
-<div class="listing-date">
-Apr 9, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="25" data-categories="coding" data-listing-date-sort="1710435600000" data-listing-file-modified-sort="1736264337996" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="405">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-004-wsl_new_user.html" class="no-external"></a></p><a href="./posts/coding/code-004-wsl_new_user.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/imgs/4users.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-004-wsl_new_user.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-004-wsl_new_user.html" class="no-external">Code 4: Create new Users in WSL</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-004-wsl_new_user.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-004-wsl_new_user.html" class="no-external">Quick instructions to set up a new user in wsl</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-004-wsl_new_user.html" class="no-external">
-<div class="listing-date">
-Mar 15, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="26" data-categories="coding" data-listing-date-sort="1709053200000" data-listing-file-modified-sort="1736264317126" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="542">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-003-bash.html" class="no-external"></a></p><a href="./posts/coding/code-003-bash.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/imgs/3bash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-003-bash.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-003-bash.html" class="no-external">Code 3: Bash Basics</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-003-bash.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-003-bash.html" class="no-external">Learning Bash from scratch</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-003-bash.html" class="no-external">
-<div class="listing-date">
-Feb 28, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="27" data-categories="coding" data-listing-date-sort="1708448400000" data-listing-file-modified-sort="1736264298366" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1285">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-002-linux_setup.html" class="no-external"></a></p><a href="./posts/coding/code-002-linux_setup.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/imgs/2setup.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-002-linux_setup.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-002-linux_setup.html" class="no-external">Code 2: Data Science Machine</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-002-linux_setup.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-002-linux_setup.html" class="no-external">How to setup a Linux-based Python on a Windows PC for Data Science and Deep Learning Projects</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-002-linux_setup.html" class="no-external">
-<div class="listing-date">
-Feb 21, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="28" data-categories="coding" data-listing-date-sort="1708362000000" data-listing-file-modified-sort="1736264232606" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="171">
-<div class="thumbnail">
-<p><a href="./posts/coding/code-001-github_resolve.html" class="no-external"></a></p><a href="./posts/coding/code-001-github_resolve.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/imgs/1gh.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/code-001-github_resolve.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/code-001-github_resolve.html" class="no-external">Code 1: Github Issues Automation</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/code-001-github_resolve.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('coding'); return false;">
-coding
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/coding/code-001-github_resolve.html" class="no-external">How to automate the closing of an issue in Github Projects via a Commit Message</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/coding/code-001-github_resolve.html" class="no-external">
-<div class="listing-date">
-Feb 20, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="29" data-categories="leetcode" data-listing-date-sort="1707498000000" data-listing-file-modified-sort="1728144212827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="92">
-<div class="thumbnail">
-<p><a href="./posts/coding/leetcode/LC74.html" class="no-external"></a></p><a href="./posts/coding/leetcode/LC74.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/leetcode/LC74.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/coding/leetcode/LC74.html" class="no-external">LC: 74. Search a 2D Matrix</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/coding/leetcode/LC74.html" class="no-external"></a>
+<a href="./posts/computerscience/leetcode/leet-074.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
 leetcode
 </div>
+<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
+datastructures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
 </div>
 <div class="listing-description">
-<a href="./posts/coding/leetcode/LC74.html" class="no-external">Almost the same as binary search problem</a>
+<a href="./posts/computerscience/leetcode/leet-074.html" class="no-external">Almost the same as binary search problem</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/coding/leetcode/LC74.html" class="no-external">
+<a href="./posts/computerscience/leetcode/leet-074.html" class="no-external">
 <div class="listing-date">
 Feb 10, 2024
 </div>
@@ -1216,30 +299,36 @@ Tony Phung
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="30" data-categories="leetcode" data-listing-date-sort="1707411600000" data-listing-file-modified-sort="1728144229557" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="170">
+<div class="quarto-post image-right" data-index="1" data-categories="leetcode,datastructures,algorithms" data-listing-date-sort="1707411600000" data-listing-file-modified-sort="1736274940518" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="170">
 <div class="thumbnail">
-<p><a href="./posts/coding/leetcode/LC704.html" class="no-external"></a></p><a href="./posts/coding/leetcode/LC704.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/leetcode/LC704.html" class="no-external"></a></p>
+<p><a href="./posts/computerscience/leetcode/leet-704.html" class="no-external"></a></p><a href="./posts/computerscience/leetcode/leet-704.html" class="no-external">
+<p><img loading="lazy" src="./posts/computerscience/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/computerscience/leetcode/leet-704.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/coding/leetcode/LC704.html" class="no-external">LC: 704. Binary Search</a>
+<a href="./posts/computerscience/leetcode/leet-704.html" class="no-external">LC: 704. Binary Search</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/coding/leetcode/LC704.html" class="no-external"></a>
+<a href="./posts/computerscience/leetcode/leet-704.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
 leetcode
 </div>
+<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
+datastructures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
 </div>
 <div class="listing-description">
-<a href="./posts/coding/leetcode/LC704.html" class="no-external">First binary search question</a>
+<a href="./posts/computerscience/leetcode/leet-704.html" class="no-external">First binary search question</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/coding/leetcode/LC704.html" class="no-external">
+<a href="./posts/computerscience/leetcode/leet-704.html" class="no-external">
 <div class="listing-date">
 Feb 9, 2024
 </div>
@@ -1249,30 +338,36 @@ Tony Phung
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="31" data-categories="leetcode" data-listing-date-sort="1707238800000" data-listing-file-modified-sort="1728144212827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1218">
+<div class="quarto-post image-right" data-index="2" data-categories="leetcode,datastructures,algorithms" data-listing-date-sort="1707238800000" data-listing-file-modified-sort="1736274940518" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1218">
 <div class="thumbnail">
-<p><a href="./posts/coding/leetcode/LC150.html" class="no-external"></a></p><a href="./posts/coding/leetcode/LC150.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/leetcode/LC150.html" class="no-external"></a></p>
+<p><a href="./posts/computerscience/leetcode/leet-150.html" class="no-external"></a></p><a href="./posts/computerscience/leetcode/leet-150.html" class="no-external">
+<p><img loading="lazy" src="./posts/computerscience/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/computerscience/leetcode/leet-150.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/coding/leetcode/LC150.html" class="no-external">LC: 150. Evaluate Reverse Polish Notation</a>
+<a href="./posts/computerscience/leetcode/leet-150.html" class="no-external">LC: 150. Evaluate Reverse Polish Notation</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/coding/leetcode/LC150.html" class="no-external"></a>
+<a href="./posts/computerscience/leetcode/leet-150.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
 leetcode
 </div>
+<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
+datastructures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
 </div>
 <div class="listing-description">
-<a href="./posts/coding/leetcode/LC150.html" class="no-external">Implement a Stack Class using Postfix Notation</a>
+<a href="./posts/computerscience/leetcode/leet-150.html" class="no-external">Implement a Stack Class using Postfix Notation</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/coding/leetcode/LC150.html" class="no-external">
+<a href="./posts/computerscience/leetcode/leet-150.html" class="no-external">
 <div class="listing-date">
 Feb 7, 2024
 </div>
@@ -1282,30 +377,36 @@ Tony Phung
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="32" data-categories="leetcode" data-listing-date-sort="1707152400000" data-listing-file-modified-sort="1728144212827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="451">
+<div class="quarto-post image-right" data-index="3" data-categories="leetcode,datastructures,algorithms" data-listing-date-sort="1707152400000" data-listing-file-modified-sort="1736274940518" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="451">
 <div class="thumbnail">
-<p><a href="./posts/coding/leetcode/LC155.html" class="no-external"></a></p><a href="./posts/coding/leetcode/LC155.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/coding/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/coding/leetcode/LC155.html" class="no-external"></a></p>
+<p><a href="./posts/computerscience/leetcode/leet-155.html" class="no-external"></a></p><a href="./posts/computerscience/leetcode/leet-155.html" class="no-external">
+<p><img loading="lazy" src="./posts/computerscience/leetcode/imgs/leetcode.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/computerscience/leetcode/leet-155.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/coding/leetcode/LC155.html" class="no-external">LC: 155. Min Stack</a>
+<a href="./posts/computerscience/leetcode/leet-155.html" class="no-external">LC: 155. Min Stack</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/coding/leetcode/LC155.html" class="no-external"></a>
+<a href="./posts/computerscience/leetcode/leet-155.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
 leetcode
 </div>
+<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
+datastructures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
 </div>
 <div class="listing-description">
-<a href="./posts/coding/leetcode/LC155.html" class="no-external">An introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class</a>
+<a href="./posts/computerscience/leetcode/leet-155.html" class="no-external">An introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/coding/leetcode/LC155.html" class="no-external">
+<a href="./posts/computerscience/leetcode/leet-155.html" class="no-external">
 <div class="listing-date">
 Feb 6, 2024
 </div>
@@ -1315,18 +416,18 @@ Tony Phung
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="33" data-categories="leetcode,hello world" data-listing-date-sort="1707066000000" data-listing-file-modified-sort="1728144212837" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="112">
+<div class="quarto-post image-right" data-index="4" data-categories="leetcode,hello world" data-listing-date-sort="1707066000000" data-listing-file-modified-sort="1736274940518" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="112">
 <div class="thumbnail">
-<p><a href="./posts/coding/leetcode/index.html" class="no-external"></a></p><a href="./posts/coding/leetcode/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/coding/leetcode/index.html" class="no-external"></a></p>
+<p><a href="./posts/computerscience/leetcode/index.html" class="no-external"></a></p><a href="./posts/computerscience/leetcode/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/computerscience/leetcode/imgs/leetcode_coming.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/computerscience/leetcode/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/coding/leetcode/index.html" class="no-external">❄️LeetCode Posts❄️</a>
+<a href="./posts/computerscience/leetcode/index.html" class="no-external">❄️LeetCode Posts❄️</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/coding/leetcode/index.html" class="no-external"></a>
+<a href="./posts/computerscience/leetcode/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('leetcode'); return false;">
@@ -1337,11 +438,11 @@ hello world
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/coding/leetcode/index.html" class="no-external">A page to archive my (naively hopeful daily) leetcode attempts.</a>
+<a href="./posts/computerscience/leetcode/index.html" class="no-external">A page to archive my (naively hopeful daily) leetcode attempts.</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/coding/leetcode/index.html" class="no-external">
+<a href="./posts/computerscience/leetcode/index.html" class="no-external">
 <div class="listing-date">
 Feb 5, 2024
 </div>
@@ -1355,9 +456,6 @@ Tony Phung
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
-  <ul class="pagination"></ul>
-</nav>
 </div></main> 
     <div class="about-footer"><div class="about-links">
   <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
@@ -1602,7 +700,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

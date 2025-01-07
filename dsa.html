@@ -6,11 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-01-25">
-<meta name="description" content="Host a neural network app live on HuggingFace">
 
-<title>How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3) – Tony’s Blog ✍️</title>
+<title>Data Structures &amp; Algorithms 💻 – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,24 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<script src="../../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +69,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Tony’s Blog ✍️</span>
     </a>
   </div>
@@ -98,23 +154,23 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
         <li>
-    <a class="dropdown-item" href="../../../../computerscience.html">
+    <a class="dropdown-item" href="./computerscience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../dsa.html">
+    <a class="dropdown-item" href="./dsa.html">
  <span class="dropdown-text">Data Structures and Algorithms</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../designpatterns.html">
+    <a class="dropdown-item" href="./designpatterns.html">
  <span class="dropdown-text">Design Patterns</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../coding.html">
+    <a class="dropdown-item" href="./coding.html">
  <span class="dropdown-text">Coding</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../leetcode.html">
+    <a class="dropdown-item" href="./leetcode.html">
  <span class="dropdown-text">LeetCode</span></a>
   </li>  
     </ul>
@@ -125,15 +181,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
         <li>
-    <a class="dropdown-item" href="../../../../mathematics.html">
+    <a class="dropdown-item" href="./mathematics.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../calculus.html">
+    <a class="dropdown-item" href="./calculus.html">
  <span class="dropdown-text">Calculus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../linearalgebra.html">
+    <a class="dropdown-item" href="./linearalgebra.html">
  <span class="dropdown-text">Linear Algebra</span></a>
   </li>  
     </ul>
@@ -144,21 +200,21 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
         <li>
-    <a class="dropdown-item" href="../../../../datascience.html">
+    <a class="dropdown-item" href="./datascience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../machinelearning.html">
+    <a class="dropdown-item" href="./machinelearning.html">
  <span class="dropdown-text">Machine Learning</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../../kaggle.html">
+    <a class="dropdown-item" href="./kaggle.html">
  <span class="dropdown-text">Kaggle</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../../../about.html"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About 🐈‍⬛</span></a>
   </li>  
   <li class="nav-item compact">
@@ -182,125 +238,155 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 3)</h1>
-                  <div>
-        <div class="description">
-          Host a neural network app live on <strong>HuggingFace</strong>
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">machinelearning</div>
-                <div class="quarto-category">ai</div>
-              </div>
-                  </div>
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Data Structures &amp; Algorithms 💻</h1>
+                      </div>
   </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Tony Phung </p>
-            </div>
+  <div class="quarto-title-meta column-page-left">
     </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">January 25, 2024</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#part-3-host-on-huggingface-account" id="toc-part-3-host-on-huggingface-account" class="nav-link active" data-scroll-target="#part-3-host-on-huggingface-account">Part 3: Host on <strong>HuggingFace</strong> account</a></li>
-  <li><a href="#create-huggingface-account-and-create-a-space" id="toc-create-huggingface-account-and-create-a-space" class="nav-link" data-scroll-target="#create-huggingface-account-and-create-a-space">1 Create HuggingFace Account and Create a ‘Space’</a></li>
-  <li><a href="#clone-the-repo" id="toc-clone-the-repo" class="nav-link" data-scroll-target="#clone-the-repo">2 Clone the repo</a></li>
-  <li><a href="#gather-your-files" id="toc-gather-your-files" class="nav-link" data-scroll-target="#gather-your-files">2. Gather your files</a></li>
-  <li><a href="#push-to-huggingface-repo" id="toc-push-to-huggingface-repo" class="nav-link" data-scroll-target="#push-to-huggingface-repo">3. Push to HuggingFace Repo</a>
-  <ul class="collapse">
-  <li><a href="#add-the-requirements.txt" id="toc-add-the-requirements.txt" class="nav-link" data-scroll-target="#add-the-requirements.txt">3.1 Add the requirements.txt</a></li>
-  </ul></li>
-  <li><a href="#web-app-complete-and-is-live" id="toc-web-app-complete-and-is-live" class="nav-link" data-scroll-target="#web-app-complete-and-is-live">4 Web App Complete and is Live</a></li>
-  </ul>
-</nav>
-    </div>
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(3)</span></div><div class="category" data-category="data structures">data structures <span class="quarto-category-count">(1)</span></div><div class="category" data-category="datastructures">datastructures <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<div class="quarto-about-marquee column-page-left">
+  <div class="about-image-container">
+  </div>
+  <div class="about-contents">
+     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
-
-
-
-<p><img src="dog_cat.jpg" class="img-fluid"></p>
-<p>This post shows how to host your working Local Gradio App on <strong>HuggingFace</strong>.</p>
-<p>This post is part of a series:<br>
-Part 1: Create <strong>Learner</strong> (.pkl file)<br>
-Part 2: Create <strong>Gradio</strong> application file (app.py)<br>
-Part 3: Host on <strong>HuggingFace</strong> account</p>
-<section id="part-3-host-on-huggingface-account" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-host-on-huggingface-account">Part 3: Host on <strong>HuggingFace</strong> account</h2>
-</section>
-<section id="create-huggingface-account-and-create-a-space" class="level2">
-<h2 class="anchored" data-anchor-id="create-huggingface-account-and-create-a-space">1 Create HuggingFace Account and Create a ‘Space’</h2>
-<ol type="1">
-<li>Choose your <strong>Space</strong> name</li>
-<li>Choose <strong>Apache-2.0</strong> to avoid any copyright issues</li>
-<li>Choose <strong>Gradio</strong></li>
-<li>Choose the <strong>Free</strong> option</li>
-<li>Choose <strong>Public</strong> (show you can show it to the world!)</li>
-</ol>
-<p><img src="hf_space.jpg" class="img-fluid"></p>
-</section>
-<section id="clone-the-repo" class="level2">
-<h2 class="anchored" data-anchor-id="clone-the-repo">2 Clone the repo</h2>
-<p>This will create allow us deploy the Gradio app to the HuggingFace repository:</p>
-<p><code>git clone https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor</code></p>
-<p><img src="hf_git.jpg" class="img-fluid"></p>
-</section>
-<section id="gather-your-files" class="level2">
-<h2 class="anchored" data-anchor-id="gather-your-files">2. Gather your files</h2>
-<p>Recall the various files we needed to <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/">run the app locally part 2</a>.</p>
-<p>Gather into the cloned huggingface folder:<br>
-- Learner (.pkl)<br>
-- Pet examples (pets.jpg)<br>
-- Gradio app (app.py)</p>
-<p><img src="hf_folder.jpg" class="img-fluid"></p>
-<p>A good way to check for me is seeing the <strong>pets_breed_predictor</strong> is the git folder and huggingface space.</p>
-</section>
-<section id="push-to-huggingface-repo" class="level2">
-<h2 class="anchored" data-anchor-id="push-to-huggingface-repo">3. Push to HuggingFace Repo</h2>
-<p>If you’ve pushed succesfully your app (could take several minutes), then your app is live! Congrats!</p>
-<p>If you’re like me and forgot to include the <code>requirements.txt</code> then you’ll be greeted with this error.</p>
-<p><img src="hf_requirements.jpg" class="img-fluid"></p>
-<section id="add-the-requirements.txt" class="level3">
-<h3 class="anchored" data-anchor-id="add-the-requirements.txt">3.1 Add the requirements.txt</h3>
-<p>We imported two libraries <code>fastai</code> and <code>gradio</code> so include them in the <code>requirements.txt</code> file. Commit and push.</p>
-<p><img src="hf_rq_fix.jpg" class="img-fluid"></p>
-</section>
-</section>
-<section id="web-app-complete-and-is-live" class="level2">
-<h2 class="anchored" data-anchor-id="web-app-complete-and-is-live">4 Web App Complete and is Live</h2>
-<p>If all goes well, the HuggingFace space is hosting the Gradio App!</p>
-<p>Check out <a href="https://huggingface.co/spaces/tonyjustdevs/pets_breed_predictor">my web app here</a>!</p>
-<p><img src="hf_live.jpg" class="img-fluid"></p>
-
-
-</section>
-
-</main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="datastructures,algorithms" data-listing-date-sort="1736182800000" data-listing-file-modified-sort="1736274940498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="378">
+<div class="thumbnail">
+<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">
+<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-003-binsearch.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">DSA 3: Binary Search - Exercises</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
+datastructures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">Chapter 2 Exercises, J.Wengrow Vol 2</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">
+<div class="listing-date">
+Jan 7, 2025
+</div>
+<div class="listing-author">
+Tony Phung
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="datastructures,algorithms" data-listing-date-sort="1736010000000" data-listing-file-modified-sort="1736274940498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
+<div class="thumbnail">
+<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">
+<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-002-array.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">DSA 2: Array and Sets - Exercises</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
+datastructures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">Chapter 1 Exercises, J.Wengrow Vol 2</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">
+<div class="listing-date">
+Jan 5, 2025
+</div>
+<div class="listing-author">
+Tony Phung
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="data structures,algorithms" data-listing-date-sort="1735664400000" data-listing-file-modified-sort="1736274940498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="754">
+<div class="thumbnail">
+<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
+<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-001-bigo.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">DSA 1: Big-O - Arrays and Sets</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
+data structures
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
+algorithms
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">Big-O for Array Operations</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
+<div class="listing-date">
+Jan 1, 2025
+</div>
+<div class="listing-author">
+Tony Phung
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> 
+    <div class="about-footer"><div class="about-links">
+  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+</div>
+</div>
+  </div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -465,13 +551,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
