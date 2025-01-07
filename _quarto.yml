@@ -5,9 +5,36 @@ website:
   title: "Tony's Blog ✍️"
   navbar:
     right:
-      - computerscience.qmd      
-      - mathematics.qmd      
-      - datascience.qmd      
+      - text: "Computer Science 💻"
+        menu:
+          - text: "All"
+            href: computerscience.qmd
+          - text: "Data Structures and Algorithms"
+            href: dsa.qmd
+          - text: "Design Patterns"
+            href: designpatterns.qmd
+          - text: "Coding"
+            href: coding.qmd
+          - text: "LeetCode"
+            href: leetcode.qmd
+      - text: "Mathematics 🧮"
+        menu:
+          - text: "All"
+            href: mathematics.qmd
+          - text: "Calculus"
+            href: calculus.qmd
+          - text: "Linear Algebra"
+            href: linearalgebra.qmd
+      - text: "Data Science 🧪"
+        menu:
+          - text: "All"
+            href: datascience.qmd
+          - text: "Machine Learning"
+            href: machinelearning.qmd
+          - text: "Kaggle"
+            href: kaggle.qmd
+      # - mathematics.qmd      
+      # - datascience.qmd      
       - about.qmd
       - icon: github
         href: https://github.com/tonyjustdevs
