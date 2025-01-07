@@ -1,7 +1,7 @@
 ---
-title: "Tony's Blog ✍️"
+title: "Computer Science 💻"
 listing:
-  contents: posts
+  contents: posts/computerscience
   sort: "date desc"
   type: default
   categories: true
@@ -18,9 +18,4 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://au.linkedin.com/in/tony-phung-6190b0b8
-    # - icon: HuggingFace
-    #   text: HuggingFace
-    #   href: https://huggingface.co/tonyjustdevs
 ---
-
-
