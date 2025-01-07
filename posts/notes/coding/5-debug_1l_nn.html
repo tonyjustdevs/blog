@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2024-04-09">
 <meta name="description" content="Documenting my debugging of a neural network model I built from scratch">
 
-<title>Debugging a 1-Hidden-Layer Neural Network Model – Tony’s blog</title>
+<title>Code : Debugging a 1-Hidden-Layer Neural Network Model – Tony’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Debugging a 1-Hidden-Layer Neural Network Model</h1>
+      <h1 class="title">Code : Debugging a 1-Hidden-Layer Neural Network Model</h1>
                   <div>
         <div class="description">
           Documenting my debugging of a neural network model I built from scratch
@@ -581,7 +581,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

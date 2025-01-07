@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2024-01-25">
+<meta name="description" content="Create a local neural network Gradio App">
+
+<title>How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2) – Tony’s Blog ✍️</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Tony’s Blog ✍️</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../computerscience.html"> 
+<span class="menu-text">Computer Science 💻</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../mathematics.html"> 
+<span class="menu-text">Mathematics 🧮</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../datascience.html"> 
+<span class="menu-text">Data Science 🧪</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About 🐈‍⬛</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tonyjustdevs"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://au.linkedin.com/in/tony-phung-6190b0b8"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">How to Build and Deploy a Deep-Learning Multi-Classifier Web App (Part 2)</h1>
+                  <div>
+        <div class="description">
+          Create a local neural network <strong>Gradio App</strong>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">machinelearning</div>
+                <div class="quarto-category">ai</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 25, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-2-create-gradio-application-file-app.py" id="toc-part-2-create-gradio-application-file-app.py" class="nav-link active" data-scroll-target="#part-2-create-gradio-application-file-app.py">Part 2: Create Gradio application file (app.py)</a></li>
+  <li><a href="#import-gradio-and-fast-ai-libraries" id="toc-import-gradio-and-fast-ai-libraries" class="nav-link" data-scroll-target="#import-gradio-and-fast-ai-libraries">1. Import Gradio and Fast AI libraries</a></li>
+  <li><a href="#import-learner-.pkl-file" id="toc-import-learner-.pkl-file" class="nav-link" data-scroll-target="#import-learner-.pkl-file">2. Import Learner (.pkl file)</a>
+  <ul class="collapse">
+  <li><a href="#import-learner-error-.pkl-file-solution-windows-only" id="toc-import-learner-error-.pkl-file-solution-windows-only" class="nav-link" data-scroll-target="#import-learner-error-.pkl-file-solution-windows-only">2.1 Import Learner Error (.pkl file) Solution (Windows only)</a></li>
+  </ul></li>
+  <li><a href="#predict-the-breed-with-imported-learner" id="toc-predict-the-breed-with-imported-learner" class="nav-link" data-scroll-target="#predict-the-breed-with-imported-learner">3 Predict the Breed with Imported Learner</a>
+  <ul class="collapse">
+  <li><a href="#import-local-image" id="toc-import-local-image" class="nav-link" data-scroll-target="#import-local-image">3.1 Import Local Image</a></li>
+  <li><a href="#make-prediction" id="toc-make-prediction" class="nav-link" data-scroll-target="#make-prediction">3.2 Make prediction</a></li>
+  <li><a href="#what-is-the-probabilities-representing" id="toc-what-is-the-probabilities-representing" class="nav-link" data-scroll-target="#what-is-the-probabilities-representing">3.3 What is the probabilities representing?</a></li>
+  <li><a href="#the-prediction-and-probabilities-of-our-image" id="toc-the-prediction-and-probabilities-of-our-image" class="nav-link" data-scroll-target="#the-prediction-and-probabilities-of-our-image">3.4 The prediction and probabilities of our image</a></li>
+  <li><a href="#probability-of-every-category-available" id="toc-probability-of-every-category-available" class="nav-link" data-scroll-target="#probability-of-every-category-available">3.5 Probability of every category available</a></li>
+  </ul></li>
+  <li><a href="#run-local-gradio-app" id="toc-run-local-gradio-app" class="nav-link" data-scroll-target="#run-local-gradio-app">4 Run local Gradio App</a>
+  <ul class="collapse">
+  <li><a href="#open-local-gradio-app" id="toc-open-local-gradio-app" class="nav-link" data-scroll-target="#open-local-gradio-app">4.1 Open Local Gradio App</a></li>
+  <li><a href="#test-it-out" id="toc-test-it-out" class="nav-link" data-scroll-target="#test-it-out">4.2 Test it out</a></li>
+  </ul></li>
+  <li><a href="#export-app.py" id="toc-export-app.py" class="nav-link" data-scroll-target="#export-app.py">5. Export (app.py)</a>
+  <ul class="collapse">
+  <li><a href="#put-directives-at-front-of-notebook" id="toc-put-directives-at-front-of-notebook" class="nav-link" data-scroll-target="#put-directives-at-front-of-notebook">5.1 Put directives at front of notebook</a></li>
+  <li><a href="#choose-the-cellblocks-to-export" id="toc-choose-the-cellblocks-to-export" class="nav-link" data-scroll-target="#choose-the-cellblocks-to-export">5.2 Choose the cellblocks to export</a></li>
+  <li><a href="#run-nbdev-and-export" id="toc-run-nbdev-and-export" class="nav-link" data-scroll-target="#run-nbdev-and-export">5.3 Run nbdev and export</a></li>
+  </ul></li>
+  <li><a href="#to-be-continued" id="toc-to-be-continued" class="nav-link" data-scroll-target="#to-be-continued">To be Continued…</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p><img src="dog_cat.jpg" class="img-fluid"></p>
+<p>This post shows how to create a Gradio App (app.py) and run it locally in a browser. This app should:</p>
+<ul>
+<li>Allow users to <strong>upload an image</strong><br>
+</li>
+<li>Make a <strong>Prediction</strong> of the breed of dog or cat</li>
+<li>Provide a <strong>Probability</strong> on the predictions of available breeds (dataset used only has 37 different breeds)</li>
+</ul>
+<p>This post is part of a series:<br>
+Part 1: Create <strong>Learner</strong> (.pkl file)<br>
+Part 2: Create <strong>Gradio</strong> application file (app.py)<br>
+Part 3: Upload to <strong>HuggingFace</strong> account</p>
+<section id="part-2-create-gradio-application-file-app.py" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-create-gradio-application-file-app.py">Part 2: Create Gradio application file (app.py)</h2>
+</section>
+<section id="import-gradio-and-fast-ai-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="import-gradio-and-fast-ai-libraries">1. Import Gradio and Fast AI libraries</h2>
+<div id="cell-4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastai.vision.<span class="bu">all</span> <span class="im">import</span> <span class="op">*</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gradio <span class="im">as</span> gr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\torchvision\io\image.py:13: UserWarning: Failed to load image Python extension: '[WinError 127] The specified procedure could not be found'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(</code></pre>
+</div>
+</div>
+</section>
+<section id="import-learner-.pkl-file" class="level2">
+<h2 class="anchored" data-anchor-id="import-learner-.pkl-file">2. Import Learner (.pkl file)</h2>
+<p>Recall, this file was created and exported in <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/pt1_create_learner.html">Part 1</a></p>
+<ul>
+<li>If you’re running on a Linux, you shouldn’t have any import issues.<br>
+</li>
+<li>If you’re running a Windows PC, you’ll likely to experience an error.</li>
+</ul>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pets_learner <span class="op">=</span> load_learner(<span class="st">'pets_learner.pkl'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">NotImplementedError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[4], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> pets_learner <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">load_learner</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">pets_learner.pkl</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span> 
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\learner.py:446</span>, in <span class="ansi-cyan-fg">load_learner</span><span class="ansi-blue-fg ansi-bold">(fname, cpu, pickle_module)</span>
+<span class="ansi-green-fg">    444</span> distrib_barrier()
+<span class="ansi-green-fg">    445</span> map_loc <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">cpu</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> cpu <span style="font-weight:bold;color:rgb(0,135,0)">else</span> default_device()
+<span class="ansi-green-fg ansi-bold">--&gt; 446</span> <span style="font-weight:bold;color:rgb(0,135,0)">try</span>: res <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">torch</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">load</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">fname</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">map_location</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">map_loc</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">pickle_module</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">pickle_module</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    447</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">AttributeError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e: 
+<span class="ansi-green-fg">    448</span>     e<span style="color:rgb(98,98,98)">.</span>args <span style="color:rgb(98,98,98)">=</span> [<span style="color:rgb(175,0,0)">f</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Custom classes or functions exported with your `Learner` not available in namespace.</span><span style="color:rgb(175,0,0)">\</span><span style="color:rgb(175,0,0)">Re-declare/import before loading:</span><span style="font-weight:bold;color:rgb(175,95,0)">\n</span><span style="font-weight:bold;color:rgb(175,95,0)">\t</span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>e<span style="color:rgb(98,98,98)">.</span>args[<span style="color:rgb(98,98,98)">0</span>]<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span style="color:rgb(175,0,0)">"</span>]
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\torch\serialization.py:1014</span>, in <span class="ansi-cyan-fg">load</span><span class="ansi-blue-fg ansi-bold">(f, map_location, pickle_module, weights_only, mmap, **pickle_load_args)</span>
+<span class="ansi-green-fg">   1012</span>             <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">RuntimeError</span> <span style="font-weight:bold;color:rgb(0,135,0)">as</span> e:
+<span class="ansi-green-fg">   1013</span>                 <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> pickle<span style="color:rgb(98,98,98)">.</span>UnpicklingError(UNSAFE_MESSAGE <span style="color:rgb(98,98,98)">+</span> <span style="color:rgb(0,135,0)">str</span>(e)) <span style="font-weight:bold;color:rgb(0,135,0)">from</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
+<span class="ansi-green-fg ansi-bold">-&gt; 1014</span>         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_load</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">opened_zipfile</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1015</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">map_location</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1016</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">pickle_module</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1017</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">overall_storage</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">overall_storage</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1018</span> <span class="ansi-yellow-bg">                     </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">pickle_load_args</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   1019</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> mmap:
+<span class="ansi-green-fg">   1020</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">RuntimeError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">mmap can only be used with files saved with </span><span style="color:rgb(175,0,0)">"</span>,
+<span class="ansi-green-fg">   1021</span>                        <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">`torch.save(_use_new_zipfile_serialization=True), </span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg">   1022</span>                        <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">please torch.save your checkpoint with this option in order to use mmap.</span><span style="color:rgb(175,0,0)">"</span>)
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\torch\serialization.py:1422</span>, in <span class="ansi-cyan-fg">_load</span><span class="ansi-blue-fg ansi-bold">(zip_file, map_location, pickle_module, pickle_file, overall_storage, **pickle_load_args)</span>
+<span class="ansi-green-fg">   1420</span> unpickler <span style="color:rgb(98,98,98)">=</span> UnpicklerWrapper(data_file, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>pickle_load_args)
+<span class="ansi-green-fg">   1421</span> unpickler<span style="color:rgb(98,98,98)">.</span>persistent_load <span style="color:rgb(98,98,98)">=</span> persistent_load
+<span class="ansi-green-fg ansi-bold">-&gt; 1422</span> result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">unpickler</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">load</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   1424</span> torch<span style="color:rgb(98,98,98)">.</span>_utils<span style="color:rgb(98,98,98)">.</span>_validate_loaded_sparse_tensors()
+<span class="ansi-green-fg">   1425</span> torch<span style="color:rgb(98,98,98)">.</span>_C<span style="color:rgb(98,98,98)">.</span>_log_api_usage_metadata(
+<span class="ansi-green-fg">   1426</span>     <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">torch.load.metadata</span><span style="color:rgb(175,0,0)">"</span>, {<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">serialization_id</span><span style="color:rgb(175,0,0)">"</span>: zip_file<span style="color:rgb(98,98,98)">.</span>serialization_id()}
+<span class="ansi-green-fg">   1427</span> )
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\tonyp\miniconda3\envs\fastai\Lib\pathlib.py:873</span>, in <span class="ansi-cyan-fg">Path.__new__</span><span class="ansi-blue-fg ansi-bold">(cls, *args, **kwargs)</span>
+<span class="ansi-green-fg">    871</span> <span style="color:rgb(0,135,0)">self</span> <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">cls</span><span style="color:rgb(98,98,98)">.</span>_from_parts(args)
+<span class="ansi-green-fg">    872</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>_flavour<span style="color:rgb(98,98,98)">.</span>is_supported:
+<span class="ansi-green-fg ansi-bold">--&gt; 873</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">NotImplementedError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">cannot instantiate </span><span style="font-weight:bold;color:rgb(175,95,135)">%r</span><span style="color:rgb(175,0,0)"> on your system</span><span style="color:rgb(175,0,0)">"</span>
+<span class="ansi-green-fg">    874</span>                               <span style="color:rgb(98,98,98)">%</span> (<span style="color:rgb(0,135,0)">cls</span><span style="color:rgb(98,98,98)">.</span><span style="color:rgb(0,0,135)">__name__</span>,))
+<span class="ansi-green-fg">    875</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span>
+
+<span class="ansi-red-fg ansi-bold">NotImplementedError</span>: cannot instantiate 'PosixPath' on your system</pre>
+</div>
+</div>
+</div>
+<section id="import-learner-error-.pkl-file-solution-windows-only" class="level3">
+<h3 class="anchored" data-anchor-id="import-learner-error-.pkl-file-solution-windows-only">2.1 Import Learner Error (.pkl file) Solution (Windows only)</h3>
+<p>I found a solution <a href="https://forums.fast.ai/t/couldnt-load-learner-in-windows/89388">here</a>.<br>
+Not too sure why this happens, probably linux vs windows compatibility, forward vs backlashes probably?</p>
+<p>Import the <code>pathlib</code> library below and run the code below to fix the paths:</p>
+<p><strong>Note</strong>:<br>
+- This <strong><em>fix</em></strong> is only required during the <strong>testing</strong> phase of our Gradio App.<br>
+- This <strong>testing</strong> phase is defined as being able to run the Gradio App locally.<br>
+- When we <strong>Upload to HuggingFace</strong> Spaces, this code fix is not required (because HF is run on Linux, hence no Posix issues, from my understanding)</p>
+<div id="cell-8" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only run to import pkl in windows when youre doing testing in windows | when run in hus | its run via dock images ie linux ie no problems</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pathlib <span class="co"># </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pathlib.PosixPath</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pathlib.PosixPath <span class="op">=</span> pathlib.WindowsPath</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-9" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pets_learner <span class="op">=</span> load_learner(<span class="st">'pets_learner.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="predict-the-breed-with-imported-learner" class="level2">
+<h2 class="anchored" data-anchor-id="predict-the-breed-with-imported-learner">3 Predict the Breed with Imported Learner</h2>
+<section id="import-local-image" class="level3">
+<h3 class="anchored" data-anchor-id="import-local-image">3.1 Import Local Image</h3>
+<div id="cell-12" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pet1 <span class="op">=</span> PILImage.create(<span class="st">'pet1.jpg'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pet1.thumbnail((<span class="dv">224</span>,<span class="dv">224</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pet1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="make-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="make-prediction">3.2 Make prediction</h3>
+<p>Use <code>predict()</code> to make prediction on the uploaded local image. The results will have 3 items:<br>
+1. The prediction of the breed.<br>
+2. Index of the Tensor (in point 3.)<br>
+3. A Tensor of length 37. Why the odd number?<br>
+- These are the probabilities of each unique breeds in our data!<br>
+- Recall in Part 1, we determined the different categories by using a <a href="https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/pt1_create_learner.html#a-different-labelling-function">custom labelling function</a></p>
+<div id="cell-14" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> pets_learner.predict(pet1)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  return getattr(torch, 'has_mps', False)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<style>
+    /* Turns off some styling */
+    progress {
+        /* gets rid of default border in Firefox and Opera. */
+        border: none;
+        /* Needs to be in here for Safari polyfill so background images work as expected. */
+        background-size: auto;
+    }
+    progress:not([value]), progress:not([value])::-webkit-progress-bar {
+        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
+    }
+    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+        background: #F44336;
+    }
+</style>
+</div>
+<div class="cell-output cell-output-display">
+
+    <div>
+      <progress value="0" class="" max="1" style="width:300px; height:20px; vertical-align: middle;"></progress>
+      0.00% [0/1 00:00&lt;?]
+    </div>
+    
+</div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>('Bombay',
+ tensor(3),
+ tensor([3.4475e-02, 1.7813e-03, 8.1388e-03, 6.3685e-01, 6.0993e-03, 4.8830e-04,
+         5.0747e-02, 8.8036e-03, 2.1084e-01, 3.4832e-02, 9.6598e-04, 7.6646e-04,
+         6.3764e-04, 2.5949e-04, 8.7999e-05, 1.3308e-03, 6.6650e-05, 5.7116e-05,
+         9.0377e-04, 6.9052e-05, 2.0095e-04, 2.1758e-05, 2.5767e-04, 2.1859e-05,
+         3.8547e-05, 1.6165e-06, 6.2601e-05, 4.3552e-05, 1.4901e-04, 9.6175e-05,
+         1.0010e-04, 1.3717e-04, 2.7684e-04, 5.5386e-05, 5.7012e-05, 4.6809e-05,
+         2.2643e-04]))</code></pre>
+</div>
+</div>
+</section>
+<section id="what-is-the-probabilities-representing" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-the-probabilities-representing">3.3 What is the probabilities representing?</h3>
+<p>The probabilities tensor from <code>predict()</code> are the unique categories in our data and are stored in our dataloader</p>
+<div id="cell-16" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>categories <span class="op">=</span> pets_learner.dls.vocab </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>categories</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<pre><code>['Abyssinian', 'Bengal', 'Birman', 'Bombay', 'British_Shorthair', 'Egyptian_Mau', 'Maine_Coon', 'Persian', 'Ragdoll', 'Russian_Blue', 'Siamese', 'Sphynx', 'american_bulldog', 'american_pit_bull_terrier', 'basset_hound', 'beagle', 'boxer', 'chihuahua', 'english_cocker_spaniel', 'english_setter', 'german_shorthaired', 'great_pyrenees', 'havanese', 'japanese_chin', 'keeshond', 'leonberger', 'miniature_pinscher', 'newfoundland', 'pomeranian', 'pug', 'saint_bernard', 'samoyed', 'scottish_terrier', 'shiba_inu', 'staffordshire_bull_terrier', 'wheaten_terrier', 'yorkshire_terrier']</code></pre>
+</div>
+</div>
+</section>
+<section id="the-prediction-and-probabilities-of-our-image" class="level3">
+<h3 class="anchored" data-anchor-id="the-prediction-and-probabilities-of-our-image">3.4 The prediction and probabilities of our image</h3>
+<div id="cell-18" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get index of predction</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> res[<span class="dv">1</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># store list of probalities of our predction</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> res[<span class="dv">2</span>]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get breed and probability of our prediction</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>categories[idx],probabilities[idx]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<pre><code>('Bombay', tensor(0.6369))</code></pre>
+</div>
+</div>
+</section>
+<section id="probability-of-every-category-available" class="level3">
+<h3 class="anchored" data-anchor-id="probability-of-every-category-available">3.5 Probability of every category available</h3>
+<div id="cell-20" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_image_fn(img):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    prediction, idx, probabilities <span class="op">=</span> pets_learner.predict(img)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">dict</span>(<span class="bu">zip</span>(categories, <span class="bu">map</span>(<span class="bu">float</span>, probabilities)))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>classify_image_fn(pet1)     <span class="co"># names and probabilities</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  return getattr(torch, 'has_mps', False)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<style>
+    /* Turns off some styling */
+    progress {
+        /* gets rid of default border in Firefox and Opera. */
+        border: none;
+        /* Needs to be in here for Safari polyfill so background images work as expected. */
+        background-size: auto;
+    }
+    progress:not([value]), progress:not([value])::-webkit-progress-bar {
+        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
+    }
+    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+        background: #F44336;
+    }
+</style>
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<pre><code>{'Abyssinian': 0.034474823623895645,
+ 'Bengal': 0.0017812795704230666,
+ 'Birman': 0.008138809353113174,
+ 'Bombay': 0.6368528604507446,
+ 'British_Shorthair': 0.006099338177591562,
+ 'Egyptian_Mau': 0.0004883029614575207,
+ 'Maine_Coon': 0.05074741691350937,
+ 'Persian': 0.008803554810583591,
+ 'Ragdoll': 0.21084259450435638,
+ 'Russian_Blue': 0.03483246639370918,
+ 'Siamese': 0.0009659799397923052,
+ 'Sphynx': 0.0007664564182050526,
+ 'american_bulldog': 0.0006376394885592163,
+ 'american_pit_bull_terrier': 0.0002594943216536194,
+ 'basset_hound': 8.799932402325794e-05,
+ 'beagle': 0.0013307805638760328,
+ 'boxer': 6.664981629000977e-05,
+ 'chihuahua': 5.711586709367111e-05,
+ 'english_cocker_spaniel': 0.0009037724230438471,
+ 'english_setter': 6.905203190399334e-05,
+ 'german_shorthaired': 0.00020094779029022902,
+ 'great_pyrenees': 2.1758336515631527e-05,
+ 'havanese': 0.0002576670085545629,
+ 'japanese_chin': 2.1859435946680605e-05,
+ 'keeshond': 3.85471066692844e-05,
+ 'leonberger': 1.616517351976654e-06,
+ 'miniature_pinscher': 6.26009568804875e-05,
+ 'newfoundland': 4.355219061835669e-05,
+ 'pomeranian': 0.00014901049144100398,
+ 'pug': 9.617456089472398e-05,
+ 'saint_bernard': 0.0001000974079943262,
+ 'samoyed': 0.0001371700782328844,
+ 'scottish_terrier': 0.00027684049564413726,
+ 'shiba_inu': 5.5386270105373114e-05,
+ 'staffordshire_bull_terrier': 5.701235932065174e-05,
+ 'wheaten_terrier': 4.680879646912217e-05,
+ 'yorkshire_terrier': 0.0002264348149765283}</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="run-local-gradio-app" class="level2">
+<h2 class="anchored" data-anchor-id="run-local-gradio-app">4 Run local Gradio App</h2>
+<p>Theres a variety of ways to alter the app, I’ve set the size of the images and provided some examples:</p>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gr_image <span class="op">=</span> gr.Image(width<span class="op">=</span><span class="dv">244</span>, height<span class="op">=</span><span class="dv">244</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gr_label <span class="op">=</span> gr.Label()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>input_examples <span class="op">=</span> [<span class="st">'pet1.jpg'</span>,<span class="st">'pet2.jpg'</span>,<span class="st">'pet3.jpg'</span>,<span class="st">'pet4.jpg'</span>,<span class="st">'pet5.jpg'</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>intf <span class="op">=</span> gr.Interface(fn<span class="op">=</span>classify_image_fn,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                    inputs<span class="op">=</span>gr_image,    </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                    outputs<span class="op">=</span>gr_label,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                    examples<span class="op">=</span>input_examples)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>intf.launch(inline<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running on local URL:  http://127.0.0.1:7863
+
+To create a public link, set `share=True` in `launch()`.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  return getattr(torch, 'has_mps', False)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<style>
+    /* Turns off some styling */
+    progress {
+        /* gets rid of default border in Firefox and Opera. */
+        border: none;
+        /* Needs to be in here for Safari polyfill so background images work as expected. */
+        background-size: auto;
+    }
+    progress:not([value]), progress:not([value])::-webkit-progress-bar {
+        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
+    }
+    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+        background: #F44336;
+    }
+</style>
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  return getattr(torch, 'has_mps', False)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<style>
+    /* Turns off some styling */
+    progress {
+        /* gets rid of default border in Firefox and Opera. */
+        border: none;
+        /* Needs to be in here for Safari polyfill so background images work as expected. */
+        background-size: auto;
+    }
+    progress:not([value]), progress:not([value])::-webkit-progress-bar {
+        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
+    }
+    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+        background: #F44336;
+    }
+</style>
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\tonyp\miniconda3\envs\fastai\Lib\site-packages\fastai\torch_core.py:263: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  return getattr(torch, 'has_mps', False)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<style>
+    /* Turns off some styling */
+    progress {
+        /* gets rid of default border in Firefox and Opera. */
+        border: none;
+        /* Needs to be in here for Safari polyfill so background images work as expected. */
+        background-size: auto;
+    }
+    progress:not([value]), progress:not([value])::-webkit-progress-bar {
+        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
+    }
+    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+        background: #F44336;
+    }
+</style>
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+</div>
+<section id="open-local-gradio-app" class="level3">
+<h3 class="anchored" data-anchor-id="open-local-gradio-app">4.1 Open Local Gradio App</h3>
+<p>Open the URL provided in your favourite browser</p>
+<p><img src="gradio_local.jpg" class="img-fluid"></p>
+</section>
+<section id="test-it-out" class="level3">
+<h3 class="anchored" data-anchor-id="test-it-out">4.2 Test it out</h3>
+<p>The app knows a pug when it sees one! The app is ready.</p>
+<p><img src="gradio_local_pug.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="export-app.py" class="level2">
+<h2 class="anchored" data-anchor-id="export-app.py">5. Export (app.py)</h2>
+<p>Gradio app must be all inside a <code>app.py</code> script when being deployed on HuggingFaces.</p>
+<p>Thankfully, there is a library to export all the <strong>cell-blocks</strong> from our notebook (.ipynb) to python script (app.py).<br>
+<a href="https://nbdev.fast.ai/tutorials/tutorial.html">Reference</a></p>
+<section id="put-directives-at-front-of-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="put-directives-at-front-of-notebook">5.1 Put directives at front of notebook</h3>
+<ul>
+<li>Place ‘#| default_exp app’ in a python codeblock in front of the the notebook</li>
+</ul>
+<p><img src="gradio_default_app.jpg" class="img-fluid"></p>
+</section>
+<section id="choose-the-cellblocks-to-export" class="level3">
+<h3 class="anchored" data-anchor-id="choose-the-cellblocks-to-export">5.2 Choose the cellblocks to export</h3>
+<ul>
+<li>Place ‘#| export’ in front of each codeblock you need to export</li>
+</ul>
+<p><img src="gradio_clean.jpg" class="img-fluid"></p>
+</section>
+<section id="run-nbdev-and-export" class="level3">
+<h3 class="anchored" data-anchor-id="run-nbdev-and-export">5.3 Run nbdev and export</h3>
+<div id="cell-28" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nbdev.export <span class="im">import</span> nb_export</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nb_export(<span class="st">'app.ipynb'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will create a new folder as home directory and place in the <code>app.py</code></p>
+<p><img src="gradio_app.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="to-be-continued" class="level2">
+<h2 class="anchored" data-anchor-id="to-be-continued">To be Continued…</h2>
+<p><a href="https://tonyjustdevs.github.io/blog/posts/2024-01-24-99_multi_classifier/pt1_create_learner.html">Part 1: Create <strong>Learner</strong> (.pkl file)</a><br>
+<a href="https://tonyjustdevs.github.io/blog/posts/2024-01-25-99_gradio_app/">Part 2: Create <strong>Gradio</strong> application file (app.py)</a><br>
+<a href="https://tonyjustdevs.github.io/blog/posts/2024-01-25-98_huggingface/">Part 3: Upload to <strong>HuggingFace</strong> account</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

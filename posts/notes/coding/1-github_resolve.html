@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2024-02-20">
 <meta name="description" content="How to automate the closing of an issue in Github Projects via a Commit Message">
 
-<title>Automate the closing of Issues in Github Projects – Tony’s blog</title>
+<title>Automate the closing of Issues in Github Projects – Tony's blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -471,7 +471,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

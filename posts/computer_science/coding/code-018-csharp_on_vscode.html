@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2024-10-30">
+<meta name="description" content="Creating, Building and Running Simple C# Console Apps">
+
+<title>Code 18: Introduction to C# in Visual Studio Code – Tony’s blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Tony’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../computer_science.html"> 
+<span class="menu-text">computer_science</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../data_science.html"> 
+<span class="menu-text">data_science</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../math.html"> 
+<span class="menu-text">notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tonyjustdevs"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://au.linkedin.com/in/tony-phung-6190b0b8"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Code 18: Introduction to C# in Visual Studio Code</h1>
+                  <div>
+        <div class="description">
+          Creating, Building and Running Simple C# Console Apps
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">c#</div>
+                <div class="quarto-category">vscode</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 30, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#net-platform-and-visual-studio-code-extensions" id="toc-net-platform-and-visual-studio-code-extensions" class="nav-link" data-scroll-target="#net-platform-and-visual-studio-code-extensions">2. <code>.NET</code> Platform and Visual Studio Code Extensions</a>
+  <ul class="collapse">
+  <li><a href="#net-runtime-explained" id="toc-net-runtime-explained" class="nav-link" data-scroll-target="#net-runtime-explained">2.1 .NET Runtime Explained</a></li>
+  <li><a href="#visual-studio-code-extensions" id="toc-visual-studio-code-extensions" class="nav-link" data-scroll-target="#visual-studio-code-extensions">2.2 Visual Studio Code Extensions</a></li>
+  <li><a href="#install-extensions" id="toc-install-extensions" class="nav-link" data-scroll-target="#install-extensions">2.3 Install Extensions</a>
+  <ul class="collapse">
+  <li><a href="#c-dev-kit---official-c" id="toc-c-dev-kit---official-c" class="nav-link" data-scroll-target="#c-dev-kit---official-c">2.3.1 [C# Dev Kit - Official C#]</a></li>
+  </ul></li>
+  <li><a href="#intellicode-for-c-dev-kit" id="toc-intellicode-for-c-dev-kit" class="nav-link" data-scroll-target="#intellicode-for-c-dev-kit">2.3.2 [IntelliCode for C# Dev Kit]</a></li>
+  <li><a href="#net-sdk" id="toc-net-sdk" class="nav-link" data-scroll-target="#net-sdk">2.3.3 .NET SDK</a></li>
+  </ul></li>
+  <li><a href="#create-build-and-run-your-application" id="toc-create-build-and-run-your-application" class="nav-link" data-scroll-target="#create-build-and-run-your-application">3. Create, build, and run your application</a>
+  <ul class="collapse">
+  <li><a href="#net-cli" id="toc-net-cli" class="nav-link" data-scroll-target="#net-cli">3.1 <code>.NET CLI</code></a></li>
+  <li><a href="#net-cli-command-structure" id="toc-net-cli-command-structure" class="nav-link" data-scroll-target="#net-cli-command-structure">3.2 .NET CLI Command Structure</a></li>
+  <li><a href="#c-console-application-template" id="toc-c-console-application-template" class="nav-link" data-scroll-target="#c-console-application-template">3.3 C# Console Application Template</a></li>
+  </ul></li>
+  <li><a href="#update-build-and-run-application" id="toc-update-build-and-run-application" class="nav-link" data-scroll-target="#update-build-and-run-application">4. Update, Build, and Run Application</a>
+  <ul class="collapse">
+  <li><a href="#build-application" id="toc-build-application" class="nav-link" data-scroll-target="#build-application">4.1 Build Application</a></li>
+  <li><a href="#run-application" id="toc-run-application" class="nav-link" data-scroll-target="#run-application">4.2 Run Application</a></li>
+  </ul></li>
+  <li><a href="#create-build-and-run-a-test-project-in-one-screenshot" id="toc-create-build-and-run-a-test-project-in-one-screenshot" class="nav-link" data-scroll-target="#create-build-and-run-a-test-project-in-one-screenshot">5. Create, Build and Run a Test Project (in one screenshot)</a>
+  <ul class="collapse">
+  <li><a href="#oldbad-version-1" id="toc-oldbad-version-1" class="nav-link" data-scroll-target="#oldbad-version-1">5.1 Old/Bad (Version 1)</a></li>
+  <li><a href="#betterupdated-version-2" id="toc-betterupdated-version-2" class="nav-link" data-scroll-target="#betterupdated-version-2">5.2 Better/Updated (Version 2)</a></li>
+  <li><a href="#create-build-run-version-2-steps" id="toc-create-build-run-version-2-steps" class="nav-link" data-scroll-target="#create-build-run-version-2-steps">5.3 Create, Build Run: Version 2 Steps</a>
+  <ul class="collapse">
+  <li><a href="#dotnet-run-notes" id="toc-dotnet-run-notes" class="nav-link" data-scroll-target="#dotnet-run-notes">5.3.1 <code>dotnet run</code> notes</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#bonus-clone-repo-in-windows" id="toc-bonus-clone-repo-in-windows" class="nav-link" data-scroll-target="#bonus-clone-repo-in-windows">6. [Bonus] Clone Repo in Windows</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p><img src="imgs/19csvscode.jpg" class="img-fluid"></p>
+<section id="introduction" class="level1">
+<h1>1. Introduction</h1>
+<p>Visual Studio Code supports the <em>development of <code>C#</code> applications</em> using:</p>
+<ul>
+<li><code>C#</code> language extensions and</li>
+<li>the <code>.NET</code> <strong>Software Development Kit</strong> (SDK).</li>
+</ul>
+</section>
+<section id="net-platform-and-visual-studio-code-extensions" class="level1">
+<h1>2. <code>.NET</code> Platform and Visual Studio Code Extensions</h1>
+<p><code>.NET</code> is a an open-source developer platform to <strong>develop applications</strong> (in <code>C#</code>, F#, or Visual Basic). - It is used to develop &amp; run applications <strong>cross-platform</strong> (for Windows, macOS, and Linux) - It includes software languages and code libraries. - The <code>.NET</code> platform provides a <strong>runtime environment</strong> for running applications.</p>
+<section id="net-runtime-explained" class="level2">
+<h2 class="anchored" data-anchor-id="net-runtime-explained">2.1 .NET Runtime Explained</h2>
+<p>The <strong><code>.NET</code> runtime</strong> is the: - <em>code library</em> - <strong><em>required</em></strong> to <strong>run your C# applications</strong> - also known as <strong>Common Language Runtime</strong>, or CLR.</p>
+<pre><code>    The .NET runtime isn't required to WRITE C# code, 
+    The .NET runtime is required to RUN `C#` applications.</code></pre>
+</section>
+<section id="visual-studio-code-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="visual-studio-code-extensions">2.2 Visual Studio Code Extensions</h2>
+<p>Visual Studio Code provides a development environment for:</p>
+<ul>
+<li><em>writing</em>,</li>
+<li><em>running</em>, and</li>
+<li><em>debugging</em> <code>C#</code> applications</li>
+</ul>
+<p>By using Visual Studio Extenions:</p>
+<ul>
+<li><strong><code>.NET</code> SDK</strong></li>
+<li><strong><code>C#</code> extensions</strong></li>
+</ul>
+</section>
+<section id="install-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="install-extensions">2.3 Install Extensions</h2>
+<section id="c-dev-kit---official-c" class="level3">
+<h3 class="anchored" data-anchor-id="c-dev-kit---official-c">2.3.1 [C# Dev Kit - Official C#]</h3>
+<p>This extensions helps to develop, edit, and debug C# code in Visual Studio Code. It also installs:</p>
+<ul>
+<li><strong>[.NET Install Tool]</strong>: This extension installs &amp; manages different versions of:
+<ul>
+<li><code>.NET SDK</code></li>
+<li><code>Runtime</code>.</li>
+</ul></li>
+<li><strong>[C#]</strong>: Base language support for <code>C#</code>.</li>
+<li><strong>[C# Dev Kit]</strong>: Official <code>C#</code> extension from Microsoft.</li>
+</ul>
+</section>
+</section>
+<section id="intellicode-for-c-dev-kit" class="level2">
+<h2 class="anchored" data-anchor-id="intellicode-for-c-dev-kit">2.3.2 [IntelliCode for C# Dev Kit]</h2>
+<p>This extension provides AI-assisted development for the <code>C# Dev Kit</code>.</p>
+</section>
+<section id="net-sdk" class="level2">
+<h2 class="anchored" data-anchor-id="net-sdk">2.3.3 .NET SDK</h2>
+<p>This is required to <em>run</em> and <em>debug</em> C# applications:</p>
+<ul>
+<li>Check if already install: <code>dotnet --version</code></li>
+<li>If not installed:
+<ul>
+<li>type <code>.NET: Install</code> and then</li>
+<li>select <code>.NET: Install New .NET SDK</code>.</li>
+<li>Under <code>Latest</code>, select <code>.NET 8</code>, select <code>Install</code>.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="create-build-and-run-your-application" class="level1">
+<h1>3. Create, build, and run your application</h1>
+<p>The <strong>[.NET software development kit (SDK)]</strong> includes:</p>
+<ul>
+<li>A command-line interface (CLI) VSC’s Terminal.</li>
+<li><code>.NET CLI</code> commands can:
+<ul>
+<li><em>create</em> new console applications,</li>
+<li><em>build</em> project code, and</li>
+<li><em>run</em> applications.</li>
+</ul></li>
+</ul>
+<section id="net-cli" class="level2">
+<h2 class="anchored" data-anchor-id="net-cli">3.1 <code>.NET CLI</code></h2>
+<p>Sample .NET CLI command Code below will <em>create new console app</em> in <em>specified folder</em>.</p>
+<ul>
+<li><code>dotnet new console -o ./CsharpProjects/TestProject</code></li>
+</ul>
+</section>
+<section id="net-cli-command-structure" class="level2">
+<h2 class="anchored" data-anchor-id="net-cli-command-structure">3.2 .NET CLI Command Structure</h2>
+<p>There are 3 parts: [<em>driver</em>] [<em>command</em>] [<em>command arguments</em>]:</p>
+<ul>
+<li>The <strong><em>driver</em></strong>:
+<ul>
+<li><code>dotnet</code></li>
+</ul></li>
+<li>The <strong><em>command</em></strong>:
+<ul>
+<li><code>new console</code></li>
+</ul></li>
+<li>The <strong><em>command arguments</em></strong>:
+<ul>
+<li><code>-o ./CsharpProjects/TestProjectByCLI</code></li>
+</ul></li>
+</ul>
+<p><em>command arguments</em> are optional, so <code>dotnet new console</code> creates a new console app in the current working directory.</p>
+<p><img src="imgs/19dotnet_template.jpg" class="img-fluid"></p>
+</section>
+<section id="c-console-application-template" class="level2">
+<h2 class="anchored" data-anchor-id="c-console-application-template">3.3 C# Console Application Template</h2>
+<ul>
+<li><code>Program.cs</code>: Source Code ? (TBA)<br>
+</li>
+<li><code>TestProject1.csproj</code>: Project File<br>
+</li>
+<li><code>obj</code>: Build files and dependencies like .dlls (TBA)</li>
+</ul>
+</section>
+</section>
+<section id="update-build-and-run-application" class="level1">
+<h1>4. Update, Build, and Run Application</h1>
+<p>The <code>dotnet build</code> command:</p>
+<ul>
+<li>builds the <strong>project</strong> and</li>
+<li>builds its <strong>dependencies</strong></li>
+<li>into a set of <strong>binaries</strong>.</li>
+</ul>
+<p>The <strong>binaries</strong> include the:</p>
+<ul>
+<li>project’s code in <code>Intermediate Language (IL)</code> files with a <code>.dll extension</code>.</li>
+<li>Location: <code>.\bin\Debug\net7.0\</code></li>
+</ul>
+<section id="build-application" class="level2">
+<h2 class="anchored" data-anchor-id="build-application">4.1 Build Application</h2>
+<ul>
+<li>Navigate to <code>TestProject</code> (<code>Ctrl + q</code>: <strong>Folders</strong>)</li>
+<li><code>Shift + F10</code></li>
+<li><code>Open in Terminal</code></li>
+<li><code>dotnet build</code></li>
+</ul>
+<p><img src="imgs/19dotnet_build.jpg" class="img-fluid"></p>
+</section>
+<section id="run-application" class="level2">
+<h2 class="anchored" data-anchor-id="run-application">4.2 Run Application</h2>
+<p>The <code>dotnet run</code> command:</p>
+<ul>
+<li>runs source code without any explicit compile or launch commands.</li>
+<li>A convenient option to run application <strong><em>from the source code</em></strong>
+<ul>
+<li>Useful for fast iterative development from CLI.</li>
+<li>The command depends on the dotnet build command to build the code.</li>
+</ul></li>
+</ul>
+<p>Code: <code>dotnet run</code></p>
+</section>
+</section>
+<section id="create-build-and-run-a-test-project-in-one-screenshot" class="level1">
+<h1>5. Create, Build and Run a Test Project (in one screenshot)</h1>
+<section id="oldbad-version-1" class="level2">
+<h2 class="anchored" data-anchor-id="oldbad-version-1">5.1 Old/Bad (Version 1)</h2>
+<ol type="1">
+<li>Check dotnet (exists): <code>dotnet --version</code></li>
+<li>Create console app with dotnet cli command: <code>dotnet new console -o 2-CreateRunCSConsoleApps</code></li>
+<li>Check app has been created… [Realised I made a mistake]</li>
+</ol>
+<p>Should have created a extra folder within the top folder, that is: <code>2-CreateRunCSConsoleApps\SimpleApp</code></p>
+<p>I’ll leave screenshot below and also provide update.</p>
+<p><img src="imgs/19create_build_run.jpg" class="img-fluid"></p>
+</section>
+<section id="betterupdated-version-2" class="level2">
+<h2 class="anchored" data-anchor-id="betterupdated-version-2">5.2 Better/Updated (Version 2)</h2>
+<p>Current Project Structure:</p>
+<ul>
+<li><code>2-CreateRunCSConsoleApps\Program.cs</code>:
+<ul>
+<li>Only one project per solution, an undesirable structure.</li>
+<li><code>Program.cs</code> is directly under the Solution Name.</li>
+<li>Preferred to be able to have multiple projects within a single Solution (see next section).</li>
+</ul></li>
+</ul>
+<p>New Project Structure:</p>
+<ul>
+<li><code>2-CreateRunCSConsoleApps\TestProjectNo\Program.cs</code>:
+<ul>
+<li>Allows for multiple projects within single Solution. Example:
+<ul>
+<li><strong>[Project 1]</strong>: <code>2-CreateRunCSConsoleApps\TestProject1\Program.cs</code></li>
+<li><strong>[Project 2]</strong>: <code>2-CreateRunCSConsoleApps\TestProject2\Program.cs</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="create-build-run-version-2-steps" class="level2">
+<h2 class="anchored" data-anchor-id="create-build-run-version-2-steps">5.3 Create, Build Run: Version 2 Steps</h2>
+<ol type="1">
+<li>Create <strong>TestProject1</strong>: <code>dotnet new console -o 2-CreateRunCSConsoleApp\TestProject1</code>.</li>
+<li>Create <strong>TestProject2</strong>: See 2.</li>
+<li>Check projects created succesfully.</li>
+<li>Update <strong>Program.cs</strong> scripts and save.</li>
+<li>Build.. <strong><em>[Realised I didnt build it first, but still works??]</em></strong>: No issues (see 4.3.1 <code>dotnet run</code> notes).</li>
+<li>Build TestProject1: Go to TestProject 1 directly then: <code>dotnet build</code>, then <code>dotnet run</code>.</li>
+<li>Build TestProject2: see 6.</li>
+</ol>
+<p>Output for both projects are as expected.</p>
+<p><img src="imgs/19create_build_run2.jpg" class="img-fluid"></p>
+<section id="dotnet-run-notes" class="level3">
+<h3 class="anchored" data-anchor-id="dotnet-run-notes">5.3.1 <code>dotnet run</code> notes</h3>
+<p>Turns out <code>dotnet run</code> also runs <code>dotnet build</code>. GPT output:</p>
+<ul>
+<li><p><strong>Separate Build and Run Steps</strong>: In scenarios like continuous integration (CI) pipelines or deployment scripts, you often want to explicitly build the project first (dotnet build) and then run or test it separately. This allows for better error handling and control over each step.</p></li>
+<li><p><strong>Build Output for Distribution</strong>: dotnet build creates the build artifacts (compiled .dll files and dependencies) without running the project. If you’re distributing your code or creating deployment packages, you’ll want the output from dotnet build, not the temporary output that dotnet run uses.</p></li>
+<li><p><strong>Faster Subsequent Runs</strong>: Running dotnet build first creates a compiled version that dotnet run will use as long as there are no code changes. This can make dotnet run faster on subsequent runs.</p></li>
+<li><p><strong>Debugging and Optimization</strong>: dotnet build allows for setting specific build configurations, like Release or Debug, without running the program. This is useful for testing different build configurations or optimizing the final build before deployment.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="bonus-clone-repo-in-windows" class="level1">
+<h1>6. [Bonus] Clone Repo in Windows</h1>
+<p>Terminal: <code>git@github.com:tonyjustdevs/learning_csharp_vs.git</code></p>
+<p>If <code>git</code> is not recognised: Add git bin as <strong>environment variable</strong>.</p>
+<p><img src="imgs/19add_env_var.jpg" class="img-fluid"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
