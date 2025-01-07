@@ -1,5 +1,5 @@
 ---
-title: "about"
+title: "About 🐈‍⬛"
 image: profile.jpg
 about:
   template: jolla
@@ -13,7 +13,7 @@ about:
 
 ---
 
-This is a blog is my journey from applied finance into (a hopefully useful) developer.  
+This is a blog coinciding with my journey to becoming a developer.  
 
 **A Poem of Oreo**  
 
