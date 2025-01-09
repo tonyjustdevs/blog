@@ -11,6 +11,7 @@
   {
     "listing": "/computerscience.html",
     "items": [
+      "/posts/computerscience/datastructuresandalgorithms/dsa_004-chessboard-grains.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html",
@@ -51,6 +52,7 @@
     "listing": "/mathematics.html",
     "items": [
       "/posts/mathematics/calculus/calc-007-ch3-1-ex-25-31.html",
+      "/posts/mathematics/calculus/calc-008-log-rules-workout.html",
       "/posts/mathematics/calculus/calc-006-ch3-1-ex-23.html",
       "/posts/mathematics/calculus/calc-005-ch3-1-ex-17.html",
       "/posts/mathematics/calculus/calc-004-binomial-theorem.html",
@@ -100,6 +102,7 @@
     "listing": "/calculus.html",
     "items": [
       "/posts/mathematics/calculus/calc-007-ch3-1-ex-25-31.html",
+      "/posts/mathematics/calculus/calc-008-log-rules-workout.html",
       "/posts/mathematics/calculus/calc-006-ch3-1-ex-23.html",
       "/posts/mathematics/calculus/calc-005-ch3-1-ex-17.html",
       "/posts/mathematics/calculus/calc-004-binomial-theorem.html",
@@ -111,7 +114,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/computerscience/datastructuresandalgorithms/dsa_004-chessboard-grains.html",
       "/posts/mathematics/calculus/calc-007-ch3-1-ex-25-31.html",
+      "/posts/mathematics/calculus/calc-008-log-rules-workout.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html",
       "/posts/mathematics/calculus/calc-006-ch3-1-ex-23.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html",
@@ -189,6 +194,7 @@
   {
     "listing": "/dsa.html",
     "items": [
+      "/posts/computerscience/datastructuresandalgorithms/dsa_004-chessboard-grains.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html"

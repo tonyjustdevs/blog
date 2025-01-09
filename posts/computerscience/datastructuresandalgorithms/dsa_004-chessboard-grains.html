@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2025-01-01">
-<meta name="description" content="Big-O for Array Operations">
+<meta name="dcterms.date" content="2025-01-09">
+<meta name="description" content="Chapter 3 Exercises 3, J.Wengrow Vol 2">
 
-<title>DSA 1: Big-O - Arrays and Sets – Tony’s Blog ✍️</title>
+<title>DSA 4: Big-O - Chessboard &amp; Grains Problem – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -212,14 +246,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">DSA 1: Big-O - Arrays and Sets</h1>
+      <h1 class="title">DSA 4: Big-O - Chessboard &amp; Grains Problem</h1>
                   <div>
         <div class="description">
-          Big-O for Array Operations
+          Chapter 3 Exercises 3, J.Wengrow Vol 2
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">datastructures</div>
+                <div class="quarto-category">data structures</div>
                 <div class="quarto-category">algorithms</div>
               </div>
                   </div>
@@ -238,7 +272,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 1, 2025</p>
+        <p class="date">January 9, 2025</p>
       </div>
     </div>
     
@@ -254,33 +288,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#arrays" id="toc-arrays" class="nav-link active" data-scroll-target="#arrays">1. Arrays</a>
+  <li><a href="#question-3.-chess-board-algorithm" id="toc-question-3.-chess-board-algorithm" class="nav-link active" data-scroll-target="#question-3.-chess-board-algorithm">Question 3. Chess Board Algorithm</a>
   <ul class="collapse">
-  <li><a href="#array-operation---summary" id="toc-array-operation---summary" class="nav-link" data-scroll-target="#array-operation---summary">1.1 Array Operation - Summary</a></li>
-  <li><a href="#array-operation---details" id="toc-array-operation---details" class="nav-link" data-scroll-target="#array-operation---details">1.2 Array Operation - Details</a>
-  <ul class="collapse">
-  <li><a href="#read-1" id="toc-read-1" class="nav-link" data-scroll-target="#read-1">1.2.1 <strong>Read <span class="math inline">\((1)\)</span></strong>:</a></li>
-  <li><a href="#search-n" id="toc-search-n" class="nav-link" data-scroll-target="#search-n">1.2.2 <strong>Search <span class="math inline">\((n)\)</span></strong>:</a></li>
-  <li><a href="#delete-n" id="toc-delete-n" class="nav-link" data-scroll-target="#delete-n">1.2.3 <strong>Delete <span class="math inline">\((n)\)</span></strong>:</a></li>
-  <li><a href="#a-delete-n---worse" id="toc-a-delete-n---worse" class="nav-link" data-scroll-target="#a-delete-n---worse">1.2.3a <strong>Delete <span class="math inline">\((n)\)</span></strong> - Worse:</a></li>
-  <li><a href="#b-delete-1---best" id="toc-b-delete-1---best" class="nav-link" data-scroll-target="#b-delete-1---best">1.2.3b <strong>Delete <span class="math inline">\((1)\)</span></strong> - Best</a></li>
-  <li><a href="#insert-n1" id="toc-insert-n1" class="nav-link" data-scroll-target="#insert-n1">1.2.4 <strong>Insert <span class="math inline">\((n+1)\)</span></strong></a></li>
-  <li><a href="#a-insert-n1---worse" id="toc-a-insert-n1---worse" class="nav-link" data-scroll-target="#a-insert-n1---worse">1.2.4a <strong>Insert <span class="math inline">\((n+1)\)</span> - Worse</strong>:</a></li>
-  <li><a href="#b-insert-1---best" id="toc-b-insert-1---best" class="nav-link" data-scroll-target="#b-insert-1---best">1.2.4b <strong>Insert <span class="math inline">\((1)\)</span> - Best</strong>:</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#array-based-sets" id="toc-array-based-sets" class="nav-link" data-scroll-target="#array-based-sets">2. Array-Based Sets</a>
-  <ul class="collapse">
-  <li><a href="#classic-arrays-vs-array-based-sets---differences" id="toc-classic-arrays-vs-array-based-sets---differences" class="nav-link" data-scroll-target="#classic-arrays-vs-array-based-sets---differences">2.1 Classic Arrays vs Array-Based Sets - Differences</a></li>
-  <li><a href="#classic-arrays-vs-array-based-sets---operations-comparison-table" id="toc-classic-arrays-vs-array-based-sets---operations-comparison-table" class="nav-link" data-scroll-target="#classic-arrays-vs-array-based-sets---operations-comparison-table">2.2 Classic Arrays vs Array-Based Sets - Operations Comparison Table</a></li>
-  <li><a href="#array-based-set-operation---detailed" id="toc-array-based-set-operation---detailed" class="nav-link" data-scroll-target="#array-based-set-operation---detailed">2.3 Array-Based Set Operation - Detailed</a>
-  <ul class="collapse">
-  <li><a href="#read-1-search-n-delete-n" id="toc-read-1-search-n-delete-n" class="nav-link" data-scroll-target="#read-1-search-n-delete-n">2.3.1 <strong>Read <span class="math inline">\((1)\)</span></strong>, <strong>Search <span class="math inline">\((n)\)</span></strong>, <strong>Delete <span class="math inline">\((n)\)</span></strong></a></li>
-  <li><a href="#insert-2n1-different-to-classic-arrays" id="toc-insert-2n1-different-to-classic-arrays" class="nav-link" data-scroll-target="#insert-2n1-different-to-classic-arrays">2.3.2 <strong>Insert <span class="math inline">\((2n+1)\)</span></strong>: Different to Classic Arrays</a></li>
-  <li><a href="#a-insert-2n1---worse" id="toc-a-insert-2n1---worse" class="nav-link" data-scroll-target="#a-insert-2n1---worse">2.3.2a <strong>Insert <span class="math inline">\((2n+1)\)</span></strong> - Worse</a></li>
-  <li><a href="#b-insert-n1---best" id="toc-b-insert-n1---best" class="nav-link" data-scroll-target="#b-insert-n1---best">2.3.2b <strong>Insert <span class="math inline">\((n+1)\)</span></strong> - Best</a></li>
-  <li><a href="#c-insert-mn1---medium" id="toc-c-insert-mn1---medium" class="nav-link" data-scroll-target="#c-insert-mn1---medium">2.3.2c <strong>Insert <span class="math inline">\((m*n+1)\)</span></strong> - Medium</a></li>
-  </ul></li>
+  <li><a href="#written-solution" id="toc-written-solution" class="nav-link" data-scroll-target="#written-solution">3.1 Written Solution</a></li>
+  <li><a href="#expected-results-placed-grains-table" id="toc-expected-results-placed-grains-table" class="nav-link" data-scroll-target="#expected-results-placed-grains-table">3.2 Expected Results: Placed Grains Table</a></li>
+  <li><a href="#python-for-loop-explainer" id="toc-python-for-loop-explainer" class="nav-link" data-scroll-target="#python-for-loop-explainer">3.3 Python <code>for-loop</code> explainer</a></li>
+  <li><a href="#python-while-loop-explainer" id="toc-python-while-loop-explainer" class="nav-link" data-scroll-target="#python-while-loop-explainer">3.4 Python <code>while-loop</code> explainer</a></li>
+  <li><a href="#for-loop-solution" id="toc-for-loop-solution" class="nav-link" data-scroll-target="#for-loop-solution">3.5 <code>for-loop</code> Solution</a></li>
+  <li><a href="#while-loop-solution" id="toc-while-loop-solution" class="nav-link" data-scroll-target="#while-loop-solution">3.6 <code>while-loop</code> Solution</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -292,216 +307,190 @@ window.Quarto = {
 
 
 
-<p><img src="imgs/dsa-001-bigo.jpg" class="img-fluid"></p>
-<section id="arrays" class="level1">
-<h1>1. Arrays</h1>
-<section id="array-operation---summary" class="level2">
-<h2 class="anchored" data-anchor-id="array-operation---summary">1.1 Array Operation - Summary</h2>
+<p><img src="imgs/dsa_ch03chess.jpg" class="img-fluid"></p>
+<section id="question-3.-chess-board-algorithm" class="level1">
+<h1>Question 3. Chess Board Algorithm</h1>
+<p>Imagine you have a chessboard ♟️, and:</p>
 <ul>
-<li><strong>Read <span class="math inline">\((1)\)</span></strong><br>
-</li>
-<li><strong>Search <span class="math inline">\((n)\)</span></strong><br>
-</li>
-<li><strong>Insert <span class="math inline">\((n+1)\)</span></strong><br>
-</li>
-<li><strong>Delete <span class="math inline">\((n)\)</span></strong></li>
+<li>One <code>one</code> square put a <strong>single</strong> grain of rice</li>
+<li>On the <code>second</code> square, you put <strong>two</strong> grains of rice, since that is double the amount of rice on the previous square.</li>
+<li>On the <code>third</code> square, you put <strong>four</strong> grains.</li>
+<li>On the <code>fourth</code> square, you put <strong>eight</strong> grains, and</li>
+<li>On the <code>fifth</code> square, you put <strong>sixteen</strong> grains, and so on.</li>
+</ul>
+<section id="q.-use-big_o-notation-to-describe-the-time-complexity" class="level4">
+<h4 class="anchored" data-anchor-id="q.-use-big_o-notation-to-describe-the-time-complexity">Q. Use <span class="math inline">\(Big\_O\)</span> notation to describe the <span class="math inline">\(Time\ Complexity\)</span>:</h4>
+</section>
+<section id="q.-write-a-function-to-calculate-which-square-youll-need-to-place-a-certain-number-of-rice-grains." class="level4">
+<h4 class="anchored" data-anchor-id="q.-write-a-function-to-calculate-which-square-youll-need-to-place-a-certain-number-of-rice-grains.">Q. Write a function to calculate <strong><em>which square you’ll need to place a certain number of rice grains</em></strong>.</h4>
+<p>For example, for <strong>sixteen grains</strong>:</p>
+<ul>
+<li>the function will return <code>5</code>, since you will</li>
+<li>place the <code>sixteen</code> grains on the <strong>fifth</strong> square.</li>
+</ul>
+<p>Reference:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Wheat_and_chessboard_problem">Wheat and chessboard problem (wiki)</a></li>
 </ul>
 </section>
-<section id="array-operation---details" class="level2">
-<h2 class="anchored" data-anchor-id="array-operation---details">1.2 Array Operation - Details</h2>
-<section id="read-1" class="level3">
-<h3 class="anchored" data-anchor-id="read-1">1.2.1 <strong>Read <span class="math inline">\((1)\)</span></strong>:</h3>
+<section id="written-solution" class="level2">
+<h2 class="anchored" data-anchor-id="written-solution">3.1 Written Solution</h2>
+<p>We can define:</p>
 <ul>
-<li><span class="math inline">\(1\)</span> (<em>worse</em>)</li>
-<li><span class="math inline">\(1\)</span> (<em>best</em>)</li>
-</ul>
-</section>
-<section id="search-n" class="level3">
-<h3 class="anchored" data-anchor-id="search-n">1.2.2 <strong>Search <span class="math inline">\((n)\)</span></strong>:</h3>
+<li>For each <code>step</code> (chessboard square), it is incremented by one,
 <ul>
-<li><span class="math inline">\(n\)</span> (<em>worse</em>: target is last value found)<br>
-</li>
-<li><span class="math inline">\(1\)</span> (<em>best</em>: target is first value found)</li>
-</ul>
-</section>
-<section id="delete-n" class="level3">
-<h3 class="anchored" data-anchor-id="delete-n">1.2.3 <strong>Delete <span class="math inline">\((n)\)</span></strong>:</h3>
-</section>
-<section id="a-delete-n---worse" class="level3">
-<h3 class="anchored" data-anchor-id="a-delete-n---worse">1.2.3a <strong>Delete <span class="math inline">\((n)\)</span></strong> - Worse:</h3>
-<p>{<span class="math inline">\(n\)</span>}=({<span class="math inline">\(1\)</span>} <span class="math inline">\(+\)</span> {<span class="math inline">\(n-1\)</span>}): <em>worse</em> - delete <span class="math inline">\(first\)</span> item or <span class="math inline">\(arr[0]\)</span>:</p>
+<li><code>placed_grains</code> is the number grains placed down on the square
 <ul>
-<li><p>{<span class="math inline">\(1\)</span>}: <strong>delete</strong> item at <span class="math inline">\(arr[0]\)</span></p></li>
-<li><p>{<span class="math inline">\(n-1\)</span>}: shift whole array, left one item at a time:</p>
+<li>This number <strong><em>doubles</em></strong> at each step.</li>
+</ul></li>
+<li><code>placed_grains</code> is calculated by an algorithm of <span class="math inline">\(log\ time\)</span> or <span class="math inline">\(O(\log{N})\)</span>
 <ul>
-<li><span class="math inline">\(arr[1] \to arr[0]\)</span> (<span class="math inline">\(index\_1 \to index\_0\)</span>)</li>
-<li><span class="math inline">\(arr[2] \to arr[1]\)</span> (<span class="math inline">\(index\_2 \to index\_1\)</span>)</li>
-<li><span class="math inline">\(...\)</span></li>
-<li><span class="math inline">\(arr[n] \to arr[n-1]\)</span> (<span class="math inline">\(inde`x\_[n] \to index\_[n-1]\)</span>)</li>
+<li><em>Increases</em> <strong><em>one step</em></strong> <em>each time the data</em> <strong><em>doubles</em></strong>,</li>
+<li>and so equivalently,</li>
+<li><em>Move to next chessboard square, double placed grains</em></li>
+</ul></li>
 </ul></li>
 </ul>
-</section>
-<section id="b-delete-1---best" class="level3">
-<h3 class="anchored" data-anchor-id="b-delete-1---best">1.2.3b <strong>Delete <span class="math inline">\((1)\)</span></strong> - Best</h3>
-<p>{<span class="math inline">\(1\)</span>}: <em>best</em> - delete <span class="math inline">\(last\)</span> item or <span class="math inline">\(arr[-1]\)</span></p>
-</section>
-<section id="insert-n1" class="level3">
-<h3 class="anchored" data-anchor-id="insert-n1">1.2.4 <strong>Insert <span class="math inline">\((n+1)\)</span></strong></h3>
-</section>
-<section id="a-insert-n1---worse" class="level3">
-<h3 class="anchored" data-anchor-id="a-insert-n1---worse">1.2.4a <strong>Insert <span class="math inline">\((n+1)\)</span> - Worse</strong>:</h3>
-<p>{<span class="math inline">\(n + 1\)</span>}: <em>worse</em> - insert at <span class="math inline">\(front\)</span> or <span class="math inline">\(arr[0]\)</span>:</p>
+<p>In other words:</p>
 <ul>
-<li><p>{<span class="math inline">\(n\)</span>}: whole existing array of length {<span class="math inline">\(n\)</span>} needs to move right by {<span class="math inline">\(1\)</span>}:</p>
+<li><span class="math inline">\(O(\log{N})\)</span> means that for N data elements, the algorithm would take <span class="math inline">\(\log_{2}{N}\)</span> steps.</li>
+</ul>
+</section>
+<section id="expected-results-placed-grains-table" class="level2">
+<h2 class="anchored" data-anchor-id="expected-results-placed-grains-table">3.2 Expected Results: Placed Grains Table</h2>
+<p>To find out:</p>
 <ul>
-<li>starts at {<span class="math inline">\(n\)</span>}, moves it right to {<span class="math inline">\(n+1\)</span>}</li>
-<li>then {<span class="math inline">\(n-1\)</span>} moves to {<span class="math inline">\(n\)</span>}… {<span class="math inline">\(n\_times\)</span>} or {<span class="math inline">\(n\_steps\)</span>}<br>
-</li>
-<li>index <span class="math inline">\([0]\)</span> becomes empty<br>
-</li>
-<li>index <span class="math inline">\([0]\)</span> retains same memory address (might change for diff languages)</li>
+<li><em>Which</em> <strong>chessboard square</strong> (<code>step</code>)</li>
+<li><em>Contains</em> <strong>16</strong> grains on the square (<code>n_grains=16</code>)</li>
+<li><em>Double</em> the number of grains placed (<code>placed_grain</code>) at each step until we reached the desired amount of grains (<code>placed_grain==n_grains</code>):
+<ul>
+<li>chessboard square: <strong>5</strong> (<code>step=5</code>)</li>
 </ul></li>
-<li><p>{<span class="math inline">\(1\)</span>}: insert the finally vacant spot at index 0, same memory address</p></li>
 </ul>
-</section>
-<section id="b-insert-1---best" class="level3">
-<h3 class="anchored" data-anchor-id="b-insert-1---best">1.2.4b <strong>Insert <span class="math inline">\((1)\)</span> - Best</strong>:</h3>
-<p>{<span class="math inline">\(1\)</span>}: <em>best</em> - insert at <span class="math inline">\(end\)</span> or <span class="math inline">\(arr[-1]\)</span>:</p>
-<p>Computers may have to allocate additional memory cells toward this array (language specific)</p>
-</section>
-</section>
-</section>
-<section id="array-based-sets" class="level1">
-<h1>2. Array-Based Sets</h1>
-<p>A data stucture that <em>does not allow</em> <strong><em>duplicates</em></strong> values within it.</p>
-<p>Useful: data without duplicates (e.g.online phonebook)</p>
-<section id="classic-arrays-vs-array-based-sets---differences" class="level2">
-<h2 class="anchored" data-anchor-id="classic-arrays-vs-array-based-sets---differences">2.1 Classic Arrays vs Array-Based Sets - Differences</h2>
-<p><strong>An array-based set</strong>:</p>
-<ul>
-<li>is an <strong>array</strong></li>
-<li>with <em>one additional constraint</em></li>
-<li>of <strong><em>barring duplicates</em></strong></li>
-</ul>
-</section>
-<section id="classic-arrays-vs-array-based-sets---operations-comparison-table" class="level2">
-<h2 class="anchored" data-anchor-id="classic-arrays-vs-array-based-sets---operations-comparison-table">2.2 Classic Arrays vs Array-Based Sets - Operations Comparison Table</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 8%">
-<col style="width: 25%">
-<col style="width: 23%">
-<col style="width: 29%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Operation</th>
-<th>Array</th>
-<th>Array-Based Set</th>
-<th>Difference</th>
-<th>Change</th>
+<th><code>step</code></th>
+<th><code>placed_grain</code></th>
+<th><code>n_grains</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Read</strong></td>
-<td><span class="math inline">\(O(1,1)\)</span></td>
-<td><span class="math inline">\(O(1,1)\)</span></td>
-<td>Same</td>
-<td>None</td>
+<td>1</td>
+<td>1</td>
+<td>16</td>
 </tr>
 <tr class="even">
-<td><strong>Search</strong></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td>Same</td>
-<td>None</td>
+<td>2</td>
+<td>2</td>
+<td>16</td>
 </tr>
 <tr class="odd">
-<td><strong>Delete</strong></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td>Same</td>
-<td>None</td>
+<td>3</td>
+<td>4</td>
+<td>16</td>
 </tr>
 <tr class="even">
-<td><strong>Insert</strong></td>
-<td><span class="math inline">\(O(1,n+1)\)</span></td>
-<td><span class="math inline">\(O(n+1,n*n+1)\)</span><br>or<br><span class="math inline">\(O(n+1,2n+1)\)</span></td>
-<td><span class="math inline">\(O(worse,worse)\)</span></td>
-<td><span class="math inline">\(O_{best}(1 \to n+1)\)</span> <br> and <br> <span class="math inline">\(O_{worse}(n+1 \to 2n+1)\)</span></td>
+<td>4</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>16</td>
+<td>16</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="array-based-set-operation---detailed" class="level2">
-<h2 class="anchored" data-anchor-id="array-based-set-operation---detailed">2.3 Array-Based Set Operation - Detailed</h2>
-<section id="read-1-search-n-delete-n" class="level3">
-<h3 class="anchored" data-anchor-id="read-1-search-n-delete-n">2.3.1 <strong>Read <span class="math inline">\((1)\)</span></strong>, <strong>Search <span class="math inline">\((n)\)</span></strong>, <strong>Delete <span class="math inline">\((n)\)</span></strong></h3>
+<section id="python-for-loop-explainer" class="level2">
+<h2 class="anchored" data-anchor-id="python-for-loop-explainer">3.3 Python <code>for-loop</code> explainer</h2>
+<p><code>for-loops</code> are useful when:</p>
 <ul>
-<li><strong>Read <span class="math inline">\((1,1)\)</span></strong><br>
-</li>
-<li><strong>Search <span class="math inline">\((1,n)\)</span></strong><br>
-</li>
-<li><strong>Delete <span class="math inline">\((1,n)\)</span></strong><br>
-</li>
-<li><strong>Insert <span class="math inline">\((n+1,2n+1)\)</span></strong></li>
-</ul>
-</section>
-<section id="insert-2n1-different-to-classic-arrays" class="level3">
-<h3 class="anchored" data-anchor-id="insert-2n1-different-to-classic-arrays">2.3.2 <strong>Insert <span class="math inline">\((2n+1)\)</span></strong>: Different to Classic Arrays</h3>
-</section>
-<section id="a-insert-2n1---worse" class="level3">
-<h3 class="anchored" data-anchor-id="a-insert-2n1---worse">2.3.2a <strong>Insert <span class="math inline">\((2n+1)\)</span></strong> - Worse</h3>
-<p>{<span class="math inline">\(n*n+1\)</span>} - worse, insert at the <span class="math inline">\(front\)</span>:</p>
+<li><p>Scenario: The <strong><em>range</em></strong> of iteration is <strong>known</strong>:</p>
 <ul>
-<li><p>{<span class="math inline">\(n\)</span>}: <strong>search</strong> whole array {<span class="math inline">\(n\_times\)</span>}<br>
-</p></li>
-<li><p>{<span class="math inline">\(n\)</span>}: <strong>shift</strong> whole array, right (one-item-at-a-time) i.e.&nbsp;{<span class="math inline">\(n\_times\)</span>}:</p>
+<li>or <code>min</code> and <code>max</code> of our iteration</li>
+<li>or <code>start</code> (arg 1) and <code>stop</code> (arg 2) indexes are known in advance</li>
+<li><code>boolean</code> rule not required.
 <ul>
-<li><span class="math inline">\(arr[n] \to arr[n+1]\)</span> (<span class="math inline">\(index\_[n] \to index\_[n+1]\)</span>)<br>
-</li>
-<li><span class="math inline">\(arr[n-1] \to arr[n]\)</span> (<span class="math inline">\(index\_[n-1] \to index\_[n]\)</span>)<br>
-</li>
-<li><span class="math inline">\(...\)</span><br>
-</li>
-<li><span class="math inline">\(arr[0] \to arr[1]\)</span> (<span class="math inline">\(index\_[0] \to index\_[1]\)</span>)</li>
+<li>The loop will <strong><em>stop automatically</em></strong> when the limit is reached</li>
 </ul></li>
-<li><p>{<span class="math inline">\(1\)</span>}: insert at index 0, same memory address</p></li>
-</ul>
-</section>
-<section id="b-insert-n1---best" class="level3">
-<h3 class="anchored" data-anchor-id="b-insert-n1---best">2.3.2b <strong>Insert <span class="math inline">\((n+1)\)</span></strong> - Best</h3>
-<p>{<span class="math inline">\(n+1\)</span>} - best, insert at the <span class="math inline">\(end\)</span>:</p>
-<ul>
-<li>Search array (for dupes) + insert (at end)</li>
-</ul>
-</section>
-<section id="c-insert-mn1---medium" class="level3">
-<h3 class="anchored" data-anchor-id="c-insert-mn1---medium">2.3.2c <strong>Insert <span class="math inline">\((m*n+1)\)</span></strong> - Medium</h3>
-<p>{<span class="math inline">\(m*n+1\)</span>} - medium, insert at the <span class="math inline">\(arr[j]\)</span> or <span class="math inline">\(index\_[j]\)</span>):</p>
-<ul>
-<li><p>{<span class="math inline">\(n\)</span>}: <strong>search</strong> whole array {<span class="math inline">\(n\_times\)</span>}</p></li>
-<li><p>{<span class="math inline">\(m\)</span>}: <strong>shift</strong> whole array {<span class="math inline">\(n\_times\)</span>} where {<span class="math inline">\(m\)</span>} <span class="math inline">\(=\)</span> {<span class="math inline">\(n-j\)</span>}:</p>
-<ul>
-<li>if want to insert at <span class="math inline">\(index\_[j]\)</span>: all items after <span class="math inline">\(index\_[j]\)</span> by one</li>
-<li>thus we shift right {<span class="math inline">\(m\)</span>} <span class="math inline">\(=\)</span> {<span class="math inline">\(n-j\)</span>} items</li>
-<li><span class="math inline">\(arr[n] \to arr[n+1]\)</span> (<span class="math inline">\(index\_[n] \to index\_[n+1]\)</span>)</li>
-<li><span class="math inline">\(...\)</span></li>
-<li><span class="math inline">\(arr[j] \to arr[j+1]\)</span> (<span class="math inline">\(index\_[j] \to index\_[j+1]\)</span>)</li>
-<li>or</li>
-<li><span class="math inline">\(arr[n-m] \to arr[n-m+1]\)</span> (<span class="math inline">\(index\_[n-m] \to index\_[n-m+1]\)</span>)</li>
 </ul></li>
-<li><p>{<span class="math inline">\(1\)</span>}: insert at <span class="math inline">\(arr[j]\)</span> or <span class="math inline">\(arr[n-m]\)</span></p></li>
+<li><p>The chessboard has <span class="math inline">\(64\)</span> squares: the <code>range</code> would be:</p>
+<ul>
+<li>from <code>1</code> to <code>64</code></li>
+<li>Note: The loop counts up to but does not include the <code>stop</code> value
+<ul>
+<li><code>range(1,64)</code>: counts <code>1,2,..63</code>, thus use</li>
+<li><code>range(1,65)</code>: counts <code>1,2,..64</code></li>
+</ul></li>
+</ul></li>
 </ul>
-<section id="inserting-at-arrj-hand-drawn" class="level4">
-<h4 class="anchored" data-anchor-id="inserting-at-arrj-hand-drawn">2.3.3 Inserting at <span class="math inline">\(arr[j]\)</span> hand-drawn</h4>
-<p><img src="imgs/dsa-001-insert-set.jpg" class="img-fluid"></p>
+</section>
+<section id="python-while-loop-explainer" class="level2">
+<h2 class="anchored" data-anchor-id="python-while-loop-explainer">3.4 Python <code>while-loop</code> explainer</h2>
+<p><code>while-loops</code> are useful when:</p>
+<ul>
+<li><p>Scenario: The <strong><em>range</em></strong> of iteration is <strong>unknown</strong>:</p>
+<ul>
+<li>a <code>min</code> or <code>start</code> argument required
+<ul>
+<li>manual <code>iteration</code> required</li>
+</ul></li>
+<li><code>boolean</code> rule is <strong>required</strong>.
+<ul>
+<li>The loop will <strong><em>exit</em></strong> when rule is <code>not True</code> or <code>False</code> anymore (i.e.&nbsp;goal has been reached)</li>
+<li>The loop will continue forever unless the goal is reached
+<ul>
+<li>Note: careful consideration to ensure the <strong>boolean test is reachable</strong></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>The loop does not care how many squares the chessboard has (unless manually placed as a requirement)</p></li>
+</ul>
+</section>
+<section id="for-loop-solution" class="level2">
+<h2 class="anchored" data-anchor-id="for-loop-solution">3.5 <code>for-loop</code> Solution</h2>
+<div id="cell-9" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Answer 1: for-loop </span><span class="al">###</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>idx<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>max_squares <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>placed_grains <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>target_grains <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,max_squares<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> placed_grains <span class="op">==</span> target_grains:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(idx)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># return idx</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    idx<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    placed_grains<span class="op">=</span>placed_grains<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># [1,2,3,4, 5, 6, 7]</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># [1,2,4,8,16,32,64]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5</code></pre>
+</div>
+</div>
+</section>
+<section id="while-loop-solution" class="level2">
+<h2 class="anchored" data-anchor-id="while-loop-solution">3.6 <code>while-loop</code> Solution</h2>
+<div id="cell-11" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Answer 2: while-loop </span><span class="al">###</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>placed_grains <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>target_grains <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> placed_grains<span class="op">&lt;</span>target_grains:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    idx<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    placed_grains<span class="op">*=</span><span class="dv">2</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(idx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5</code></pre>
+</div>
+</div>
 
 
-</section>
-</section>
 </section>
 </section>
 

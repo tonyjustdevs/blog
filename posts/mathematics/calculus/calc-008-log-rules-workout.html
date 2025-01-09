@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2025-01-01">
-<meta name="description" content="Big-O for Array Operations">
+<meta name="dcterms.date" content="2025-01-08">
+<meta name="description" content="From Ch3.1.Ex25-31, Thomas 13e pp.126-127">
 
-<title>DSA 1: Big-O - Arrays and Sets – Tony’s Blog ✍️</title>
+<title>Calculus 7: Rates of Change Applications – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -72,35 +106,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -212,15 +217,14 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">DSA 1: Big-O - Arrays and Sets</h1>
+      <h1 class="title">Calculus 7: Rates of Change Applications</h1>
                   <div>
         <div class="description">
-          Big-O for Array Operations
+          From Ch3.1.Ex25-31, Thomas 13e pp.126-127
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">datastructures</div>
-                <div class="quarto-category">algorithms</div>
+                <div class="quarto-category">calculus</div>
               </div>
                   </div>
   </div>
@@ -238,7 +242,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 1, 2025</p>
+        <p class="date">January 8, 2025</p>
       </div>
     </div>
     
@@ -254,34 +258,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#arrays" id="toc-arrays" class="nav-link active" data-scroll-target="#arrays">1. Arrays</a>
-  <ul class="collapse">
-  <li><a href="#array-operation---summary" id="toc-array-operation---summary" class="nav-link" data-scroll-target="#array-operation---summary">1.1 Array Operation - Summary</a></li>
-  <li><a href="#array-operation---details" id="toc-array-operation---details" class="nav-link" data-scroll-target="#array-operation---details">1.2 Array Operation - Details</a>
-  <ul class="collapse">
-  <li><a href="#read-1" id="toc-read-1" class="nav-link" data-scroll-target="#read-1">1.2.1 <strong>Read <span class="math inline">\((1)\)</span></strong>:</a></li>
-  <li><a href="#search-n" id="toc-search-n" class="nav-link" data-scroll-target="#search-n">1.2.2 <strong>Search <span class="math inline">\((n)\)</span></strong>:</a></li>
-  <li><a href="#delete-n" id="toc-delete-n" class="nav-link" data-scroll-target="#delete-n">1.2.3 <strong>Delete <span class="math inline">\((n)\)</span></strong>:</a></li>
-  <li><a href="#a-delete-n---worse" id="toc-a-delete-n---worse" class="nav-link" data-scroll-target="#a-delete-n---worse">1.2.3a <strong>Delete <span class="math inline">\((n)\)</span></strong> - Worse:</a></li>
-  <li><a href="#b-delete-1---best" id="toc-b-delete-1---best" class="nav-link" data-scroll-target="#b-delete-1---best">1.2.3b <strong>Delete <span class="math inline">\((1)\)</span></strong> - Best</a></li>
-  <li><a href="#insert-n1" id="toc-insert-n1" class="nav-link" data-scroll-target="#insert-n1">1.2.4 <strong>Insert <span class="math inline">\((n+1)\)</span></strong></a></li>
-  <li><a href="#a-insert-n1---worse" id="toc-a-insert-n1---worse" class="nav-link" data-scroll-target="#a-insert-n1---worse">1.2.4a <strong>Insert <span class="math inline">\((n+1)\)</span> - Worse</strong>:</a></li>
-  <li><a href="#b-insert-1---best" id="toc-b-insert-1---best" class="nav-link" data-scroll-target="#b-insert-1---best">1.2.4b <strong>Insert <span class="math inline">\((1)\)</span> - Best</strong>:</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#array-based-sets" id="toc-array-based-sets" class="nav-link" data-scroll-target="#array-based-sets">2. Array-Based Sets</a>
-  <ul class="collapse">
-  <li><a href="#classic-arrays-vs-array-based-sets---differences" id="toc-classic-arrays-vs-array-based-sets---differences" class="nav-link" data-scroll-target="#classic-arrays-vs-array-based-sets---differences">2.1 Classic Arrays vs Array-Based Sets - Differences</a></li>
-  <li><a href="#classic-arrays-vs-array-based-sets---operations-comparison-table" id="toc-classic-arrays-vs-array-based-sets---operations-comparison-table" class="nav-link" data-scroll-target="#classic-arrays-vs-array-based-sets---operations-comparison-table">2.2 Classic Arrays vs Array-Based Sets - Operations Comparison Table</a></li>
-  <li><a href="#array-based-set-operation---detailed" id="toc-array-based-set-operation---detailed" class="nav-link" data-scroll-target="#array-based-set-operation---detailed">2.3 Array-Based Set Operation - Detailed</a>
-  <ul class="collapse">
-  <li><a href="#read-1-search-n-delete-n" id="toc-read-1-search-n-delete-n" class="nav-link" data-scroll-target="#read-1-search-n-delete-n">2.3.1 <strong>Read <span class="math inline">\((1)\)</span></strong>, <strong>Search <span class="math inline">\((n)\)</span></strong>, <strong>Delete <span class="math inline">\((n)\)</span></strong></a></li>
-  <li><a href="#insert-2n1-different-to-classic-arrays" id="toc-insert-2n1-different-to-classic-arrays" class="nav-link" data-scroll-target="#insert-2n1-different-to-classic-arrays">2.3.2 <strong>Insert <span class="math inline">\((2n+1)\)</span></strong>: Different to Classic Arrays</a></li>
-  <li><a href="#a-insert-2n1---worse" id="toc-a-insert-2n1---worse" class="nav-link" data-scroll-target="#a-insert-2n1---worse">2.3.2a <strong>Insert <span class="math inline">\((2n+1)\)</span></strong> - Worse</a></li>
-  <li><a href="#b-insert-n1---best" id="toc-b-insert-n1---best" class="nav-link" data-scroll-target="#b-insert-n1---best">2.3.2b <strong>Insert <span class="math inline">\((n+1)\)</span></strong> - Best</a></li>
-  <li><a href="#c-insert-mn1---medium" id="toc-c-insert-mn1---medium" class="nav-link" data-scroll-target="#c-insert-mn1---medium">2.3.2c <strong>Insert <span class="math inline">\((m*n+1)\)</span></strong> - Medium</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#chapter-3-exercises-25-27-29-and-31-hand-written-working-out" id="toc-chapter-3-exercises-25-27-29-and-31-hand-written-working-out" class="nav-link active" data-scroll-target="#chapter-3-exercises-25-27-29-and-31-hand-written-working-out">1. Chapter 3 Exercises: 25, 27, 29 and 31 (Hand-Written Working-Out)</a></li>
+  <li><a href="#a.-ch3-1-25-and-27" id="toc-a.-ch3-1-25-and-27" class="nav-link" data-scroll-target="#a.-ch3-1-25-and-27">1a. Ch3-1-25 and 27</a></li>
+  <li><a href="#b.-ch3-1-ex-29-and-31" id="toc-b.-ch3-1-ex-29-and-31" class="nav-link" data-scroll-target="#b.-ch3-1-ex-29-and-31">1b. Ch3-1-Ex-29 and 31</a></li>
+  <li><a href="#ch3-1-ex-27-chart-only" id="toc-ch3-1-ex-27-chart-only" class="nav-link" data-scroll-target="#ch3-1-ex-27-chart-only">2. Ch3-1-Ex-27 Chart Only</a></li>
   </ul>
 </nav>
     </div>
@@ -292,217 +272,124 @@ window.Quarto = {
 
 
 
-<p><img src="imgs/dsa-001-bigo.jpg" class="img-fluid"></p>
-<section id="arrays" class="level1">
-<h1>1. Arrays</h1>
-<section id="array-operation---summary" class="level2">
-<h2 class="anchored" data-anchor-id="array-operation---summary">1.1 Array Operation - Summary</h2>
-<ul>
-<li><strong>Read <span class="math inline">\((1)\)</span></strong><br>
-</li>
-<li><strong>Search <span class="math inline">\((n)\)</span></strong><br>
-</li>
-<li><strong>Insert <span class="math inline">\((n+1)\)</span></strong><br>
-</li>
-<li><strong>Delete <span class="math inline">\((n)\)</span></strong></li>
-</ul>
+<p><img src="imgs/3-1-Ex-27chart.png" class="img-fluid"></p>
+<section id="chapter-3-exercises-25-27-29-and-31-hand-written-working-out" class="level1">
+<h1>1. Chapter 3 Exercises: 25, 27, 29 and 31 (Hand-Written Working-Out)</h1>
 </section>
-<section id="array-operation---details" class="level2">
-<h2 class="anchored" data-anchor-id="array-operation---details">1.2 Array Operation - Details</h2>
-<section id="read-1" class="level3">
-<h3 class="anchored" data-anchor-id="read-1">1.2.1 <strong>Read <span class="math inline">\((1)\)</span></strong>:</h3>
-<ul>
-<li><span class="math inline">\(1\)</span> (<em>worse</em>)</li>
-<li><span class="math inline">\(1\)</span> (<em>best</em>)</li>
-</ul>
+<section id="a.-ch3-1-25-and-27" class="level1">
+<h1>1a. Ch3-1-25 and 27</h1>
+<p><img src="imgs/3-1-Ex-25-27.png" class="img-fluid"></p>
 </section>
-<section id="search-n" class="level3">
-<h3 class="anchored" data-anchor-id="search-n">1.2.2 <strong>Search <span class="math inline">\((n)\)</span></strong>:</h3>
-<ul>
-<li><span class="math inline">\(n\)</span> (<em>worse</em>: target is last value found)<br>
-</li>
-<li><span class="math inline">\(1\)</span> (<em>best</em>: target is first value found)</li>
-</ul>
+<section id="b.-ch3-1-ex-29-and-31" class="level1">
+<h1>1b. Ch3-1-Ex-29 and 31</h1>
+<p><img src="imgs/3-1-Ex-29-31.png" class="img-fluid"></p>
 </section>
-<section id="delete-n" class="level3">
-<h3 class="anchored" data-anchor-id="delete-n">1.2.3 <strong>Delete <span class="math inline">\((n)\)</span></strong>:</h3>
-</section>
-<section id="a-delete-n---worse" class="level3">
-<h3 class="anchored" data-anchor-id="a-delete-n---worse">1.2.3a <strong>Delete <span class="math inline">\((n)\)</span></strong> - Worse:</h3>
-<p>{<span class="math inline">\(n\)</span>}=({<span class="math inline">\(1\)</span>} <span class="math inline">\(+\)</span> {<span class="math inline">\(n-1\)</span>}): <em>worse</em> - delete <span class="math inline">\(first\)</span> item or <span class="math inline">\(arr[0]\)</span>:</p>
-<ul>
-<li><p>{<span class="math inline">\(1\)</span>}: <strong>delete</strong> item at <span class="math inline">\(arr[0]\)</span></p></li>
-<li><p>{<span class="math inline">\(n-1\)</span>}: shift whole array, left one item at a time:</p>
-<ul>
-<li><span class="math inline">\(arr[1] \to arr[0]\)</span> (<span class="math inline">\(index\_1 \to index\_0\)</span>)</li>
-<li><span class="math inline">\(arr[2] \to arr[1]\)</span> (<span class="math inline">\(index\_2 \to index\_1\)</span>)</li>
-<li><span class="math inline">\(...\)</span></li>
-<li><span class="math inline">\(arr[n] \to arr[n-1]\)</span> (<span class="math inline">\(inde`x\_[n] \to index\_[n-1]\)</span>)</li>
-</ul></li>
-</ul>
-</section>
-<section id="b-delete-1---best" class="level3">
-<h3 class="anchored" data-anchor-id="b-delete-1---best">1.2.3b <strong>Delete <span class="math inline">\((1)\)</span></strong> - Best</h3>
-<p>{<span class="math inline">\(1\)</span>}: <em>best</em> - delete <span class="math inline">\(last\)</span> item or <span class="math inline">\(arr[-1]\)</span></p>
-</section>
-<section id="insert-n1" class="level3">
-<h3 class="anchored" data-anchor-id="insert-n1">1.2.4 <strong>Insert <span class="math inline">\((n+1)\)</span></strong></h3>
-</section>
-<section id="a-insert-n1---worse" class="level3">
-<h3 class="anchored" data-anchor-id="a-insert-n1---worse">1.2.4a <strong>Insert <span class="math inline">\((n+1)\)</span> - Worse</strong>:</h3>
-<p>{<span class="math inline">\(n + 1\)</span>}: <em>worse</em> - insert at <span class="math inline">\(front\)</span> or <span class="math inline">\(arr[0]\)</span>:</p>
-<ul>
-<li><p>{<span class="math inline">\(n\)</span>}: whole existing array of length {<span class="math inline">\(n\)</span>} needs to move right by {<span class="math inline">\(1\)</span>}:</p>
-<ul>
-<li>starts at {<span class="math inline">\(n\)</span>}, moves it right to {<span class="math inline">\(n+1\)</span>}</li>
-<li>then {<span class="math inline">\(n-1\)</span>} moves to {<span class="math inline">\(n\)</span>}… {<span class="math inline">\(n\_times\)</span>} or {<span class="math inline">\(n\_steps\)</span>}<br>
-</li>
-<li>index <span class="math inline">\([0]\)</span> becomes empty<br>
-</li>
-<li>index <span class="math inline">\([0]\)</span> retains same memory address (might change for diff languages)</li>
-</ul></li>
-<li><p>{<span class="math inline">\(1\)</span>}: insert the finally vacant spot at index 0, same memory address</p></li>
-</ul>
-</section>
-<section id="b-insert-1---best" class="level3">
-<h3 class="anchored" data-anchor-id="b-insert-1---best">1.2.4b <strong>Insert <span class="math inline">\((1)\)</span> - Best</strong>:</h3>
-<p>{<span class="math inline">\(1\)</span>}: <em>best</em> - insert at <span class="math inline">\(end\)</span> or <span class="math inline">\(arr[-1]\)</span>:</p>
-<p>Computers may have to allocate additional memory cells toward this array (language specific)</p>
-</section>
-</section>
-</section>
-<section id="array-based-sets" class="level1">
-<h1>2. Array-Based Sets</h1>
-<p>A data stucture that <em>does not allow</em> <strong><em>duplicates</em></strong> values within it.</p>
-<p>Useful: data without duplicates (e.g.online phonebook)</p>
-<section id="classic-arrays-vs-array-based-sets---differences" class="level2">
-<h2 class="anchored" data-anchor-id="classic-arrays-vs-array-based-sets---differences">2.1 Classic Arrays vs Array-Based Sets - Differences</h2>
-<p><strong>An array-based set</strong>:</p>
-<ul>
-<li>is an <strong>array</strong></li>
-<li>with <em>one additional constraint</em></li>
-<li>of <strong><em>barring duplicates</em></strong></li>
-</ul>
-</section>
-<section id="classic-arrays-vs-array-based-sets---operations-comparison-table" class="level2">
-<h2 class="anchored" data-anchor-id="classic-arrays-vs-array-based-sets---operations-comparison-table">2.2 Classic Arrays vs Array-Based Sets - Operations Comparison Table</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 8%">
-<col style="width: 25%">
-<col style="width: 23%">
-<col style="width: 29%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Operation</th>
-<th>Array</th>
-<th>Array-Based Set</th>
-<th>Difference</th>
-<th>Change</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Read</strong></td>
-<td><span class="math inline">\(O(1,1)\)</span></td>
-<td><span class="math inline">\(O(1,1)\)</span></td>
-<td>Same</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td><strong>Search</strong></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td>Same</td>
-<td>None</td>
-</tr>
-<tr class="odd">
-<td><strong>Delete</strong></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td><span class="math inline">\(O(1,n)\)</span></td>
-<td>Same</td>
-<td>None</td>
-</tr>
-<tr class="even">
-<td><strong>Insert</strong></td>
-<td><span class="math inline">\(O(1,n+1)\)</span></td>
-<td><span class="math inline">\(O(n+1,n*n+1)\)</span><br>or<br><span class="math inline">\(O(n+1,2n+1)\)</span></td>
-<td><span class="math inline">\(O(worse,worse)\)</span></td>
-<td><span class="math inline">\(O_{best}(1 \to n+1)\)</span> <br> and <br> <span class="math inline">\(O_{worse}(n+1 \to 2n+1)\)</span></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="array-based-set-operation---detailed" class="level2">
-<h2 class="anchored" data-anchor-id="array-based-set-operation---detailed">2.3 Array-Based Set Operation - Detailed</h2>
-<section id="read-1-search-n-delete-n" class="level3">
-<h3 class="anchored" data-anchor-id="read-1-search-n-delete-n">2.3.1 <strong>Read <span class="math inline">\((1)\)</span></strong>, <strong>Search <span class="math inline">\((n)\)</span></strong>, <strong>Delete <span class="math inline">\((n)\)</span></strong></h3>
-<ul>
-<li><strong>Read <span class="math inline">\((1,1)\)</span></strong><br>
-</li>
-<li><strong>Search <span class="math inline">\((1,n)\)</span></strong><br>
-</li>
-<li><strong>Delete <span class="math inline">\((1,n)\)</span></strong><br>
-</li>
-<li><strong>Insert <span class="math inline">\((n+1,2n+1)\)</span></strong></li>
-</ul>
-</section>
-<section id="insert-2n1-different-to-classic-arrays" class="level3">
-<h3 class="anchored" data-anchor-id="insert-2n1-different-to-classic-arrays">2.3.2 <strong>Insert <span class="math inline">\((2n+1)\)</span></strong>: Different to Classic Arrays</h3>
-</section>
-<section id="a-insert-2n1---worse" class="level3">
-<h3 class="anchored" data-anchor-id="a-insert-2n1---worse">2.3.2a <strong>Insert <span class="math inline">\((2n+1)\)</span></strong> - Worse</h3>
-<p>{<span class="math inline">\(n*n+1\)</span>} - worse, insert at the <span class="math inline">\(front\)</span>:</p>
-<ul>
-<li><p>{<span class="math inline">\(n\)</span>}: <strong>search</strong> whole array {<span class="math inline">\(n\_times\)</span>}<br>
-</p></li>
-<li><p>{<span class="math inline">\(n\)</span>}: <strong>shift</strong> whole array, right (one-item-at-a-time) i.e.&nbsp;{<span class="math inline">\(n\_times\)</span>}:</p>
-<ul>
-<li><span class="math inline">\(arr[n] \to arr[n+1]\)</span> (<span class="math inline">\(index\_[n] \to index\_[n+1]\)</span>)<br>
-</li>
-<li><span class="math inline">\(arr[n-1] \to arr[n]\)</span> (<span class="math inline">\(index\_[n-1] \to index\_[n]\)</span>)<br>
-</li>
-<li><span class="math inline">\(...\)</span><br>
-</li>
-<li><span class="math inline">\(arr[0] \to arr[1]\)</span> (<span class="math inline">\(index\_[0] \to index\_[1]\)</span>)</li>
-</ul></li>
-<li><p>{<span class="math inline">\(1\)</span>}: insert at index 0, same memory address</p></li>
-</ul>
-</section>
-<section id="b-insert-n1---best" class="level3">
-<h3 class="anchored" data-anchor-id="b-insert-n1---best">2.3.2b <strong>Insert <span class="math inline">\((n+1)\)</span></strong> - Best</h3>
-<p>{<span class="math inline">\(n+1\)</span>} - best, insert at the <span class="math inline">\(end\)</span>:</p>
-<ul>
-<li>Search array (for dupes) + insert (at end)</li>
-</ul>
-</section>
-<section id="c-insert-mn1---medium" class="level3">
-<h3 class="anchored" data-anchor-id="c-insert-mn1---medium">2.3.2c <strong>Insert <span class="math inline">\((m*n+1)\)</span></strong> - Medium</h3>
-<p>{<span class="math inline">\(m*n+1\)</span>} - medium, insert at the <span class="math inline">\(arr[j]\)</span> or <span class="math inline">\(index\_[j]\)</span>):</p>
-<ul>
-<li><p>{<span class="math inline">\(n\)</span>}: <strong>search</strong> whole array {<span class="math inline">\(n\_times\)</span>}</p></li>
-<li><p>{<span class="math inline">\(m\)</span>}: <strong>shift</strong> whole array {<span class="math inline">\(n\_times\)</span>} where {<span class="math inline">\(m\)</span>} <span class="math inline">\(=\)</span> {<span class="math inline">\(n-j\)</span>}:</p>
-<ul>
-<li>if want to insert at <span class="math inline">\(index\_[j]\)</span>: all items after <span class="math inline">\(index\_[j]\)</span> by one</li>
-<li>thus we shift right {<span class="math inline">\(m\)</span>} <span class="math inline">\(=\)</span> {<span class="math inline">\(n-j\)</span>} items</li>
-<li><span class="math inline">\(arr[n] \to arr[n+1]\)</span> (<span class="math inline">\(index\_[n] \to index\_[n+1]\)</span>)</li>
-<li><span class="math inline">\(...\)</span></li>
-<li><span class="math inline">\(arr[j] \to arr[j+1]\)</span> (<span class="math inline">\(index\_[j] \to index\_[j+1]\)</span>)</li>
-<li>or</li>
-<li><span class="math inline">\(arr[n-m] \to arr[n-m+1]\)</span> (<span class="math inline">\(index\_[n-m] \to index\_[n-m+1]\)</span>)</li>
-</ul></li>
-<li><p>{<span class="math inline">\(1\)</span>}: insert at <span class="math inline">\(arr[j]\)</span> or <span class="math inline">\(arr[n-m]\)</span></p></li>
-</ul>
-<section id="inserting-at-arrj-hand-drawn" class="level4">
-<h4 class="anchored" data-anchor-id="inserting-at-arrj-hand-drawn">2.3.3 Inserting at <span class="math inline">\(arr[j]\)</span> hand-drawn</h4>
-<p><img src="imgs/dsa-001-insert-set.jpg" class="img-fluid"></p>
+<section id="ch3-1-ex-27-chart-only" class="level1">
+<h1>2. Ch3-1-Ex-27 Chart Only</h1>
+<div id="cell-8" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.ticker <span class="im">import</span> MaxNLocator</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> ticker</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">### x-values </span><span class="al">###</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>xpt <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>x_deviation <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x_increments <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>xs_min <span class="op">=</span> xpt <span class="op">-</span> x_deviation</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>xs_max <span class="op">=</span> xpt <span class="op">+</span> x_deviation</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(xs_min, xs_max, x_increments)  <span class="co"># XS</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">### exclude x-values </span><span class="al">###</span><span class="co"> (eg f(x!=0)=1/x, f(x&gt;0)=log(x))</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> xs[xs <span class="op">!=</span> <span class="dv">1</span>]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># xs = xs[xs &gt; 0]</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">### THE FUNCTION </span><span class="al">###</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>lbl_fx <span class="op">=</span> <span class="vs">r'$f(x)=\frac</span><span class="sc">{1}</span><span class="vs">{x-1}$'</span>   <span class="co"># LABEL</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>fx_fx <span class="op">=</span> <span class="kw">lambda</span> x: (<span class="dv">1</span>)<span class="op">/</span>(x<span class="op">-</span><span class="dv">1</span>)  <span class="co"># f(x)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># lbl_fx = r'$f(x)= 6.1t^{2}-9.28t+16.43$'   # LABEL</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">### y-values </span><span class="al">###</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>ys_fx <span class="op">=</span> fx_fx(xs)            <span class="co"># ys=f(xs)</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ypt_fx = fx_fx(xpt)</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"ypt_fx_at_P(x={xpt}): {ypt_fx}")</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">### fractions? </span><span class="al">###</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># lbl_denom = r'$f(x)=x-2$'</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># fx_denom = lambda x: x-2</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># ys_denom = fx_denom(xs)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">### derivative </span><span class="al">###</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># lbl_dydx = r"$f'(x)=6.10*(2t)-9.28$ (dydx or slope fn)"</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># fx_dydx = lambda x: 6.1*(2*x)-9.28</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># xpt_dydx = xpt</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># dydx = fx_dydx(xpt_dydx)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># print(f"ypt_dydx_at_P(x={xpt_dydx}): {dydx}")</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">### tangent </span><span class="al">###</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># c_tangent = ypt_fx-(dydx)*(xpt)</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># tgt = "tangent"</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># lbl_tangent = rf'$f_t(x)={dydx:,.1f}t+{c_tangent:,.1f}$ (tangent at x={xpt})'</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># fx_tangent = lambda x: dydx*xs+c_tangent</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># ys_tangent = fx_tangent(xs)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">### plot things ####</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(xs, ys_fx,  'r^-', linewidth=2, markersize=6, label=lbl_fx)</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, ys_fx,  <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span>lbl_fx)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(xs, ys_fx, marker="o")</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(xs, ys_tangent,      'yo-', linewidth=2, markersize=6, label=lbl_tangent)</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(xs, ys_denom,      'bo-', linewidth=2, markersize=8, label=lbl_denom)</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.scatter(x=xpt, y=fx_fx(xpt), marker="o")</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">##### EXTRAS: title, grid, legend, zooming, ticks, hline, vline, tickers #####</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co"># title</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>plot_title <span class="op">=</span> lbl_fx <span class="op">+</span> <span class="vs">rf" (Ch3.1.Ex27, Thomas 13e pp.126-127)"</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_title = lbl_fx + f" &amp; it's tangent at x={xpt}"</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_title = lbl_fx + "at (4,2)"</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_title = lbl_denom + " and " + lbl_denom + "at (3,3)"</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_title = lbl_fx + " and " + lbl_tangent + "at (4,2)"</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>plt.title(plot_title, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co"># grid </span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>plt.grid(color<span class="op">=</span><span class="st">'lightgrey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co"># legend plt.legend(loc='upper right')</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="co"># zoom! enhance! #</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.xlim(xpt-5,xpt+5)  # x-rng</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.ylim(-0.1, 0.1)  # y-rng</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="fl">0.5</span>, <span class="fl">1.5</span>)  <span class="co"># y-rng</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="co"># vertical, horizontal, </span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()  <span class="co"># Get the current axis</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>ax.axvline(x<span class="op">=</span>xpt, color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="co"># ax.axhline(y=fx_fx(xpt), color='grey', linestyle='--', linewidth=0.5)</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co"># X-LIMIT &amp; VALUE</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.vlines(x_at_c,linestyles="dotted", ymin=plt.ylim()[0], ymax=max(ys)) # non-monotonic</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(x_at_c, 0.5,marker="o",markersize=15, markerfacecolor='none', markeredgecolor='red')</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="co"># OTHER</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="co"># b+-- , o:b , r^ , bo    plt.xlabel("") </span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.ylim(bottom=0)  # chart starts from y=0</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="co"># ax.yaxis.set_minor_locator(ticker.MultipleLocator(0.000025)) # minor ticks</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="co"># ref: https://matplotlib.org/stable/users/explain/axes/axes_ticks.html</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="calc-008-log-rules-workout_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
-</section>
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
