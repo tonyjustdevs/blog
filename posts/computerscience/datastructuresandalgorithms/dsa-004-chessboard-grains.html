@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2025-01-09">
+<meta name="description" content="Chapter 3 Exercises 3, J.Wengrow Vol 2">
 
-<title>Data Structures &amp; Algorithms 💻 – Tony’s Blog ✍️</title>
+<title>DSA 4: Big-O - Chessboard &amp; Grains Problem – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +105,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -138,7 +145,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Tony’s Blog ✍️</span>
     </a>
   </div>
@@ -154,23 +161,23 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
         <li>
-    <a class="dropdown-item" href="./computerscience.html">
+    <a class="dropdown-item" href="../../../computerscience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./dsa.html">
+    <a class="dropdown-item" href="../../../dsa.html">
  <span class="dropdown-text">Data Structures and Algorithms</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./designpatterns.html">
+    <a class="dropdown-item" href="../../../designpatterns.html">
  <span class="dropdown-text">Design Patterns</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./coding.html">
+    <a class="dropdown-item" href="../../../coding.html">
  <span class="dropdown-text">Coding</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./leetcode.html">
+    <a class="dropdown-item" href="../../../leetcode.html">
  <span class="dropdown-text">LeetCode</span></a>
   </li>  
     </ul>
@@ -181,15 +188,15 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
         <li>
-    <a class="dropdown-item" href="./mathematics.html">
+    <a class="dropdown-item" href="../../../mathematics.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./calculus.html">
+    <a class="dropdown-item" href="../../../calculus.html">
  <span class="dropdown-text">Calculus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./linearalgebra.html">
+    <a class="dropdown-item" href="../../../linearalgebra.html">
  <span class="dropdown-text">Linear Algebra</span></a>
   </li>  
     </ul>
@@ -200,21 +207,21 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
         <li>
-    <a class="dropdown-item" href="./datascience.html">
+    <a class="dropdown-item" href="../../../datascience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machinelearning.html">
+    <a class="dropdown-item" href="../../../machinelearning.html">
  <span class="dropdown-text">Machine Learning</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./kaggle.html">
+    <a class="dropdown-item" href="../../../kaggle.html">
  <span class="dropdown-text">Kaggle</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About 🐈‍⬛</span></a>
   </li>  
   <li class="nav-item compact">
@@ -238,227 +245,256 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Data Structures &amp; Algorithms 💻</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">DSA 4: Big-O - Chessboard &amp; Grains Problem</h1>
+                  <div>
+        <div class="description">
+          Chapter 3 Exercises 3, J.Wengrow Vol 2
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">data structures</div>
+                <div class="quarto-category">algorithms</div>
+              </div>
+                  </div>
   </div>
-  <div class="quarto-title-meta column-page-left">
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
     </div>
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 9, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(5)</span></div><div class="category" data-category="data structures">data structures <span class="quarto-category-count">(2)</span></div><div class="category" data-category="datastructures">datastructures <span class="quarto-category-count">(3)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#question-3.-chess-board-algorithm" id="toc-question-3.-chess-board-algorithm" class="nav-link active" data-scroll-target="#question-3.-chess-board-algorithm">Question 3. Chess Board Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#written-solution" id="toc-written-solution" class="nav-link" data-scroll-target="#written-solution">3.1 Written Solution</a></li>
+  <li><a href="#expected-results-placed-grains-table" id="toc-expected-results-placed-grains-table" class="nav-link" data-scroll-target="#expected-results-placed-grains-table">3.2 Expected Results: Placed Grains Table</a></li>
+  <li><a href="#python-for-loop-explainer" id="toc-python-for-loop-explainer" class="nav-link" data-scroll-target="#python-for-loop-explainer">3.3 Python <code>for-loop</code> explainer</a></li>
+  <li><a href="#python-while-loop-explainer" id="toc-python-while-loop-explainer" class="nav-link" data-scroll-target="#python-while-loop-explainer">3.4 Python <code>while-loop</code> explainer</a></li>
+  <li><a href="#for-loop-solution" id="toc-for-loop-solution" class="nav-link" data-scroll-target="#for-loop-solution">3.5 <code>for-loop</code> Solution</a></li>
+  <li><a href="#while-loop-solution" id="toc-while-loop-solution" class="nav-link" data-scroll-target="#while-loop-solution">3.6 <code>while-loop</code> Solution</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-marquee column-page-left">
-  <div class="about-image-container">
-  </div>
-  <div class="about-contents">
-     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="data structures,algorithms" data-listing-date-sort="1736442000000" data-listing-file-modified-sort="1736443459641" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="93">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-005-string.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">DSA: Big O - String Select Function</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">Chapter 3 Exercise 4, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">
-<div class="listing-date">
-Jan 10, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="data structures,algorithms" data-listing-date-sort="1736355600000" data-listing-file-modified-sort="1736441100993" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="700">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-004-chess.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">DSA 4: Big-O - Chessboard &amp; Grains Problem</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">Chapter 3 Exercises 3, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">
-<div class="listing-date">
-Jan 9, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="datastructures,algorithms" data-listing-date-sort="1736182800000" data-listing-file-modified-sort="1736274940498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="378">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-003-binsearch.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">DSA 3: Binary Search - Exercises</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
-datastructures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">Chapter 2 Exercises, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">
-<div class="listing-date">
-Jan 7, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="datastructures,algorithms" data-listing-date-sort="1736010000000" data-listing-file-modified-sort="1736274940498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-002-array.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">DSA 2: Array and Sets - Exercises</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
-datastructures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">Chapter 1 Exercises, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">
-<div class="listing-date">
-Jan 5, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="datastructures,algorithms" data-listing-date-sort="1735664400000" data-listing-file-modified-sort="1736284000819" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="754">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-001-bigo.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">DSA 1: Big-O - Arrays and Sets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
-datastructures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">Big-O for Array Operations</a>
+
+
+
+<p><img src="imgs/dsa-004-chess.jpg" class="img-fluid"></p>
+<section id="question-3.-chess-board-algorithm" class="level1">
+<h1>Question 3. Chess Board Algorithm</h1>
+<p>Imagine you have a chessboard ♟️, and:</p>
+<ul>
+<li>One <code>one</code> square put a <strong>single</strong> grain of rice</li>
+<li>On the <code>second</code> square, you put <strong>two</strong> grains of rice, since that is double the amount of rice on the previous square.</li>
+<li>On the <code>third</code> square, you put <strong>four</strong> grains.</li>
+<li>On the <code>fourth</code> square, you put <strong>eight</strong> grains, and</li>
+<li>On the <code>fifth</code> square, you put <strong>sixteen</strong> grains, and so on.</li>
+</ul>
+<section id="q.-use-big_o-notation-to-describe-the-time-complexity" class="level4">
+<h4 class="anchored" data-anchor-id="q.-use-big_o-notation-to-describe-the-time-complexity">Q. Use <span class="math inline">\(Big\_O\)</span> notation to describe the <span class="math inline">\(Time\ Complexity\)</span>:</h4>
+</section>
+<section id="q.-write-a-function-to-calculate-which-square-youll-need-to-place-a-certain-number-of-rice-grains." class="level4">
+<h4 class="anchored" data-anchor-id="q.-write-a-function-to-calculate-which-square-youll-need-to-place-a-certain-number-of-rice-grains.">Q. Write a function to calculate <strong><em>which square you’ll need to place a certain number of rice grains</em></strong>.</h4>
+<p>For example, for <strong>sixteen grains</strong>:</p>
+<ul>
+<li>the function will return <code>5</code>, since you will</li>
+<li>place the <code>sixteen</code> grains on the <strong>fifth</strong> square.</li>
+</ul>
+<p>Reference:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Wheat_and_chessboard_problem">Wheat and chessboard problem (wiki)</a></li>
+</ul>
+</section>
+<section id="written-solution" class="level2">
+<h2 class="anchored" data-anchor-id="written-solution">3.1 Written Solution</h2>
+<p>We can define:</p>
+<ul>
+<li>For each <code>step</code> (chessboard square), it is incremented by one,
+<ul>
+<li><code>placed_grains</code> is the number grains placed down on the square
+<ul>
+<li>This number <strong><em>doubles</em></strong> at each step.</li>
+</ul></li>
+<li><code>placed_grains</code> is calculated by an algorithm of <span class="math inline">\(log\ time\)</span> or <span class="math inline">\(O(\log{N})\)</span>
+<ul>
+<li><em>Increases</em> <strong><em>one step</em></strong> <em>each time the data</em> <strong><em>doubles</em></strong>,</li>
+<li>and so equivalently,</li>
+<li><em>Move to next chessboard square, double placed grains</em></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>In other words:</p>
+<ul>
+<li><span class="math inline">\(O(\log{N})\)</span> means that for N data elements, the algorithm would take <span class="math inline">\(\log_{2}{N}\)</span> steps.</li>
+</ul>
+</section>
+<section id="expected-results-placed-grains-table" class="level2">
+<h2 class="anchored" data-anchor-id="expected-results-placed-grains-table">3.2 Expected Results: Placed Grains Table</h2>
+<p>To find out:</p>
+<ul>
+<li><em>Which</em> <strong>chessboard square</strong> (<code>step</code>)</li>
+<li><em>Contains</em> <strong>16</strong> grains on the square (<code>n_grains=16</code>)</li>
+<li><em>Double</em> the number of grains placed (<code>placed_grain</code>) at each step until we reached the desired amount of grains (<code>placed_grain==n_grains</code>):
+<ul>
+<li>chessboard square: <strong>5</strong> (<code>step=5</code>)</li>
+</ul></li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>step</code></th>
+<th><code>placed_grain</code></th>
+<th><code>n_grains</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>4</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>16</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="python-for-loop-explainer" class="level2">
+<h2 class="anchored" data-anchor-id="python-for-loop-explainer">3.3 Python <code>for-loop</code> explainer</h2>
+<p><code>for-loops</code> are useful when:</p>
+<ul>
+<li><p>Scenario: The <strong><em>range</em></strong> of iteration is <strong>known</strong>:</p>
+<ul>
+<li>or <code>min</code> and <code>max</code> of our iteration</li>
+<li>or <code>start</code> (arg 1) and <code>stop</code> (arg 2) indexes are known in advance</li>
+<li><code>boolean</code> rule not required.
+<ul>
+<li>The loop will <strong><em>stop automatically</em></strong> when the limit is reached</li>
+</ul></li>
+</ul></li>
+<li><p>The chessboard has <span class="math inline">\(64\)</span> squares: the <code>range</code> would be:</p>
+<ul>
+<li>from <code>1</code> to <code>64</code></li>
+<li>Note: The loop counts up to but does not include the <code>stop</code> value
+<ul>
+<li><code>range(1,64)</code>: counts <code>1,2,..63</code>, thus use</li>
+<li><code>range(1,65)</code>: counts <code>1,2,..64</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="python-while-loop-explainer" class="level2">
+<h2 class="anchored" data-anchor-id="python-while-loop-explainer">3.4 Python <code>while-loop</code> explainer</h2>
+<p><code>while-loops</code> are useful when:</p>
+<ul>
+<li><p>Scenario: The <strong><em>range</em></strong> of iteration is <strong>unknown</strong>:</p>
+<ul>
+<li>a <code>min</code> or <code>start</code> argument required
+<ul>
+<li>manual <code>iteration</code> required</li>
+</ul></li>
+<li><code>boolean</code> rule is <strong>required</strong>.
+<ul>
+<li>The loop will <strong><em>exit</em></strong> when rule is <code>not True</code> or <code>False</code> anymore (i.e.&nbsp;goal has been reached)</li>
+<li>The loop will continue forever unless the goal is reached
+<ul>
+<li>Note: careful consideration to ensure the <strong>boolean test is reachable</strong></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>The loop does not care how many squares the chessboard has (unless manually placed as a requirement)</p></li>
+</ul>
+</section>
+<section id="for-loop-solution" class="level2">
+<h2 class="anchored" data-anchor-id="for-loop-solution">3.5 <code>for-loop</code> Solution</h2>
+<div id="cell-9" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Answer 1: for-loop </span><span class="al">###</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>idx<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>max_squares <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>placed_grains <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>target_grains <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,max_squares<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> placed_grains <span class="op">==</span> target_grains:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(idx)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># return idx</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    idx<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    placed_grains<span class="op">=</span>placed_grains<span class="op">*</span><span class="dv">2</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># [1,2,3,4, 5, 6, 7]</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># [1,2,4,8,16,32,64]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5</code></pre>
 </div>
 </div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
-<div class="listing-date">
-Jan 1, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> 
-    <div class="about-footer"><div class="about-links">
-  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
+</section>
+<section id="while-loop-solution" class="level2">
+<h2 class="anchored" data-anchor-id="while-loop-solution">3.6 <code>while-loop</code> Solution</h2>
+<div id="cell-11" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Answer 2: while-loop </span><span class="al">###</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>placed_grains <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>target_grains <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> placed_grains<span class="op">&lt;</span>target_grains:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    idx<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    placed_grains<span class="op">*=</span><span class="dv">2</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(idx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5</code></pre>
 </div>
 </div>
-  </div>
-</div>
- <!-- /main -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -623,6 +659,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
