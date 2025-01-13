@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2024-02-09">
-<meta name="description" content="First binary search question">
+<meta name="dcterms.date" content="2024-02-06">
+<meta name="description" content="An introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class">
 
-<title>LeetCode 3: 704 - Binary Search – Tony’s Blog ✍️</title>
+<title>LeetCode 1: 155 - Min Stack – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -217,10 +217,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">LeetCode 3: 704 - Binary Search</h1>
+      <h1 class="title">LeetCode 1: 155 - Min Stack</h1>
                   <div>
         <div class="description">
-          First binary search question
+          An introduction to .append(), .pop() and .min() list functions and creating them as method as part of a class
         </div>
       </div>
                           <div class="quarto-categories">
@@ -242,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 9, 2024</p>
+        <p class="date">February 6, 2024</p>
       </div>
     </div>
     
@@ -260,17 +260,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#problem-description" id="toc-problem-description" class="nav-link active" data-scroll-target="#problem-description">1. Problem Description</a>
   <ul class="collapse">
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">1.1 Example 1:</a></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">1.2 Example 2:</a></li>
+  <li><a href="#leetcode-example" id="toc-leetcode-example" class="nav-link" data-scroll-target="#leetcode-example">1.1 LeetCode example</a></li>
   </ul></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">3. Code</a>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">2. Analysis</a>
   <ul class="collapse">
-  <li><a href="#larger-than-binary-split" id="toc-larger-than-binary-split" class="nav-link" data-scroll-target="#larger-than-binary-split">3.1 larger than binary split</a></li>
-  <li><a href="#less-than-binary-split" id="toc-less-than-binary-split" class="nav-link" data-scroll-target="#less-than-binary-split">3.2 less than binary split</a></li>
-  <li><a href="#on-a-split" id="toc-on-a-split" class="nav-link" data-scroll-target="#on-a-split">3.3 On a split</a></li>
-  <li><a href="#clean-version" id="toc-clean-version" class="nav-link" data-scroll-target="#clean-version">4.4 Clean version</a></li>
+  <li><a href="#summary-table" id="toc-summary-table" class="nav-link" data-scroll-target="#summary-table">2.1 Summary Table</a></li>
   </ul></li>
-  <li><a href="#submit" id="toc-submit" class="nav-link" data-scroll-target="#submit">6. Submit</a></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">3. Code</a></li>
+  <li><a href="#test-functionality" id="toc-test-functionality" class="nav-link" data-scroll-target="#test-functionality">4. Test Functionality</a></li>
+  <li><a href="#submit" id="toc-submit" class="nav-link" data-scroll-target="#submit">5. Submit</a></li>
+  <li><a href="#some-commentary" id="toc-some-commentary" class="nav-link" data-scroll-target="#some-commentary">6. Some Commentary</a></li>
   </ul>
 </nav>
     </div>
@@ -285,159 +284,184 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://leetcode.com/tonyjustdevs/">link to my leetcode profile</a></p>
 <section id="problem-description" class="level2">
 <h2 class="anchored" data-anchor-id="problem-description">1. Problem Description</h2>
-<p>Given an array of integers nums which is sorted in:<br>
-- <strong>ascending order</strong>, and an<br>
-- <strong>integer target</strong>,<br>
-- write a function to search target in <strong>nums</strong>.</p>
-<ul>
-<li>If target exists, then
-<ul>
-<li>return its <strong>index</strong><br>
-</li>
-</ul></li>
-<li>Otherwise,
-<ul>
-<li>return <strong>-1</strong></li>
-</ul></li>
-</ul>
-<p>You must write an algorithm with <strong>O(log n)</strong> runtime complexity.</p>
-<section id="example-1" class="level3">
-<h3 class="anchored" data-anchor-id="example-1">1.1 Example 1:</h3>
-<p>Input: nums = <code>[-1,0,3,5,9,12]</code><br>
-target = <code>9</code><br>
-Output: <code>4</code><br>
-Explanation: <code>9</code> exists in nums and its index is <code>4</code></p>
+<p>Design a stack that supports <code>push</code>, <code>pop</code>, <code>top</code>, and retrieving the <code>minimum</code> element in constant time.</p>
+<p>Implement the <code>MinStack</code> class:<br>
+1. <code>MinStack()</code> initializes the stack object.<br>
+2. void <code>push(int val)</code> pushes the element val onto the stack.<br>
+3. void <code>pop()</code> removes the element on the top of the stack.<br>
+4. int <code>top()</code> gets the top element of the stack.<br>
+5. int <code>getMin()</code> retrieves the minimum element in the stack.</p>
+<section id="leetcode-example" class="level3">
+<h3 class="anchored" data-anchor-id="leetcode-example">1.1 LeetCode example</h3>
+<p>Input:<br>
+<code>["MinStack","push","push","push","getMin","pop","top","getMin"]</code><br>
+<code>[[],[-2],[0],[-3],[],[],[],[]]</code></p>
+<p>Output:<br>
+<code>[null,null,null,null,-3,null,0,-2]</code></p>
 </section>
-<section id="example-2" class="level3">
-<h3 class="anchored" data-anchor-id="example-2">1.2 Example 2:</h3>
-<p>Input: nums = <code>[-1,0,3,5,9,12]</code><br>
-target = <code>2</code><br>
-Output: <code>-1</code><br>
-Explanation: <code>2</code> does not exist in nums so return <code>-1</code></p>
+</section>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">2. Analysis</h2>
+<p>I’ve decomposed the Inputs (code + variables) and expected outputs (stack and return values) for each line of code run.</p>
+<p><strong>[Future Iteration 1]</strong>: Learn how to <code>assert</code> or include code that checks inputs what they are expected in an automatic way (The Output_Mine should be filled later hopefully automatically. For now, I eyeball the results and have LeetCode accept whether its passing or failing)</p>
+<p><strong>[Future Iteration 2]</strong>: I’m using Python <code>Lists</code>, I could do the same attempt with <code>chr</code> and <code>string</code> types as parentheses are simply characters.</p>
+<section id="summary-table" class="level3">
+<h3 class="anchored" data-anchor-id="summary-table">2.1 Summary Table</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Python_Executed</th>
+<th>Stack_Expected</th>
+<th>Output_Expected</th>
+<th>Output_Mine</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MinStack minStack = new MinStack();</td>
+<td>[]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.push(-2);</td>
+<td>[-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="odd">
+<td>minStack.push(0)</td>
+<td>[0,-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.push(-3);</td>
+<td>[-3,0,-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="odd">
+<td>minStack.getMin()</td>
+<td>[-3,0,-2]</td>
+<td>-3</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.pop()</td>
+<td>[0,-2]</td>
+<td>null</td>
+<td>asdf</td>
+</tr>
+<tr class="odd">
+<td>minStack.top()</td>
+<td>[0,-2]</td>
+<td>0</td>
+<td>asdf</td>
+</tr>
+<tr class="even">
+<td>minStack.getMin()</td>
+<td>[0,-2]</td>
+<td>-2</td>
+<td>asdf</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">3. Code</h2>
-<p>Test the cases that its larger, smaller and on the split.</p>
-<section id="larger-than-binary-split" class="level3">
-<h3 class="anchored" data-anchor-id="larger-than-binary-split">3.1 larger than binary split</h3>
-<div id="cell-3" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> search(<span class="va">self</span>, nums: [<span class="bu">int</span>], target: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> <span class="bu">len</span>(nums)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> l<span class="op">&lt;</span>r:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> (l<span class="op">+</span>r)<span class="op">//</span><span class="dv">2</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[0],  1, {2}, 3, *4*, [5]]</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[-1], 0, {3}, 5, *9*, [12]] </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> nums[m]<span class="op">&lt;</span>target: <span class="co">#if 3&lt;9:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                l <span class="op">=</span> m <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[3], *4*, [5]]</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[5], *9*, [12]] </span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> nums[m]<span class="op">&gt;</span>target:</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                r <span class="op">=</span> m</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> m</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> [<span class="op">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">9</span>,<span class="dv">12</span>]</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>soln <span class="op">=</span> Solution()</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>soln.search(arr, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Write the MinStack() class and its requried methods.</p>
+<div id="cell-5" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinStack():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.stack <span class="op">=</span> [] <span class="co"># create empty list</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, val: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.stack.append(val) <span class="co"># add value to end of list</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.stack.pop() <span class="co"># remove last val of the list</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> top(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.stack[<span class="op">-</span><span class="dv">1</span>] <span class="co"># in a list, top of stack is the last item list[-1]</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getMin(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">min</span>(<span class="va">self</span>.stack) </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="test-functionality" class="level2">
+<h2 class="anchored" data-anchor-id="test-functionality">4. Test Functionality</h2>
+<div id="cell-7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>minStack <span class="op">=</span> MinStack()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>minStack.push(<span class="op">-</span><span class="dv">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-9" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>minStack.push(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>minStack.stack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>[-2, 0]</code></pre>
+</div>
+</div>
+<div id="cell-10" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>minStack.push(<span class="op">-</span><span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>minStack.stack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>[-2, 0, -3]</code></pre>
+</div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>minStack.getMin() <span class="co"># // return -3</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># minStack.stack</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>4</code></pre>
+<pre><code>-3</code></pre>
 </div>
 </div>
-</section>
-<section id="less-than-binary-split" class="level3">
-<h3 class="anchored" data-anchor-id="less-than-binary-split">3.2 less than binary split</h3>
-<div id="cell-5" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> search(<span class="va">self</span>, nums: [<span class="bu">int</span>], target: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> <span class="bu">len</span>(nums)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> l<span class="op">&lt;</span>r:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> (l<span class="op">+</span>r)<span class="op">//</span><span class="dv">2</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[0],1,{2},3,*4*,[5]]</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [{-1}, 9, {10}, 11, 12, [12]] </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> nums[m]<span class="op">&lt;</span>target:</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                l <span class="op">=</span> m <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[0],*1*,{2},3,*4*,[5]]</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [{-1}, *9*, {10}, 11, 12, [12]] </span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> nums[m]<span class="op">&gt;</span>target:</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[0],*1*,[2],3,*4*,[5]]</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [{-1}, *9*, [10], 11, 12, [12]]                </span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                r <span class="op">=</span> m</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> m</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> [<span class="op">-</span><span class="dv">1</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">12</span>]</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>soln <span class="op">=</span> Solution()</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>soln.search(arr, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>minStack.pop()<span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>minStack.stack</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>1</code></pre>
+<pre><code>[-2, 0]</code></pre>
 </div>
 </div>
-</section>
-<section id="on-a-split" class="level3">
-<h3 class="anchored" data-anchor-id="on-a-split">3.3 On a split</h3>
-<div id="cell-7" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> search(<span class="va">self</span>, nums: [<span class="bu">int</span>], target: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> <span class="bu">len</span>(nums)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> l<span class="op">&lt;</span>r:</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> (l<span class="op">+</span>r)<span class="op">//</span><span class="dv">2</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [[0],1,{2},3,*4*,[5]]</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>           <span class="co"># [{7}, 8, {*9*}, 11, 12, [13]] </span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> nums[m]<span class="op">&lt;</span>target:</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                l <span class="op">=</span> m <span class="op">+</span> <span class="dv">1</span>                </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> nums[m]<span class="op">&gt;</span>target:          </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                r <span class="op">=</span> m</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> m</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> [<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>]</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>soln <span class="op">=</span> Solution()</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>soln.search(arr, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>2</code></pre>
+<div id="cell-13" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>minStack.top() <span class="co"># return 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>0</code></pre>
 </div>
 </div>
-</section>
-<section id="clean-version" class="level3">
-<h3 class="anchored" data-anchor-id="clean-version">4.4 Clean version</h3>
-<div id="cell-9" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Solution:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> search(<span class="va">self</span>, nums: [<span class="bu">int</span>], target: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> <span class="bu">len</span>(nums)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> l<span class="op">&lt;</span>r:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            m <span class="op">=</span> (l<span class="op">+</span>r)<span class="op">//</span><span class="dv">2</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> nums[m]<span class="op">&lt;</span>target:</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                l <span class="op">=</span> m <span class="op">+</span> <span class="dv">1</span>                </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> nums[m]<span class="op">&gt;</span>target:</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                r <span class="op">=</span> m</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> m</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-14" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>minStack.getMin() <span class="co"># return -2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>-2</code></pre>
 </div>
-</section>
+</div>
 </section>
 <section id="submit" class="level2">
-<h2 class="anchored" data-anchor-id="submit">6. Submit</h2>
-<p>Middle of the pack <img src="imgs/results.jpg" class="img-fluid"></p>
+<h2 class="anchored" data-anchor-id="submit">5. Submit</h2>
+<p>The code is slow but great memory management.</p>
+<p>At the my current level, I’m happy to simply solve the problems. I don’t usually solve Mediums that easily.</p>
+<p><img src="imgs/155-1.jpg" class="img-fluid"></p>
+</section>
+<section id="some-commentary" class="level2">
+<h2 class="anchored" data-anchor-id="some-commentary">6. Some Commentary</h2>
+<p>The question is framed from a <code>Java</code>’s perspective hence there are <code>types</code> in front of each declaration:<br>
+- <code>void pop()</code><br>
+- <code>int top()</code><br>
+- <code>new MinStack()</code></p>
+<p><strong>Note</strong>: I’ve never touched Java 🤭.</p>
+<p>Java is a <strong>Static-Typed</strong> whilst Python is a <strong>Dynamically-Type</strong>.</p>
+<ul>
+<li>Java <strong>requires</strong> variables and method return values be <strong>explicitly declared</strong> at <strong>compile-time</strong>.</li>
+<li>Python <strong>data types</strong> are determined at <strong>runtime</strong>.
+<ul>
+<li>Python <strong>doesn’t require</strong> explicit type declarations for variables, function return types, or when creating objects.</li>
+</ul></li>
+</ul>
+<p>That is, since I’m using Python, so I won’t need to declare my return types when creating a method of a class.</p>
 <p><a href="https://tonyjustdevs.github.io/blog/">Go to Main Blog</a><br>
 <a href="https://tonyjustdevs.github.io/blog/leetcode.html">Go to LeetCode Blog</a></p>
 
@@ -681,7 +705,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
