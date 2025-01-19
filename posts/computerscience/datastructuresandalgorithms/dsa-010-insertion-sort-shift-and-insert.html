@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2025-01-19">
+<meta name="description" content="3rd attempt which uses less variable assigning">
 
-<title>Data Structures &amp; Algorithms 💻 – Tony’s Blog ✍️</title>
+<title>DSA 10: Insertion Sort - Shift &amp; Insert – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,65 +105,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -138,7 +116,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Tony’s Blog ✍️</span>
     </a>
   </div>
@@ -154,23 +132,23 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
         <li>
-    <a class="dropdown-item" href="./computerscience.html">
+    <a class="dropdown-item" href="../../../computerscience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./dsa.html">
+    <a class="dropdown-item" href="../../../dsa.html">
  <span class="dropdown-text">Data Structures and Algorithms</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./designpatterns.html">
+    <a class="dropdown-item" href="../../../designpatterns.html">
  <span class="dropdown-text">Design Patterns</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./coding.html">
+    <a class="dropdown-item" href="../../../coding.html">
  <span class="dropdown-text">Coding</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./leetcode.html">
+    <a class="dropdown-item" href="../../../leetcode.html">
  <span class="dropdown-text">LeetCode</span></a>
   </li>  
     </ul>
@@ -181,15 +159,15 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
         <li>
-    <a class="dropdown-item" href="./mathematics.html">
+    <a class="dropdown-item" href="../../../mathematics.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./calculus.html">
+    <a class="dropdown-item" href="../../../calculus.html">
  <span class="dropdown-text">Calculus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./linearalgebra.html">
+    <a class="dropdown-item" href="../../../linearalgebra.html">
  <span class="dropdown-text">Linear Algebra</span></a>
   </li>  
     </ul>
@@ -200,21 +178,21 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
         <li>
-    <a class="dropdown-item" href="./datascience.html">
+    <a class="dropdown-item" href="../../../datascience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machinelearning.html">
+    <a class="dropdown-item" href="../../../machinelearning.html">
  <span class="dropdown-text">Machine Learning</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./kaggle.html">
+    <a class="dropdown-item" href="../../../kaggle.html">
  <span class="dropdown-text">Kaggle</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About 🐈‍⬛</span></a>
   </li>  
   <li class="nav-item compact">
@@ -238,407 +216,307 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Data Structures &amp; Algorithms 💻</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">DSA 10: Insertion Sort - Shift &amp; Insert</h1>
+                  <div>
+        <div class="description">
+          3rd attempt which uses less variable assigning
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">data structures</div>
+                <div class="quarto-category">algorithms</div>
+              </div>
+                  </div>
   </div>
-  <div class="quarto-title-meta column-page-left">
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
     </div>
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 19, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(10)</span></div><div class="category" data-category="data structures">data structures <span class="quarto-category-count">(7)</span></div><div class="category" data-category="datastructures">datastructures <span class="quarto-category-count">(3)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#code" id="toc-code" class="nav-link active" data-scroll-target="#code">1. Code</a>
+  <ul class="collapse">
+  <li><a href="#psuedo-code" id="toc-psuedo-code" class="nav-link" data-scroll-target="#psuedo-code">1.1 Psuedo-Code</a></li>
+  <li><a href="#python-code" id="toc-python-code" class="nav-link" data-scroll-target="#python-code">1.2 Python-Code</a></li>
+  </ul></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">2. Testing</a></li>
+  <li><a href="#sorted-unsorted-parts-shift-and-insert" id="toc-sorted-unsorted-parts-shift-and-insert" class="nav-link" data-scroll-target="#sorted-unsorted-parts-shift-and-insert">2.1 Sorted &amp; Unsorted Parts: <code>shift</code> &amp; and <code>insert</code></a></li>
+  <li><a href="#mostly-sorted-for-loop" id="toc-mostly-sorted-for-loop" class="nav-link" data-scroll-target="#mostly-sorted-for-loop">2.2 Mostly Sorted: <code>for</code>-loop</a></li>
+  <li><a href="#unsorted-descending-for-loop" id="toc-unsorted-descending-for-loop" class="nav-link" data-scroll-target="#unsorted-descending-for-loop">2.3 Unsorted (Descending): <code>for</code>-loop</a></li>
+  <li><a href="#duplicates-for-loop" id="toc-duplicates-for-loop" class="nav-link" data-scroll-target="#duplicates-for-loop">2.4 Duplicates: <code>for</code>-loop</a></li>
+  <li><a href="#already-sorted-for-loop" id="toc-already-sorted-for-loop" class="nav-link" data-scroll-target="#already-sorted-for-loop">2.5 Already Sorted: <code>for</code>-loop</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-marquee column-page-left">
-  <div class="about-image-container">
-  </div>
-  <div class="about-contents">
-     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="data structures,algorithms" data-listing-date-sort="1737219600000" data-listing-file-modified-sort="1737286399538" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="192">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-010-insert-shift-insert.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html" class="no-external">DSA 10: Insertion Sort - Shift &amp; Insert</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html" class="no-external">3rd attempt which uses less variable assigning</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html" class="no-external">
-<div class="listing-date">
-Jan 19, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="data structures,algorithms" data-listing-date-sort="1737133200000" data-listing-file-modified-sort="1737145845482" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="348">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-009-insert-for-while.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html" class="no-external">DSA 9: Insertion Sort - With Test Scenarios</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html" class="no-external">Equivalent Implementations Using <code>for</code> &amp; <code>while</code>-loops</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html" class="no-external">
-<div class="listing-date">
-Jan 18, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="data structures,algorithms" data-listing-date-sort="1736701200000" data-listing-file-modified-sort="1736706329013" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="117">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-008-analysing-algos.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-008-analysing-algos.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-008-analysing-algos.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-008-analysing-algos.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-008-analysing-algos.html" class="no-external">DSA 8: Big O - Analysing Algorithms</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-008-analysing-algos.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-008-analysing-algos.html" class="no-external">Describing Algorithms &amp; Functions in Big O notation - Chapter 5 Exercises, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-008-analysing-algos.html" class="no-external">
-<div class="listing-date">
-Jan 13, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="data structures,algorithms" data-listing-date-sort="1736528400000" data-listing-file-modified-sort="1736606957482" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-007-bubble-sort-practice.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-007-bubble-sort-practice.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-007-bubble.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-007-bubble-sort-practice.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-007-bubble-sort-practice.html" class="no-external">DSA 7: <span class="math inline">\(BubbleSort()\)</span> Practice</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-007-bubble-sort-practice.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-007-bubble-sort-practice.html" class="no-external">Implementing from scratch and charting the time complexity</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-007-bubble-sort-practice.html" class="no-external">
-<div class="listing-date">
-Jan 11, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="data structures,algorithms" data-listing-date-sort="1736528400000" data-listing-file-modified-sort="1736590427760" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="9">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-006-bin-search-practice.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-006-bin-search-practice.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-006-bsearch.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-006-bin-search-practice.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-006-bin-search-practice.html" class="no-external">DSA 6: Binary Search Practice</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-006-bin-search-practice.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-006-bin-search-practice.html" class="no-external">Writing binary search from scratch and testing array sizes</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-006-bin-search-practice.html" class="no-external">
-<div class="listing-date">
-Jan 11, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="data structures,algorithms" data-listing-date-sort="1736442000000" data-listing-file-modified-sort="1736607213692" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="93">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-005-string.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">DSA 5: Big O - String Select Function</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">Chapter 3 Exercise 4, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-005-string-selection.html" class="no-external">
-<div class="listing-date">
-Jan 10, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="data structures,algorithms" data-listing-date-sort="1736355600000" data-listing-file-modified-sort="1736441100993" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="700">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-004-chess.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">DSA 4: Big-O - Chessboard &amp; Grains Problem</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
-data structures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">Chapter 3 Exercises 3, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-004-chessboard-grains.html" class="no-external">
-<div class="listing-date">
-Jan 9, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="datastructures,algorithms" data-listing-date-sort="1736182800000" data-listing-file-modified-sort="1736274940498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="378">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-003-binsearch.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">DSA 3: Binary Search - Exercises</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
-datastructures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">Chapter 2 Exercises, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-003-bin-search-exs.html" class="no-external">
-<div class="listing-date">
-Jan 7, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="datastructures,algorithms" data-listing-date-sort="1736010000000" data-listing-file-modified-sort="1736274940498" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-002-array.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">DSA 2: Array and Sets - Exercises</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
-datastructures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">Chapter 1 Exercises, J.Wengrow Vol 2</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-002-array-set-exs.html" class="no-external">
-<div class="listing-date">
-Jan 5, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="datastructures,algorithms" data-listing-date-sort="1735664400000" data-listing-file-modified-sort="1736284000819" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="754">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/datastructuresandalgorithms/imgs/dsa-001-bigo.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">DSA 1: Big-O - Arrays and Sets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('datastructures'); return false;">
-datastructures
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('algorithms'); return false;">
-algorithms
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">Big-O for Array Operations</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/datastructuresandalgorithms/dsa-001-big-o-arrays-sets.html" class="no-external">
-<div class="listing-date">
-Jan 1, 2025
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> 
-    <div class="about-footer"><div class="about-links">
-  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-</div>
-</div>
-  </div>
-</div>
- <!-- /main -->
+
+
+
+<p><img src="imgs/dsa-010-insert-shift-insert.png" class="img-fluid"></p>
+<section id="code" class="level1">
+<h1>1. Code</h1>
+<section id="psuedo-code" class="level2">
+<h2 class="anchored" data-anchor-id="psuedo-code">1.1 Psuedo-Code</h2>
+<p>Not the greatest psuedo-code but it’lll do for now.</p>
+<ul>
+<li><strong>Outer loop</strong>:
+<ul>
+<li>from <code>1</code> to last index of array (or array size)</li>
+</ul></li>
+<li>For each index <code>r</code> of <strong>outer loop</strong>:
+<ul>
+<li>Allocate <strong>current-index</strong> <code>arr[l]</code> to <strong>temp-variable</strong> (temp-val): <code>tmp</code></li>
+<li>while <code>l&gt;0</code> and <strong>temp-value</strong> (<code>tmp</code>) to <strong>previous-value</strong> (<code>l-1</code>)
+<ul>
+<li>If <strong>temp-val</strong> &lt; <strong>prev-value</strong>: <strong><em>shift</em></strong> <strong>prev-val</strong> right by 1, then decrement <code>l</code> <em>and go back to start of <code></code>-loop</em></li>
+<li>If <strong>temp-val</strong> &gt; <strong>prev-value</strong>:
+<ul>
+<li>if: <strong><em>shifted</em></strong> previously, assign <code>arr[l]=tmp</code></li>
+<li>else: next <code>r</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="python-code" class="level2">
+<h2 class="anchored" data-anchor-id="python-code">1.2 Python-Code</h2>
+<div id="cell-4" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vals_to_list_fn <span class="op">=</span> <span class="kw">lambda</span> vals: [<span class="bu">int</span>(val) <span class="cf">for</span> val <span class="kw">in</span> <span class="bu">str</span>(vals)]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_sort_shift_and_insert(arr: <span class="bu">list</span>[<span class="bu">int</span>]):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(arr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(arr)):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        shifted<span class="op">=</span><span class="va">False</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        l<span class="op">=</span>r</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        tmp<span class="op">=</span>arr[l]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\t</span><span class="sc">{</span>[r]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> l<span class="op">&gt;</span><span class="dv">0</span> <span class="kw">and</span> tmp<span class="op">&lt;</span>arr[l<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            arr[l]<span class="op">=</span>[] <span class="co">#uncessary - temporarily blank-out [l] - for visaul debugging-purposes</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"(idx[</span><span class="sc">{</span>l<span class="op">-</span><span class="dv">1</span><span class="sc">}</span><span class="ss">]=</span><span class="sc">{</span>arr[l<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">_vs_tmp=</span><span class="sc">{</span>tmp<span class="sc">}</span><span class="ss">) COMPARE: </span><span class="sc">{</span>arr<span class="sc">}</span><span class="ss"> | tmp=</span><span class="sc">{</span>tmp<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            arr[l]<span class="op">=</span>arr[l<span class="op">-</span><span class="dv">1</span>] <span class="co"># shift-right 1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            arr[l<span class="op">-</span><span class="dv">1</span>]<span class="op">=</span>[] <span class="co"># uncessary - for visual debugging-purposes</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"(idx[</span><span class="sc">{</span>l<span class="op">-</span><span class="dv">1</span><span class="sc">}</span><span class="ss">]=</span><span class="sc">{</span>arr[l<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">_vs_tmp=</span><span class="sc">{</span>tmp<span class="sc">}</span><span class="ss">) SHIFTD: </span><span class="sc">{</span>arr<span class="sc">}</span><span class="ss"> | tmp=</span><span class="sc">{</span>tmp<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            shifted<span class="op">=</span><span class="va">True</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            l<span class="op">-=</span><span class="dv">1</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> shifted:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            arr[l] <span class="op">=</span> tmp </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"(idx[</span><span class="sc">{</span>l<span class="sc">}</span><span class="ss">)=tmp=</span><span class="sc">{</span>tmp<span class="sc">}</span><span class="ss">) </span><span class="ch">\t</span><span class="ss">     INSERT: </span><span class="sc">{</span>arr<span class="sc">}</span><span class="ss"> | tmp=</span><span class="sc">{</span>tmp<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"SKIPPED: Already sorted from 0 to </span><span class="sc">{</span>r<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>arr[<span class="dv">0</span>:r<span class="op">+</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss"> of </span><span class="sc">{</span>arr<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(arr)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>vals <span class="op">=</span> <span class="dv">12354</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> vals_to_list_fn(vals)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>insert_sort_shift_and_insert(arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 5, 4]
+    [1]
+SKIPPED: Already sorted from 0 to 1: [1, 2] of [1, 2, 3, 5, 4]
+    [2]
+SKIPPED: Already sorted from 0 to 2: [1, 2, 3] of [1, 2, 3, 5, 4]
+    [3]
+SKIPPED: Already sorted from 0 to 3: [1, 2, 3, 5] of [1, 2, 3, 5, 4]
+    [4]
+(idx[3]=5_vs_tmp=4) COMPARE: [1, 2, 3, 5, []] | tmp=4
+(idx[3]=[]_vs_tmp=4) SHIFTD: [1, 2, 3, [], 5] | tmp=4
+(idx[3)=tmp=4)       INSERT: [1, 2, 3, 4, 5] | tmp=4
+[1, 2, 3, 4, 5]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>[1, 2, 3, 4, 5]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="testing" class="level1">
+<h1>2. Testing</h1>
+<p><strong>Test Scenarios from previous post <a href="https://tonyjustdevs.github.io/blog/posts/computerscience/datastructuresandalgorithms/dsa-009-insertion-sort-for-while.html">[DSA 9: Insertion Sort - With Test Scenarios]</a></strong>:</p>
+<ol type="1">
+<li>Sorted &amp; Unsorted Parts</li>
+<li>Mostly Sorted</li>
+<li>Unsorted (Descending)</li>
+<li>Duplicates</li>
+<li>Already Sorted</li>
+</ol>
+</section>
+<section id="sorted-unsorted-parts-shift-and-insert" class="level1">
+<h1>2.1 Sorted &amp; Unsorted Parts: <code>shift</code> &amp; and <code>insert</code></h1>
+<div id="cell-8" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> vals_to_list_fn(<span class="dv">42713</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>insert_sort_shift_and_insert(arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[4, 2, 7, 1, 3]
+    [1]
+(idx[0]=4_vs_tmp=2) COMPARE: [4, [], 7, 1, 3] | tmp=2
+(idx[0]=[]_vs_tmp=2) SHIFTD: [[], 4, 7, 1, 3] | tmp=2
+(idx[0)=tmp=2)       INSERT: [2, 4, 7, 1, 3] | tmp=2
+    [2]
+SKIPPED: Already sorted from 0 to 2: [2, 4, 7] of [2, 4, 7, 1, 3]
+    [3]
+(idx[2]=7_vs_tmp=1) COMPARE: [2, 4, 7, [], 3] | tmp=1
+(idx[2]=[]_vs_tmp=1) SHIFTD: [2, 4, [], 7, 3] | tmp=1
+(idx[1]=4_vs_tmp=1) COMPARE: [2, 4, [], 7, 3] | tmp=1
+(idx[1]=[]_vs_tmp=1) SHIFTD: [2, [], 4, 7, 3] | tmp=1
+(idx[0]=2_vs_tmp=1) COMPARE: [2, [], 4, 7, 3] | tmp=1
+(idx[0]=[]_vs_tmp=1) SHIFTD: [[], 2, 4, 7, 3] | tmp=1
+(idx[0)=tmp=1)       INSERT: [1, 2, 4, 7, 3] | tmp=1
+    [4]
+(idx[3]=7_vs_tmp=3) COMPARE: [1, 2, 4, 7, []] | tmp=3
+(idx[3]=[]_vs_tmp=3) SHIFTD: [1, 2, 4, [], 7] | tmp=3
+(idx[2]=4_vs_tmp=3) COMPARE: [1, 2, 4, [], 7] | tmp=3
+(idx[2]=[]_vs_tmp=3) SHIFTD: [1, 2, [], 4, 7] | tmp=3
+(idx[2)=tmp=3)       INSERT: [1, 2, 3, 4, 7] | tmp=3
+[1, 2, 3, 4, 7]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>[1, 2, 3, 4, 7]</code></pre>
+</div>
+</div>
+</section>
+<section id="mostly-sorted-for-loop" class="level1">
+<h1>2.2 Mostly Sorted: <code>for</code>-loop</h1>
+<div id="cell-10" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> vals_to_list_fn(<span class="dv">12354</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>insert_sort_shift_and_insert(arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 5, 4]
+    [1]
+SKIPPED: Already sorted from 0 to 1: [1, 2] of [1, 2, 3, 5, 4]
+    [2]
+SKIPPED: Already sorted from 0 to 2: [1, 2, 3] of [1, 2, 3, 5, 4]
+    [3]
+SKIPPED: Already sorted from 0 to 3: [1, 2, 3, 5] of [1, 2, 3, 5, 4]
+    [4]
+(idx[3]=5_vs_tmp=4) COMPARE: [1, 2, 3, 5, []] | tmp=4
+(idx[3]=[]_vs_tmp=4) SHIFTD: [1, 2, 3, [], 5] | tmp=4
+(idx[3)=tmp=4)       INSERT: [1, 2, 3, 4, 5] | tmp=4
+[1, 2, 3, 4, 5]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>[1, 2, 3, 4, 5]</code></pre>
+</div>
+</div>
+</section>
+<section id="unsorted-descending-for-loop" class="level1">
+<h1>2.3 Unsorted (Descending): <code>for</code>-loop</h1>
+<div id="cell-12" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> vals_to_list_fn(<span class="dv">54321</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>insert_sort_shift_and_insert(arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[5, 4, 3, 2, 1]
+    [1]
+(idx[0]=5_vs_tmp=4) COMPARE: [5, [], 3, 2, 1] | tmp=4
+(idx[0]=[]_vs_tmp=4) SHIFTD: [[], 5, 3, 2, 1] | tmp=4
+(idx[0)=tmp=4)       INSERT: [4, 5, 3, 2, 1] | tmp=4
+    [2]
+(idx[1]=5_vs_tmp=3) COMPARE: [4, 5, [], 2, 1] | tmp=3
+(idx[1]=[]_vs_tmp=3) SHIFTD: [4, [], 5, 2, 1] | tmp=3
+(idx[0]=4_vs_tmp=3) COMPARE: [4, [], 5, 2, 1] | tmp=3
+(idx[0]=[]_vs_tmp=3) SHIFTD: [[], 4, 5, 2, 1] | tmp=3
+(idx[0)=tmp=3)       INSERT: [3, 4, 5, 2, 1] | tmp=3
+    [3]
+(idx[2]=5_vs_tmp=2) COMPARE: [3, 4, 5, [], 1] | tmp=2
+(idx[2]=[]_vs_tmp=2) SHIFTD: [3, 4, [], 5, 1] | tmp=2
+(idx[1]=4_vs_tmp=2) COMPARE: [3, 4, [], 5, 1] | tmp=2
+(idx[1]=[]_vs_tmp=2) SHIFTD: [3, [], 4, 5, 1] | tmp=2
+(idx[0]=3_vs_tmp=2) COMPARE: [3, [], 4, 5, 1] | tmp=2
+(idx[0]=[]_vs_tmp=2) SHIFTD: [[], 3, 4, 5, 1] | tmp=2
+(idx[0)=tmp=2)       INSERT: [2, 3, 4, 5, 1] | tmp=2
+    [4]
+(idx[3]=5_vs_tmp=1) COMPARE: [2, 3, 4, 5, []] | tmp=1
+(idx[3]=[]_vs_tmp=1) SHIFTD: [2, 3, 4, [], 5] | tmp=1
+(idx[2]=4_vs_tmp=1) COMPARE: [2, 3, 4, [], 5] | tmp=1
+(idx[2]=[]_vs_tmp=1) SHIFTD: [2, 3, [], 4, 5] | tmp=1
+(idx[1]=3_vs_tmp=1) COMPARE: [2, 3, [], 4, 5] | tmp=1
+(idx[1]=[]_vs_tmp=1) SHIFTD: [2, [], 3, 4, 5] | tmp=1
+(idx[0]=2_vs_tmp=1) COMPARE: [2, [], 3, 4, 5] | tmp=1
+(idx[0]=[]_vs_tmp=1) SHIFTD: [[], 2, 3, 4, 5] | tmp=1
+(idx[0)=tmp=1)       INSERT: [1, 2, 3, 4, 5] | tmp=1
+[1, 2, 3, 4, 5]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>[1, 2, 3, 4, 5]</code></pre>
+</div>
+</div>
+</section>
+<section id="duplicates-for-loop" class="level1">
+<h1>2.4 Duplicates: <code>for</code>-loop</h1>
+<div id="cell-14" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> vals_to_list_fn(<span class="dv">11111</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>insert_sort_shift_and_insert(arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 1, 1, 1, 1]
+    [1]
+SKIPPED: Already sorted from 0 to 1: [1, 1] of [1, 1, 1, 1, 1]
+    [2]
+SKIPPED: Already sorted from 0 to 2: [1, 1, 1] of [1, 1, 1, 1, 1]
+    [3]
+SKIPPED: Already sorted from 0 to 3: [1, 1, 1, 1] of [1, 1, 1, 1, 1]
+    [4]
+SKIPPED: Already sorted from 0 to 4: [1, 1, 1, 1, 1] of [1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>[1, 1, 1, 1, 1]</code></pre>
+</div>
+</div>
+</section>
+<section id="already-sorted-for-loop" class="level1">
+<h1>2.5 Already Sorted: <code>for</code>-loop</h1>
+<div id="cell-16" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>arr <span class="op">=</span> vals_to_list_fn(<span class="dv">12345</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>insert_sort_shift_and_insert(arr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 4, 5]
+    [1]
+SKIPPED: Already sorted from 0 to 1: [1, 2] of [1, 2, 3, 4, 5]
+    [2]
+SKIPPED: Already sorted from 0 to 2: [1, 2, 3] of [1, 2, 3, 4, 5]
+    [3]
+SKIPPED: Already sorted from 0 to 3: [1, 2, 3, 4] of [1, 2, 3, 4, 5]
+    [4]
+SKIPPED: Already sorted from 0 to 4: [1, 2, 3, 4, 5] of [1, 2, 3, 4, 5]
+[1, 2, 3, 4, 5]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>[1, 2, 3, 4, 5]</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -803,6 +681,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
