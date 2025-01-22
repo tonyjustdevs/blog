@@ -10,6 +10,7 @@ requests = "*"
 mypy = "*"
 pandas = "*"
 matplotlib = "*"
+sympy = "*"
 
 [dev-packages]
 
