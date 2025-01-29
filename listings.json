@@ -11,10 +11,10 @@
   {
     "listing": "/computerscience.html",
     "items": [
-      "/posts/computerscience/datastructuresandalgorithms/dsa-016-linter-attempt-1.html",
-      "/posts/computerscience/datastructuresandalgorithms/dsa-015-hash-tables-exercises.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-016-stacks-part-2.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-015-hash-tables-part-4.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-014-hash-tables-part-3.html",
-      "/posts/computerscience/datastructuresandalgorithms/dsa-013-stacks.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-013-stacks-part-1.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-012-hash-tables-part-2.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-011-hash-tables-part-1.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html",
@@ -140,10 +140,10 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/computerscience/datastructuresandalgorithms/dsa-016-linter-attempt-1.html",
-      "/posts/computerscience/datastructuresandalgorithms/dsa-015-hash-tables-exercises.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-016-stacks-part-2.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-015-hash-tables-part-4.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-014-hash-tables-part-3.html",
-      "/posts/computerscience/datastructuresandalgorithms/dsa-013-stacks.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-013-stacks-part-1.html",
       "/posts/mathematics/calculus/calc-014-ch3-5-ex-59-nth-derivative.html",
       "/posts/mathematics/calculus/calc-013-ch2-4-eg-5.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-012-hash-tables-part-2.html",
@@ -240,10 +240,10 @@
   {
     "listing": "/dsa.html",
     "items": [
-      "/posts/computerscience/datastructuresandalgorithms/dsa-016-linter-attempt-1.html",
-      "/posts/computerscience/datastructuresandalgorithms/dsa-015-hash-tables-exercises.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-016-stacks-part-2.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-015-hash-tables-part-4.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-014-hash-tables-part-3.html",
-      "/posts/computerscience/datastructuresandalgorithms/dsa-013-stacks.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-013-stacks-part-1.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-012-hash-tables-part-2.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-011-hash-tables-part-1.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-010-insertion-sort-shift-and-insert.html",
