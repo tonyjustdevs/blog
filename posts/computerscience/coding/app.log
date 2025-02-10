@@ -1,0 +1,4 @@
+2025-02-10 13:05:55,969 - DEBUG - a debug message
+2025-02-10 13:05:55,970 - INFO - an info message
+2025-02-10 13:08:38,787 - DEBUG - a debug msg going to file and console
+2025-02-10 13:08:38,790 - INFO - an info msg to file and console
