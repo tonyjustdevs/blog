@@ -11,6 +11,7 @@
   {
     "listing": "/computerscience.html",
     "items": [
+      "/posts/computerscience/datastructuresandalgorithms/dsa-025-recursion-part-6.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-024-recursion-part-5.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-023-recursion-part-4.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-022-recursion-part-3.html",
@@ -72,6 +73,7 @@
   {
     "listing": "/mathematics.html",
     "items": [
+      "/posts/mathematics/calculus/calc-017-ch3-6-ex-103.html",
       "/posts/mathematics/calculus/calc-016-ch10-1-ex-39-49.html",
       "/posts/mathematics/calculus/calc-015-ch10-1-ex-27-37.html",
       "/posts/mathematics/calculus/calc-014-ch3-5-ex-59-nth-derivative.html",
@@ -131,6 +133,7 @@
   {
     "listing": "/calculus.html",
     "items": [
+      "/posts/mathematics/calculus/calc-017-ch3-6-ex-103.html",
       "/posts/mathematics/calculus/calc-016-ch10-1-ex-39-49.html",
       "/posts/mathematics/calculus/calc-015-ch10-1-ex-27-37.html",
       "/posts/mathematics/calculus/calc-014-ch3-5-ex-59-nth-derivative.html",
@@ -152,6 +155,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/mathematics/calculus/calc-017-ch3-6-ex-103.html",
+      "/posts/computerscience/datastructuresandalgorithms/dsa-025-recursion-part-6.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-024-recursion-part-5.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-023-recursion-part-4.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-022-recursion-part-3.html",
@@ -262,6 +267,7 @@
   {
     "listing": "/dsa.html",
     "items": [
+      "/posts/computerscience/datastructuresandalgorithms/dsa-025-recursion-part-6.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-024-recursion-part-5.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-023-recursion-part-4.html",
       "/posts/computerscience/datastructuresandalgorithms/dsa-022-recursion-part-3.html",
