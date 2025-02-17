@@ -8,7 +8,7 @@
 
 <meta name="author" content="Tony Phung">
 <meta name="dcterms.date" content="2025-02-17">
-<meta name="description" content="The Other Two Important Operations">
+<meta name="description" content="The Two Other Important Operations">
 
 <title>DSA 35: LinkedList - Insert &amp; Delete – Tony’s Blog ✍️</title>
 <style>
@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">DSA 35: LinkedList - Insert &amp; Delete</h1>
                   <div>
         <div class="description">
-          The Other Two Important Operations
+          The Two Other Important Operations
         </div>
       </div>
                           <div class="quarto-categories">
@@ -288,10 +288,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p><img src="imgs/dsa-ch14-insert.png" class="img-fluid"></p>
 <section id="setup-linkedlist-and-node-objects" class="level1">
 <h1>1. Setup <code>Linkedlist</code> and <code>Node</code> Objects</h1>
 <p>Previously <a href="https://tonyjustdevs.github.io/blog/posts/computerscience/datastructuresandalgorithms/dsa-033-nodes-part-1.html">introduced</a>.</p>
-<div id="cell-2" class="cell" data-execution_count="2">
+<div id="cell-3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Node():</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data<span class="op">=</span>data</span>
@@ -301,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, first_node:Node<span class="op">|</span><span class="va">None</span><span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.first_node: Node<span class="op">|</span><span class="va">None</span> <span class="op">=</span> first_node</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-3" class="cell" data-execution_count="3">
+<div id="cell-4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>node0<span class="op">=</span>Node(<span class="st">"Hey"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>node1<span class="op">=</span>Node(<span class="st">"I"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>node2<span class="op">=</span>Node(<span class="st">"Just"</span>)</span>
@@ -317,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="read0-or-top" class="level1">
 <h1>2.1 <code>Read(0)</code> or <strong>Top</strong></h1>
-<div id="cell-6" class="cell" data-execution_count="5">
+<div id="cell-7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_top_ll(linked_list: LinkedList, index: <span class="bu">int</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> current_node.data</span>
@@ -334,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="add-base-case-read0" class="level1">
 <h1>2.3 Add Base-Case: <code>Read(0)</code></h1>
-<div id="cell-9" class="cell" data-execution_count="115">
+<div id="cell-10" class="cell" data-execution_count="115">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_ll_forloop(linked_list: LinkedList, index: <span class="bu">int</span>):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -357,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="read1" class="level1">
 <h1>2.4 <code>Read(1)</code></h1>
-<div id="cell-11" class="cell" data-execution_count="44">
+<div id="cell-12" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_ll_whileloop(linked_list: LinkedList, index: <span class="bu">int</span>):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node </span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -380,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="read-all---linkedlist-to-python-list" class="level1">
 <h1>2.5 <code>Read</code> <strong>All</strong> - <code>LinkedList</code> to Python <code>List</code></h1>
-<div id="cell-13" class="cell" data-execution_count="6">
+<div id="cell-14" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_all_ll_whileloop(linked_list: LinkedList):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ll_list <span class="op">=</span> []</span>
@@ -402,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="insert0-or-top" class="level1">
 <h1>3.1 <code>Insert(0)</code> or <strong>Top</strong></h1>
-<div id="cell-16" class="cell">
+<div id="cell-17" class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_front_ll_forloop(linked_list: LinkedList, index: <span class="bu">int</span>,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                            new_node: Node):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -429,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="create-new-linkedlist-for-each-test" class="level1">
 <h1>3.2 Create <strong>New</strong> <code>LinkedList</code> for Each Test</h1>
-<div id="cell-18" class="cell" data-execution_count="8">
+<div id="cell-19" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reset_ll():</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    node0<span class="op">=</span>Node(<span class="st">"Hey"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    node1<span class="op">=</span>Node(<span class="st">"I"</span>)</span>
@@ -447,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="insertindex-for-loop-version" class="level1">
 <h1>3.3.1 <code>Insert(Index)</code>: <code>for</code>-loop version</h1>
-<div id="cell-20" class="cell" data-execution_count="41">
+<div id="cell-21" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_ll_forloop(linked_list: LinkedList, index: <span class="bu">int</span>,</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                            new_node: Node):</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -523,7 +524,7 @@ Cell <span class="ansi-green-fg">In[41], line 11</span>, in <span class="ansi-cy
 </section>
 <section id="insertindex-while-loop-version-1-no-out-of-index-error" class="level1">
 <h1>3.3.2 <code>Insert(Index)</code>: <code>while</code>-loop version 1 (No Out-of-Index Error)</h1>
-<div id="cell-22" class="cell" data-execution_count="39">
+<div id="cell-23" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_ll_WHILELOOP_v1(linked_list: LinkedList, index: <span class="bu">int</span>,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                            new_node: Node):</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -579,7 +580,7 @@ NO ERROR EXPECTED NEXT RUN DESPITE OUT OF INDEX - NEED TO UPDATE FN
 </section>
 <section id="insertindex-while-loop-version-2-includes-out-of-index-error" class="level1">
 <h1>3.3.3 <code>Insert(Index)</code>: <code>while</code>-loop version 2 (Includes Out-of-Index Error)</h1>
-<div id="cell-24" class="cell" data-execution_count="45">
+<div id="cell-25" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_ll_WHILELOOP(linked_list: LinkedList, index: <span class="bu">int</span>,</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                            new_node: Node):</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -659,7 +660,7 @@ Cell <span class="ansi-green-fg">In[45], line 14</span>, in <span class="ansi-cy
 </section>
 <section id="delete0-or-top" class="level1">
 <h1>4.1 <code>Delete(0)</code> or <strong>Top</strong></h1>
-<div id="cell-27" class="cell" data-execution_count="10">
+<div id="cell-28" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [Hey', 'I', 'Just', 'Met']</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># del 0 -&gt;  'I', 'Just', 'Met'</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -680,10 +681,11 @@ Cell <span class="ansi-green-fg">In[45], line 14</span>, in <span class="ansi-cy
 </section>
 <section id="deleteindex" class="level1">
 <h1>4.2 <code>Delete(Index)</code></h1>
+<p><img src="imgs/dsa-ch14-delete.png" class="img-fluid"></p>
 </section>
 <section id="deleteindex-for-loop-version" class="level1">
 <h1>4.2.1 <code>Delete(Index)</code>: <code>for</code>-loop version</h1>
-<div id="cell-30" class="cell" data-execution_count="46">
+<div id="cell-32" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> delete_node_ll_FORLOOP(linked_list: LinkedList, index<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> index<span class="op">==</span><span class="dv">0</span>:</span>
@@ -767,7 +769,7 @@ Cell <span class="ansi-green-fg">In[46], line 9</span>, in <span class="ansi-cya
 </section>
 <section id="deleteindex-while-loop-version" class="level1">
 <h1>4.2.2 <code>Delete(Index)</code>: <code>while</code>-loop version</h1>
-<div id="cell-32" class="cell" data-execution_count="47">
+<div id="cell-34" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> delete_node_ll_WHILELOOP(linked_list: LinkedList, index<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> index<span class="op">==</span><span class="dv">0</span>:</span>
