@@ -8,7 +8,7 @@
 
 <meta name="author" content="Tony Phung">
 <meta name="dcterms.date" content="2025-02-21">
-<meta name="description" content="Chapter 14 Exercises 1-3, J.Wengrow Vol 2">
+<meta name="description" content="Chapter 14 Exercises 1-5, J.Wengrow Vol 2">
 
 <title>DSA 37: Singly &amp; Doubly Linked List - Exercises – Tony’s Blog ✍️</title>
 <style>
@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">DSA 37: Singly &amp; Doubly Linked List - Exercises</h1>
                   <div>
         <div class="description">
-          Chapter 14 Exercises 1-3, J.Wengrow Vol 2
+          Chapter 14 Exercises 1-5, J.Wengrow Vol 2
         </div>
       </div>
                           <div class="quarto-categories">
@@ -266,8 +266,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#a.-add-method-return_last_item-to-classic-linkedlist-class" id="toc-a.-add-method-return_last_item-to-classic-linkedlist-class" class="nav-link" data-scroll-target="#a.-add-method-return_last_item-to-classic-linkedlist-class">3a. Add method: <code>return_last_item</code> to Classic <code>LinkedList</code> Class</a></li>
   <li><a href="#b.-add-recursive-method-return_last_item-to-classic-linkedlist-class" id="toc-b.-add-recursive-method-return_last_item-to-classic-linkedlist-class" class="nav-link" data-scroll-target="#b.-add-recursive-method-return_last_item-to-classic-linkedlist-class">3b. Add recursive method: <code>return_last_item</code> to Classic <code>LinkedList</code> Class</a></li>
   <li><a href="#c.-add-recursive-method-return_last_item-with-nodes" id="toc-c.-add-recursive-method-return_last_item-with-nodes" class="nav-link" data-scroll-target="#c.-add-recursive-method-return_last_item-with-nodes">3c. Add recursive method: <code>return_last_item</code> with <code>Nodes</code></a></li>
-  <li><a href="#tba-4.-add-method-reverse" id="toc-tba-4.-add-method-reverse" class="nav-link" data-scroll-target="#tba-4.-add-method-reverse">[TBA] 4. Add method: <code>reverse</code></a></li>
-  <li><a href="#tba-5.-delete-node-puzzle" id="toc-tba-5.-delete-node-puzzle" class="nav-link" data-scroll-target="#tba-5.-delete-node-puzzle">[TBA] 5. Delete Node Puzzle</a></li>
+  <li><a href="#add-method-reverse_linkedlist" id="toc-add-method-reverse_linkedlist" class="nav-link" data-scroll-target="#add-method-reverse_linkedlist">4. Add method: <code>reverse_linkedlist</code></a></li>
+  <li><a href="#delete-current-node-puzzle" id="toc-delete-current-node-puzzle" class="nav-link" data-scroll-target="#delete-current-node-puzzle">5. Delete Current Node Puzzle</a></li>
   </ul>
 </nav>
     </div>
@@ -281,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="imgs/dsa-ch14-ex.png" class="img-fluid"></p>
 <section id="setup-node-linkedlist-doublylinkedlist-class" class="level1">
 <h1>0. Setup <code>Node</code>, <code>LinkedList</code> &amp; <code>DoublyLinkedList</code> Class</h1>
-<div id="cell-3" class="cell" data-execution_count="1">
+<div id="cell-3" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Any</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NodeLL():</span>
@@ -333,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="add-method-print_all-to-classic-linkedlist-class" class="level1">
 <h1>1. Add method: <code>print_all</code> to Classic <code>LinkedList</code> Class</h1>
 <div id="cell-7" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_rev_all_ll(linked_list: LinkedList)<span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_all_ll(linked_list: LinkedList)<span class="op">-&gt;</span> <span class="va">None</span>:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># case 1: empty list: print empty list</span></span>
@@ -351,11 +351,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(current_node.data)        <span class="co"># print node.data</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        current_node <span class="op">=</span> current_node.next_node <span class="co"># go next node</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>print_rev_all_ll(LinkedList()) <span class="co"># empty list</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>print_all_ll(LinkedList()) <span class="co"># empty list</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>print_rev_all_ll(LinkedList(NodeLL(<span class="st">"single lonely node"</span>))) <span class="co"># empty list</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>print_all_ll(LinkedList(NodeLL(<span class="st">"single lonely node"</span>))) <span class="co"># empty list</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>print_rev_all_ll(LinkedList(node0_ll))</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>print_all_ll(LinkedList(node0_ll))</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -605,19 +605,69 @@ life
 </div>
 </section>
 </section>
-<section id="tba-4.-add-method-reverse" class="level1">
-<h1>[TBA] 4. Add method: <code>reverse</code></h1>
+<section id="add-method-reverse_linkedlist" class="level1">
+<h1>4. Add method: <code>reverse_linkedlist</code></h1>
 <ul>
 <li>original list: A -&gt; B -&gt; C<br>
 </li>
 <li>reversed list: C -&gt; B -&gt; A.</li>
 </ul>
 <div id="cell-21" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TBA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reverse_ll(linked_list: LinkedList):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> linked_list.first_node</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    previous_node <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> current_node:</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Empty Linked List!"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> current_node:</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># A-&gt;B-&gt;C-&gt;</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 1. &lt;-A POINT A TO PREVIOUS NODE</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 1.  BUT CANT DO THAT YET, BECAUSE WONT HAVE ACCESS</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     TO NEXT NODE FOR ITERATION</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 1A. SO SAVE [NEXT_NODE], </span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 1B. then CURR.NEXT IS [PREV]  &lt;-A </span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 2.  update [PREV]</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 3.  update [CURR]  </span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        next_node<span class="op">=</span>current_node.next_node        <span class="co"># 1A.   B=A.NEXT</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        previous_node <span class="op">=</span> current_node.next_node  <span class="co"># 1B.   A.NEXT=PREV</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>        current_node <span class="op">=</span> previous_node            <span class="co"># 2.    PREV = A   </span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        current_node <span class="op">=</span> next_node                <span class="co"># 3.    CURR = CURR.NEXT</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> linked_list</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 'time','of','your','life'</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>reverse_ll(LinkedList()) <span class="co"># empty list</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> LinkedList(NodeLL(<span class="st">"single lonely node"</span>))</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>reverse_ll(ll)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>print_rev_all_ll(ll)</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> LinkedList(node0_ll)</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>reverse_ll(ll)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>print_rev_all_ll(ll)</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="co">#eta: 25m</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co">#comments: definitely helped writign it down step by step </span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="co"># rather than trying to do it all in my head, see the comments</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Empty Linked List!
+
+single lonely node
+
+life
+your
+of
+time
+</code></pre>
+</div>
 </div>
 </section>
-<section id="tba-5.-delete-node-puzzle" class="level1">
-<h1>[TBA] 5. Delete Node Puzzle</h1>
+<section id="delete-current-node-puzzle" class="level1">
+<h1>5. Delete Current Node Puzzle</h1>
 <p>List-Type:</p>
 <ul>
 <li><code>LinkedList</code> Class</li>
@@ -626,15 +676,65 @@ life
 <ul>
 <li><p>You have <strong><em>access to a node</em></strong> from somewhere in the middle of a classic linked list but <strong><em>not to the linked list</em></strong> itself;</p></li>
 <li><p>You have a <strong><em>variable that points to an instance of Node</em></strong>, but you don’t have access to the LinkedList instance.</p></li>
-<li><p>If you follow this node’s link</p>
-<ul>
-<li>you <strong><em>can find all the values from this middle node until the end</em></strong>,</li>
-<li>but you have <strong><em>no way to find the nodes that precede</em></strong> this node in the list.</li>
-</ul></li>
+<li><p>Write code that will effectively <strong><em>delete this node</em></strong> from the list.</p></li>
+<li><p>The entire remaining list should remain complete, with only this node removed.</p></li>
 </ul>
-<p>Write code that will effectively delete this node from the list. The entire remaining list should remain complete, with only this node removed.</p>
 <div id="cell-23" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TBA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> delete_node_ll(current_node: NodeLL)<span class="op">-&gt;</span><span class="va">None</span>:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A -&gt; B -&gt; C -&gt; D</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Delete current_node: [B]</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A -&gt;   -&gt; C -&gt; D</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A -&gt; C -&gt; D</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C.data into B.data</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># D.data into C.data</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># None into D.data</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> current_node.data:</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Empty Node!"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> current_node.next_node: <span class="co"># STOPS AT CN=D, LAST ENTERS CN=C</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        current_node.data <span class="op">=</span> current_node.next_node.data <span class="co">#B, C,</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print(f"NEW_CURRENT_DATA: {current_node.data}")</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        current_node<span class="op">=</span>current_node.next_node</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    current_node.data <span class="op">=</span> <span class="va">None</span> </span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(f"NEW_CURRENT_DATA: {current_node.data}")</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co"># classic nodes setup</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>node0_ll<span class="op">=</span>NodeLL(<span class="st">"A"</span>)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>node1_ll<span class="op">=</span>NodeLL(<span class="st">"B"</span>)</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>node2_ll<span class="op">=</span>NodeLL(<span class="st">"C"</span>)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>node3_ll<span class="op">=</span>NodeLL(<span class="st">"D"</span>)</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>node0_ll.next_node<span class="op">=</span>node1_ll</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>node1_ll.next_node<span class="op">=</span>node2_ll</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>node2_ll.next_node<span class="op">=</span>node3_ll</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>ll <span class="op">=</span> LinkedList(node0_ll)</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Before Deleting 'B'"</span>)</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>print_all_ll(ll)</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>delete_node_ll(node1_ll)</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After Deleting 'B'"</span>)</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>print_all_ll(ll)</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co"># print()</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co"># print()</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co"># ll = LinkedList(node0_ll)</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co"># reverse_ll(ll)</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co"># print_rev_all_ll(ll)</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co"># print()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Before Deleting 'B'
+A
+B
+C
+D
+
+After Deleting 'B'
+A
+C
+D
+None</code></pre>
+</div>
 </div>
 
 
