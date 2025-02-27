@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2025-02-27">
+<meta name="description" content="Insert a List of Integers into a Binary-Tree">
 
-<title>Design Patterns 💻 – Tony’s Blog ✍️</title>
+<title>DSA 43: Binary Search Trees - Sir-Insert-A-Lot [Part 6] – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,65 +105,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -138,7 +116,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Tony’s Blog ✍️</span>
     </a>
   </div>
@@ -154,23 +132,23 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
         <li>
-    <a class="dropdown-item" href="./computerscience.html">
+    <a class="dropdown-item" href="../../../computerscience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./dsa.html">
+    <a class="dropdown-item" href="../../../dsa.html">
  <span class="dropdown-text">Data Structures and Algorithms</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./designpatterns.html">
+    <a class="dropdown-item" href="../../../designpatterns.html">
  <span class="dropdown-text">Design Patterns</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./coding.html">
+    <a class="dropdown-item" href="../../../coding.html">
  <span class="dropdown-text">Coding</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./leetcode.html">
+    <a class="dropdown-item" href="../../../leetcode.html">
  <span class="dropdown-text">LeetCode</span></a>
   </li>  
     </ul>
@@ -181,15 +159,15 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
         <li>
-    <a class="dropdown-item" href="./mathematics.html">
+    <a class="dropdown-item" href="../../../mathematics.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./calculus.html">
+    <a class="dropdown-item" href="../../../calculus.html">
  <span class="dropdown-text">Calculus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./linearalgebra.html">
+    <a class="dropdown-item" href="../../../linearalgebra.html">
  <span class="dropdown-text">Linear Algebra</span></a>
   </li>  
     </ul>
@@ -200,21 +178,21 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
         <li>
-    <a class="dropdown-item" href="./datascience.html">
+    <a class="dropdown-item" href="../../../datascience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machinelearning.html">
+    <a class="dropdown-item" href="../../../machinelearning.html">
  <span class="dropdown-text">Machine Learning</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./kaggle.html">
+    <a class="dropdown-item" href="../../../kaggle.html">
  <span class="dropdown-text">Kaggle</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About 🐈‍⬛</span></a>
   </li>  
   <li class="nav-item compact">
@@ -238,179 +216,222 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Design Patterns 💻</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">DSA 43: Binary Search Trees - Sir-Insert-A-Lot [Part 6]</h1>
+                  <div>
+        <div class="description">
+          Insert a List of Integers into a Binary-Tree
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">data structures</div>
+                <div class="quarto-category">algorithms</div>
+              </div>
+                  </div>
   </div>
-  <div class="quarto-title-meta column-page-left">
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
     </div>
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 27, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="design patterns">design patterns <span class="quarto-category-count">(4)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#treenode-class-insert_node-function-setup" id="toc-treenode-class-insert_node-function-setup" class="nav-link active" data-scroll-target="#treenode-class-insert_node-function-setup">1. <code>TreeNode</code> Class &amp; <code>insert_node</code> Function: Setup</a></li>
+  <li><a href="#insert-manual" id="toc-insert-manual" class="nav-link" data-scroll-target="#insert-manual">2. Insert: <strong>Manual</strong></a></li>
+  <li><a href="#insert-for-loop" id="toc-insert-for-loop" class="nav-link" data-scroll-target="#insert-for-loop">3. Insert: <code>for</code>-loop</a></li>
+  <li><a href="#insert-function" id="toc-insert-function" class="nav-link" data-scroll-target="#insert-function">4. Insert: <strong>Function</strong></a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-marquee column-page-left">
-  <div class="about-image-container">
-  </div>
-  <div class="about-contents">
-     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="design patterns" data-listing-date-sort="1735578000000" data-listing-file-modified-sort="1740657928341" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="145">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/designpatterns/dp-004-singleton-pattern.html" class="no-external"></a></p><a href="./posts/computerscience/designpatterns/dp-004-singleton-pattern.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/designpatterns/imgs/dp-004-singleton.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/designpatterns/dp-004-singleton-pattern.html" class="no-external"></a></p>
+
+
+
+<p><img src="imgs/dsa-ch15-insert-alot.png" class="img-fluid"></p>
+<section id="treenode-class-insert_node-function-setup" class="level1">
+<h1>1. <code>TreeNode</code> Class &amp; <code>insert_node</code> Function: Setup</h1>
+<p>Previously <a href="https://tonyjustdevs.github.io/blog/posts/computerscience/datastructuresandalgorithms/dsa-041-binary-search-trees-part-4.html">introduced</a>.</p>
+<div id="cell-3" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TreeNode:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data, left<span class="op">=</span><span class="va">None</span>, right<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data<span class="op">=</span>data</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.left<span class="op">=</span>left</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.right<span class="op">=</span>right</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_node(root_node: TreeNode, target: <span class="bu">int</span>):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> root_node</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> current_node.data<span class="op">==</span>target:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]|t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t\t\t\t\t\t</span><span class="ss">No Duplicate Allowed!"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>   </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target<span class="op">&lt;</span>current_node.data: <span class="co"># t&lt;c -&gt; left</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.left: <span class="co"># go left: if exists </span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="co">#   50</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="co">#  1</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]|t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]: c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has 1 left-child: </span><span class="ch">\t</span><span class="ss">going left c[</span><span class="sc">{</span>current_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            current_node<span class="op">=</span>current_node.left</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> insert_node(current_node, target)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># go left: if not exist, insert</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            current_node.left<span class="op">=</span>TreeNode(target)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]|t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]: c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has no left-child: </span><span class="ch">\t</span><span class="ss">inserted t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]cl[</span><span class="sc">{</span>current_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:  <span class="co">#t&lt;c -&gt; go right</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.right: <span class="co"># go right: if exists </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="co">#   50</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="co">#  1  51</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]|t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]: c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has 1 right-child: </span><span class="ch">\t</span><span class="ss">going right c[</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            current_node<span class="op">=</span>current_node.right</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> insert_node(current_node, target)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># go right: if not exist, insert</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            current_node.right<span class="op">=</span>TreeNode(target)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]|t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]: c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has no right-child: </span><span class="ch">\t</span><span class="ss">inserted t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]cl[</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/designpatterns/dp-004-singleton-pattern.html" class="no-external">DP 4: Singleton Pattern</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/designpatterns/dp-004-singleton-pattern.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/designpatterns/dp-004-singleton-pattern.html" class="no-external">A Design (or Anti) Pattern Allowing Only A Single Instance</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/designpatterns/dp-004-singleton-pattern.html" class="no-external">
-<div class="listing-date">
-Dec 31, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="design patterns" data-listing-date-sort="1733504400000" data-listing-file-modified-sort="1740657928341" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="13">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/designpatterns/dp-003-interfaces-2-protocols.html" class="no-external"></a></p><a href="./posts/computerscience/designpatterns/dp-003-interfaces-2-protocols.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/designpatterns/imgs/dp-003-protocols.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/designpatterns/dp-003-interfaces-2-protocols.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/designpatterns/dp-003-interfaces-2-protocols.html" class="no-external">[INCOMPLETE] DP 3: Interfaces [Part 2] - Protocols</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/designpatterns/dp-003-interfaces-2-protocols.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/designpatterns/dp-003-interfaces-2-protocols.html" class="no-external">Programming to Interfaces rather than Implementation specificsgit</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/designpatterns/dp-003-interfaces-2-protocols.html" class="no-external">
-<div class="listing-date">
-Dec 7, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="design patterns" data-listing-date-sort="1733418000000" data-listing-file-modified-sort="1740657928341" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="277">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/designpatterns/dp-002-interfaces-1-abc.html" class="no-external"></a></p><a href="./posts/computerscience/designpatterns/dp-002-interfaces-1-abc.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/designpatterns/imgs/dp-002-abc.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/designpatterns/dp-002-interfaces-1-abc.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/designpatterns/dp-002-interfaces-1-abc.html" class="no-external">DP 2: Interfaces [Part 1] - <code>ABC</code> Abstract Base Classes</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/designpatterns/dp-002-interfaces-1-abc.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/designpatterns/dp-002-interfaces-1-abc.html" class="no-external">Programming to Interfaces rather than Implementation specifics</a>
+</section>
+<section id="insert-manual" class="level1">
+<h1>2. Insert: <strong>Manual</strong></h1>
+<div id="cell-5" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> TreeNode(<span class="dv">50</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>insert_node(root, <span class="dv">50</span>) </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>insert_node(root, <span class="dv">10</span>) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>insert_node(root, <span class="dv">10</span>) </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>insert_node(root, <span class="dv">51</span>) </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>insert_node(root, <span class="dv">53</span>) </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>insert_node(root, <span class="dv">52</span>) </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>insert_node(root, <span class="dv">52</span>) </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c[50]|t[50]:                            No Duplicate Allowed!
+
+c[50]|t[10]: c[50] has no left-child:   inserted t[10]cl[10]
+
+c[50]|t[10]: c[50] has 1 left-child:    going left c[10]
+c[10]|t[10]:                            No Duplicate Allowed!
+
+c[50]|t[51]: c[50] has no right-child:  inserted t[51]cl[51]
+
+c[50]|t[53]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[53]: c[51] has no right-child:  inserted t[53]cl[53]
+
+c[50]|t[52]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[52]: c[51] has 1 right-child:   going right c[53]
+c[53]|t[52]: c[53] has no left-child:   inserted t[52]cl[52]
+
+c[50]|t[52]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[52]: c[51] has 1 right-child:   going right c[53]
+c[53]|t[52]: c[53] has 1 left-child:    going left c[52]
+c[52]|t[52]:                            No Duplicate Allowed!
+</code></pre>
 </div>
 </div>
-<div class="metadata">
-<a href="./posts/computerscience/designpatterns/dp-002-interfaces-1-abc.html" class="no-external">
-<div class="listing-date">
-Dec 6, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="design patterns" data-listing-date-sort="1732899600000" data-listing-file-modified-sort="1740657928341" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="215">
-<div class="thumbnail">
-<p><a href="./posts/computerscience/designpatterns/dp-001-encapsulation-getter-python.html" class="no-external"></a></p><a href="./posts/computerscience/designpatterns/dp-001-encapsulation-getter-python.html" class="no-external">
-<p><img loading="lazy" src="./posts/computerscience/designpatterns/imgs/dp-001-getprop.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/computerscience/designpatterns/dp-001-encapsulation-getter-python.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/computerscience/designpatterns/dp-001-encapsulation-getter-python.html" class="no-external">DP 1: Encapsulation - Getter Method in Python</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/computerscience/designpatterns/dp-001-encapsulation-getter-python.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('design patterns'); return false;">
-design patterns
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/computerscience/designpatterns/dp-001-encapsulation-getter-python.html" class="no-external">Using Python’s <code>@property</code> to create a getter method</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/computerscience/designpatterns/dp-001-encapsulation-getter-python.html" class="no-external">
-<div class="listing-date">
-Nov 30, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
+</section>
+<section id="insert-for-loop" class="level1">
+<h1>3. Insert: <code>for</code>-loop</h1>
+<div id="cell-7" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nodes_to_insert_list <span class="op">=</span> [<span class="dv">50</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">51</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">52</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> TreeNode(<span class="dv">50</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> nodes_to_insert_list:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    insert_node(root, node)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c[50]|t[50]:                            No Duplicate Allowed!
+
+c[50]|t[10]: c[50] has no left-child:   inserted t[10]cl[10]
+
+c[50]|t[10]: c[50] has 1 left-child:    going left c[10]
+c[10]|t[10]:                            No Duplicate Allowed!
+
+c[50]|t[51]: c[50] has no right-child:  inserted t[51]cl[51]
+
+c[50]|t[53]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[53]: c[51] has no right-child:  inserted t[53]cl[53]
+
+c[50]|t[52]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[52]: c[51] has 1 right-child:   going right c[53]
+c[53]|t[52]: c[53] has no left-child:   inserted t[52]cl[52]
+
+c[50]|t[52]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[52]: c[51] has 1 right-child:   going right c[53]
+c[53]|t[52]: c[53] has 1 left-child:    going left c[52]
+c[52]|t[52]:                            No Duplicate Allowed!
+</code></pre>
 </div>
 </div>
+</section>
+<section id="insert-function" class="level1">
+<h1>4. Insert: <strong>Function</strong></h1>
+<div id="cell-9" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_nodes_list(nodes_list: <span class="bu">list</span>[<span class="bu">int</span>]):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node <span class="kw">in</span> nodes_list:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        insert_node(root, node)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>nodes_to_insert_list <span class="op">=</span> [<span class="dv">50</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">51</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">52</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> TreeNode(<span class="dv">50</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>insert_nodes_list(nodes_to_insert_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c[50]|t[50]:                            No Duplicate Allowed!
+
+c[50]|t[10]: c[50] has no left-child:   inserted t[10]cl[10]
+
+c[50]|t[10]: c[50] has 1 left-child:    going left c[10]
+c[10]|t[10]:                            No Duplicate Allowed!
+
+c[50]|t[51]: c[50] has no right-child:  inserted t[51]cl[51]
+
+c[50]|t[53]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[53]: c[51] has no right-child:  inserted t[53]cl[53]
+
+c[50]|t[52]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[52]: c[51] has 1 right-child:   going right c[53]
+c[53]|t[52]: c[53] has no left-child:   inserted t[52]cl[52]
+
+c[50]|t[52]: c[50] has 1 right-child:   going right c[51]
+c[51]|t[52]: c[51] has 1 right-child:   going right c[53]
+c[53]|t[52]: c[53] has 1 left-child:    going left c[52]
+c[52]|t[52]:                            No Duplicate Allowed!
+</code></pre>
 </div>
-<div class="listing-no-matching d-none">
-No matching items
 </div>
-</div></main> 
-    <div class="about-footer"><div class="about-links">
-  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-</div>
-</div>
-  </div>
-</div>
- <!-- /main -->
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -575,6 +596,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
