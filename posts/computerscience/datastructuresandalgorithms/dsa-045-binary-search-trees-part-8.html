@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2025-02-28">
+<meta name="description" content="Wip Attempt 2: Zero, 1 or 2 Children">
+
+<title>DSA: Binary Search Trees - Delete [Part 9] – Tony’s Blog ✍️</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Tony’s Blog ✍️</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computer-science-💻" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computer Science 💻</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
+        <li>
+    <a class="dropdown-item" href="../../../computerscience.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../dsa.html">
+ <span class="dropdown-text">Data Structures and Algorithms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../designpatterns.html">
+ <span class="dropdown-text">Design Patterns</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../coding.html">
+ <span class="dropdown-text">Coding</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../leetcode.html">
+ <span class="dropdown-text">LeetCode</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mathematics-🧮" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mathematics 🧮</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
+        <li>
+    <a class="dropdown-item" href="../../../mathematics.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../calculus.html">
+ <span class="dropdown-text">Calculus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../linearalgebra.html">
+ <span class="dropdown-text">Linear Algebra</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-science-🧪" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Science 🧪</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
+        <li>
+    <a class="dropdown-item" href="../../../datascience.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../machinelearning.html">
+ <span class="dropdown-text">Machine Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../kaggle.html">
+ <span class="dropdown-text">Kaggle</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About 🐈‍⬛</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tonyjustdevs"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://au.linkedin.com/in/tony-phung-6190b0b8"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">DSA: Binary Search Trees - Delete [Part 9]</h1>
+                  <div>
+        <div class="description">
+          Wip Attempt 2: Zero, 1 or 2 Children
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">data structures</div>
+                <div class="quarto-category">algorithms</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 28, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#treenode-binary-tree-insert_node-setup" id="toc-treenode-binary-tree-insert_node-setup" class="nav-link active" data-scroll-target="#treenode-binary-tree-insert_node-setup">1. <code>TreeNode</code>, <code>Binary Tree</code> &amp; <code>insert_node</code>: Setup</a></li>
+  <li><a href="#confirm-tree" id="toc-confirm-tree" class="nav-link" data-scroll-target="#confirm-tree">2. Confirm Tree</a></li>
+  <li><a href="#delete_node-0-or-1-child-nodes-only" id="toc-delete_node-0-or-1-child-nodes-only" class="nav-link" data-scroll-target="#delete_node-0-or-1-child-nodes-only">3. <code>delete_node</code>: 0 or 1 Child Nodes Only</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">4. Testing</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p><img src="imgs/dsa-ch15-delete.gif" class="img-fluid"></p>
+<section id="treenode-binary-tree-insert_node-setup" class="level1">
+<h1>1. <code>TreeNode</code>, <code>Binary Tree</code> &amp; <code>insert_node</code>: Setup</h1>
+<p>Introduced <a href="https://tonyjustdevs.github.io/blog/posts/computerscience/datastructuresandalgorithms/dsa-043-binary-search-trees-part-6.html">previously</a>.</p>
+<div id="cell-3" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TreeNode:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, data, left<span class="op">=</span><span class="va">None</span>, right<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.data <span class="op">=</span> data</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.left <span class="op">=</span> left</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.right <span class="op">=</span> right</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_node(root_node: TreeNode, target: <span class="bu">int</span>):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> root_node</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target <span class="op">==</span> current_node.data:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]|c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t</span><span class="ss">Cannot insert duplicates"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>  </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target <span class="op">&lt;</span> current_node.data: <span class="co"># left</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.left: <span class="co"># go left-child: if exists</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]|c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t</span><span class="ss">Current[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has ONE left-child : GO LEFT[</span><span class="sc">{</span>current_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            current_node<span class="op">=</span>current_node.left</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> insert_node(current_node, target)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># insert left-child: if not exist</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            current_node.left <span class="op">=</span> TreeNode(target)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]|c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t</span><span class="ss">Current[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has NO left-child: INSERTED LEFT CurrentLeft[</span><span class="sc">{</span>current_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> current_node.left</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.right: <span class="co"># go right-child: if exists</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]|c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t</span><span class="ss">Current[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has ONE right-child : GO right[</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            current_node<span class="op">=</span>current_node.right</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> insert_node(current_node, target)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># insert right-child: if not exist</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            current_node.right <span class="op">=</span> TreeNode(target)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]|c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t</span><span class="ss">Current[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has NO right-child: INSERTED right Currentright[</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_node_clean(root_node: TreeNode, target: <span class="bu">int</span>):</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> root_node</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target <span class="op">==</span> current_node.data:</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span>  </span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target <span class="op">&lt;</span> current_node.data: <span class="co"># left</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.left: <span class="co"># go left-child: if exists</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            current_node<span class="op">=</span>current_node.left</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> insert_node_clean(current_node, target)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># insert left-child: if not exist</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            current_node.left <span class="op">=</span> TreeNode(target)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> current_node.left</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.right: <span class="co"># go right-child: if exists</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            current_node<span class="op">=</span>current_node.right</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> insert_node_clean(current_node, target)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># insert right-child: if not exist</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            current_node.right <span class="op">=</span> TreeNode(target)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a basic tree</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#      25           75</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  10     33     56     89  </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 4  11 30  40 52  61 82  95  </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insert_node_list(root_node:TreeNode, node_list: <span class="bu">list</span>[<span class="bu">int</span>], show_outputs:<span class="bu">bool</span><span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node <span class="kw">in</span> node_list: </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> show_outputs:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            insert_node(root_node, node) </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            insert_node_clean(root_node, node) </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> TreeNode(<span class="dv">50</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>node_list <span class="op">=</span> [<span class="dv">25</span>,<span class="dv">75</span>,<span class="dv">10</span>,<span class="dv">33</span>,<span class="dv">56</span>,<span class="dv">89</span>,<span class="dv">4</span>,<span class="dv">11</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">52</span>,<span class="dv">61</span>,<span class="dv">82</span>,<span class="dv">95</span>]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>insert_node_list(root, node_list,show_outputs<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>t[25]|c[50]:        Current[50] has NO left-child: INSERTED LEFT CurrentLeft[25]
+t[75]|c[50]:        Current[50] has NO right-child: INSERTED right Currentright[75]
+t[10]|c[50]:        Current[50] has ONE left-child : GO LEFT[25]
+t[10]|c[25]:        Current[25] has NO left-child: INSERTED LEFT CurrentLeft[10]
+t[33]|c[50]:        Current[50] has ONE left-child : GO LEFT[25]
+t[33]|c[25]:        Current[25] has NO right-child: INSERTED right Currentright[33]
+t[56]|c[50]:        Current[50] has ONE right-child : GO right[75]
+t[56]|c[75]:        Current[75] has NO left-child: INSERTED LEFT CurrentLeft[56]
+t[89]|c[50]:        Current[50] has ONE right-child : GO right[75]
+t[89]|c[75]:        Current[75] has NO right-child: INSERTED right Currentright[89]
+t[4]|c[50]:         Current[50] has ONE left-child : GO LEFT[25]
+t[4]|c[25]:         Current[25] has ONE left-child : GO LEFT[10]
+t[4]|c[10]:         Current[10] has NO left-child: INSERTED LEFT CurrentLeft[4]
+t[11]|c[50]:        Current[50] has ONE left-child : GO LEFT[25]
+t[11]|c[25]:        Current[25] has ONE left-child : GO LEFT[10]
+t[11]|c[10]:        Current[10] has NO right-child: INSERTED right Currentright[11]
+t[30]|c[50]:        Current[50] has ONE left-child : GO LEFT[25]
+t[30]|c[25]:        Current[25] has ONE right-child : GO right[33]
+t[30]|c[33]:        Current[33] has NO left-child: INSERTED LEFT CurrentLeft[30]
+t[40]|c[50]:        Current[50] has ONE left-child : GO LEFT[25]
+t[40]|c[25]:        Current[25] has ONE right-child : GO right[33]
+t[40]|c[33]:        Current[33] has NO right-child: INSERTED right Currentright[40]
+t[52]|c[50]:        Current[50] has ONE right-child : GO right[75]
+t[52]|c[75]:        Current[75] has ONE left-child : GO LEFT[56]
+t[52]|c[56]:        Current[56] has NO left-child: INSERTED LEFT CurrentLeft[52]
+t[61]|c[50]:        Current[50] has ONE right-child : GO right[75]
+t[61]|c[75]:        Current[75] has ONE left-child : GO LEFT[56]
+t[61]|c[56]:        Current[56] has NO right-child: INSERTED right Currentright[61]
+t[82]|c[50]:        Current[50] has ONE right-child : GO right[75]
+t[82]|c[75]:        Current[75] has ONE right-child : GO right[89]
+t[82]|c[89]:        Current[89] has NO left-child: INSERTED LEFT CurrentLeft[82]
+t[95]|c[50]:        Current[50] has ONE right-child : GO right[75]
+t[95]|c[75]:        Current[75] has ONE right-child : GO right[89]
+t[95]|c[89]:        Current[89] has NO right-child: INSERTED right Currentright[95]</code></pre>
+</div>
+</div>
+</section>
+<section id="confirm-tree" class="level1">
+<h1>2. Confirm Tree</h1>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#      25           75</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  10     33     56     89  </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4  11 30  40 52  61 82  95</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L1] root.data: </span><span class="ch">\t\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 50)"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L2] root.left.data: </span><span class="ch">\t\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 25)"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L2] root.right.data: </span><span class="ch">\t\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 75)"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L3] root.left.left.data:      </span><span class="ch">\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>left<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 10)"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L3] root.left.right.data:     </span><span class="ch">\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>left<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 33)"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L3] root.right.left.data:     </span><span class="ch">\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 56)"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L3] root.right.right.data:    </span><span class="ch">\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 89)"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.left.left.left.data: </span><span class="ch">\t\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>left<span class="sc">.</span>left<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]  (expected:  4)"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.left.left.right.data:  </span><span class="ch">\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>left<span class="sc">.</span>left<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 11)"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.left.right.left.data:  </span><span class="ch">\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>left<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 30)"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.left.right.right.data: </span><span class="ch">\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>left<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 40)"</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.right.left.left.data:  </span><span class="ch">\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 52)"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.right.left.right.data: </span><span class="ch">\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 61)"</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.right.right.left.data: </span><span class="ch">\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 82)"</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[L4] root.right.right.right.data:</span><span class="ch">\t</span><span class="ss">[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] (expected: 95)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[L1] root.data:             [50] (expected: 50)
+
+[L2] root.left.data:            [25] (expected: 25)
+[L2] root.right.data:           [75] (expected: 75)
+
+[L3] root.left.left.data:           [10] (expected: 10)
+[L3] root.left.right.data:          [33] (expected: 33)
+[L3] root.right.left.data:          [56] (expected: 56)
+[L3] root.right.right.data:         [89] (expected: 89)
+
+[L4] root.left.left.left.data:      [4]  (expected:  4)
+[L4] root.left.left.right.data:     [11] (expected: 11)
+[L4] root.left.right.left.data:     [30] (expected: 30)
+[L4] root.left.right.right.data:    [40] (expected: 40)
+
+[L4] root.right.left.left.data:     [52] (expected: 52)
+[L4] root.right.left.right.data:    [61] (expected: 61)
+[L4] root.right.right.left.data:    [82] (expected: 82)
+[L4] root.right.right.right.data:   [95] (expected: 95)</code></pre>
+</div>
+</div>
+</section>
+<section id="delete_node-0-or-1-child-nodes-only" class="level1">
+<h1>3. <code>delete_node</code>: 0 or 1 Child Nodes Only</h1>
+<div id="cell-8" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> delete_node(root_node: TreeNode, target: <span class="bu">int</span>, parent_node<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    current_node <span class="op">=</span> root_node</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target <span class="op">==</span> current_node.data:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 2. delete_node - delete cases 1, 2 &amp; 3.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"[Part 1: Search] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]==c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t\t\t</span><span class="ss">Node Found..."</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"[Part 2: Delete] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]==c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t\t\t\t</span><span class="ss">Determine Number of Children..."</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="kw">not</span> current_node.left <span class="kw">and</span> <span class="kw">not</span> current_node.right): <span class="co"># 0-kids</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Case A: Target has 0-kid --- [(0 left + 0 right) </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># only 1 parent per node(p.left or p.right)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> parent_node.left: <span class="co"># if exists burn it</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                parent_node.left <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> parent_node.right: </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                parent_node.right <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[Part2A: Del_0Kid] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]==c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]._0_kid: </span><span class="ch">\t\t</span><span class="ss">Burn'em!🔥[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">], Parent[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] will survive 🍀."</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> (current_node.left <span class="kw">and</span> <span class="kw">not</span> current_node.right) <span class="kw">or</span> (<span class="kw">not</span> current_node.left <span class="kw">and</span> current_node.right):</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Case B: 1-kid --- [(1 left + 0 right) OR (0 left + 1 right)]</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> current_node.left:</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                target_sgl_child <span class="op">=</span> current_node.left </span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                target_sgl_child <span class="op">=</span> current_node.right</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[Part2B: Del_1Kid] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]==c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]._1_kid[</span><span class="sc">{</span>target_sgl_child<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t</span><span class="ss">Is it Left or Right? kids_gramps[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> parent_node.left <span class="op">==</span> current_node:</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>                parent_node.left <span class="op">=</span> target_sgl_child     <span class="co">##### 2BI  REPLACE TARGET WITH TARGETS LEFT-CHILD</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"[Part2B: Del_1Kid] targets.child[</span><span class="sc">{</span>target_sgl_child<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has now assumed the identity of the target t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">|c</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] and is the kid of it's (previous) gramps[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: aka now gramps.leftkid[</span><span class="sc">{</span>parent_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> parent_node.right <span class="op">==</span> current_node: <span class="co"># target can be a left or right child</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>                parent_node.right <span class="op">=</span> target_sgl_child    <span class="co">##### 2BII REPLACE TARGET WITH TARGETS LEFT-CHILD</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"[Part2B: Del_1Kid] targets.child[</span><span class="sc">{</span>target_sgl_child<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] has now assumed the identity of the target t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">|c</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] and is the kid of it's (previous) gramps[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: aka now gramps.rightkid[</span><span class="sc">{</span>parent_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Case C: 2-kid --- [(1 left + 1 right)</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>            <span class="co"># [deleting_node]: 2KIDS, </span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>            <span class="co"># * replace [target] with [successor_node]. </span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># The [s_node] is the [child_node]: least of all descendents that are greater than target</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            <span class="co"># how to: [target + all descendants in ascending order], [s_node] is next number after [target]</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[Part2C: Del_2Kid] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]==c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]._2_kids[</span><span class="sc">{</span>current_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]:</span><span class="ch">\t\t</span><span class="ss">GO RIGHT-CHILD[</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             50</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>            <span class="co">#       25           75</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>            <span class="co">#    11    33    [56]    89  </span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>            <span class="co"># []  [] 30  40 52  61 82  95</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>            <span class="co"># STEP 1 FOR ALL NODES WITH 2 KIDS - GO RIGHT ONCE:</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Step 1: [GO-RIGHT] (for all scenarios)</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>            target_node <span class="op">=</span> parent_node <span class="op">=</span> current_node</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>            current_node <span class="op">=</span> current_node.right  <span class="co"># target(aka current) always has 2_kids (right always exists)</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             50</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>            <span class="co">#       25           75</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>            <span class="co">#    11    33    [56]    89  </span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>            <span class="co"># []  [] 30  40 52  61 82  95</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>            <span class="co"># go left as possible til no leaf (or left child)</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>            <span class="co"># while current_node:     </span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> current_node:</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> current_node.left:</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"[Part3A: 2K_SNodeLeft] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">],c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].left_child exists[</span><span class="sc">{</span>current_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t</span><span class="ss">go left...Parent[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>                    parent_node<span class="op">=</span>current_node</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>                    current_node<span class="op">=</span>current_node.left</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> current_node.right: <span class="co">#no left + yes right (S_Node is Right)</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"[Part3B: 2K_SNodeRite] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">],c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].right_child exists [</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t</span><span class="ss"> do something...1...Parent[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"expected c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: to [expected 52] with right[</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] as [expected 55]"</span>)</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>                          </span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>                          </span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># S_NODE HAS RIGHT_CHILD</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># S_NODE replaces TARGET</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># RIGHT_CHILDr replaces S_NODE</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># insert_node_clean(root,55)</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#             [X]</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#       25            75</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#    11    33     61     89  </span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># []  [] 30  40 {52}  [] 82  95    CN: {52} -&gt; BECOMES SNODE</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#                 [55]</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#             (52)</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#       25            75</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#    11    33     61     89  </span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># []  [] 30  40 (55)  [] 82  95    CN: {52} -&gt; BECOMES SNODE</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#                 [X]</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>                    s_node <span class="op">=</span> current_node</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>                    target_node.data <span class="op">=</span> s_node.data</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>                    current_node.data <span class="op">=</span> s_node.right.data</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>                    current_node.right <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"[Part3B: 2K_SNodeRite] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">] replaced w' s_node[</span><span class="sc">{</span>target_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">], s_node[</span><span class="sc">{</span>target_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] replaced w' right_child[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] "</span>)</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> s_node.data <span class="co"># </span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"[Part3C: 2K_SNodeLeaf] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">],c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].no_children): </span><span class="ch">\t</span><span class="ss">Parent[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]"</span>)</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#             50</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#       25           75</span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>                    <span class="co">#    11    33     [X]    89  </span></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># []  [] 30  40 52  61 82  95</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>                    s_node <span class="op">=</span> current_node</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># delete target by simply replacing the data????</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>                    target_node.data <span class="op">=</span> s_node.data</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># remove pointer from parent to current_node</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> parent_node.left <span class="op">==</span> current_node:</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">print</span>(<span class="ss">f"[Part3C: 2K_SNodeLeaf] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">],c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].is_s_node[</span><span class="sc">{</span>s_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]): replaces target[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">] </span><span class="ch">\t</span><span class="ss">Parent[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].left[</span><span class="sc">{</span>parent_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] to be deleted"</span>)</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>                        parent_node.left<span class="op">=</span><span class="va">None</span></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">return</span></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">elif</span> parent_node.right <span class="op">==</span> current_node: <span class="co"># IF S_NODE IS RIGHT_CHILD WITH A CHILD, REPLACE ITSELF WITH THE CHILD</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">print</span>(<span class="ss">f"[Part3C: 2K_SNodeLeaf] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">],c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].is_s_node[</span><span class="sc">{</span>s_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]): replaces target[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">] </span><span class="ch">\t</span><span class="ss">Parent[</span><span class="sc">{</span>parent_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].right[</span><span class="sc">{</span>parent_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">] to be deleted"</span>)</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>                        parent_node.right<span class="op">=</span><span class="va">None</span></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">return</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> s_node.data <span class="co"># current is S_Node, target is deleted, s_node replaced target</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Step 2:[LEFT EXISTS]: keep_going_left -&gt; ... -&gt; [Leaf.F_left_child]:</span></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Step 2a:  [LEAF F_right_child]: leaf is [s_node]  -&gt; replace [target]</span></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Step 2bi: [LEAF T_right_child]: leaf is [s_node]  -&gt; replace [target]</span></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Step 2bii:                      and leaf.right_child  -&gt; replace [leaf]</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>            <span class="co"># test 1: c has two kids</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>            <span class="co"># if current_node.left and current_node.right:</span></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>                <span class="co"># print(f"[Part2C: Delete] t[{target}]==c[{current_node.data}]._2_kids: \t\twhat a shame! ☠️ [TBA IN FUTURE]")</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. search_node </span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> target <span class="op">&lt;</span> current_node.data: <span class="co"># go left</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.left:</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[Part 1: Search] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]&lt;c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].left_child exists[</span><span class="sc">{</span>current_node<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t</span><span class="ss">go left..."</span>)</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>            parent_node <span class="op">=</span> current_node</span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>            current_node <span class="op">=</span> current_node.left</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> delete_node(current_node, target,parent_node)</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[Part 1: Search] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]&lt;c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].left_child doesnt exists[</span><span class="sc">{</span><span class="va">None</span><span class="sc">}</span><span class="ss">]: Node Not Found!"</span>)</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> current_node.right:</span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[Part 1: Search] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]&gt;c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].right_child exists[</span><span class="sc">{</span>current_node<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: </span><span class="ch">\t</span><span class="ss">go right..."</span>)</span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>            parent_node <span class="op">=</span> current_node</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>            current_node <span class="op">=</span> current_node.right</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> delete_node(current_node, target,parent_node)</span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"[Part 1: Search] t[</span><span class="sc">{</span>target<span class="sc">}</span><span class="ss">]&gt;c[</span><span class="sc">{</span>current_node<span class="sc">.</span>data<span class="sc">}</span><span class="ss">].right_child doesnt exists[</span><span class="sc">{</span><span class="va">None</span><span class="sc">}</span><span class="ss">]: Node Not Found!"</span>)</span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="testing" class="level1">
+<h1>4. Testing</h1>
+<div id="cell-10" class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> TreeNode(<span class="dv">50</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>node_list <span class="op">=</span> [<span class="dv">25</span>,<span class="dv">75</span>,<span class="dv">10</span>,<span class="dv">33</span>,<span class="dv">56</span>,<span class="dv">89</span>,<span class="dv">4</span>,<span class="dv">11</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">52</span>,<span class="dv">61</span>,<span class="dv">82</span>,<span class="dv">95</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>insert_node_list(root, node_list,show_outputs<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>delete_node(root,<span class="dv">4</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#      25           75</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    10     33     56     89  </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># [X]  11 30  40 52  61 82  95</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>delete_node(root,<span class="dv">10</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#      25           75</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#    11     33     56     89  </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># []  [X] 30  40 52  61 82  95</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>delete_node(root,<span class="dv">56</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#       25           75</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#    11    33     [X]    89  </span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># []  [] 30  40 52  61 82  95</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>delete_node(root,<span class="dv">56</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#       25             75</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co">#    11    33    [61]     89  </span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># []  [] 30  40 52  [X] 82  95</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.data[</span><span class="sc">{</span>root<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: expected[50]"</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.right.data[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: expected[75]"</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.right.left.data[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: expected[61]"</span>)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.right.right.data[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: expected[89]"</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.right.left.left.data[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: expected[52]"</span>)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.right.left.right.data[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>right<span class="sc">}</span><span class="ss">]: expected[None]"</span>) </span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.right.right.left.data[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>left<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: expected[82]"</span>)</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"root.right.right.right.data[</span><span class="sc">{</span>root<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>right<span class="sc">.</span>data<span class="sc">}</span><span class="ss">]: expected[95]"</span>)</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"INSERT 55 (RIGHT OF 52)"</span>)</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>insert_node(root,<span class="dv">55</span>)</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co"># insert_node_clean(root,55)</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">#       25            75</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="co">#    11    33     61     89  </span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co"># []  [] 30  40 52  [] 82  95</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co">#                [55]</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(root.right.left.left.right.data)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>delete_node(root,<span class="dv">50</span>)</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="co"># insert_node_clean(root,55)</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="co">#             50</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="co">#       25            75</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co">#    11    33     61     89  </span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="co"># []  [] 30  40 52  [] 82  95</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="co">#                [55]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[Part 1: Search] t[4]&lt;c[50].left_child exists[25]:  go left...
+[Part 1: Search] t[4]&lt;c[25].left_child exists[10]:  go left...
+[Part 1: Search] t[4]&lt;c[10].left_child exists[4]:   go left...
+[Part 1: Search] t[4]==c[4]:                Node Found...
+[Part 2: Delete] t[4]==c[4]:                Determine Number of Children...
+[Part2A: Del_0Kid] t[4]==c[4]._0_kid:       Burn'em!🔥[4], Parent[10] will survive 🍀.
+
+[Part 1: Search] t[10]&lt;c[50].left_child exists[25]:     go left...
+[Part 1: Search] t[10]&lt;c[25].left_child exists[10]:     go left...
+[Part 1: Search] t[10]==c[10]:              Node Found...
+[Part 2: Delete] t[10]==c[10]:              Determine Number of Children...
+[Part2B: Del_1Kid] t[10]==c[10]._1_kid[11]:     Is it Left or Right? kids_gramps[25]
+[Part2B: Del_1Kid] targets.child[11] has now assumed the identity of the target t[10|c10] and is the kid of it's (previous) gramps[25]: aka now gramps.leftkid[11]
+
+[Part 1: Search] t[56]&gt;c[50].right_child exists[75]:    go right...
+[Part 1: Search] t[56]&lt;c[75].left_child exists[56]:     go left...
+[Part 1: Search] t[56]==c[56]:              Node Found...
+[Part 2: Delete] t[56]==c[56]:              Determine Number of Children...
+[Part2C: Del_2Kid] t[56]==c[56]._2_kids[52,61]:     GO RIGHT-CHILD[61]
+[Part3C: 2K_SNodeLeaf] t[56],c[61].no_children):    Parent[56]
+[Part3C: 2K_SNodeLeaf] t[56],c[61].is_s_node[61]): replaces target[56]  Parent[61].right[61] to be deleted
+
+[Part 1: Search] t[56]&gt;c[50].right_child exists[75]:    go right...
+[Part 1: Search] t[56]&lt;c[75].left_child exists[61]:     go left...
+[Part 1: Search] t[56]&lt;c[61].left_child exists[52]:     go left...
+[Part 1: Search] t[56]&gt;c[52].right_child doesnt exists[None]: Node Not Found!
+root.data[50]: expected[50]
+root.right.data[75]: expected[75]
+root.right.left.data[61]: expected[61]
+root.right.right.data[89]: expected[89]
+root.right.left.left.data[52]: expected[52]
+root.right.left.right.data[None]: expected[None]
+root.right.right.left.data[82]: expected[82]
+root.right.right.right.data[95]: expected[95]
+
+INSERT 55 (RIGHT OF 52)
+t[55]|c[50]:        Current[50] has ONE right-child : GO right[75]
+t[55]|c[75]:        Current[75] has ONE left-child : GO LEFT[61]
+t[55]|c[61]:        Current[61] has ONE left-child : GO LEFT[52]
+t[55]|c[52]:        Current[52] has NO right-child: INSERTED right Currentright[55]
+55
+[Part 1: Search] t[50]==c[50]:              Node Found...
+[Part 2: Delete] t[50]==c[50]:              Determine Number of Children...
+[Part2C: Del_2Kid] t[50]==c[50]._2_kids[25,75]:     GO RIGHT-CHILD[75]
+[Part3A: 2K_SNodeLeft] t[50],c[75].left_child exists[61]:   go left...Parent[50]
+[Part3A: 2K_SNodeLeft] t[50],c[61].left_child exists[52]:   go left...Parent[75]
+[Part3B: 2K_SNodeRite] t[50],c[52].right_child exists [55]:      do something...1...Parent[61]
+expected c[52]: to [expected 52] with right[55] as [expected 55]
+[Part3B: 2K_SNodeRite] t[50] replaced w' s_node[52], s_node[52] replaced w' right_child[55] </code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>55</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
