@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tony Phung">
-<meta name="dcterms.date" content="2025-05-02">
-<meta name="description" content="Automate Selection of Python Interpreter &amp; Virtual Environment Activations to Save Time and Avoid Confusion">
+<meta name="dcterms.date" content="2025-05-07">
+<meta name="description" content="How to Package &amp; Distribute a Python Project">
 
-<title>Code 27: VS-Code Custom Interpreter &amp; Virtual Environments – Tony’s Blog ✍️</title>
+<title>Code 28: Python Project Packaging &amp; Distribution – Tony’s Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -183,14 +217,13 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Code 27: VS-Code Custom Interpreter &amp; Virtual Environments</h1>
+      <h1 class="title">Code 28: Python Project Packaging &amp; Distribution</h1>
                   <div>
         <div class="description">
-          Automate Selection of Python Interpreter &amp; Virtual Environment Activations to Save Time and Avoid Confusion
+          How to Package &amp; Distribute a Python Project
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">coding</div>
                 <div class="quarto-category">python</div>
               </div>
                   </div>
@@ -209,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 2, 2025</p>
+        <p class="date">May 7, 2025</p>
       </div>
     </div>
     
@@ -225,18 +258,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#major-edit-add-to-.bashrc" id="toc-major-edit-add-to-.bashrc" class="nav-link active" data-scroll-target="#major-edit-add-to-.bashrc">0. Major Edit: Add to <code>.bashrc</code></a></li>
-  <li><a href="#problem-wrong-python-interpreter" id="toc-problem-wrong-python-interpreter" class="nav-link" data-scroll-target="#problem-wrong-python-interpreter">1. Problem: Wrong Python Interpreter</a></li>
-  <li><a href="#terminal-meaning-fapi.venv" id="toc-terminal-meaning-fapi.venv" class="nav-link" data-scroll-target="#terminal-meaning-fapi.venv">1.1 Terminal Meaning: <code>fapi(.venv)</code></a></li>
-  <li><a href="#solution-1-via-manually-gui" id="toc-solution-1-via-manually-gui" class="nav-link" data-scroll-target="#solution-1-via-manually-gui">2. <strong>Solution 1 via Manually GUI</strong></a></li>
-  <li><a href="#solution-2-create-.vscodesettings.json" id="toc-solution-2-create-.vscodesettings.json" class="nav-link" data-scroll-target="#solution-2-create-.vscodesettings.json">3. <strong>Solution 2: Create <code>.vscode/settings.json</code></strong></a>
+  <li><a href="#goals" id="toc-goals" class="nav-link active" data-scroll-target="#goals">0. Goals</a></li>
+  <li><a href="#a-simple-project" id="toc-a-simple-project" class="nav-link" data-scroll-target="#a-simple-project">1. A Simple Project</a></li>
+  <li><a href="#file-stucture" id="toc-file-stucture" class="nav-link" data-scroll-target="#file-stucture">2. File Stucture</a></li>
+  <li><a href="#creating-package-files" id="toc-creating-package-files" class="nav-link" data-scroll-target="#creating-package-files">3. Creating Package Files</a></li>
+  <li><a href="#choosing-a-build-backend" id="toc-choosing-a-build-backend" class="nav-link" data-scroll-target="#choosing-a-build-backend">4. Choosing a Build-Backend</a>
   <ul class="collapse">
-  <li><a href="#solution-2-part-1-add-key-value-pair" id="toc-solution-2-part-1-add-key-value-pair" class="nav-link" data-scroll-target="#solution-2-part-1-add-key-value-pair">3.1 Solution 2 Part 1: Add key-value pair</a></li>
-  <li><a href="#solution-2-part-1-reset-workspace-settings" id="toc-solution-2-part-1-reset-workspace-settings" class="nav-link" data-scroll-target="#solution-2-part-1-reset-workspace-settings">3.2 Solution 2 Part 1: Reset Workspace Settings</a></li>
-  <li><a href="#step-4-confirm-okay" id="toc-step-4-confirm-okay" class="nav-link" data-scroll-target="#step-4-confirm-okay"><strong>Step 4: Confirm Okay</strong></a></li>
-  <li><a href="#step-5-problems-debugging" id="toc-step-5-problems-debugging" class="nav-link" data-scroll-target="#step-5-problems-debugging"><strong>Step 5: Problems &amp; Debugging</strong></a></li>
+  <li><a href="#pip-build-versus-build-backend" id="toc-pip-build-versus-build-backend" class="nav-link" data-scroll-target="#pip-build-versus-build-backend">4.1 <code>pip</code> &amp; <code>build</code> versus <code>build-backend</code></a></li>
+  <li><a href="#hatchling-example" id="toc-hatchling-example" class="nav-link" data-scroll-target="#hatchling-example">4.2 Hatchling Example</a></li>
+  <li><a href="#requires-key-is-a" id="toc-requires-key-is-a" class="nav-link" data-scroll-target="#requires-key-is-a">4.3 <code>requires</code> key is a:</a></li>
+  <li><a href="#build-frontend" id="toc-build-frontend" class="nav-link" data-scroll-target="#build-frontend">4.4 <code>build-frontend</code></a></li>
+  <li><a href="#build-backend" id="toc-build-backend" class="nav-link" data-scroll-target="#build-backend">4.5 <code>build-backend</code></a></li>
+  <li><a href="#additional-configurations-of-build-tool" id="toc-additional-configurations-of-build-tool" class="nav-link" data-scroll-target="#additional-configurations-of-build-tool">4.6 Additional Configurations of Build Tool</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary:</a></li>
+  <li><a href="#configuring-metadata" id="toc-configuring-metadata" class="nav-link" data-scroll-target="#configuring-metadata">5. Configuring Metadata</a></li>
+  <li><a href="#update-readme.md-license" id="toc-update-readme.md-license" class="nav-link" data-scroll-target="#update-readme.md-license">6. Update README.md &amp; <code>LICENSE</code></a></li>
+  <li><a href="#generating-distribution-archives" id="toc-generating-distribution-archives" class="nav-link" data-scroll-target="#generating-distribution-archives">7. Generating Distribution Archives</a></li>
+  <li><a href="#upload-to-distribution-archives" id="toc-upload-to-distribution-archives" class="nav-link" data-scroll-target="#upload-to-distribution-archives">8. Upload to Distribution Archives</a></li>
+  <li><a href="#installing-your-newly-uploaded-package" id="toc-installing-your-newly-uploaded-package" class="nav-link" data-scroll-target="#installing-your-newly-uploaded-package">9. Installing your newly uploaded package</a></li>
+  <li><a href="#import-package" id="toc-import-package" class="nav-link" data-scroll-target="#import-package">10. Import Package</a></li>
   </ul>
 </nav>
     </div>
@@ -247,98 +287,283 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p><img src="imgs/code-027-interp.png" class="img-fluid"></p>
-<section id="major-edit-add-to-.bashrc" class="level1">
-<h1>0. Major Edit: Add to <code>.bashrc</code></h1>
-<p>To automate activation of <code>.venv</code></p>
-<p><img src="imgs/code-027-edit.png" class="img-fluid"></p>
-</section>
-<section id="problem-wrong-python-interpreter" class="level1">
-<h1>1. Problem: Wrong Python Interpreter</h1>
-<p>When opening a project, VS-Code keeps opening some previous Interpreter or the wrong one compared. The required one is simply the one in the local <code>.venv</code> folder.</p>
-<p><img src="imgs/code-027-interpreter.png" class="img-fluid"></p>
-<p>And terminal shows this:</p>
-<p><img src="imgs/code-027-terminal-fapi.png" class="img-fluid"></p>
-</section>
-<section id="terminal-meaning-fapi.venv" class="level1">
-<h1>1.1 Terminal Meaning: <code>fapi(.venv)</code></h1>
-<p>Two sections:</p>
+<p><img src="imgs/code-028-packaging.png" class="img-fluid"></p>
+<section id="goals" class="level1">
+<h1>0. Goals</h1>
+<p>Final Product - A Python Project Packaged and Distributed to PiPY (Test):</p>
 <ul>
-<li><code>interpreter</code> <code>(virtual environment)</code></li>
+<li>https://test.pypi.org/project/example-package-tonyjustdevs/0.0.1/</li>
 </ul>
-<p>What is happening:</p>
+<p><img src="imgs/code-028-pipy-tonypkg.png" class="img-fluid"></p>
+<p>How to package a simple Python project:</p>
 <ul>
-<li>VSC is using the Python interpreter: <code>fapi...</code>,
+<li>how to add the necessary files and structure to create the package,</li>
+<li>how to build the package, and</li>
+<li>how to upload it to the Python Package Index (PyPI).</li>
+</ul>
+<p>Firstly, update pip:</p>
 <ul>
-<li>it’s the first interpreter it find its in path or</li>
-<li>more likely, we previously selected this interpreter and forgot we did.</li>
+<li><code>python3 -m pip install --upgrade pip</code></li>
+</ul>
+</section>
+<section id="a-simple-project" class="level1">
+<h1>1. A Simple Project</h1>
+<p>Project name: <code>example_package_YOUR_USERNAME_HERE</code></p>
+<ul>
+<li>If username is <code>me</code>, then <code>example_package_me</code></li>
+<li>or <code>example_package_tonyjustdevs</code></li>
+</ul>
+</section>
+<section id="file-stucture" class="level1">
+<h1>2. File Stucture</h1>
+<p>Create the following file structure locally:</p>
+<pre><code>packaging_tutorial/
+└── src/
+    └── example_package_YOUR_USERNAME_HERE/
+        ├── __init__.py
+        └── example.py</code></pre>
+<p>or</p>
+<pre><code>packaging_tutorial/
+└── src/
+    └── example_package_tonyjustdevs/
+        ├── __init__.py
+        └── example.py</code></pre>
+<p>The directory of files be same as the project name in toml file</p>
+<p>Creating <code>__init__.py</code>:</p>
+<ul>
+<li>allows users to import directory as a regular package</li>
+</ul>
+<p><code>example.py</code> is a module:</p>
+<ul>
+<li><strong>module</strong> it may contain:</li>
+<li><strong>logic</strong> (functions, classes, constants, etc.) of package</li>
+</ul>
+<div id="cell-8" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example.py</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_one(number):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> number <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-package-files" class="level1">
+<h1>3. Creating Package Files</h1>
+<pre><code>packaging_tutorial/
+├── LICENSE
+├── pyproject.toml
+├── README.md
+├── src/
+│   └── example_package_YOUR_USERNAME_HERE/
+│       ├── __init__.py
+│       └── example.py
+└── tests/</code></pre>
+<p>or</p>
+<pre><code>packaging_tutorial/
+├── LICENSE
+├── pyproject.toml
+├── README.md
+├── src/
+│   └── example_package_tonyjustdevs/
+│       ├── __init__.py
+│       └── example.py
+└── tests/</code></pre>
+</section>
+<section id="choosing-a-build-backend" class="level1">
+<h1>4. Choosing a Build-Backend</h1>
+<section id="pip-build-versus-build-backend" class="level2">
+<h2 class="anchored" data-anchor-id="pip-build-versus-build-backend">4.1 <code>pip</code> &amp; <code>build</code> versus <code>build-backend</code></h2>
+<p>Convert sources into distribution packages:</p>
+<ul>
+<li><code>build-backend</code> does</li>
+<li><code>pip</code> &amp; <code>build</code> does not</li>
+</ul>
+<p>The <code>build-backend</code> determines:</p>
+<ul>
+<li>Project configuration specifics
+<ul>
+<li>metadata (name, tags etc on PyPI)</li>
+<li>input files.</li>
 </ul></li>
-<li>VSC automatically <strong>prefixs</strong> interpreters name (part of it) to our terminal, simply to inform us.</li>
-<li>VSC is also automatically <strong>activating</strong> local <code>.venv</code> and <strong>appends</strong> to terminal.</li>
-</ul>
-</section>
-<section id="solution-1-via-manually-gui" class="level1">
-<h1>2. <strong>Solution 1 via Manually GUI</strong></h1>
+<li>Different functionalities
 <ul>
-<li><p>Choose from menu: <code>Select Interpreter</code> [<strong>GUI</strong> via <strong>Ctrl + Shift + P</strong>]:</p>
-<ul>
-<li>Choose local .venv: <code>('.venv') ./.venv/bin/python</code></li>
+<li>Single purpose tools or multi-purple tools</li>
+<li>Support building extension modules or not</li>
+<li>Command-line interfaces</li>
+<li>Project Initialisation</li>
+<li>Version Management</li>
+<li>Building, Uploading &amp; Installing packages.</li>
 </ul></li>
 </ul>
-<p>This will start a process to update 3 areas:</p>
+</section>
+<section id="hatchling-example" class="level2">
+<h2 class="anchored" data-anchor-id="hatchling-example">4.2 Hatchling Example</h2>
+<pre><code>[build-system]
+requires = ["hatchling &gt;= 1.26"]
+build-backend = "hatchling.build"</code></pre>
+</section>
+<section id="requires-key-is-a" class="level2">
+<h2 class="anchored" data-anchor-id="requires-key-is-a">4.3 <code>requires</code> key is a:</h2>
+<p>List of packages that are needed to <strong>build</strong> your package:</p>
 <ul>
-<li><strong>[1]</strong>: Highlights the selected interpreter if you go back to <code>Select Interpreter</code> [<strong>GUI</strong> via <strong>Ctrl + Shift + P</strong>]</li>
-<li><strong>[2]</strong>: Interpreter Prefix now updates from <code>fapi</code> (in <em>Section 1.1 Meaning</em>) to selected local interpreter <code>.venv</code> in <strong>[1]</strong></li>
-<li><strong>[3]</strong>: Shows selected local interpreter <code>.venv</code></li>
-<li><strong>[4]</strong>: No defaults (see Solution 2)</li>
-</ul>
-<p><img src="imgs/code-027-gui.png" class="img-fluid"></p>
-</section>
-<section id="solution-2-create-.vscodesettings.json" class="level1">
-<h1>3. <strong>Solution 2: Create <code>.vscode/settings.json</code></strong></h1>
-<section id="solution-2-part-1-add-key-value-pair" class="level2">
-<h2 class="anchored" data-anchor-id="solution-2-part-1-add-key-value-pair">3.1 Solution 2 Part 1: Add key-value pair</h2>
+<li>backend’s package,</li>
+<li>other build-time dependencies.
 <ul>
-<li><p>Add <strong>default interpreter</strong> <code>.vscode/settings.json</code> file:</p>
-<pre><code>  {    
-      "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
-  }</code></pre></li>
+<li><strong>build-time errors</strong> if dependencies ommited here</li>
+</ul></li>
 </ul>
-<p><img src="imgs/code-027-settings-json.png" class="img-fluid"></p>
 </section>
-<section id="solution-2-part-1-reset-workspace-settings" class="level2">
-<h2 class="anchored" data-anchor-id="solution-2-part-1-reset-workspace-settings">3.2 Solution 2 Part 1: Reset Workspace Settings</h2>
-<p>Okay so this also requires using the GUI but I’m sure theres a way to automate this too…</p>
+<section id="build-frontend" class="level2">
+<h2 class="anchored" data-anchor-id="build-frontend">4.4 <code>build-frontend</code></h2>
+<p>The <code>build-frontend</code> (e.g.&nbsp;<code>pip</code>, <code>build</code>) automatically <strong>install</strong> list of packagies when building your package, is tool run by user</p>
+<p><strong>Input</strong>:</p>
 <ul>
-<li>Choose from menu (via Ctrl + Shift + P): <code>Clear Workspace Interpreter Setting</code></li>
+<li><strong>arbitrary source trees</strong> or <strong>source distributions</strong></li>
 </ul>
-<p><img src="imgs/code-027-reset.png" class="img-fluid"></p>
-</section>
-<section id="step-4-confirm-okay" class="level2">
-<h2 class="anchored" data-anchor-id="step-4-confirm-okay"><strong>Step 4: Confirm Okay</strong></h2>
-<p>A few things to notice: - <strong>[1]</strong> VS-Code default in menu is now always the <code>.venv</code>’s python, which wasn’t available doing it manually - <strong>[1]</strong> VS-Code automatically chose it (after you settings reset) - <strong>[2]</strong> No errors finding interepreter (see next section when interpreter cant be found) - <strong>[3]</strong> Shows seleted interpreter</p>
-<p><img src="imgs/code-027-selected.png" class="img-fluid"></p>
-</section>
-<section id="step-5-problems-debugging" class="level2">
-<h2 class="anchored" data-anchor-id="step-5-problems-debugging"><strong>Step 5: Problems &amp; Debugging</strong></h2>
-<p>If path provided to <code>settings.json</code> is incorrect, (e.g.&nbsp;I made up a <code>mate/.venv</code> which doesnt exist) <img src="imgs/code-027-bad-default-1.png" class="img-fluid"></p>
+<p><strong>Builds</strong> in isolaated environments (typically):</p>
 <ul>
-<li><strong>[1]</strong>: VSC shows default path but it doesnt actually exist</li>
-<li><strong>[2]</strong>: VSC stuck in infinite loop looking for it</li>
-<li><strong>[3]</strong>: VSC cant find it, will just show Python rather than a particular interpreter</li>
+<li><strong>source distributions</strong> or <strong>wheels</strong> from them.</li>
+<li>actual building is delegated to each source tree’s <code>build-backend</code>.</li>
 </ul>
-<p><img src="imgs/code-027-bad-default-2.png" class="img-fluid"></p>
-<p>Reference: https://code.visualstudio.com/docs/python/settings-reference#_general-python-settings</p>
 </section>
-</section>
-<section id="summary" class="level1">
-<h1>Summary:</h1>
+<section id="build-backend" class="level2">
+<h2 class="anchored" data-anchor-id="build-backend">4.5 <code>build-backend</code></h2>
+<p>The <code>build-backend</code> key is the:</p>
 <ul>
-<li>VSC stores your last selection in: <code>Python: Select Interpreter (Ctrl + Shift + P)</code></li>
-<li>Reset workspace settings to start afresh in menu.</li>
-<li>Explicity set a default interpreter <code>.venv</code> in <code>settings.json</code>.</li>
-<li>If our venv is named exactly <code>.venv</code>, VSC will also automatically activate it upon opening VSC.</li>
+<li>name of Python object</li>
+<li>frontends will use to perform the build.</li>
 </ul>
+<p>Values from:</p>
+<ul>
+<li>build backend tool <strong>documentation</strong>, or</li>
+<li><em>generated</em> by its <strong>command line interface</strong>.</li>
+<li>No need for Author to customize these settings.</li>
+</ul>
+</section>
+<section id="additional-configurations-of-build-tool" class="level2">
+<h2 class="anchored" data-anchor-id="additional-configurations-of-build-tool">4.6 Additional Configurations of Build Tool</h2>
+<ul>
+<li><code>tool</code> section of <code>pyproject.toml</code> or in a</li>
+<li><strong>Special file</strong> defined by the build tool.
+<ul>
+<li>E.g. <code>setuptools</code> additional configuration added to:</li>
+<li><code>setup.py</code> or <code>setup.cfg file</code>, and <code>specifying setuptools.build_meta</code> in your build allows the tools to locate and use these automatically.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="configuring-metadata" class="level1">
+<h1>5. Configuring Metadata</h1>
+<pre><code>[project]
+    name = "example_package_tonyjustdevs"
+    version = "0.0.1"
+    authors = [
+        { name="Tony JustDevs", email="tonyjustdevs@gmail.com" },
+        ]
+    description = "A small example package"
+    readme = "README.md"
+    requires-python = "&gt;=3.9"
+    classifiers = [
+            "Programming Language :: Python :: 3",
+            "Operating System :: OS Independent",
+        ]
+    license = "MIT"
+    license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+    Homepage = "https://github.com/pypa/sampleproject_tonyjustdevs"
+    Issues = "https://github.com/pypa/sampleproject_tonyjustdevs/issues"</code></pre>
+</section>
+<section id="update-readme.md-license" class="level1">
+<h1>6. Update README.md &amp; <code>LICENSE</code></h1>
+<p><a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/#creating-readme-md">README Reference</a></p>
+<p><a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/#creating-a-license">LICENSE Reference</a></p>
+</section>
+<section id="generating-distribution-archives" class="level1">
+<h1>7. Generating Distribution Archives</h1>
+<p>These <strong>archives</strong> are:</p>
+<ul>
+<li>uploaded to PyPI</li>
+<li>installed by <code>pip</code></li>
+</ul>
+<p>Update <code>build</code>:</p>
+<ul>
+<li><code>python3 -m pip install --upgrade build</code></li>
+</ul>
+<p>Build command in <code>pyproject.toml</code> directory:</p>
+<ul>
+<li><code>python3 -m build</code></li>
+</ul>
+<p>Sample Files Generated:</p>
+<pre><code>    dist/
+    ├── example_package_YOUR_USERNAME_HERE-0.0.1-py3-none-any.whl
+    └── example_package_YOUR_USERNAME_HERE-0.0.1.tar.gz</code></pre>
+<p><code>tar.gz</code> file is a source distribution <code>.whl</code> file is a built distribution.</p>
+<p><strong>Recommended</strong>:</p>
+<ul>
+<li>Always upload a source distribution (<code>tar.gz</code>)</li>
+<li>Provide built distributions (<code>.whl</code>) for the platforms project is compatible with.</li>
+</ul>
+</section>
+<section id="upload-to-distribution-archives" class="level1">
+<h1>8. Upload to Distribution Archives</h1>
+<p>Upgrade or Install <code>twine</code>:</p>
+<ul>
+<li><code>python3 -m pip install --upgrade twine</code></li>
+<li><code>python3 -m pip install twine --user</code></li>
+</ul>
+<p>Register Test PyPI:</p>
+<ul>
+<li>https://test.pypi.org/account/register/</li>
+</ul>
+<p>PyPI API token:</p>
+<ul>
+<li>https://test.pypi.org/manage/account/#api-tokens</li>
+</ul>
+<p>Use API token:</p>
+<ul>
+<li><p>Create <code>$HOME/.pypirc</code> file like this:</p>
+<pre><code>  [testpypi]
+  username = __token__
+  password = ACTUAL_API_TOKEN_FROM_TEST_PYPI</code></pre></li>
+</ul>
+<p>Run <code>twine</code> command to upload archives under dist:</p>
+<ul>
+<li><code>python3 -m twine upload --repository testpypi dist/*</code></li>
+</ul>
+<p>Update their CI configuration file (e.g.&nbsp;.travis.yml if you are using Travis).</p>
+<p><a href="https://test.pypi.org/help/#apitoken">Reference Link</a></p>
+<p>Upgrade <code>twine</code></p>
+<ul>
+<li><code>python3 -m pip install --upgrade twine</code></li>
+</ul>
+<p>Run <code>Twine</code> to upload archives:</p>
+<ul>
+<li><code>python3 -m twine upload --repository testpypi dist/*</code></li>
+</ul>
+</section>
+<section id="installing-your-newly-uploaded-package" class="level1">
+<h1>9. Installing your newly uploaded package</h1>
+<p>Test Package Uploaded &amp; Created in Test PyPI:</p>
+<ul>
+<li>https://test.pypi.org/project/example-package-tonyjustdevs/0.0.1/</li>
+</ul>
+<p>Create venv and install:</p>
+<ul>
+<li><code>python3 -m venv .venv &amp;&amp; source .venv/bin/activate</code></li>
+<li><code>pip install -i https://test.pypi.org/simple/  --no-deps example-package-tonyjustdevs==0.0.1</code></li>
+</ul>
+<p>or Generically:</p>
+<ul>
+<li><code>python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps example-package-YOUR-USERNAME-HERE</code></li>
+</ul>
+<p><img src="imgs/install_tonypkg.png" class="img-fluid"></p>
+</section>
+<section id="import-package" class="level1">
+<h1>10. Import Package</h1>
+<ul>
+<li><code>from example_package_tonyjustdevs import example</code></li>
+<li><code>example.add_one(11)</code></li>
+</ul>
+<p><img src="imgs/import_tonypkg.png" class="img-fluid"></p>
+<p>My Python project has been packaged and distributed successfully!</p>
 
 
 </section>
