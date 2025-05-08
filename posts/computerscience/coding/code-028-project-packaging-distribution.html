@@ -277,6 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#upload-to-distribution-archives" id="toc-upload-to-distribution-archives" class="nav-link" data-scroll-target="#upload-to-distribution-archives">8. Upload to Distribution Archives</a></li>
   <li><a href="#installing-your-newly-uploaded-package" id="toc-installing-your-newly-uploaded-package" class="nav-link" data-scroll-target="#installing-your-newly-uploaded-package">9. Installing your newly uploaded package</a></li>
   <li><a href="#import-package" id="toc-import-package" class="nav-link" data-scroll-target="#import-package">10. Import Package</a></li>
+  <li><a href="#development-workflow" id="toc-development-workflow" class="nav-link" data-scroll-target="#development-workflow">11. Development Workflow</a></li>
+  <li><a href="#dev-process" id="toc-dev-process" class="nav-link" data-scroll-target="#dev-process">11. Dev Process</a></li>
   </ul>
 </nav>
     </div>
@@ -564,6 +566,36 @@ build-backend = "hatchling.build"</code></pre>
 </ul>
 <p><img src="imgs/import_tonypkg.png" class="img-fluid"></p>
 <p>My Python project has been packaged and distributed successfully!</p>
+</section>
+<section id="development-workflow" class="level1">
+<h1>11. Development Workflow</h1>
+<p><img src="imgs/code-028-dev-workflow.png" class="img-fluid"></p>
+</section>
+<section id="dev-process" class="level1">
+<h1>11. Dev Process</h1>
+<ul>
+<li>git clone</li>
+<li>or pip install -e git+https://github.com/numpy/numpy.git@v1.25.0#egg=numpy</li>
+<li>or pip install -e git+https://github.com/owner/repo.git@branch#egg=package</li>
+<li>or pip install -e git+https://<span class="citation" data-cites="github.com/owner/repo.git">@github.com/owner/repo.git</span><span class="citation" data-cites="branch#egg">@branch#egg</span>=package_name</li>
+<li>or pip install -e git+ssh://git@github.com/owner/repo.git@main#egg=private_pkg</li>
+<li>add venv</li>
+<li>pip install -e .</li>
+<li>or pip install -e “.[dev]”</li>
+<li>python -c “import my_package; print(my_package.__file__)”</li>
+<li>git commit -am “Prepare release v…”</li>
+<li>git tag -a v1.0.0 -m “Release v…”</li>
+<li>or git push origin main –tags</li>
+<li>or git push origin v…</li>
+<li>git push origin main –tags</li>
+<li>rm -rf dist</li>
+<li>[if not in backend build] pip install build twine</li>
+<li>[if not in backend build] python -m build</li>
+<li>twine upload -r testpypi dist/*</li>
+<li>pip install dist/my_package-v0.0.0.whl</li>
+<li>python -c “import my_package; print(my_package.__file__)</li>
+<li>pip install -e .</li>
+</ul>
 
 
 </section>
