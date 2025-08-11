@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2025-08-12">
+<meta name="description" content="The C++ Journey Begins…(with Visual Studio)">
+
+<title>CPP 1: Setting Up Visual Studio for C++ – Tony’s Blog ✍️</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-f5cdf60c8a2ab6fdef356bb5a4a0f338.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-212eacf795e5a86edde2096d16dcfe38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Tony’s Blog ✍️</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-computer-science-💻" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Computer Science 💻</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
+        <li>
+    <a class="dropdown-item" href="../../../computerscience.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../dsa.html">
+ <span class="dropdown-text">Data Structures and Algorithms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../designpatterns.html">
+ <span class="dropdown-text">Design Patterns</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../coding.html">
+ <span class="dropdown-text">Coding</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../leetcode.html">
+ <span class="dropdown-text">LeetCode</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mathematics-🧮" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mathematics 🧮</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
+        <li>
+    <a class="dropdown-item" href="../../../mathematics.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../calculus.html">
+ <span class="dropdown-text">Calculus</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../linearalgebra.html">
+ <span class="dropdown-text">Linear Algebra</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-science-🧪" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Science 🧪</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
+        <li>
+    <a class="dropdown-item" href="../../../datascience.html">
+ <span class="dropdown-text">All</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../machinelearning.html">
+ <span class="dropdown-text">Machine Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../kaggle.html">
+ <span class="dropdown-text">Kaggle</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About 🐈‍⬛</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tonyjustdevs"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://au.linkedin.com/in/tony-phung-6190b0b8"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">CPP 1: Setting Up Visual Studio for C++</h1>
+                  <div>
+        <div class="description">
+          The C++ Journey Begins…(with Visual Studio)
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">coding</div>
+                <div class="quarto-category">cplusplus</div>
+                <div class="quarto-category">visual studio</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 12, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#configurations" id="toc-configurations" class="nav-link active" data-scroll-target="#configurations">1. Configurations</a>
+  <ul class="collapse">
+  <li><a href="#compiler" id="toc-compiler" class="nav-link" data-scroll-target="#compiler">1.1 Compiler</a></li>
+  <li><a href="#warnings" id="toc-warnings" class="nav-link" data-scroll-target="#warnings">1.2 Warnings</a></li>
+  <li><a href="#language-standard" id="toc-language-standard" class="nav-link" data-scroll-target="#language-standard">1.3 Language Standard</a></li>
+  <li><a href="#language-options" id="toc-language-options" class="nav-link" data-scroll-target="#language-options">1.4 Language Options</a></li>
+  </ul></li>
+  <li><a href="#removed" id="toc-removed" class="nav-link" data-scroll-target="#removed">2. [Removed]</a></li>
+  <li><a href="#initialisation" id="toc-initialisation" class="nav-link" data-scroll-target="#initialisation">3. Initialisation</a>
+  <ul class="collapse">
+  <li><a href="#narrowing-conversions" id="toc-narrowing-conversions" class="nav-link" data-scroll-target="#narrowing-conversions">3.1 Narrowing Conversions</a></li>
+  </ul></li>
+  <li><a href="#literals" id="toc-literals" class="nav-link" data-scroll-target="#literals">4. Literals</a>
+  <ul class="collapse">
+  <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format">4.1 Format</a></li>
+  </ul></li>
+  <li><a href="#preprocessor" id="toc-preprocessor" class="nav-link" data-scroll-target="#preprocessor">5. Preprocessor</a>
+  <ul class="collapse">
+  <li><a href="#phases-of-translate" id="toc-phases-of-translate" class="nav-link" data-scroll-target="#phases-of-translate">5.1 Phases of Translate</a></li>
+  <li><a href="#preprocessor-directives" id="toc-preprocessor-directives" class="nav-link" data-scroll-target="#preprocessor-directives">5.2 Preprocessor Directives</a></li>
+  <li><a href="#include" id="toc-include" class="nav-link" data-scroll-target="#include">5.3 <code>#include</code></a></li>
+  <li><a href="#preprocessor-directive-example" id="toc-preprocessor-directive-example" class="nav-link" data-scroll-target="#preprocessor-directive-example">5.4 Preprocessor Directive Example</a></li>
+  <li><a href="#translation-unit" id="toc-translation-unit" class="nav-link" data-scroll-target="#translation-unit">5.5 Translation Unit</a></li>
+  <li><a href="#macro-defines" id="toc-macro-defines" class="nav-link" data-scroll-target="#macro-defines">5.5 Macro defines</a></li>
+  <li><a href="#object-like-macros" id="toc-object-like-macros" class="nav-link" data-scroll-target="#object-like-macros">5.5.1 Object-like macros</a></li>
+  <li><a href="#conditional-compilation" id="toc-conditional-compilation" class="nav-link" data-scroll-target="#conditional-compilation">5.6 Conditional Compilation</a></li>
+  <li><a href="#macro-substitution-within-preprocessor-command" id="toc-macro-substitution-within-preprocessor-command" class="nav-link" data-scroll-target="#macro-substitution-within-preprocessor-command">5.6.1 Macro Substitution within Preprocessor Command</a></li>
+  <li><a href="#defines" id="toc-defines" class="nav-link" data-scroll-target="#defines">5.7 <code>#defines</code></a></li>
+  </ul></li>
+  <li><a href="#header-files" id="toc-header-files" class="nav-link" data-scroll-target="#header-files">6. Header Files</a>
+  <ul class="collapse">
+  <li><a href="#best-practice" id="toc-best-practice" class="nav-link" data-scroll-target="#best-practice">6.1 Best Practice</a></li>
+  </ul></li>
+  <li><a href="#header-guards" id="toc-header-guards" class="nav-link" data-scroll-target="#header-guards">7. Header Guards</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">7.1 Example 1</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">7.2 Example 2</a></li>
+  <li><a href="#naming-suggestions" id="toc-naming-suggestions" class="nav-link" data-scroll-target="#naming-suggestions">7.3 Naming Suggestions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p><img src="imgs/cpp/cpp.png" class="img-fluid"></p>
+<section id="configurations" class="level1">
+<h1>1. Configurations</h1>
+<section id="compiler" class="level3">
+<h3 class="anchored" data-anchor-id="compiler">1.1 Compiler</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What?</th>
+<th>How?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Conformance Mode</strong></td>
+<td>Project -&gt; Configuration: <strong>All Configurations</strong> -&gt; C/C++ -&gt; Language -&gt; Comformance Mode -&gt; Choose: <code>Yes</code><br>Disables compiler extensions ensuringp program is compliant with C++ standards &amp; will work on any system.</td>
+</tr>
+</tbody>
+</table>
+<p>Ref: https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-compiler-extensions/</p>
+</section>
+<section id="warnings" class="level3">
+<h3 class="anchored" data-anchor-id="warnings">1.2 Warnings</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What?</th>
+<th>How?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Platform</strong></td>
+<td>x86 (32-bit) or x64 (64-bit)</td>
+</tr>
+<tr class="even">
+<td><strong>Increase warning level</strong></td>
+<td>Project -&gt; C/C++ -&gt; General -&gt; Warning Level -&gt; Choose <code>Level 4</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Enable signed/unsigned conversion warnings</strong></td>
+<td>Project -&gt; C/C++ -&gt; Command Line -&gt; Additional -&gt; Enter <code>/w44365</code><br>Compiler enables these warnings at warning level 4 (as above)<br>Project -&gt; C/C++ -&gt; External Includes -&gt; External Header Level-&gt; Choose <code>Level 3</code></td>
+</tr>
+<tr class="even">
+<td><strong>Warnings as errors</strong></td>
+<td>Project -&gt; Configuration: <strong>All Configurations</strong> -&gt; General -&gt;Choose <code>Treat Warnings as Errors</code></td>
+</tr>
+</tbody>
+</table>
+<p>Reference: https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-warning-and-error-levels/</p>
+</section>
+<section id="language-standard" class="level3">
+<h3 class="anchored" data-anchor-id="language-standard">1.3 Language Standard</h3>
+<p>Visual Studio 2022 defaults to <code>C++14</code> capabilities, i.e.&nbsp;excludes new features introduced in <code>C++17</code>/<code>C++20</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What?</th>
+<th>How?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Change Language Standard</strong></td>
+<td>Project -&gt; Configuration: <strong>All Configurations</strong> -&gt; Language -&gt; C++ Language Standard -&gt; Choose: <code>ISO C++ Latest Standard</code></td>
+</tr>
+<tr class="even">
+<td><strong>Export Configurations</strong></td>
+<td>Project -&gt; Export Template: <strong>Project Template</strong> -&gt; Enter &amp; Description: e.g.&nbsp;“<code>C++23 Latest Console Application</code>” -&gt; Finish</td>
+</tr>
+<tr class="odd">
+<td><strong>Import Configurations</strong></td>
+<td>List of Project templates: Choose Template</td>
+</tr>
+<tr class="even">
+<td><strong>Compile Support C++23 Link</strong></td>
+<td>https://en.cppreference.com/w/cpp/compiler_support/23</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="language-options" class="level3">
+<h3 class="anchored" data-anchor-id="language-options">1.4 Language Options</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 29%">
+<col style="width: 29%">
+<col style="width: 10%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Publication Year</th>
+<th>Formal Name</th>
+<th>Conventional name</th>
+<th>Development name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2011</td>
+<td>ISO/IEC 14882:2011</td>
+<td>C++11</td>
+<td>C++0x</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2014</td>
+<td>ISO/IEC 14882:2014</td>
+<td>C++14</td>
+<td>C++1y</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2017</td>
+<td>ISO/IEC 14882:2017</td>
+<td>C++17</td>
+<td>C++1z</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2020</td>
+<td>ISO/IEC 14882:2020</td>
+<td>C++20</td>
+<td>C++2a</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2024</td>
+<td>ISO/IEC 14882:2024</td>
+<td>C++23</td>
+<td>C++2b</td>
+<td>Finalised 2023</td>
+</tr>
+<tr class="even">
+<td>TBD</td>
+<td>TBD</td>
+<td>C++26</td>
+<td>C++2c</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Ref: https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-choosing-a-language-standard/</p>
+</section>
+</section>
+<section id="removed" class="level1">
+<h1>2. [Removed]</h1>
+</section>
+<section id="initialisation" class="level1">
+<h1>3. Initialisation</h1>
+<section id="narrowing-conversions" class="level3">
+<h3 class="anchored" data-anchor-id="narrowing-conversions">3.1 Narrowing Conversions</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 52%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Initialisation</th>
+<th>Statement</th>
+<th>Results</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>List-init</strong></td>
+<td><code>int w1{ 4.5 };</code></td>
+<td><code>compile error: list-init doesnt allow narrowing conversion</code></td>
+</tr>
+<tr class="even">
+<td><strong>Copy-init</strong></td>
+<td><code>int w2=4.5;</code></td>
+<td><code>4</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Direct-init</strong></td>
+<td><code>int w3=4.5;</code></td>
+<td><code>4</code></td>
+</tr>
+<tr class="even">
+<td><strong>Zero-init</strong></td>
+<td><code>int w4={};</code></td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="literals" class="level1">
+<h1>4. Literals</h1>
+<p>A <code>literal</code>’s value is placed directly in the <code>executable</code>, and the executable itself <strong><em>can’t be changed</em></strong> after it is created.</p>
+<p>A <code>variable</code>’s value is placed in <code>memory</code>, and the value of memory <strong><em>can be changed</em></strong> while the executable is running.</p>
+<p>Ref: https://www.learncpp.com/cpp-tutorial/introduction-to-literals-and-operators/</p>
+<section id="format" class="level3">
+<h3 class="anchored" data-anchor-id="format">4.1 Format</h3>
+<p><code>Ctrl+k</code>, <code>Ctrl+f</code>: Format Selection</p>
+<p>Ref: https://www.learncpp.com/cpp-tutorial/whitespace-and-basic-formatting/</p>
+</section>
+</section>
+<section id="preprocessor" class="level1">
+<h1>5. Preprocessor</h1>
+<section id="phases-of-translate" class="level3">
+<h3 class="anchored" data-anchor-id="phases-of-translate">5.1 Phases of Translate</h3>
+<p>The entire process of preprocessing, compiling, and linking is called <strong>translation</strong>.</p>
+<p>The text of a C++ program is kept in units called source files.</p>
+<p>C++ source files undergo translation to become a translation unit, consisting of the following steps:</p>
+<ul>
+<li>Maps each source file to a character sequence.</li>
+<li>Converts each character sequence to a preprocessing token sequence, separated by whitespace.</li>
+<li>Converts each preprocessing token to a token, forming a token sequence.</li>
+<li>Converts each token sequence to a translation unit.</li>
+</ul>
+<p>Ref: https://en.cppreference.com/w/cpp/language/translation_phases.html</p>
+</section>
+<section id="preprocessor-directives" class="level3">
+<h3 class="anchored" data-anchor-id="preprocessor-directives">5.2 Preprocessor Directives</h3>
+<p><strong>Preprocessor directives</strong> (often just called directives) are instructions that start with a # symbol and end with a newline (NOT a semicolon).</p>
+<p>The final output of the preprocessor contains no directives – only the output of the processed directive is passed to the compiler.</p>
+</section>
+<section id="include" class="level3">
+<h3 class="anchored" data-anchor-id="include">5.3 <code>#include</code></h3>
+<p>When you <code>#include</code> a file:</p>
+<ul>
+<li>the preprocessor replaces the #include directive<br>
+</li>
+<li>with the contents of the included file.</li>
+</ul>
+<p>The included contents are then preprocessed (which may result in additional #includes being preprocessed recursively), then the rest of the file is preprocessed.</p>
+</section>
+<section id="preprocessor-directive-example" class="level3">
+<h3 class="anchored" data-anchor-id="preprocessor-directive-example">5.4 Preprocessor Directive Example</h3>
+<pre><code>#include &lt;iostream&gt;
+
+int main()
+{
+    std::cout &lt;&lt; "Hello, world!\n";
+    return 0;
+}</code></pre>
+<p>the preprocessor will:</p>
+<ul>
+<li>replace <code>#include &lt;iostream&gt;</code></li>
+<li>with the <strong>contents</strong> of the file named <code>iostream</code> and</li>
+<li>then preprocess the included content and the rest of the file.</li>
+</ul>
+</section>
+<section id="translation-unit" class="level3">
+<h3 class="anchored" data-anchor-id="translation-unit">5.5 Translation Unit</h3>
+<p>Each translation unit typically consists of:</p>
+<ul>
+<li>a single code (.cpp) file and</li>
+<li>all header files it #includes (applied recursively
+<ul>
+<li>since header files can #include other header files).</li>
+</ul></li>
+</ul>
+</section>
+<section id="macro-defines" class="level3">
+<h3 class="anchored" data-anchor-id="macro-defines">5.5 Macro defines</h3>
+<p>The <code>#define</code> directive can be used to create a <strong>macro</strong>.</p>
+<p>In C++, a macro is a rule that defines:</p>
+<ul>
+<li>how input text is <strong><em>converted</em></strong> into</li>
+<li>replacement output text.</li>
+</ul>
+<p>There are two basic types of macros:</p>
+<ul>
+<li>object-like macros, and</li>
+<li>function-like macros (unsafe).</li>
+</ul>
+</section>
+<section id="object-like-macros" class="level3">
+<h3 class="anchored" data-anchor-id="object-like-macros">5.5.1 Object-like macros</h3>
+<p><strong>Macro Identifiers</strong>: Macro names should be written in all uppercase letters, with words separated by underscores</p>
+<pre><code>#define IDENTIFIER
+#define IDENTIFIER substitution_text</code></pre>
+</section>
+<section id="conditional-compilation" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-compilation">5.6 Conditional Compilation</h3>
+<p>The <strong>conditional compilation</strong> <em>preprocessor directives</em> allow you to specify under what conditions something will or won’t compile:</p>
+<p>or <strong>Preprocessor commands</strong>:</p>
+<ul>
+<li><code>#ifdef SOME_NAME2</code>: run if <code>SOME_NAME1</code> is defined</li>
+<li><code>#ifndef SOME_NAME2</code>: opposite to <code>ifdef</code></li>
+<li><code>#endif</code>: end above</li>
+<li><code>#if 0</code>: exclude a block of code</li>
+</ul>
+<p>In most cases, <strong><em>macro substitution</em></strong> does not occur when a <code>macro identifier</code> is used within another <code>preprocessor command</code>.</p>
+<p>There is at least one exception to this rule: most forms of <code>#if</code> and <code>#elif</code> do <strong><em>macro substitution</em></strong> within the preprocessor command.</p>
+</section>
+<section id="macro-substitution-within-preprocessor-command" class="level3">
+<h3 class="anchored" data-anchor-id="macro-substitution-within-preprocessor-command">5.6.1 Macro Substitution within Preprocessor Command</h3>
+<pre><code>#define FOO 9 // Here's a macro substitution
+
+#ifdef FOO // This FOO does not get replaced with 9 because it’s part of another preprocessor directive
+    std::cout &lt;&lt; FOO &lt;&lt; '\n'; // This FOO gets replaced with 9 because it's part of the normal code
+#endif</code></pre>
+</section>
+<section id="defines" class="level3">
+<h3 class="anchored" data-anchor-id="defines">5.7 <code>#defines</code></h3>
+<p>Directives are resolved before compilation, from top to bottom on a file-by-file basis.</p>
+</section>
+</section>
+<section id="header-files" class="level1">
+<h1>6. Header Files</h1>
+<p>Prefer a <code>.h</code> suffix when naming your header files (unless your project already follows some other convention):</p>
+<ul>
+<li>A <strong>header guard</strong>, which we’ll discuss in more detail in the next lesson (2.12 – Header guards).</li>
+<li>The actual content of the header file, which should be the <strong>forward declarations</strong> for <strong>all of the identifiers</strong>.</li>
+</ul>
+<p>Header files are often paired with code files, with:</p>
+<ul>
+<li>the header file providing forward declarations for</li>
+<li>the corresponding code file.</li>
+</ul>
+<p>Since our header file will contain a forward declaration for functions defined in</p>
+<ul>
+<li><code>add.cpp</code>, we’ll call our</li>
+<li>new header file <code>add.h</code>.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>What?</th>
+<th>How?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Add Header Directories</strong></td>
+<td>Properties -&gt; VC++ Directories -&gt; General: Include Directories</td>
+</tr>
+</tbody>
+</table>
+<section id="best-practice" class="level3">
+<h3 class="anchored" data-anchor-id="best-practice">6.1 Best Practice</h3>
+<p>Order #includes, alphabetically per group, as follows:</p>
+<ul>
+<li>The <strong>paired header file</strong> for this code file (e.g.&nbsp;<code>add.cpp</code> should <code>#include "add.h"</code>)</li>
+<li>Other headers from the same project (e.g.&nbsp;<code>#include "mymath.h</code>“)</li>
+<li><strong>3rd party</strong> library headers (e.g.&nbsp;<code>#include &lt;boost/tuple/tuple.hpp&gt;</code>)</li>
+<li><strong>Standard</strong> library headers (e.g.&nbsp;<code>#include &lt;iostream&gt;</code>)</li>
+</ul>
+</section>
+</section>
+<section id="header-guards" class="level1">
+<h1>7. Header Guards</h1>
+<p>All of your header files should have header guards on them. <code>SOME_UNIQUE_NAME_HERE</code> can be:</p>
+<ul>
+<li>any name you want, but by <strong>convention</strong> is,</li>
+<li>full filename of the header file,</li>
+<li>typed in all caps,</li>
+<li>using underscores for spaces or punctuation</li>
+</ul>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">7.1 Example 1</h3>
+<pre><code>#ifndef SQUARE_H // square.h
+#define SQUARE_H
+
+int getSquareSides()
+{
+    return 4;
+}
+
+#endif</code></pre>
+</section>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">7.2 Example 2</h3>
+<pre><code>#ifndef _IOSTREAM_
+#define _IOSTREAM_
+
+// content here
+
+#endif</code></pre>
+</section>
+<section id="naming-suggestions" class="level3">
+<h3 class="anchored" data-anchor-id="naming-suggestions">7.3 Naming Suggestions</h3>
+<ul>
+<li><code>PROJECT_PATH_FILE_H</code>,</li>
+<li><code>FILE_LARGE-RANDOM-NUMBER_H</code>, or</li>
+<li><code>FILE_CREATION-DATE_H</code>.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tonyjustdevs\.github\.io\/blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
