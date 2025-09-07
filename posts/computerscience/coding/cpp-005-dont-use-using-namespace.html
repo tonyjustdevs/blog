@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tony Phung">
+<meta name="dcterms.date" content="2025-09-07">
+<meta name="description" content="A Naming Conflict Example with using namespace Directive in C++">
 
-<title>Kaggle 🧪 – Tony’s Blog ✍️</title>
+<title>Cpp 5: Don’t Use using namespace Directive – Tony's Blog ✍️</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +26,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f5cdf60c8a2ab6fdef356bb5a4a0f338.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-212eacf795e5a86edde2096d16dcfe38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-f5cdf60c8a2ab6fdef356bb5a4a0f338.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-212eacf795e5a86edde2096d16dcfe38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,65 +72,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -299,7 +243,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Tony’s Blog ✍️</span>
     </a>
   </div>
@@ -315,23 +259,23 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-computer-science-💻">    
         <li>
-    <a class="dropdown-item" href="./computerscience.html">
+    <a class="dropdown-item" href="../../../computerscience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./dsa.html">
+    <a class="dropdown-item" href="../../../dsa.html">
  <span class="dropdown-text">Data Structures and Algorithms</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./designpatterns.html">
+    <a class="dropdown-item" href="../../../designpatterns.html">
  <span class="dropdown-text">Design Patterns</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./coding.html">
+    <a class="dropdown-item" href="../../../coding.html">
  <span class="dropdown-text">Coding</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./leetcode.html">
+    <a class="dropdown-item" href="../../../leetcode.html">
  <span class="dropdown-text">LeetCode</span></a>
   </li>  
     </ul>
@@ -342,15 +286,15 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-mathematics-🧮">    
         <li>
-    <a class="dropdown-item" href="./mathematics.html">
+    <a class="dropdown-item" href="../../../mathematics.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./calculus.html">
+    <a class="dropdown-item" href="../../../calculus.html">
  <span class="dropdown-text">Calculus</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./linearalgebra.html">
+    <a class="dropdown-item" href="../../../linearalgebra.html">
  <span class="dropdown-text">Linear Algebra</span></a>
   </li>  
     </ul>
@@ -361,21 +305,21 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-data-science-🧪">    
         <li>
-    <a class="dropdown-item" href="./datascience.html">
+    <a class="dropdown-item" href="../../../datascience.html">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machinelearning.html">
+    <a class="dropdown-item" href="../../../machinelearning.html">
  <span class="dropdown-text">Machine Learning</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./kaggle.html">
+    <a class="dropdown-item" href="../../../kaggle.html">
  <span class="dropdown-text">Kaggle</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About 🐈‍⬛</span></a>
   </li>  
   <li class="nav-item compact">
@@ -399,102 +343,95 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Kaggle 🧪</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Cpp 5: Don’t Use <code>using namespace</code> Directive</h1>
+                  <div>
+        <div class="description">
+          A Naming Conflict Example with <code>using namespace</code> Directive in C++
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">coding</div>
+                <div class="quarto-category">cplusplus</div>
+              </div>
+                  </div>
   </div>
-  <div class="quarto-title-meta column-page-left">
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tony Phung </p>
+            </div>
     </div>
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 7, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZGF0YXNjaWVuY2U=">datascience <span class="quarto-category-count">(2)</span></div><div class="category" data-category="a2FnZ2xl">kaggle <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bmxw">nlp <span class="quarto-category-count">(2)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#using-namespace" id="toc-using-namespace" class="nav-link active" data-scroll-target="#using-namespace">1. <code>using namespace</code></a></li>
+  <li><a href="#scenario-1-no-naming-conflicts" id="toc-scenario-1-no-naming-conflicts" class="nav-link" data-scroll-target="#scenario-1-no-naming-conflicts">2. Scenario 1: No Naming Conflicts</a></li>
+  <li><a href="#scenario-2-naming-conflicts" id="toc-scenario-2-naming-conflicts" class="nav-link" data-scroll-target="#scenario-2-naming-conflicts">3. Scenario 2: Naming Conflicts</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-marquee column-page-left">
-  <div class="about-image-container">
-  </div>
-  <div class="about-contents">
-     <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="a2FnZ2xlJTJDZGF0YXNjaWVuY2UlMkNubHA=" data-listing-date-sort="1708102800000" data-listing-file-modified-sort="1737572487405" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="389">
-<div class="thumbnail"><a href="./posts/datascience/kaggle/kagg-002-us-patents-offline/index.html" class="no-external">
-<img loading="lazy" src="./posts/datascience/kaggle/kagg-002-us-patents-offline/patent.jpg" class="thumbnail-image">
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/datascience/kaggle/kagg-002-us-patents-offline/index.html" class="no-external">KAGG 2: A Basic NLP model - [Competition Version]</a>
-</h3>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('a2FnZ2xl'); return false;">kaggle</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YXNjaWVuY2U='); return false;">datascience</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bmxw'); return false;">nlp</div>
-</div>
-<div class="delink listing-description"><a href="./posts/datascience/kaggle/kagg-002-us-patents-offline/index.html" class="no-external">
-<p>Training my first NLP Model</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/datascience/kaggle/kagg-002-us-patents-offline/index.html" class="no-external">
-<div class="listing-date">
-Feb 17, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="a2FnZ2xlJTJDZGF0YXNjaWVuY2UlMkNubHA=" data-listing-date-sort="1708016400000" data-listing-file-modified-sort="1737572487405" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="420">
-<div class="thumbnail"><a href="./posts/datascience/kaggle/kagg-001-us-patents/index.html" class="no-external">
-<img loading="lazy" src="./posts/datascience/kaggle/kagg-001-us-patents/nlp.jpg" class="thumbnail-image">
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/datascience/kaggle/kagg-001-us-patents/index.html" class="no-external">KAGG 1: A Basic NLP model</a>
-</h3>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('a2FnZ2xl'); return false;">kaggle</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YXNjaWVuY2U='); return false;">datascience</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bmxw'); return false;">nlp</div>
-</div>
-<div class="delink listing-description"><a href="./posts/datascience/kaggle/kagg-001-us-patents/index.html" class="no-external">
-<p>Training my first NLP Model</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/datascience/kaggle/kagg-001-us-patents/index.html" class="no-external">
-<div class="listing-date">
-Feb 16, 2024
-</div>
-<div class="listing-author">
-Tony Phung
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> 
-    <div class="about-footer"><div class="about-links">
-  <a href="https://github.com/tonyjustdevs" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://au.linkedin.com/in/tony-phung-6190b0b8" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-</div>
-</div>
-  </div>
-</div>
- <!-- /main -->
+
+
+
+<p><img src="imgs/cpp/005-using.jpg" class="img-fluid"></p>
+<section id="using-namespace" class="level1">
+<h1>1. <code>using namespace</code></h1>
+<p>If your program is <strong>super simple</strong> and:</p>
+<ul>
+<li>will <strong>not change</strong> and</li>
+<li>you’re 100% confident that
+<ul>
+<li>there will be <strong>no updates</strong> or</li>
+<li><strong>no changes</strong> to the program,</li>
+</ul></li>
+<li>even then
+<ul>
+<li>STILL <strong>DONT</strong> use <code>using namespace</code>!</li>
+</ul></li>
+</ul>
+<p>But if you’re forced at gunpoint 🔫, then fine.</p>
+</section>
+<section id="scenario-1-no-naming-conflicts" class="level1">
+<h1>2. Scenario 1: No Naming Conflicts</h1>
+<p><strong>Compilation Successful!</strong></p>
+<p><img src="imgs/cpp/005-using-ok.png" class="img-fluid"></p>
+</section>
+<section id="scenario-2-naming-conflicts" class="level1">
+<h1>3. Scenario 2: Naming Conflicts</h1>
+<p><strong>Compilation Error!</strong></p>
+<p><img src="imgs/cpp/005-using-bad.png" class="img-fluid"></p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -510,6 +447,13 @@ Tony Phung
       window.document.body.appendChild(a);
     }
     setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
