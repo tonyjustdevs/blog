@@ -132,7 +132,9 @@
   {
     "listing": "/computerscience.html",
     "items": [
+      "/posts/computerscience/coding/cpp-008-constant-expressions.html",
       "/posts/computerscience/coding/cpp-007-fractions.html",
+      "/posts/computerscience/coding/cpp-009-bit-manipulation-1.html",
       "/posts/computerscience/coding/cpp-006-scientific-notation.html",
       "/posts/computerscience/coding/cpp-005-dont-use-using-namespace.html",
       "/posts/computerscience/coding/cpp-003-precedence-associativity.html",
@@ -246,7 +248,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/computerscience/coding/cpp-008-constant-expressions.html",
       "/posts/computerscience/coding/cpp-007-fractions.html",
+      "/posts/computerscience/coding/cpp-009-bit-manipulation-1.html",
       "/posts/computerscience/coding/cpp-006-scientific-notation.html",
       "/posts/computerscience/coding/cpp-005-dont-use-using-namespace.html",
       "/posts/computerscience/coding/cpp-003-precedence-associativity.html",
@@ -456,7 +460,9 @@
   {
     "listing": "/coding.html",
     "items": [
+      "/posts/computerscience/coding/cpp-008-constant-expressions.html",
       "/posts/computerscience/coding/cpp-007-fractions.html",
+      "/posts/computerscience/coding/cpp-009-bit-manipulation-1.html",
       "/posts/computerscience/coding/cpp-006-scientific-notation.html",
       "/posts/computerscience/coding/cpp-005-dont-use-using-namespace.html",
       "/posts/computerscience/coding/cpp-003-precedence-associativity.html",

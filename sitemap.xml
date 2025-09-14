@@ -29,39 +29,43 @@
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-006-measuring_accuracy.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-004-precedence-associativity-qns.html</loc>
+    <lastmod>2025-09-03T12:13:41.436Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-018-csharp_on_vscode.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-012-vscode-keybindings-json.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-007-virtual_environments.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-011-github-api.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-009-symlinks.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-026-venv.html</loc>
-    <lastmod>2025-08-11T15:40:08.687Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-001-project-setup.html</loc>
+    <lastmod>2025-08-13T13:40:31.868Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-024-falsy-values.html</loc>
-    <lastmod>2025-08-11T15:40:08.687Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-002-linux_setup.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-021-call-magic-method.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-013-shallow-and-deep.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-007-fractions.html</loc>
+    <lastmod>2025-09-13T14:04:26.599Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-020-utf-8-encoding.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-001-github_resolve.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-014-python-classes-101.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-015_exceptions_101.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-019-uv-package.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
@@ -585,44 +589,48 @@
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-019-uv-package.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-008-constant-expressions.html</loc>
+    <lastmod>2025-09-14T14:11:36.512Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-015_exceptions_101.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-014-python-classes-101.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-001-github_resolve.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-020-utf-8-encoding.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-013-shallow-and-deep.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-007-fractions.html</loc>
-    <lastmod>2025-09-13T14:04:26.599Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-021-call-magic-method.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-002-linux_setup.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-001-project-setup.html</loc>
-    <lastmod>2025-08-13T13:40:31.868Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-024-falsy-values.html</loc>
+    <lastmod>2025-08-11T15:40:08.687Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-009-symlinks.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-026-venv.html</loc>
+    <lastmod>2025-08-11T15:40:08.687Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-011-github-api.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-007-virtual_environments.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-012-vscode-keybindings-json.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-018-csharp_on_vscode.html</loc>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-006-measuring_accuracy.html</loc>
     <lastmod>2025-01-22T19:01:27.345Z</lastmod>
   </url>
   <url>
-    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-004-precedence-associativity-qns.html</loc>
-    <lastmod>2025-09-03T12:13:41.436Z</lastmod>
+    <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/cpp-009-bit-manipulation-1.html</loc>
+    <lastmod>2025-09-14T14:09:05.627Z</lastmod>
   </url>
   <url>
     <loc>https://tonyjustdevs.github.io/blog/posts/computerscience/coding/code-004-wsl_new_user.html</loc>
